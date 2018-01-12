@@ -85,9 +85,7 @@ function makeBelieveFunctionality (selector) {
 
             let child = _querySelector;
             _querySelector = _parent();
-
             let grandParent = _parent(nestedSelector);
-
             _querySelector = child;
 
             return grandParent;
