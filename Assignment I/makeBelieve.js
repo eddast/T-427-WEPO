@@ -36,32 +36,31 @@ function makeBelieveFunctionality (selector) {
 
         let children = _querySelector;
 
-        if (children.length > 1)        { return _getParentList (children, nestedSelector); }
-        else if (children.length == 1)  { return _getParent (children[0], nestedSelector); }
-        else                            { return {}; }
+        try {
+            if (children.length > 1)        { return _getParentList (children, nestedSelector); }
+            else if (children.length == 1)  { return _getParent (children[0], nestedSelector); }
+            else                            { return { }; }
+        } catch (e) { return { }; }
     };
     // Parent helper function 
     let _getParent = (child, nestedSelector) => {
+
         if(nestedSelector !== undefined)    { return _checkParentSelector(child.parentNode, nestedSelector); }
         else                                { return child.parentNode; }
     }
     // Parent helper function 
     let _checkParentSelector = (parent, nestedSelector) =>  {   
 
-        let selectorList = document.querySelectorAll(nestedSelector);
+        if ( parent.matches(nestedSelector) ) { return parent; }
 
-                for(let i = 0; i < selectorList.length; i++) {
-                    if(parent === selectorList[i]) { return parent; }
-                }
-
-                return { };
+        return { };
     }
     // Parent helper function 
     let _getParentList = (children, nestedSelector) => {
         
-        let parentList = [ ]; let emptyParent = { };
-
+        let parentList = [ ];
         for( let i = 0; i < children.length; i++ ) {
+
                 let currParent = _getParent (children[i], nestedSelector);
                 if ( isEmpty(currParent) )  { continue; }
                 else                        { parentList.push(currParent); }
@@ -69,11 +68,38 @@ function makeBelieveFunctionality (selector) {
 
         return parentList;
     }
-    
-    // Checks whether object is empty
+    // Parent helper function - checks whether object is empty
     function isEmpty(obj) {
         return Object.keys(obj).length === 0 && obj.constructor === Object;
     }
+
+
+    /*      4.  THE GRANDPARENT SELECTOR
+     *      Returns grandparent of selector
+     *      If nested selector is provided within this method,
+     *      it returns grandparent only if it matches that selector
+     *      Otherwise an empty object */
+    let _grandParent = (nestedSelector) => {
+
+        if( _querySelector.length > 1 ) {
+
+            let child = _querySelector;
+            _querySelector = _parent();
+
+            let grandParent = _parent(nestedSelector);
+
+            _querySelector = child;
+
+            return grandParent;
+
+        } else { 
+            
+            let grandparent = _parent().parentNode;
+            if(grandparent !== undefined) {
+                return grandparent;
+            } else return { };
+        }
+    };
 
 
 
@@ -81,7 +107,8 @@ function makeBelieveFunctionality (selector) {
     // to make the library's methods usable
     return methods = {
         querySelector: _querySelector,
-        parent: _parent
+        parent: _parent,
+        grandParent: _grandParent
     };
 
 }
