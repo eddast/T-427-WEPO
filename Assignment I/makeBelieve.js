@@ -35,11 +35,18 @@ function makeBelieveFunctionality (selector) {
     let _parent = (nestedSelector) => {
 
         let children = _querySelector;
-
+        
         try {
+
             if (children.length > 1)        { return _getParentList (children, nestedSelector); }
             else if (children.length == 1)  { return _getParent (children[0], nestedSelector); }
-            else                            { return { }; }
+            else if (children != undefined) { 
+                let parent = children.parentNode;
+                if (parent != null) { return parent; }
+            }
+
+            return { };
+
         } catch (e) { return { }; }
     };
     // Parent helper function 
@@ -81,22 +88,12 @@ function makeBelieveFunctionality (selector) {
      *      Otherwise an empty object */
     let _grandParent = (nestedSelector) => {
 
-        if( _querySelector.length > 1 ) {
-
             let child = _querySelector;
             _querySelector = _parent();
             let grandParent = _parent(nestedSelector);
             _querySelector = child;
 
             return grandParent;
-
-        } else { 
-            
-            let grandparent = _parent().parentNode;
-            if(grandparent !== undefined) {
-                return grandparent;
-            } else return { };
-        }
     };
 
 

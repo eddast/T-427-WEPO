@@ -75,4 +75,7 @@ button1.addEventListener("click", () => {
     
     console.log("15. Should be [html]");
     console.log(__("div").grandParent());
+
+    console.log("15. Should be {}");
+    console.log(__("html").grandParent());
 })
