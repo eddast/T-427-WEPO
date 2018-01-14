@@ -30,6 +30,13 @@
 
         this.elements = queryElements;
 
+        this.empty = ()=> {
+            if ((this.elements === undefined) || (this.elements === null)) {
+                return true;
+            }
+            return this.elements == {};//_isEmpty(this.elements);
+        }
+
         /*      3.  THE PARENT SELECTOR
          *      Returns parent of selector
          *      If nested selector is provided within this method,
@@ -38,16 +45,19 @@
         this.parent = (selector) => {
     
             let children = this.elements;
+
+            if(this.empty()) { return new MakeBelieveObject({}); }
     
-    
-                if (children.length > 1)        { return _getParentList (children, selector); }
-                else if (children.length == 1)  { return _getParent (children[0], selector); }
-                else if (children != undefined) { 
-                    let parent = children.parentNode;
-                    if (parent != null) { return parent; }
-                }
-    
-                return { };
+            if (children.length > 1)        { 
+                let parentList = _getParentList (children, selector); 
+                return new MakeBelieveObject(parentList);
+            }
+            else if (children.length == 1)  { 
+                let parent =  _getParent (children[0], selector); 
+                return new MakeBelieveObject(parent);
+            }
+
+            return new MakeBelieveObject({});
         };
         // Parent helper function 
         let _getParent = (child, nestedSelector) => {
@@ -86,13 +96,9 @@
          *      it returns grandparent only if it matches that selector
          *      Otherwise an empty object */
         this.grandParent = (selector) => {
-    
-            let child = this.elements;
-            this.elements = this.parent();
-            let grandParent = this.parent(selector);
-            this.elements = child;
 
-            return grandParent;
+            let parent = this.parent();
+            return parent.parent(selector);
         };
 
         /*      4.  THE ANCESTOR SELECTOR
@@ -101,32 +107,130 @@
          *      it returns ancestor only if it matches that selector
          *      Otherwise an empty object */
         this.ancestor = (selector) => {
-
-            let children = this.elements;
+            console.log("THIS.grandparent");
+            console.log(this.grandParent());
             let ancestorList = [ ];
+            let ancestors = this.grandParent();
+            let currAncestor;
 
-            let grandParents = this.grandParent();
-            
-            for(let i = 0; i < grandParents.length; i++){
-                this.elements = grandParents[i];
+            console.log("//GRANDPARENTS//")
+            console.log(ancestors);
+            while (currAncestor === undefined || !currAncestor.matches("html")) {
 
-                let ancestor = this.parent(selector);
-                
-                
-                while (ancestor !== undefined && !_isEmpty(ancestor) ) {
+                ancestors = ancestors.parent();
+                console.log("//ANCESTORS//")
+                console.log(ancestors);
 
-                        ancestorList.push(ancestor);
-                        if (ancestor.matches("html")) { break; }
-                        child = ancestor;
-                        this.elements = child;
-                        ancestor = this.parent(selector);
+                for (let i = 0; i < ancestors.elements.length; i++) {
+
+                    currAncestor = ancestors.elements[i];
+                    if (selector === undefined || currAncestor.matches(selector)) { 
+                        ancestorList.push(currAncestor);
+                    }
                 }
+                if (currAncestor === undefined || currAncestor.matches("html")){break;}
             }
-            
-            this.elements = children;
-
             return ancestorList;
         };
+
+        this.onClick = (clickEvent) => {
+
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                elem.addEventListener('click', clickEvent);
+            }
+        };
+
+        this.insertText = (text) => {
+
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                elem.innerHTML = text;
+            }
+        };
+
+        this.append = (text) => {
+
+            console.log("text");
+            console.log(text);
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                let previousText = elem.innerHTML;
+                if (!text.nodeName) {
+                    elem.innerHTML = previousText + text;
+                } else { 
+                    elem.appendChild(text);
+                }
+                
+            }
+        };
+
+        this.prepend = (text) => {
+
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                let previousText = elem.innerHTML;
+                if (!text.nodeName) {
+                    elem.innerHTML = text + previousText;
+                } else { 
+                    elem.insertBefore(text, elem.childNodes[0]);
+                }
+                
+            }
+        };
+
+        this.delete = () => {
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                elem.parentNode.removeChild(elem);
+            }
+        };
+
+        this.ajax = (configs) => { }
+
+        this.css = (cssElem, value ) => {
+
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                elem.setAttribute("style", cssElem + ": " + value);
+            }
+            
+        };
+
+        this.toggleClass = (className) => {
+
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                elem.classList.toggle(className);
+            }
+            
+        };
+
+        this.onSubmit = (functionality) => {
+
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                elem.onsubmit = functionality;
+            }
+        };
+
+        this.onInput = (functionality) => {
+
+            for (let i = 0; i < this.elements.length; i++) {
+
+                let elem = this.elements[i];
+                elem.oninput = functionality;
+            }
+        };
+
     }
 
 })();
