@@ -2,13 +2,14 @@
 
 /*  ========================================================
  *
- * 		    T-427-WEPO Web Programming II
- * 		    Reykjavik University
- * 		    Assignment 1: MakeBelieve
- * 		    Assignment Due: 21.01.2018
- * 		    Authors:    Darri Valgarðsson,
- *                      Edda Steinunn,
- *                      Sigurður Marteinn Lárusson
+ *      T-427-WEPO Web Programming II
+ *      Reykjavik University
+ *      Assignment 1: MakeBelieve
+ *      Assignment Due: 21.01.2018
+ *      Authors:
+ *              Darri Valgarðsson,
+ *              Edda Steinunn,
+ *              Sigurður Marteinn Lárusson
  *
     ======================================================== */
 
@@ -254,4 +255,3 @@
     }
 
 })();
-
