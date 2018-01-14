@@ -70,12 +70,20 @@ button1.addEventListener("click", () => {
     console.log("13. Should be {}");
     console.log(__("#doesnotexist").grandParent("head"));
 
-    console.log("14. Should be [body]");
+    console.log("14. Should be [body, div#grandDiv]");
     console.log(__("div").parent());
     
-    console.log("15. Should be [html]");
+    console.log("15. Should be [html, body]");
     console.log(__("div").grandParent());
 
     console.log("15. Should be {}");
     console.log(__("html").grandParent());
+
+    console.log("TESTING ANCESTOR");
+
+    console.log("15. Should be [body, html]");
+    console.log(__(".Thisisclass").ancestor());
+
+    console.log("15. Should be [body]");
+    console.log(__(".Thisisclass").ancestor("body"));
 })
