@@ -6,8 +6,8 @@
  * 		    Reykjavik University
  * 		    Assignment 1: MakeBelieve
  * 		    Assignment Due: 21.01.2018
- * 		    Authors:    Darri Valgarðsson
- *                      Edda Steinunn
+ * 		    Authors:    Darri Valgarðsson,
+ *                      Edda Steinunn,
  *                      Sigurður Marteinn Lárusson
  *
     ======================================================== */
@@ -19,8 +19,7 @@
 
         function makeBelieveFunctionality (selector) {
     
-        /*      2.  THE QUERY SELECTOR
-         *      Returned along with other methods */
+        /*      2.  THE QUERY SELECTOR */
         let elements = document.querySelectorAll(selector);
     
         return new MakeBelieveObject(elements);
@@ -30,11 +29,12 @@
 
         this.elements = queryElements;
 
+        // Helper functions - retuns true if elements are empty
         this.empty = ()=> {
             if ((this.elements === undefined) || (this.elements === null)) {
                 return true;
             }
-            return this.elements == {};//_isEmpty(this.elements);
+            return this.elements == {};
         }
 
         /*      3.  THE PARENT SELECTOR
@@ -59,20 +59,20 @@
 
             return new MakeBelieveObject({});
         };
-        // Parent helper function 
+        // Parent helper function - gets a single parent
         let _getParent = (child, nestedSelector) => {
     
             if(nestedSelector !== undefined)    { return _checkParentSelector(child.parentNode, nestedSelector); }
             else                                { return child.parentNode; }
         }
-        // Parent helper function 
+        // Parent helper function - checks if parent matches selector provided
         let _checkParentSelector = (parent, nestedSelector) =>  {   
     
             if ( parent.matches(nestedSelector) ) { return parent; }
     
             return { };
         }
-        // Parent helper function 
+        // Parent helper function - gets list of parents from list of children
         let _getParentList = (children, nestedSelector) => {
             
             let parentList = [ ];
@@ -101,11 +101,10 @@
             return parent.parent(selector);
         };
 
-        /*      4.  THE ANCESTOR SELECTOR
+        /*      5.  THE ANCESTOR SELECTOR
          *      Returns ancestors of selector
          *      If nested selector is provided within this method,
-         *      it returns ancestor only if it matches that selector
-         *      Otherwise an empty object */
+         *      it returns ancestors only if they match that selector */
         this.ancestor = (selector) => {
             console.log("THIS.grandparent");
             console.log(this.grandParent());
@@ -133,6 +132,9 @@
             return ancestorList;
         };
 
+        /*      6.  ADDS ONCLICK EVENT 
+         *      Takes in functionality and has elements provide
+         *      that functionality when clicked */
         this.onClick = (clickEvent) => {
 
             for (let i = 0; i < this.elements.length; i++) {
@@ -142,6 +144,8 @@
             }
         };
 
+        /*      7.  INSERT TEXT 
+         *      Inserts or replaces text of an HTML element */
         this.insertText = (text) => {
 
             for (let i = 0; i < this.elements.length; i++) {
@@ -151,6 +155,8 @@
             }
         };
 
+        /*      8.  APPEND TEXT
+         *      Appends text or HTML node to HTML element */
         this.append = (text) => {
 
             console.log("text");
@@ -168,6 +174,8 @@
             }
         };
 
+        /*      9.  PREPEND TEXT
+         *      Prepends text or HTML node to HTML element */
         this.prepend = (text) => {
 
             for (let i = 0; i < this.elements.length; i++) {
@@ -183,6 +191,8 @@
             }
         };
 
+        /*      10.  DELETE
+         *      Deletes HTML element and children from DOM tree (document) */
         this.delete = () => {
             for (let i = 0; i < this.elements.length; i++) {
 
@@ -191,8 +201,12 @@
             }
         };
 
+        /*      11.  AJAX
+         *      ????*/
         this.ajax = (configs) => { }
 
+        /*      12.  CSS STYLE ADDER
+         *      Adds a given value to given style to HTML element */
         this.css = (cssElem, value ) => {
 
             for (let i = 0; i < this.elements.length; i++) {
@@ -203,6 +217,8 @@
             
         };
 
+        /*      13.  TOGGLE CLASS
+         *      Toggles class identification from HTML element */
         this.toggleClass = (className) => {
 
             for (let i = 0; i < this.elements.length; i++) {
@@ -213,6 +229,8 @@
             
         };
 
+        /*      14.  ON SUBMIT FUNCTION
+         *      Adds functionality to submission for HTML forms */
         this.onSubmit = (functionality) => {
 
             for (let i = 0; i < this.elements.length; i++) {
@@ -222,6 +240,8 @@
             }
         };
 
+        /*      15.  ON INPUT FUNCTION
+         *      Adds functionality to input for HTML input tags */
         this.onInput = (functionality) => {
 
             for (let i = 0; i < this.elements.length; i++) {
