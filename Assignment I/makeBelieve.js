@@ -20,11 +20,12 @@
 
         function makeBelieveFunctionality (selector) {
     
-        /*      2.  THE QUERY SELECTOR */
-        let elements = document.querySelectorAll(selector);
-    
-        return new MakeBelieveObject(elements);
-    }
+            /*      2.  THE QUERY SELECTOR */
+            let elements = document.querySelectorAll(selector);
+        
+
+            return new MakeBelieveObject(elements);
+        }
 
     function MakeBelieveObject (queryElements) {
 
@@ -32,10 +33,20 @@
 
         // Helper functions - retuns true if elements are empty
         this.empty = ()=> {
-            if ((this.elements === undefined) || (this.elements === null)) {
+
+            if  ((this.elements === undefined) ||
+                 (this.elements === null)) {
+                     
                 return true;
             }
-            return this.elements == {};
+
+
+            return this.elements == { };
+        }
+
+        this.isObject = () => {
+
+            return this.elements === Object(this.elements) && this.elements != null;
         }
 
         /*      3.  THE PARENT SELECTOR
@@ -47,14 +58,28 @@
     
             let children = this.elements;
 
-            if(this.empty()) { return new MakeBelieveObject({}); }
-    
-            if (children.length > 1)        { 
+            if( this.empty()) { return new MakeBelieveObject({}); }
+
+            // If we are working with more than one children
+            // A make believe object with a list is returned
+            if (children.length > 1) { 
+                
                 let parentList = _getParentList (children, selector); 
+
                 return new MakeBelieveObject(parentList);
             }
-            else if (children.length == 1)  { 
+            // If we are working with one child
+            // A make believe object with a single object (parent) is returned
+            else if (children.length == 1) { // Element is a list of one object
+
                 let parent =  _getParent (children[0], selector); 
+
+                return new MakeBelieveObject(parent);
+            }
+            else if(this.isObject()){ // Element is a single object
+
+                let parent =  _getParent (children, selector); 
+
                 return new MakeBelieveObject(parent);
             }
 
@@ -62,7 +87,9 @@
         };
         // Parent helper function - gets a single parent
         let _getParent = (child, nestedSelector) => {
-    
+
+            if( _isEmpty(child) ||
+                child.matches("html") )         { return { }; }
             if(nestedSelector !== undefined)    { return _checkParentSelector(child.parentNode, nestedSelector); }
             else                                { return child.parentNode; }
         }
@@ -71,6 +98,7 @@
     
             if ( parent.matches(nestedSelector) ) { return parent; }
     
+
             return { };
         }
         // Parent helper function - gets list of parents from list of children
@@ -84,6 +112,7 @@
                     else                        { parentList.push(currParent); }
             }
     
+
             return parentList;
         }
         // Parent helper function - checks whether object is empty
@@ -98,29 +127,38 @@
          *      Otherwise an empty object */
         this.grandParent = (selector) => {
 
-            let parent = this.parent();
-            return parent.parent(selector);
+            let par = this.parent();
+            let grandparent = par.parent();
+
+
+            return grandparent;
         };
 
         /*      5.  THE ANCESTOR SELECTOR
-         *      Returns ancestors of selector
+         *      Returns list of ancestors of selector
          *      If nested selector is provided within this method,
          *      it returns ancestors only if they match that selector */
         this.ancestor = (selector) => {
-            console.log("THIS.grandparent");
-            console.log(this.grandParent());
+
             let ancestorList = [ ];
             let ancestors = this.grandParent();
             let currAncestor;
 
-            console.log("//GRANDPARENTS//")
-            console.log(ancestors);
-            while (currAncestor === undefined || !currAncestor.matches("html")) {
+            if(_isEmpty(ancestors.parent().elements)) { return new MakeBelieveObject({}); }
+
+            // Pushes in ancestors, starting from grandparent's parent
+            // Breakes when HTML occurs, as we don't want to return #document
+            do {
 
                 ancestors = ancestors.parent();
-                console.log("//ANCESTORS//")
-                console.log(ancestors);
 
+                if(ancestors.elements.length === undefined) {
+            
+                    if (selector === undefined || currAncestor.matches(selector)) { 
+                        ancestorList.push(ancestors.elements);
+                    }
+                    continue;
+                }
                 for (let i = 0; i < ancestors.elements.length; i++) {
 
                     currAncestor = ancestors.elements[i];
@@ -128,8 +166,12 @@
                         ancestorList.push(currAncestor);
                     }
                 }
-                if (currAncestor === undefined || currAncestor.matches("html")){break;}
-            }
+                if (currAncestor !== undefined && currAncestor.matches("html")) {
+                    break; 
+                }
+            } while (!ancestors.elements.matches("html")); 
+
+
             return ancestorList;
         };
 
@@ -160,8 +202,6 @@
          *      Appends text or HTML node to HTML element */
         this.append = (text) => {
 
-            console.log("text");
-            console.log(text);
             for (let i = 0; i < this.elements.length; i++) {
 
                 let elem = this.elements[i];
@@ -169,7 +209,7 @@
                 if (!text.nodeName) {
                     elem.innerHTML = previousText + text;
                 } else { 
-                    elem.appendChild(text);
+                    elem.appendChild(text.parentElement);
                 }
                 
             }
@@ -186,7 +226,7 @@
                 if (!text.nodeName) {
                     elem.innerHTML = text + previousText;
                 } else { 
-                    elem.insertBefore(text, elem.childNodes[0]);
+                    elem.insertBefore(text.parentElement, elem.childNodes[0]);
                 }
                 
             }
@@ -203,8 +243,8 @@
         };
 
         /*      11.  AJAX
-         *      ????*/
-        this.ajax = (configs) => { }
+         *      ???? */
+        this.ajax = (URL, configs) => { }
 
         /*      12.  CSS STYLE ADDER
          *      Adds a given value to given style to HTML element */
@@ -251,7 +291,5 @@
                 elem.oninput = functionality;
             }
         };
-
     }
-
 })();
