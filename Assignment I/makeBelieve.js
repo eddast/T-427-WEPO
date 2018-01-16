@@ -36,7 +36,7 @@
 
             if  ((this.elements === undefined) ||
                  (this.elements === null)) {
-                     
+
                 return true;
             }
 
@@ -55,35 +55,17 @@
          *      it returns parent only if it matches that selector
          *      Otherwise an empty object */
         this.parent = (selector) => {
-    
-            let children = this.elements;
 
-            if( this.empty()) { return new MakeBelieveObject({}); }
+            let parentList = [ ];
 
-            // If we are working with more than one children
-            // A make believe object with a list is returned
-            if (children.length > 1) { 
-                
-                let parentList = _getParentList (children, selector); 
+            for(let i = 0; i < this.elements.length; i++) {
 
-                return new MakeBelieveObject(parentList);
+                let parent = _getParent(this.elements[i], selector);
+                if(!_isEmpty(parent)) {
+                    parentList.push(parent);
+                }
             }
-            // If we are working with one child
-            // A make believe object with a single object (parent) is returned
-            else if (children.length == 1) { // Element is a list of one object
-
-                let parent =  _getParent (children[0], selector); 
-
-                return new MakeBelieveObject(parent);
-            }
-            else if(this.isObject()){ // Element is a single object
-
-                let parent =  _getParent (children, selector); 
-
-                return new MakeBelieveObject(parent);
-            }
-
-            return new MakeBelieveObject({});
+            return new MakeBelieveObject(parentList);
         };
         // Parent helper function - gets a single parent
         let _getParent = (child, nestedSelector) => {
@@ -98,24 +80,9 @@
     
             if ( parent.matches(nestedSelector) ) { return parent; }
     
-
             return { };
         }
-        // Parent helper function - gets list of parents from list of children
-        let _getParentList = (children, nestedSelector) => {
-            
-            let parentList = [ ];
-            for( let i = 0; i < children.length; i++ ) {
-    
-                    let currParent = _getParent (children[i], nestedSelector);
-                    if ( _isEmpty(currParent) )  { continue; }
-                    else                        { parentList.push(currParent); }
-            }
-    
-
-            return parentList;
-        }
-        // Parent helper function - checks whether object is empty
+        // Checks whether object is empty
         function _isEmpty(obj) {
             return Object.keys(obj).length === 0 && obj.constructor === Object;
         }
@@ -141,37 +108,25 @@
         this.ancestor = (selector) => {
 
             let ancestorList = [ ];
-            let ancestors = this.grandParent();
-            let currAncestor;
 
-            if(_isEmpty(ancestors.parent().elements)) { return new MakeBelieveObject({}); }
+            if ( !_isEmpty(this.elements) ) {
 
-            // Pushes in ancestors, starting from grandparent's parent
-            // Breakes when HTML occurs, as we don't want to return #document
-            do {
+                let ancestors = this.grandParent();
 
-                ancestors = ancestors.parent();
+                for(let i = 0; i < ancestors.elements.length; i++) {
 
-                if(ancestors.elements.length === undefined) {
+                    let ancestor = ancestors.elements[i];
+                    while(!ancestor.matches("html") && ancestor.parentNode !== undefined) {
+
+                        ancestor = ancestor.parentNode;
+                        if(selector === undefined || ancestor.matches(selector)){
+
+                            ancestorList.push(ancestor);
+                        }
+                    }
+                }
+            }
             
-                    if (selector === undefined || currAncestor.matches(selector)) { 
-                        ancestorList.push(ancestors.elements);
-                    }
-                    continue;
-                }
-                for (let i = 0; i < ancestors.elements.length; i++) {
-
-                    currAncestor = ancestors.elements[i];
-                    if (selector === undefined || currAncestor.matches(selector)) { 
-                        ancestorList.push(currAncestor);
-                    }
-                }
-                if (currAncestor !== undefined && currAncestor.matches("html")) {
-                    break; 
-                }
-            } while (!ancestors.elements.matches("html")); 
-
-
             return ancestorList;
         };
 

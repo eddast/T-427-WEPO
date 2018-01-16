@@ -153,9 +153,53 @@ button1.addEventListener("click", () => {
     
     //console.log(__("html").ancestor());
     //console.log(__("div#grandDiv").ancestor());
-    console.log(__(".nestedPar").parent());
-    console.log(__(".nestedPar").grandParent());
-    console.log(__(".nestedPar").ancestor());
+
+    console.log("== TESTING PARENT ==");
+    console.log("parent of child");
+    console.log(__(".child").parent());
+
+    console.log("parent of parent");
+    console.log(__(".parent").parent());
+
+    console.log("parent of grandparent");
+    console.log(__(".grandparent").parent());
+
+    console.log("parent of somethingthatdoesnotexist");
+    console.log(__("notexists").parent());
+
+    console.log("Parent of html");
+    console.log(__("html").parent());
+
+    console.log("parent of body");
+    console.log(__("body").parent("html"));
+
+    console.log("parent of grandDiv");
+    console.log(__("#grandDiv").parent());
+    
+    
+    console.log("== TESTING ANCESTOR ==");
+
+    console.log("Ancestors of child");
+    console.log(__(".child").ancestor());
+
+    console.log("Ancestors of body");
+    console.log(__("body").ancestor());
+
+    console.log("Ancestors of html");
+    console.log(__("html").ancestor());
+
+    console.log("Ancestors of parentDiv");
+    console.log(__("#parentDiv").ancestor());
+
+    console.log("Ancestors of grandDiv");
+    console.log(__("#grandDiv").ancestor());
+
+    console.log("Ancestors of Thisisclass");
+    console.log(__(".Thisisclass").ancestor("html"));
+
+    console.log("Ancestors of somethingthatdoesnotexist");
+    console.log(__("#doesnotexist").ancestor());
+
 
 
 })
