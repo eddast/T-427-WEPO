@@ -15,17 +15,18 @@
 
 (function () {
 
-        /*      1.  DEFINING THE "__" KEYWORD */
-        window.__ = makeBelieveFunctionality;
+    /*      1.  DEFINING THE "__" KEYWORD */
+    window.__ = makeBelieveFunctionality;
+    window.__.ajax = ajax;
 
-        function makeBelieveFunctionality (selector) {
+    function makeBelieveFunctionality (selector) {
+
+        /*      2.  THE QUERY SELECTOR */
+        let elements = document.querySelectorAll(selector);
     
-            /*      2.  THE QUERY SELECTOR */
-            let elements = document.querySelectorAll(selector);
-        
 
-            return new MakeBelieveObject(elements);
-        }
+        return new MakeBelieveObject(elements);
+    }
 
     function MakeBelieveObject (queryElements) {
 
@@ -197,10 +198,6 @@
             }
         };
 
-        /*      11.  AJAX
-         *      ???? */
-        this.ajax = (URL, configs) => { }
-
         /*      12.  CSS STYLE ADDER
          *      Adds a given value to given style to HTML element */
         this.css = (cssElem, value ) => {
@@ -208,7 +205,8 @@
             for (let i = 0; i < this.elements.length; i++) {
 
                 let elem = this.elements[i];
-                elem.setAttribute("style", cssElem + ": " + value);
+
+                elem.style[cssElem] = value;
             }
             
         };
@@ -247,4 +245,66 @@
             }
         };
     }
+
+    /*      11.  AJAX
+    *      ???? */
+    function ajax (configs) {
+        let things = JSON.parse(configs);
+
+        if(!things.hasOwnProperty('url')){
+            console.log("ERROERROERROEROOrrr");
+            return;
+        }
+        let url = things.url;
+
+        let method = "GET";
+        if(things.hasOwnProperty('method')){
+            method = things.method;
+        }
+
+        let data = {};
+        if(things.hasOwnProperty('data')){
+            data = things.data;
+        }
+
+        let headers = {};
+        if(things.hasOwnProperty('headers')){
+            headers = things.headers;
+        }
+
+        let success = null;
+        if(things.hasOwnProperty('success')){
+            success = things.success;
+        }
+
+        // let fail = null;
+        // if(things.hasOwnProperty('fail')){
+        //     fail = things.fail;
+        // }
+
+        // let beforeSend = null;
+        // if(things.hasOwnProperty('beforeSend')){
+        //     beforeSend = things.beforeSend;
+        // }
+        
+        
+        
+        var request = new XMLHttpRequest();
+        request.open( method, url );
+
+        if(things.hasOwnProperty('timeout')){
+            request.timeout = things.timeout;
+        }
+        
+        request.onreadystatechange = function () {
+            if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+               var response = request.getResponseHeader('Content-Type').indexOf('xml') !== -1 ? request.responseXML : request.responseText;
+            }
+        }
+
+        //request.;
+        //request.fail = fail;
+        //request.beforeSend = beforeSend;
+    }
+
 })();

@@ -28,6 +28,8 @@ button1.addEventListener("click", () => {
     // // TESTING PARENT
     // console.log("TESTING PARENT");
 
+    __("#toChange").css("background-color", "green");
+
     // console.log("1. Should be [<div>...</div>]");
     // console.log(__("#num1").parent());
 
@@ -200,6 +202,17 @@ button1.addEventListener("click", () => {
     console.log("Ancestors of somethingthatdoesnotexist");
     console.log(__("#doesnotexist").ancestor());
 
+    __.ajax({
+        URL : "test",
+        method : "GET",
+        data : {id : 2410952909, name : "Edda", age : 22 },
+        success : function (resp) {
+            console.log("Success");
+        },
+        error : function (err) {
+            console.log("Error");
+        }
+    });
 
 
 })
