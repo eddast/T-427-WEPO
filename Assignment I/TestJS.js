@@ -203,16 +203,24 @@ button1.addEventListener("click", () => {
     console.log(__("#doesnotexist").ancestor());
 
     __.ajax({
-        URL : "test",
-        method : "GET",
+        url : "https://httpbin.org/post",
+        method : "POST",
+        headers: [
+            {"Authorization" : "no"},
+            {"header3" : "val3"},
+            {"header4" : "val4"}
+        ],
         data : {id : 2410952909, name : "Edda", age : 22 },
+        beforeSend : function (resp) {
+            console.log("Before!!!");
+        },
         success : function (resp) {
             console.log("Success");
+            console.log(resp.status);
+            console.log(resp.response);
         },
-        error : function (err) {
+        fail : function (err) {
             console.log("Error");
         }
     });
-
-
 })

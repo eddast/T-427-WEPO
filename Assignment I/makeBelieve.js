@@ -205,7 +205,6 @@
             for (let i = 0; i < this.elements.length; i++) {
 
                 let elem = this.elements[i];
-
                 elem.style[cssElem] = value;
             }
             
@@ -247,64 +246,71 @@
     }
 
     /*      11.  AJAX
-    *      ???? */
+    *       Sends HTTP request to requested URL (must be provided) */
     function ajax (configs) {
-        let things = JSON.parse(configs);
+        let configurations = configs;//JSON.parse(configs);
 
-        if(!things.hasOwnProperty('url')){
-            console.log("ERROERROERROEROOrrr");
+        if(!configurations.hasOwnProperty('url')){
+            throw new Error("Ajax must take in URL to process request");
             return;
         }
-        let url = things.url;
+        let url = configurations.url;
 
         let method = "GET";
-        if(things.hasOwnProperty('method')){
-            method = things.method;
+        if(configurations.hasOwnProperty('method')){
+            method = configurations.method;
         }
 
         let data = {};
-        if(things.hasOwnProperty('data')){
-            data = things.data;
-        }
-
-        let headers = {};
-        if(things.hasOwnProperty('headers')){
-            headers = things.headers;
+        if(configurations.hasOwnProperty('data')){
+            data = configurations.data;
         }
 
         let success = null;
-        if(things.hasOwnProperty('success')){
-            success = things.success;
+        if(configurations.hasOwnProperty('success')){
+            success = configurations.success;
         }
 
-        // let fail = null;
-        // if(things.hasOwnProperty('fail')){
-        //     fail = things.fail;
-        // }
+        let fail = null;
+        if(configurations.hasOwnProperty('fail')){
+            fail = configurations.fail;
+        }
 
-        // let beforeSend = null;
-        // if(things.hasOwnProperty('beforeSend')){
-        //     beforeSend = things.beforeSend;
-        // }
-        
-        
+        let beforeSend = null;
+        if(configurations.hasOwnProperty('beforeSend')){
+            beforeSend = configurations.beforeSend;
+        }
         
         var request = new XMLHttpRequest();
         request.open( method, url );
 
-        if(things.hasOwnProperty('timeout')){
-            request.timeout = things.timeout;
-        }
-        
-        request.onreadystatechange = function () {
-            if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-               var response = request.getResponseHeader('Content-Type').indexOf('xml') !== -1 ? request.responseXML : request.responseText;
-            }
+        if(configurations.hasOwnProperty('timeout')){
+            request.timeout = configurations.timeout;
         }
 
-        //request.;
-        //request.fail = fail;
-        //request.beforeSend = beforeSend;
+        for(let i = 0; i < configurations.headers.length; i++){
+            let header = configurations.headers[i];
+            var keys = Object.keys(header);
+            request.setRequestHeader(keys[0], header[keys[0]]);
+        }
+    
+        if(beforeSend) {
+            beforeSend(request);
+        }
+
+        request.onreadystatechange = function () {
+        
+            if(request.readyState === XMLHttpRequest.DONE) {
+
+                    // Request OK (status code is 2xx)
+                    if(request.status >= 200 && request.status < 300) {
+                        if(success) { success(request); }
+                    } else {
+                        if(fail)    { fail(request); }
+                    }
+            }
+        }
+        request.send(data);
     }
 
 })();
