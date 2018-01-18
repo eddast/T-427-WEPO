@@ -246,70 +246,77 @@
     }
 
     /*      11.  AJAX
-    *       Sends HTTP request to requested URL (must be provided) */
+    *       Sends HTTP request to requested URL (must be provided)
+    *       Parameter can contain additional HTTP request info such as data
+    *       Default method: GET */
     function ajax (configs) {
-        let configurations = configs;//JSON.parse(configs);
 
+        let configurations = configs;
+
+        // URL is required, if none is provided throw error
         if(!configurations.hasOwnProperty('url')){
             throw new Error("Ajax must take in URL to process request");
             return;
         }
         let url = configurations.url;
 
+        // Set user inputted parameters if they are provided
         let method = "GET";
         if(configurations.hasOwnProperty('method')){
             method = configurations.method;
-        }
-
-        let data = {};
+        } let data = {};
         if(configurations.hasOwnProperty('data')){
             data = configurations.data;
-        }
-
-        let success = null;
+        } let success = null;
         if(configurations.hasOwnProperty('success')){
             success = configurations.success;
-        }
-
-        let fail = null;
+        } let fail = null;
         if(configurations.hasOwnProperty('fail')){
             fail = configurations.fail;
-        }
-
-        let beforeSend = null;
+        } let beforeSend = null;
         if(configurations.hasOwnProperty('beforeSend')){
             beforeSend = configurations.beforeSend;
         }
         
+        // Initiate request and open it with method and url
         var request = new XMLHttpRequest();
         request.open( method, url );
 
+        // Set timeout, if provided - otherwise none is set
         if(configurations.hasOwnProperty('timeout')){
             request.timeout = configurations.timeout;
         }
 
+        // Setting all headers provided in parameter if there are any
         for(let i = 0; i < configurations.headers.length; i++){
+
             let header = configurations.headers[i];
             var keys = Object.keys(header);
             request.setRequestHeader(keys[0], header[keys[0]]);
         }
     
-        if(beforeSend) {
-            beforeSend(request);
-        }
+        // Fire before send function up if one was provided
+        if(beforeSend) { beforeSend(request); }
 
+        // Set specifications and actions once request is sent
+        // Does not neccessarily mean request passed through
         request.onreadystatechange = function () {
         
             if(request.readyState === XMLHttpRequest.DONE) {
 
                     // Request OK (status code is 2xx)
+                    // Fires up success function if one was provided
                     if(request.status >= 200 && request.status < 300) {
                         if(success) { success(request); }
+                    // Error with request
+                    // Fires up fail function if one was provided
                     } else {
                         if(fail)    { fail(request); }
                     }
             }
         }
+
+        // Send request with data
         request.send(data);
     }
 
