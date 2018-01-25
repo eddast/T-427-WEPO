@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Drawio</title>
+        <link rel="stylesheet" href="Canvas.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
+        <link rel="author" href="humans.txt">
+    </head>
+  
+    <body>
+        <div id="upperBars">
+            <div id="mainBar">
+                <img id="appIcon" src="EditorIcons/AppIcon.png" alt="Draw">
+                <h1 id="mainHeading">CANVAS 2.0</h1>
+                <p id="tagline">Everything you can imagine becomes real</p>
+            </div>
+            <div id="optionBar">
+   
+                <button id="undo" class="undoredo undo fa fa-undo" aria-hidden="true"></button>
+                <button id="redo" class="undoredo redo fa fa-repeat" aria-hidden="true"></button>
+                <p class="options odraw oline">line-width</p>
+                <p class="options ocircle orect">fill</p>
+                <p class="options ocircle orect">border</p>
+                <p class="options ocircle orect">border-width</p>
+                <p class="options otext">font</p>
+                <p class="options otext">font-size</p>
+                <button id="save" class="saveclear undo w3-button w3-circle w3-teal">SAVE IMAGE</button>
+                <button id="clear" class="saveclear redo w3-button w3-circle w3-teal">CLEAR CANVAS</button>
+            </div>
+        </div>
+        <div id="toolbar" width="100" height="500">
+                <img id="moveTool" class="iconbar icons" src="EditorIcons/move.png" alt="Draw">
+                <img id="drawTool" class="iconbar icons" src="EditorIcons/draw.png" alt="Draw">
+                <img id="lineTool" class="iconbar icons" src="EditorIcons/line.png" alt="Draw Line">
+                <img id="rectTool" class="iconbar icons" src="EditorIcons/rectangle.png" alt="Draw Rectangle">
+                <img id="circleTool" class="iconbar icons" src="EditorIcons/circle.png" alt="Draw Cirlce">
+                <img id="textTool" class="iconbar icons" src="EditorIcons/text.png" alt="Insert Text">
+                <div class="color-pickers">
+                    <div id="strokeColor" class="iconbar" width="35px" height="35px" >&nbsp</div>
+                    <div id="fillColor" class="iconbar" width="35px" height="35px" >&nbsp</div>
+                </div>
+        </div>
+        <div id="canvasDiv">
+            <canvas id="canvas" width="1100" height="450">
+                    <div id="supportError">
+                            <h1>OH WOW! This is awkward.</h1>
+                            <i class="fa fa-meh-o"></i>
+                            <p>Unfortunately your browser does not support this functionality</p>
+                    </div>
+            </canvas>
+            <div class="authors">
+                <p>Darri Valgarðsson</p>
+                <p>Edda Steinunn Rúnarsdóttir</p>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+        <script src="./Canvas.js"></script>
+    </body>
+</html>

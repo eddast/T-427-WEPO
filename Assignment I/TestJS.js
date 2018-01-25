@@ -25,10 +25,30 @@ let AddTwoNumbers = () => {
 
 button1.addEventListener("click", () => {
 
+    console.log("ancestor of child");
+    console.log(__(".child").ancestor());
+    console.log(__(".child").ancestor(".great-great-grandparent"));
+    console.log("ancestor of parent");
+    console.log(__(".parent").ancestor());
+    console.log(__(".parent").ancestor(".great-grandparent"));
+    console.log("ancestor of grandparent");
+    console.log(__(".grandparent").ancestor());
+    console.log(__(".grandparent").ancestor(".great-great-grandparent"));
+    console.log("ancestor of Thisisclass");
+    console.log(__(".Thisisclass").ancestor());
+    console.log("ancestor of parentDiv");
+    console.log(__("#parentDiv").ancestor());
+    console.log("ancestor of body");
+    console.log(__("body").ancestor());
+    console.log("ancestor of html");
+    console.log(__("html").ancestor());
+
+    
+
     // // TESTING PARENT
     // console.log("TESTING PARENT");
 
-    __("#toChange").css("background-color", "green");
+    // __("#toChange").css("background-color", "green");
 
     // console.log("1. Should be [<div>...</div>]");
     // console.log(__("#num1").parent());
@@ -156,55 +176,56 @@ button1.addEventListener("click", () => {
     //console.log(__("html").ancestor());
     //console.log(__("div#grandDiv").ancestor());
 
-    console.log("== TESTING PARENT ==");
-    console.log("parent of child");
-    console.log(__(".child").parent());
+    // console.log("== TESTING PARENT ==");
+    // console.log("parent of child");
+    // console.log(__(".child").parent());
 
-    console.log("parent of parent");
-    console.log(__(".parent").parent());
+    // console.log("parent of parent");
+    // console.log(__(".parent").parent());
 
-    console.log("parent of grandparent");
-    console.log(__(".grandparent").parent());
+    // console.log("parent of grandparent");
+    // console.log(__(".grandparent").parent());
 
-    console.log("parent of somethingthatdoesnotexist");
-    console.log(__("notexists").parent());
+    // console.log("parent of somethingthatdoesnotexist");
+    // console.log(__("notexists").parent());
 
-    console.log("Parent of html");
-    console.log(__("html").parent());
+    // console.log("Parent of html");
+    // console.log(__("html").parent());
 
-    console.log("parent of body");
-    console.log(__("body").parent("html"));
+    // console.log("parent of body");
+    // console.log(__("body").parent("html"));
 
-    console.log("parent of grandDiv");
-    console.log(__("#grandDiv").parent());
+    // console.log("parent of grandDiv");
+    // console.log(__("#grandDiv").parent());
     
     
-    console.log("== TESTING ANCESTOR ==");
+    // console.log("== TESTING ANCESTOR ==");
 
-    console.log("Ancestors of child");
-    console.log(__(".child").ancestor());
+    // console.log("Ancestors of child");
+    // console.log(__(".child").ancestor());
 
-    console.log("Ancestors of body");
-    console.log(__("body").ancestor());
+    // console.log("Ancestors of body");
+    // console.log(__("body").ancestor());
 
-    console.log("Ancestors of html");
-    console.log(__("html").ancestor());
+    // console.log("Ancestors of html");
+    // console.log(__("html").ancestor());
 
-    console.log("Ancestors of parentDiv");
-    console.log(__("#parentDiv").ancestor());
+    // console.log("Ancestors of parentDiv");
+    // console.log(__("#parentDiv").ancestor());
 
-    console.log("Ancestors of grandDiv");
-    console.log(__("#grandDiv").ancestor());
+    // console.log("Ancestors of grandDiv");
+    // console.log(__("#grandDiv").ancestor());
 
-    console.log("Ancestors of Thisisclass");
-    console.log(__(".Thisisclass").ancestor("html"));
+    // console.log("Ancestors of Thisisclass");
+    // console.log(__(".Thisisclass").ancestor("html"));
 
-    console.log("Ancestors of somethingthatdoesnotexist");
-    console.log(__("#doesnotexist").ancestor());
+    // console.log("Ancestors of somethingthatdoesnotexist");
+    // console.log(__("#doesnotexist").ancestor());
 
     __.ajax({
-        url : "https://httpbin.org/post",
-        method : "POST",
+        url : "https://serene-island-81305.herokuapp.com/400",
+        //url : "https://httpbin.org/headers",
+        method : "GET",
         headers: [
             {"Authorization" : "no"},
             {"header3" : "val3"},
@@ -221,6 +242,8 @@ button1.addEventListener("click", () => {
         },
         fail : function (err) {
             console.log("Error");
+            console.log(err.status);
+            console.log(err.response);
         }
     });
 })

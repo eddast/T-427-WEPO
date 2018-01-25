@@ -41,7 +41,6 @@
                 return true;
             }
 
-
             return this.elements == { };
         }
 
@@ -128,7 +127,7 @@
                 }
             }
             
-            return ancestorList;
+            return new MakeBelieveObject(ancestorList);
         };
 
         /*      6.  ADDS ONCLICK EVENT 
@@ -307,10 +306,12 @@
                     // Request OK (status code is 2xx)
                     // Fires up success function if one was provided
                     if(request.status >= 200 && request.status < 300) {
+
                         if(success) { success(request); }
                     // Error with request
                     // Fires up fail function if one was provided
                     } else {
+
                         if(fail)    { fail(request); }
                     }
             }
