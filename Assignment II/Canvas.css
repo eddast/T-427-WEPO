@@ -11,7 +11,7 @@ body {
     height: 100%;
 }
 #upperBars {
-    margin-left: 30px;
+    margin-left: 60px;
     margin-bottom: 10px;
     width: 100%;
 }
@@ -39,6 +39,7 @@ body {
 #optionBar .undoredo {
     float: left;
     margin-left: 20px;
+    margin-right: 20px;
     color: #25323A;
     padding: 5px 10px 5px 10px;
     border-radius: 30px;
@@ -53,15 +54,41 @@ body {
 
 #optionBar .options {
     float: left;
-    padding-left: 20px;
+    padding-left: 60px;
     padding-right: 20px;
     font-family: Helvetica, sans-serif;
     align-content: center;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     color: white;
     text-shadow: 2px 2px 4px #444040;
-    visibility: hidden;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+#optionBar .slider {
+    padding: 0px;
+    -webkit-appearance: none;
+    width: 150px;
+    height: 5px;
+    background: #d3d3d3;
+    opacity: 0.6;
+    transition: opacity .2s;
+}
+
+#optionBar .slider:hover {
+    opacity: 1;
+}
+
+#optionBar .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #fc295a6c;
+}
+
+.keepHidden {
+    display: none;
 }
 
 .saveclear {
@@ -74,6 +101,11 @@ body {
     border-radius: 20px;
     text-decoration: none;
     text-transform: capitalize;
+}
+
+.leftOptionBtns{
+    float: right;
+    margin-right: 100px;
 }
 
 #save {
@@ -177,12 +209,65 @@ body {
 }
 
 .icons {
+    margin: 2px;
     border: 1.5px solid #fc295af3;
     border-radius: 5px;
 }
 
+.toolTipText {
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    visibility: hidden;
+    font-size: 10px;
+    width: 120px;
+    background-color: #00000075;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+    left: 105%;
+}
+
+.toolTipText::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #00000075 transparent transparent;
+}
+
+#moveToolToolTip:hover .toolTipText,
+#drawToolToolTip:hover .toolTipText,
+#lineToolToolTip:hover .toolTipText,
+#circleToolToolTip:hover .toolTipText,
+#rectToolToolTip:hover .toolTipText,
+#textToolToolTip:hover .toolTipText,
+#primaryColorToolTip:hover .toolTipText,
+#secondaryColorToolTip:hover .toolTipText,
+#switchColorToolTip:hover .toolTipText {
+    visibility: visible;
+}
+
+#moveToolToolTip,
+#drawToolToolTip,
+#lineToolToolTip,
+#circleToolToolTip,
+#rectToolToolTip,
+#textToolToolTip,
+#primaryColorToolTip,
+#secondaryColorToolTip,
+#switchColorToolTip {
+    position: relative;
+    display: block;
+}
+
 .color-pickers {
-    margin: 2px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
@@ -190,6 +275,18 @@ body {
 .color-pickers div{
     border: 1.5px solid #2b2728b6;
     border-radius: 5px;
+}
+
+ #changeColorsBtn {
+    color: #25323A;
+    display: block;
+    margin: auto;
+    margin-top: 7px;
+    margin-bottom: 5px;
+    border-radius: 45px;
+    background: white;
+    border: solid  1px white;
+    box-shadow: 2px 1px 0px #fc295a6c;
 }
 .authors{
     margin-top: 50px;

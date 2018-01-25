@@ -35,26 +35,57 @@
    
                 <button id="undo" class="undoredo undo fa fa-undo" aria-hidden="true"></button>
                 <button id="redo" class="undoredo redo fa fa-repeat" aria-hidden="true"></button>
-                <p class="options odraw oline">line-width</p>
-                <p class="options ocircle orect">fill</p>
-                <p class="options ocircle orect">border</p>
-                <p class="options ocircle orect">border-width</p>
-                <p class="options otext">font</p>
-                <p class="options otext">font-size</p>
-                <button id="save" class="saveclear undo w3-button w3-circle w3-teal">SAVE IMAGE</button>
-                <button id="clear" class="saveclear redo w3-button w3-circle w3-teal">CLEAR CANVAS</button>
+                <p class="options keepHidden odraw oline lineWidth">line-width:</p>
+                <input type="range" min="1" max="200" value="50" class="options keepHidden odraw oline slider" id="myRange">
+                <p class="options keepHidden ocircle orect">fill</p>
+                <p class="options keepHidden ocircle orect">border</p>
+                <p class="options keepHidden ocircle orect">border-width</p>
+                <p class="options keepHidden otext">font</p>
+                <p class="options keepHidden otext">font-size</p>
+                <div class="leftOptionBtns">
+                    <button id="save" class="saveclear undo w3-button w3-circle w3-teal">SAVE IMAGE</button>
+                    <button id="clear" class="saveclear redo w3-button w3-circle w3-teal">CLEAR CANVAS</button>
+                </div>
             </div>
         </div>
         <div id="toolbar" width="100" height="500">
-                <img id="moveTool" class="iconbar icons" src="EditorIcons/move.png" alt="Draw">
-                <img id="drawTool" class="iconbar icons" src="EditorIcons/draw.png" alt="Draw">
-                <img id="lineTool" class="iconbar icons" src="EditorIcons/line.png" alt="Draw Line">
-                <img id="rectTool" class="iconbar icons" src="EditorIcons/rectangle.png" alt="Draw Rectangle">
-                <img id="circleTool" class="iconbar icons" src="EditorIcons/circle.png" alt="Draw Cirlce">
-                <img id="textTool" class="iconbar icons" src="EditorIcons/text.png" alt="Insert Text">
+                <span id="moveToolToolTip">
+                    <img id="moveTool" class="iconbar icons" src="EditorIcons/move.png" alt="Move">
+                    <span class="toolTipText">Moving Tool</span>
+                </span>
+                <span id="drawToolToolTip">
+                    <img id="drawTool" class="iconbar icons" src="EditorIcons/draw.png" alt="Draw">
+                    <span class="toolTipText">Pen Tool</span>
+                </span>
+                <span id="lineToolToolTip">
+                    <img id="lineTool" class="iconbar icons" src="EditorIcons/line.png" alt="Draw Line">
+                    <span class="toolTipText">Straight Line Tool</span>
+                </span>
+                <span id="rectToolToolTip">
+                    <img id="rectTool" class="iconbar icons" src="EditorIcons/rectangle.png" alt="Draw Rectangle">
+                    <span class="toolTipText">Rectangle Tool</span>
+                </span>
+                <span id="circleToolToolTip">
+                    <img id="circleTool" class="iconbar icons" src="EditorIcons/circle.png" alt="Draw Cirlce">
+                    <span class="toolTipText">Circle Tool</span>
+                </span>
+                <span id="textToolToolTip">
+                    <img id="textTool" class="iconbar icons" src="EditorIcons/text.png" alt="Insert Text">
+                    <span class="toolTipText">Insert Text Tool</span>
+                </span>
                 <div class="color-pickers">
-                    <div id="strokeColor" class="iconbar" width="35px" height="35px" >&nbsp</div>
-                    <div id="fillColor" class="iconbar" width="35px" height="35px" >&nbsp</div>
+                    <span id="primaryColorToolTip">
+                        <div id="strokeColor" class="iconbar" width="35px" height="35px" >&nbsp</div>
+                        <span class="toolTipText">Primary/Stroke Color Picker</span>
+                    </span>
+                    <span id="secondaryColorToolTip">
+                        <div id="fillColor" class="iconbar" width="35px" height="35px" >&nbsp</div>
+                        <span class="toolTipText">Secondary/Fill Color Picker</span>
+                    </span>
+                    <span id="switchColorToolTip">
+                        <button id="changeColorsBtn" class="fa fa-refresh" aria-hidden="true"></button>
+                        <span class="toolTipText">Swap Colors</span>
+                    </span>
                 </div>
         </div>
         <div id="canvasDiv">

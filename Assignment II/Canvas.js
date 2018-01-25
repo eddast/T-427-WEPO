@@ -51,6 +51,12 @@ $(document).ready(function(){
     updateStrokeColor('#25323A');
     updateFillColor('#fc295af3');
 
+    $('#changeColorsBtn').click(function(e){
+        let tmpStrokeColor = strokeColor;
+        updateStrokeColor(fillColor);
+        updateFillColor(tmpStrokeColor);
+    });
+
     // Functions to "override" by methods
     let mousedownAction = (function(e){});
     let mouseupAction = (function(e){} );
@@ -65,9 +71,16 @@ $(document).ready(function(){
 
     // Lets option bar show relevant properties based on toShow tool
     let optimizeOptionBar = (function(toShow) {
-        $(".options").css("visibility", "hidden");
-        $(toShow).css("visibility", "visible");
+        $(".options").addClass("keepHidden");
+        $(toShow).removeClass("keepHidden");
     });
+
+    $(".slider").oninput = function() {
+        console.log("hello there");
+        var slider = document.getElementById("lineWidthSlider");
+        var display = document.getElementById("lineWidthDisplay");
+        display.innerHTML += slider.value;
+      }
 
     // User clicks the draw tool icon
     // implements it's own mouse event actions that are
