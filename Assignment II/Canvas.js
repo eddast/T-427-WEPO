@@ -4,6 +4,7 @@
  *      T-427-WEPO Web Programming II
  *      Reykjavik University
  *      Assignment 2: DrawioJS
+ *      Part: Main functionlity
  *      Assignment Due: 04.02.2018
  *      Authors:
  *              Darri Valgarðsson,
@@ -20,6 +21,7 @@ $(document).ready(function(){
     let isPainting = false;
     let startx = 0; let starty = 0;
     let strokeColor; let fillColor;
+    let drawables = [];
     
 
     // Sets up colors and color picker
@@ -80,51 +82,87 @@ $(document).ready(function(){
     $("#lineTool").click(function(e) {
 
         optimizeOptionBar(".oline");
+        let line;
 
-        mousedownAction = defaultMousedownAction;
+        mousedownAction = (function(e) {
+
+            isPainting = true;
+            startx = e.pageX - canvas.offsetLeft;
+            starty = e.pageY - canvas.offsetTop;
+            line = new Line (startx, starty, strokeColor, fillColor);
+            drawables.push(line);
+        });
 
         mousemoveAction = (function(e) {
-        
+            
             if(isPainting === true) {
-                let x = e.pageX - canvas.offsetLeft;
-                let y = e.pageY - canvas.offsetTop;
-                context.beginPath();
-                context.moveTo(startx, starty);
+                let curr_x = e.pageX - canvas.offsetLeft;
+                let curr_y = e.pageY - canvas.offsetTop;
+                line.endCoordinates(curr_x, curr_y);
+                drawCanvas();
             }
         });
 
-        mouseupAction = (function(e) {
-
-            let mouseup_x = e.pageX - canvas.offsetLeft;
-            let mouseup_y = e.pageY - canvas.offsetTop;
-            context.lineTo(mouseup_x, mouseup_y);
-            context.stroke();
-            isPainting = false;
-        }); 
+        mouseupAction = (function(e) { isPainting = false; }); 
     });
 
     // User clicks the circle tool icon
     // implements it's own mouse event actions that are
     // then used by mouse event listeners on the canvas object
     $("#circleTool").click(function(e) {
-        optimizeOptionBar(".ocircle");
-        mousedownAction = defaultMousedownAction;
-        mousemoveAction = (function(e) {});
-        mouseupAction = (function(e) {
-            drawCircle (startx-30, starty-30, 50, false, true);
+        optimizeOptionBar(".orect");
+        let circle;
+
+        mousedownAction = (function(e) {
+
+            isPainting = true;
+            startx = e.pageX - canvas.offsetLeft;
+            starty = e.pageY - canvas.offsetTop;
+            circle = new Circle (startx, starty, strokeColor, fillColor);
+            drawables.push(circle);
         });
+
+        mousemoveAction = (function(e) {
+            
+            if(isPainting === true) {
+                let curr_x = e.pageX - canvas.offsetLeft;
+                let curr_y = e.pageY - canvas.offsetTop;
+                circle.endCoordinates(curr_x, curr_y);
+                drawCanvas();
+            }
+        });
+
+        mouseupAction = (function(e) { isPainting = false; }); 
     });
 
     // User clicks the circle tool icon
     // implements it's own mouse event actions that are
     // then used by mouse event listeners on the canvas object
     $("#rectTool").click(function(e) {
+
         optimizeOptionBar(".orect");
-        mousedownAction = defaultMousedownAction;
-        mousemoveAction = (function(e) {});
-        mouseupAction = (function(e) {
-            drawRect (startx-30, starty-30, 100, 100, true, false);
+        let rect;
+
+        mousedownAction = (function(e) {
+
+            isPainting = true;
+            startx = e.pageX - canvas.offsetLeft;
+            starty = e.pageY - canvas.offsetTop;
+            rect = new Rect (startx, starty, strokeColor, fillColor);
+            drawables.push(rect);
         });
+
+        mousemoveAction = (function(e) {
+            
+            if(isPainting === true) {
+                let curr_x = e.pageX - canvas.offsetLeft;
+                let curr_y = e.pageY - canvas.offsetTop;
+                rect.endCoordinates(curr_x, curr_y);
+                drawCanvas();
+            }
+        });
+
+        mouseupAction = (function(e) { isPainting = false; }); 
     });
 
     // User clicks the circle tool icon
@@ -144,39 +182,26 @@ $(document).ready(function(){
     $("#canvas").mousedown(function(e) { mousedownAction(e, this); });
 
 
-    // Draws a cicle at some specific coordinates in canvas
-    let drawCircle = (function ( x, y, radius, stroke, fill) {
-
-        context.arc( x-30, y-30, radius, 0, 2*Math.PI, false );
-
-        if ( stroke === true)   { context.stroke(); }
-        if ( fill === true )    { context.fill(); }
-
-    });
-
-    // Draws a cicle at some specific coordinates in canvas
-    let drawRect = (function ( x, y, xsize, ysize, stroke, fill) {
-
-        if ( fill === true )    { context.fillRect(x-30, y-30, xsize, ysize); }
-        if ( stroke === true)   { context.strokeRect(x-30, y-30, xsize, ysize); }
-    
-    });
-
-    // Draws text at some specific coordinates in canvas
-    let drawText = (function (text, x, y, font, size, stroke, fill) {
-        
-        context.font= size + "px " + font;
-        // context.measureText(text) <--- gets the width of text before placing it on canvas
-        if ( fill === true) { context.fillText(text, startx, starty); }
-        if ( stroke === true) { context.strokeText(text, startx, starty); }
-    });
-
     // Default mousedown action marks the start coordinates
     // And initiates the user painting state
     let defaultMousedownAction = (function(e){
         isPainting = true;
+        firstStroke = true;
         startx = e.pageX - canvas.offsetLeft;
         starty = e.pageY - canvas.offsetTop;
+    });
+
+    let drawCanvas = (function() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        let temp_pColor = context.strokeStyle;
+        let temp_sColor = context.fillStyle;
+        drawables.forEach(element => {
+            element.draw(context);
+        });
+
+        context.strokeStyle = temp_pColor;
+        context.fillStyle = temp_sColor;
     });
 
 });
