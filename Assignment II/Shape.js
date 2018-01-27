@@ -17,13 +17,14 @@
  *  Drawables are FreeForm, Line, Circle, Rect and Text */
 class Drawable {
 
-	constructor (x, y, primaryColor, secondaryColor) {
+	constructor (x, y, primaryColor, secondaryColor, lineWidth) {
 		this.start_x = x;
 		this.start_y = y;
 		this.end_x = x;
         this.end_y = y;
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
+        this.lineWidth = lineWidth;
 	}
 
 	endCoordinates (x, y) {
@@ -38,12 +39,14 @@ class FreeForm extends Drawable {
 
 class Line extends Drawable {
 
-	constructor (x, y, primaryColor, secondaryColor) { super(x, y, primaryColor, secondaryColor); }
+	constructor (x, y, primaryColor, secondaryColor, lineWidth) { super(x, y, primaryColor, secondaryColor, lineWidth); }
 
 
 	draw (context) {
+
         context.strokeStyle = this.primaryColor;
         context.fillStyle = this.secondaryColor;
+        context.lineWidth = this.lineWidth;
         context.beginPath();
 		context.moveTo(this.start_x, this.start_y);
 		context.lineTo(this.end_x, this.end_y);
@@ -58,20 +61,19 @@ class Line extends Drawable {
 
 class Circle extends Drawable {
 
-	constructor (x, y, primaryColor, secondaryColor) {
-        super(x, y, primaryColor, secondaryColor);
-        this.radiusX = 0;
-        this.radiusY = 0;
-        this.centerX = 0;
-        this.centerY = 0;
+	constructor (x, y, primaryColor, secondaryColor, lineWidth) {
+        super(x, y, primaryColor, secondaryColor, lineWidth);
+        this.radiusX = 0; this.radiusY = 0;
+        this.centerX = 0; this.centerY = 0;
+        this.fill = $("#fillMark").is( ":checked" ) ? true : false;
+        this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
     }
 
 	draw (context) {
 
         context.strokeStyle = this.primaryColor;
         context.fillStyle = this.secondaryColor;
-        let fill = true;
-        let stroke = true;
+        context.lineWidth = this.lineWidth;
         this.radiusX = (this.start_x - this.end_x) / 2;
         this.radiusY = (this.start_y - this.end_y) / 2;
         this.centerX = this.start_x - this.radiusX;
@@ -92,8 +94,8 @@ class Circle extends Drawable {
         context.lineTo(this.centerX + this.radiusX * Math.cos(a+step),
                        this.centerY + this.radiusY * Math.sin(a+step));
 
-        if ( stroke === true)   { context.stroke(); }
-        if ( fill === true )    { context.fill(); }
+        if ( this.stroke === true)   { context.stroke(); }
+        if ( this.fill === true )    { context.fill(); }
 
         context.closePath();
     }
@@ -105,7 +107,11 @@ class Circle extends Drawable {
 
 class Rect extends Drawable {
 
-	constructor (x, y, primaryColor, secondaryColor) { super(x, y, primaryColor, secondaryColor); }
+	constructor (x, y, primaryColor, secondaryColor, lineWidth) {
+        super(x, y, primaryColor, secondaryColor, lineWidth);
+        this.fill = $("#fillMark").is( ":checked" ) ? true : false;
+        this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
+    }
 
 	endCoordinates (x,y) {
 		this.end_x = x;
@@ -116,12 +122,11 @@ class Rect extends Drawable {
         
         context.strokeStyle = this.primaryColor;
         context.fillStyle = this.secondaryColor;
-        let fill = true;
-        let stroke = true;
+        context.lineWidth = this.lineWidth;
         let xsize = this.end_x - this.start_x;
         let ysize = this.end_y - this.start_y;
-        if ( fill === true )    { context.fillRect(this.start_x, this.start_y, xsize, ysize); }
-        if ( stroke === true)   { context.strokeRect(this.start_x, this.start_y, xsize, ysize); }
+        if ( this.fill === true )    { context.fillRect(this.start_x, this.start_y, xsize, ysize); }
+        if ( this.stroke === true)   { context.strokeRect(this.start_x, this.start_y, xsize, ysize); }
     }
     
     erase (context) {
@@ -155,3 +160,18 @@ class Text extends Drawable {
         if ( stroke === true) { context.strokeText(text, startx, starty); }
     };
 }
+
+
+$(document).ready(function(){
+
+    // OPTIMIZERS
+
+    // LINE WIDTH OPTIMIZER LOCATED IN CANVAS.JS
+
+    $('.fillstroke').change(function (e) {
+        let checked = $(".fillstroke:checked").length;
+        if(checked == 0) { e.target.checked = true; }
+    });
+});
+
+

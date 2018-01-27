@@ -102,7 +102,7 @@ $(document).ready(function(){
             isPainting = true;
             startx = e.pageX - canvas.offsetLeft;
             starty = e.pageY - canvas.offsetTop;
-            line = new Line (startx, starty, strokeColor, fillColor);
+            line = new Line (startx, starty, strokeColor, fillColor, context.lineWidth);
             drawables.push(line);
         });
 
@@ -131,7 +131,7 @@ $(document).ready(function(){
             isPainting = true;
             startx = e.pageX - canvas.offsetLeft;
             starty = e.pageY - canvas.offsetTop;
-            circle = new Circle (startx, starty, strokeColor, fillColor);
+            circle = new Circle (startx, starty, strokeColor, fillColor, context.lineWidth);
             drawables.push(circle);
         });
 
@@ -152,7 +152,7 @@ $(document).ready(function(){
     // implements it's own mouse event actions that are
     // then used by mouse event listeners on the canvas object
     $("#rectTool").click(function(e) {
-
+        
         optimizeOptionBar(".orect");
         let rect;
 
@@ -161,7 +161,7 @@ $(document).ready(function(){
             isPainting = true;
             startx = e.pageX - canvas.offsetLeft;
             starty = e.pageY - canvas.offsetTop;
-            rect = new Rect (startx, starty, strokeColor, fillColor);
+            rect = new Rect (startx, starty, strokeColor, fillColor, context.lineWidth);
             drawables.push(rect);
         });
 
@@ -216,5 +216,14 @@ $(document).ready(function(){
         context.strokeStyle = temp_pColor;
         context.fillStyle = temp_sColor;
     });
+
+    var slider = document.getElementById("strokeWidth");
+    var output = document.getElementById("strokeWidthOutput");
+    output.innerHTML = slider.value + " px";
+
+    slider.oninput = function() {
+        output.innerHTML = this.value + " px";
+        context.lineWidth = this.value;
+    }
 
 });

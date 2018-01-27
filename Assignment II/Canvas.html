@@ -32,20 +32,22 @@
                 <p id="tagline">Everything you can imagine becomes real</p>
             </div>
             <div id="optionBar">
-   
                 <button id="undo" class="undoredo undo fa fa-undo" aria-hidden="true"></button>
                 <button id="redo" class="undoredo redo fa fa-repeat" aria-hidden="true"></button>
                 <p class="options keepHidden odraw oline lineWidth">line-width:</p>
-                <input type="range" min="1" max="200" value="50" class="options keepHidden odraw oline slider" id="myRange">
                 <p class="options keepHidden ocircle orect">fill</p>
+                <input type="checkbox" id="fillMark" class="options keepHidden ocircle orect fillstroke" required>
                 <p class="options keepHidden ocircle orect">border</p>
-                <p class="options keepHidden ocircle orect">border-width</p>
+                <input type="checkbox" id="strokeMark" class="options keepHidden ocircle orect fillstroke" checked="checked" required>
+                <p class="options keepHidden ocircle orect">border-width:</p>
                 <p class="options keepHidden otext">font</p>
                 <p class="options keepHidden otext">font-size</p>
                 <div class="leftOptionBtns">
                     <button id="save" class="saveclear undo w3-button w3-circle w3-teal">SAVE IMAGE</button>
                     <button id="clear" class="saveclear redo w3-button w3-circle w3-teal">CLEAR CANVAS</button>
                 </div>
+                        <p id="strokeWidthOutput" class="valueDisplay keepHidden odraw oline ocircle orect"></p>
+                        <input type="range" min="1" max="100" value="5" class="options keepHidden odraw oline ocircle orect slider" id="strokeWidth">
             </div>
         </div>
         <div id="toolbar" width="100" height="500">
@@ -96,11 +98,6 @@
                             <p>Unfortunately your browser does not support this functionality</p>
                     </div>
             </canvas>
-            <div class="authors">
-                <p>Project for T-427-WEPO by:</p>
-                <p>DARRI VALGARÐSSON</p>
-                <p>EDDA STEINUNN RÚNARSDÓTTIR</p>
-            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>

@@ -28,7 +28,7 @@ body {
 
 #optionBar {
     padding: 5px;
-    padding-right: 150px;
+    padding-right: 100px;
     margin-left: 50px;
     height: 30px;
     background:  #25323A;
@@ -39,8 +39,8 @@ body {
 
 #optionBar .undoredo {
     float: left;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     color: #25323A;
     padding: 5px 10px 5px 10px;
     border-radius: 30px;
@@ -53,9 +53,21 @@ body {
     margin-right: 45px;
 }
 
+#optionBar .valueDisplay {
+    float: left;
+    padding-right: 5px;
+    font-family: Helvetica, sans-serif;
+    align-content: center;
+    font-size: 12px;
+    color: white;
+    text-shadow: 2px 2px 4px #444040;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
 #optionBar .options {
     float: left;
-    padding-left: 60px;
+    padding-left: 20px;
     padding-right: 20px;
     font-family: Helvetica, sans-serif;
     align-content: center;
@@ -67,29 +79,40 @@ body {
     vertical-align: middle;
 }
 
-#optionBar .slider {
+ #optionBar .slider {
     padding: 0px;
+    margin: 0px;
+    margin-top: 14px;
+    width: 200px;
+    height: 4px;
     -webkit-appearance: none;
-    width: 150px;
-    height: 5px;
     background: #d3d3d3;
     opacity: 0.6;
     transition: opacity .2s;
 }
 
-#optionBar .slider:hover {
+ #optionBar .slider:hover {
     opacity: 1;
 }
 
-#optionBar .slider::-webkit-slider-thumb {
+ #optionBar .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 15px;
     height: 15px;
     background: #fc295a6c;
-}
+} 
 
 .keepHidden {
     display: none;
+}
+
+.fillstroke {
+ margin-top:7px;
+}
+
+#strokeWidthOutput {
+    margin: 0 px;
+    padding: 0 px;
 }
 
 .saveclear {
@@ -231,6 +254,24 @@ body {
     left: 105%;
 }
 
+.toolTipTextOptionBar {
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    visibility: hidden;
+    font-size: 10px;
+    width: 120px;
+    background-color: #00000075;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: relative;
+    margin: 10px;
+    z-index: 1;
+    top: 50%;
+    left: 0%;
+}
+
 .toolTipText::after {
     content: " ";
     position: absolute;
@@ -287,23 +328,4 @@ body {
     background: white;
     border: solid  1px white;
     box-shadow: 2px 1px 0px #fc295a6c;
-}
-.authors{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-right: 100px;
-}
- .authors p {
-    text-align: right;
-    display: block;
-    margin: auto;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    font-family: Helvetica, sans-serif;
-    align-content: center;
-    font-weight: bold;
-    font-size: 12px;
-    color: #2b2728b6;
-    text-shadow: 0px 0.5px 1px #1d070cf3;
-    visibility: hidden;
 }
