@@ -72,6 +72,7 @@ $(document).ready(function(){
     // Lets option bar show relevant properties based on toShow tool
     let optimizeOptionBar = (function(toShow) {
         $(".options").addClass("keepHidden");
+        $(".valueDisplay").addClass("keepHidden");
         $(toShow).removeClass("keepHidden");
     });
 
