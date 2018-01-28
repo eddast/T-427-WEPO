@@ -101,8 +101,7 @@ $(document).ready(function(){
             freeDraw = new FreeForm (startx, starty, strokeColor, fillColor, context.lineWidth);
             drawables.push(freeDraw);
             
-            context.moveTo(startx, starty);
-            context.beginPath();
+            // context.moveTo(startx, starty);
         });
 
         mousemoveAction = (function(e) {
@@ -115,7 +114,7 @@ $(document).ready(function(){
             }
         });
 
-        mouseupAction = (function(e) {  context.closePath(); isPainting = false; });
+        mouseupAction = (function(e) { isPainting = false; });
     });
 
     // User clicks the line tool icon
@@ -238,12 +237,17 @@ $(document).ready(function(){
 
         let temp_pColor = context.strokeStyle;
         let temp_sColor = context.fillStyle;
+        let temp_lWidth = context.lineWidth;
+        let i = 1;
         drawables.forEach(element => {
+            console.log("Drawing element " + i);
             element.draw(context);
+            i++;
         });
 
         context.strokeStyle = temp_pColor;
         context.fillStyle = temp_sColor;
+        context.lineWidth = temp_lWidth;
     });
 
     var slider = document.getElementById("strokeWidth");

@@ -39,7 +39,7 @@ class FreeForm extends Drawable {
         
         super(x, y, primaryColor, secondaryColor, lineWidth);
         this.points = [ ];
-        let point = {x: this.start_x, y: this.end_x};
+        let point = {x: this.start_x, y: this.start_y};
         this.points.push(point);
     }
 
@@ -48,6 +48,7 @@ class FreeForm extends Drawable {
         context.strokeStyle = this.primaryColor;
         context.fillStyle = this.secondaryColor;
         context.lineWidth = this.lineWidth;
+        context.beginPath();
         let point = { x: this.end_x,
                       y: this.end_y};
         this.points.push(point);
@@ -58,7 +59,9 @@ class FreeForm extends Drawable {
             context.lineTo(point.x, point.y);
         }
         context.stroke();
+        context.closePath();
     }
+    
 
     erase (context) {
         // ?????
