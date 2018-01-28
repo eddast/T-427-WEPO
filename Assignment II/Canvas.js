@@ -22,6 +22,7 @@ $(document).ready(function(){
     let startx = 0; let starty = 0;
     let strokeColor; let fillColor;
     let drawables = [];
+    let undo = [];
     
 
     /*********************************
@@ -84,6 +85,22 @@ $(document).ready(function(){
         var display = document.getElementById("lineWidthDisplay");
         display.innerHTML += slider.value;
       }
+
+      $(".undo").click(function(e) {
+          if(drawables.length !== 0){
+              let shape = drawables.pop();
+              undo.push(shape);
+              drawCanvas();
+          }
+      })
+
+      $(".redo").click(function(e) {
+        if(undo.length !== 0){
+            let shape = undo.pop();
+            drawables.push(shape);
+            drawCanvas();
+        }
+    })
 
     // User clicks the draw tool icon
     // implements it's own mouse event actions that are
@@ -240,7 +257,6 @@ $(document).ready(function(){
         let temp_lWidth = context.lineWidth;
         let i = 1;
         drawables.forEach(element => {
-            console.log("Drawing element " + i);
             element.draw(context);
             i++;
         });
