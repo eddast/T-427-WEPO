@@ -24,7 +24,9 @@ $(document).ready(function(){
     let drawables = [];
     
 
-    // Sets up colors and color picker
+    /*********************************
+     * SET UP COLORS AND COLOR PICKERS
+     ********************************/
     $("#strokeColor").spectrum({
         color: strokeColor,
         preferredFormat: "hex",
@@ -87,7 +89,33 @@ $(document).ready(function(){
     // implements it's own mouse event actions that are
     // then used by mouse event listeners on the canvas object
     $("#drawTool").click(function(e) {
+
         optimizeOptionBar(".odraw");
+        let freeDraw;
+
+        mousedownAction = (function(e) {
+
+            isPainting = true;
+            startx = e.pageX - canvas.offsetLeft;
+            starty = e.pageY - canvas.offsetTop;
+            freeDraw = new FreeForm (startx, starty, strokeColor, fillColor, context.lineWidth);
+            drawables.push(freeDraw);
+            
+            context.moveTo(startx, starty);
+            context.beginPath();
+        });
+
+        mousemoveAction = (function(e) {
+
+            if (isPainting === true) {
+              let curr_x = e.pageX - canvas.offsetLeft;
+              let curr_y = e.pageY - canvas.offsetTop;
+              freeDraw.endCoordinates(curr_x, curr_y);
+              drawCanvas();
+            }
+        });
+
+        mouseupAction = (function(e) {  context.closePath(); isPainting = false; });
     });
 
     // User clicks the line tool icon
