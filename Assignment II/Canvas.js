@@ -86,7 +86,7 @@ $(document).ready(function(){
         display.innerHTML += slider.value;
       }
 
-      $(".undo").click(function(e) {
+      $("#undo").click(function(e) {
           if(drawables.length !== 0){
               let shape = drawables.pop();
               undo.push(shape);
@@ -94,13 +94,24 @@ $(document).ready(function(){
           }
       })
 
-      $(".redo").click(function(e) {
+      $("#redo").click(function(e) {
         if(undo.length !== 0){
             let shape = undo.pop();
             drawables.push(shape);
             drawCanvas();
         }
     })
+
+    $("#clear").click(function(e) {
+        console.log("OI");
+        while(drawables.length !== 0){
+            drawables.pop();
+        }
+        while(undo.length !== 0){
+            undo.pop();
+        }
+        drawCanvas();
+  })
 
     // User clicks the draw tool icon
     // implements it's own mouse event actions that are
