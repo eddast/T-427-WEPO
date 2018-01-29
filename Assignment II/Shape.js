@@ -171,58 +171,50 @@ function Text (x, y, primaryColor, secondaryColor, font, context) {
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
     this.font = font;
-
-    this.textInputBox = document.createElement('input');
-    this.textInputBox.setAttribute("id", "text_tool");
-    if (this.stroke) { this.textInputBox.setAttribute('style', "-webkit-text-stroke: 1px " + primaryColor + ";"); }
-    if (this.fill) { this.textInputBox.style.color = secondaryColor; }
-    if (!this.fill) { this.textInputBox.style.color = "transparent"; }
-    this.textInputBox.style.font = font;
-    this.textInputBox.style.display = "block";
-    this.textInputBox.type = 'text';
-    this.text =  this.textInputBox.value;
-
-    this.textInputBox.style.left = (this.start_x +  document.getElementById("canvas").offsetLeft) + 'px';
-    this.textInputBox.style.top  = (this.start_y + document.getElementById("canvas").offsetTop) + 'px';
-
-    document.body.appendChild(this.textInputBox);
-    this.textInputBox.focus();
-
-    this.textInputBox.onkeydown = ( (e) => {
+    this.textBox = document.getElementById("textBox");
+    if (this.stroke) { 
+        this.textBox.setAttribute('style', "-webkit-text-stroke: 1px " + primaryColor + ";");
+    }
+    if (this.fill) { 
+        this.textBox.style.color = secondaryColor;
+    }
+    if (!this.fill) {
+        this.textBox.style.color = "transparent";
+    }
+    this.textBox.style.font = font;
+    this.text =  this.textBox.value;
+    var canvas = document.getElementById("canvas");
+    this.textBox.style.left = (this.start_x +  canvas.offsetLeft) + 'px';
+    this.textBox.style.top  = (this.start_y + canvas.offsetTop) + 'px';
+    this.textBox.style.display = "block";
+    this.textBox.focus();
+    this.textBox.onkeydown = ( (e) => {
 
         if(e.keyCode==13 || e.keyCode ==27) {
 
-            this.text = this.textInputBox.value;
-            let tmp = context;
-            context.lineWidth = 1;
-            context.font = this.font;
-            context.textBaseline = 'top';
-            context.textAlign = 'left';
-            context.strokeStyle = this.primaryColor;
-            context.fillStyle = this.secondaryColor;
-            context.beginPath();
-            if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
-            if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
-            context.closePath();
-            context = tmp;
-            this.textInputBox.parentNode.removeChild(this.textInputBox);
+            this.draw(context);
         } 
     });
 };
 Text.prototype = Object.create(Drawable.prototype);
 Text.prototype.constructor = Text;
 Text.prototype.draw = function (context) {
-    
-    context.strokeStyle = this.primaryColor;
-    context.fillStyle = this.secondaryColor;
+
+    this.text = this.textBox.value;
+    let tmp = context;
     context.lineWidth = 1;
     context.font = this.font;
     context.textBaseline = 'top';
     context.textAlign = 'left';
-
+    context.strokeStyle = this.primaryColor;
+    context.fillStyle = this.secondaryColor;
     context.beginPath();
     if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
     if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
     context.closePath();
+    context = tmp;
+    textBox.value = "";
+    textBox.style.display="none";
+    Drawio.isTyping = false;
 
 };

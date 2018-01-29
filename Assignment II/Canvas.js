@@ -24,7 +24,8 @@ window.Drawio = {
     fillColor : null,
     selectedTool : "drawTool",
     currentElement : null,
-    isDrawing : false
+    isDrawing : false,
+    isTyping: false,
 }
 
 $(document).ready(function() {
@@ -151,10 +152,10 @@ $(document).ready(function() {
                                                     Drawio.context.lineWidth );
                 break;
             case "circleTool":
-                Drawio.currentElement = new Circle (startX, startY,
-                                                    Drawio.strokeColor,
-                                                    Drawio.fillColor,
-                                                    Drawio.context.lineWidth );
+                Drawio.currentElement = new Circle (    startX, startY,
+                                                        Drawio.strokeColor,
+                                                        Drawio.fillColor,
+                                                        Drawio.context.lineWidth );
                 break;
             case "rectTool":
                 Drawio.currentElement = new Rect (  startX, startY,
@@ -163,12 +164,17 @@ $(document).ready(function() {
                                                     Drawio.context.lineWidth );
                 break;
             case "textTool":
-
-                Drawio.currentElement = new Text (    startX, startY,
-                                                        Drawio.strokeColor,
-                                                        Drawio.fillColor,
-                                                        Drawio.context.font,
-                                                        Drawio.context );
+            if(!Drawio.isTyping) {
+                Drawio.isTyping = true;
+                Drawio.currentElement = new Text (  startX, startY,
+                                                    Drawio.strokeColor,
+                                                    Drawio.fillColor,
+                                                    Drawio.context.font,
+                                                    Drawio.context );
+                } else {
+                    Drawio.currentElement.draw(Drawio.context);
+                    $("#textBox").css("display", "none");
+                }
                 Drawio.isDrawing = false;
                 break;
         }
@@ -205,9 +211,9 @@ $(document).ready(function() {
     });
 
 
-    /************************
+    /*************************
      *  SET UP RANGE SLIDERS
-     ************************/
+     *************************/
 
     // Line width slider optimization
     var lineWidthSlider = document.getElementById("strokeWidth");
@@ -233,7 +239,7 @@ $(document).ready(function() {
 
 
     /**************************
-     *  SET UP FONT ON CHANGE
+     * SET UP FONT ON CHANGE
      **************************/
 
     // Detects font drop down list change
@@ -248,9 +254,9 @@ $(document).ready(function() {
     });
 
 
-    /***************************
+    /**************************
      *  ERROR CHECK CHECKBOXES
-     ***************************/
+     **************************/
 
     $('.fillstroke').change(function (e) {
         let checked = $(".fillstroke:checked").length;
