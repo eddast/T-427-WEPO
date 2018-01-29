@@ -1,4 +1,3 @@
-
 /*  ========================================================
  *
  *      T-427-WEPO Web Programming II
@@ -17,6 +16,7 @@
  *  DRAWIO APPLICATION VARIABLES
 **********************************/
 window.Drawio = {
+
     context : document.getElementById("canvas").getContext("2d"),
     drawables : [],
     undo : [],
@@ -24,6 +24,7 @@ window.Drawio = {
     fillColor : null,
     selectedTool : "drawTool",
     currentElement : null,
+    movingElement: null,
     isDrawing : false,
     isTyping: false,
     isMoving: false
@@ -166,36 +167,31 @@ $(document).ready(function() {
             case "moveTool":
                 Drawio.currentElement = null;
                 Drawio.isDrawing = false;
+                Drawio.isMoving = true;
+                movingElement = getClickedShape(startX, startY);
+                if ( getClickedShape(startX,startY) !== null ) {
+                    console.log("FOUND SHAPE!!!");
+                } else {
+                    console.log("BOO, NO SHAPE FOUND! :(")
+                }
                 return;
 
             case "drawTool":
-                Drawio.currentElement = new FreeForm (  startX, startY,
-                                                        Drawio.strokeColor,
-                                                        Drawio.fillColor,
-                                                        Drawio.context.lineWidth );
+                Drawio.currentElement = new FreeForm ( startX, startY );
                 break;
             case "lineTool":
-                Drawio.currentElement = new Line (  startX, startY,
-                                                    Drawio.strokeColor,
-                                                    Drawio.fillColor,
-                                                    Drawio.context.lineWidth );
+                Drawio.currentElement = new Line ( startX, startY );
                 break;
             case "circleTool":
-                Drawio.currentElement = new Circle (    startX, startY,
-                                                        Drawio.strokeColor,
-                                                        Drawio.fillColor,
-                                                        Drawio.context.lineWidth );
+                Drawio.currentElement = new Circle ( startX, startY );
                 break;
             case "rectTool":
-                Drawio.currentElement = new Rect (  startX, startY,
-                                                    Drawio.strokeColor,
-                                                    Drawio.fillColor,
-                                                    Drawio.context.lineWidth );
+                Drawio.currentElement = new Rect ( startX, startY );
                 break;
             case "textTool":
                 if(!Drawio.isTyping) {
                     Drawio.isTyping = true;
-                    Drawio.currentElement = new Text (startX, startY, e);
+                    Drawio.currentElement = new Text ( startX, startY, e );
                 } else {
                         let textBox = document.getElementById("textBox");
                         Drawio.currentElement.text = textBox.value;
@@ -214,16 +210,23 @@ $(document).ready(function() {
     });
     // User moves mouse but hasn't released yet
     $("#canvas").mousemove(function(e) {
-        if(Drawio.isDrawing) {
-            let currX = e.offsetX; 
-            let currY = e.offsetY;
+        let currX = e.offsetX; 
+        let currY = e.offsetY;
+        if ( Drawio.isDrawing ) {
             Drawio.currentElement.endCoordinates(currX, currY);
+            drawCanvas();
+        }
+        if ( Drawio.isMoving &&  movingElement !== null) {
+            movingElement.start_x = currX;
+            movingElement.start_y = currY;
             drawCanvas();
         }
     });
     // User releases mouse
     $("#canvas").mouseup(function(e) {
+
         Drawio.isDrawing = false;
+        Drawio.isMoving = false;
     });
     // Re-renders canvas and all it's drawables
     let drawCanvas = (function() {
@@ -233,6 +236,7 @@ $(document).ready(function() {
         let temp_pColor = Drawio.strokeStyle;
         let temp_sColor = Drawio.fillStyle;
         let temp_lWidth = Drawio.lineWidth;
+
         Drawio.drawables.forEach(element => {
             element.draw(Drawio.context);
         });
@@ -240,6 +244,18 @@ $(document).ready(function() {
         Drawio.context.strokeStyle = temp_pColor;
         Drawio.context.fillStyle = temp_sColor;
         Drawio.context.lineWidth = temp_lWidth;
+    });
+    // Gets if shape is within clicked index
+    let getClickedShape = (function(x, y){
+
+        let foundElement = null;
+        Drawio.drawables.forEach(element => {
+            if(element.isAt(x,y)) {
+                foundElement = element;
+            }
+        });
+
+        return foundElement;
     });
 
 

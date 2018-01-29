@@ -46,6 +46,8 @@ function FreeForm (x, y) {
         
     Drawable.call(this, x, y);
     this.points = [ ];
+    this.outerPoints = [ ];
+    this.innerPoints = [ ];
     let point = {x: this.start_x, y: this.start_y};
     this.points.push(point);
 };
@@ -69,6 +71,22 @@ FreeForm.prototype.draw = function (context) {
     context.stroke();
     context.closePath();
 };
+FreeForm.prototype.isAt = function (x, y) {
+
+    let outerPoints = []; let innerPoints = [];
+    for(let i = 0; i < this.points.length; i++) {
+        outerPoints[i] = {x: this.points[i].x-this.lineWidth, y: this.points[i].y-this.lineWidth};
+        innerPoints[i] = {x: this.points[i].x+this.lineWidth, y: this.points[i].y+this.lineWidth};
+    }
+    for(let i = 0; i < this.points.length-1; i++) {
+        A = outerPoints[i]; // rect startpt
+        B = innerPoints[i+1]; // rect endpt
+        if(checkRange(x, y, A, B) === true) {
+            return true;
+        }
+    }
+    return false;
+};
 
 
 /*********************************************************
@@ -82,6 +100,7 @@ function Line (x, y) {
 Line.prototype = Object.create(Drawable.prototype);
 Line.prototype.constructor = Line;
 Line.prototype.draw = function (context) {
+    
     context.strokeStyle = this.primaryColor;
     context.fillStyle = this.secondaryColor;
     context.lineWidth = this.lineWidth;
@@ -91,6 +110,15 @@ Line.prototype.draw = function (context) {
     context.stroke();
     context.closePath();
 };
+// TODO: Hægt betra?
+Line.prototype.isAt = function (x, y) {
+
+    let A = { x: this.start_x-this.lineWidth, y: this.start_y-this.lineWidth}; //rect startpt
+    let B = { x: this.end_x+this.lineWidth, y: this.end_y+this.lineWidth}; //rect endpt
+
+    return checkRange(x,y, A, B);
+};
+
 
 
 /*********************************************************
@@ -109,6 +137,7 @@ function Circle (x, y) {
 Circle.prototype = Object.create(Drawable.prototype);
 Circle.prototype.constructor = Circle;
 Circle.prototype.draw = function (context) {
+
     context.strokeStyle = this.primaryColor;
     context.fillStyle = this.secondaryColor;
     context.lineWidth = this.lineWidth;
@@ -137,6 +166,21 @@ Circle.prototype.draw = function (context) {
 
     context.closePath();    
 };
+Circle.prototype.isAt = function (x, y) {
+
+    let A; let B;
+    if(this.stroke) {
+        A = { x: this.start_x-this.lineWidth, y: this.start_y-this.lineWidth}; //rect startpt
+        B = { x: this.end_x+this.lineWidth, y: this.end_y+this.lineWidth}; //rect endpt
+    }
+    else {
+        A = { x: this.start_x, y: this.start_y}; //rect startpt
+        B = { x: this.end_x, y: this.end_y}; //rect endpt
+    }
+
+    
+    return checkRange(x,y, A, B);
+};
 
 
 /***************************************************************
@@ -153,6 +197,7 @@ function Rect (x, y) {
 Rect.prototype = Object.create(Drawable.prototype);
 Rect.prototype.constructor = Rect;
 Rect.prototype.draw = function (context) {
+
     context.strokeStyle = this.primaryColor;
     context.fillStyle = this.secondaryColor;
     context.lineWidth = this.lineWidth;
@@ -160,6 +205,21 @@ Rect.prototype.draw = function (context) {
     let ysize = this.end_y - this.start_y;
     if ( this.fill === true )    { context.fillRect(this.start_x, this.start_y, xsize, ysize); }
     if ( this.stroke === true)   { context.strokeRect(this.start_x, this.start_y, xsize, ysize); }
+};
+Rect.prototype.isAt = function (x, y) {
+
+    let A; let B;
+    if(this.stroke) {
+        A = { x: this.start_x-this.lineWidth, y: this.start_y-this.lineWidth}; //rect startpt
+        B = { x: this.end_x+this.lineWidth, y: this.end_y+this.lineWidth}; //rect endpt
+    }
+    else {
+        A = { x: this.start_x, y: this.start_y}; //rect startpt
+        B = { x: this.end_x, y: this.end_y}; //rect endpt
+    }
+
+    
+    return checkRange(x,y, A, B);
 };
 
 
@@ -175,6 +235,7 @@ function Text (x, y, e) {
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
     this.font = Drawio.context.font;
     this.textBox = document.getElementById("textBox");
+    this.textSize = {x: 0, y: 0};
     // Format textbox to be exactly as user specified text (size, color, etc)
     if (this.stroke) { 
         this.textBox.setAttribute ( 'style',
@@ -199,12 +260,14 @@ function Text (x, y, e) {
     this.textBox.focus();
     e.preventDefault();
     this.textBox.onkeydown = ( (e) => {
+
         // On enter or esc draw what is in textbox
         if(e.keyCode==13 || e.keyCode ==27) { 
+
             Drawio.isTyping = false;
             this.text = this.textBox.value;
             Drawio.drawables.push(this);
-            this.draw(Drawio.context); 
+            this.draw(Drawio.context);
 
         } 
     });
@@ -220,6 +283,8 @@ Text.prototype.draw = function (context) {
     context.strokeStyle = this.primaryColor;
     context.fillStyle = this.secondaryColor;
     context.beginPath();
+    this.textSize = {   x: this.start_x+context.measureText(this.text).width,
+                        y: this.start_y+$("#textBox")[0].scrollHeight };
     if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
     if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
     context.closePath();
@@ -227,3 +292,25 @@ Text.prototype.draw = function (context) {
     textBox.style.display="none";
 
 };
+Text.prototype.isAt = function (x, y) {
+
+    let A = { x: this.start_x-this.lineWidth, y: this.start_y-this.lineWidth}; //rect startpt
+    let B = this.textSize; //rect endpt
+    
+    return checkRange(x,y, A, B);
+};
+
+/**************************************************************
+ *  HELPER FUNCTION: CHECKS IF X, Y ARE WITHIN SPECIFIED RECT
+ **************************************************************/
+var checkRange = (function(x, y, upperRectPoint, lowerRectPoint ) {
+
+        if(upperRectPoint.x < lowerRectPoint.x) {
+            let tmp = upperRectPoint;
+            upperRectPoint = lowerRectPoint;
+            lowerRectPoint = tmp;
+        }
+
+        return  ((x <= upperRectPoint.x && x >= lowerRectPoint.x) &&
+                 (y >= lowerRectPoint.y && y <= upperRectPoint.y));
+});
