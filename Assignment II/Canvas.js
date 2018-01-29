@@ -245,4 +245,13 @@ $(document).ready(function(){
         Drawio.context.font = size + "px " + font;
     });
 
+
+    
+    /************************************
+     * Error check fill/stroke checkboxes
+     ************************************/
+    $('.fillstroke').change(function (e) {
+        let checked = $(".fillstroke:checked").length;
+        if(checked == 0) { e.target.checked = true; }
+    });
 });
