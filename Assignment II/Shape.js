@@ -13,11 +13,15 @@
     ======================================================== */
 
 
-/*  "Abstract" super-class drawable and it's derived classes
- *  Each drawable implements draw() and erase() functionality
+/*  "Abstract" super-JSObject drawable and it's derived classes
  *  Drawables are FreeForm, Line, Circle, Rect and Text */
 
 
+
+/************************************************************
+ *                  BASE CLASS DRAWABLE
+ *  Each drawable implements the draw() functionality
+*************************************************************/
 function Drawable(x,y,primaryColor,secondaryColor,lineWidth){
     this.start_x = x;
     this.start_y = y;
@@ -27,14 +31,17 @@ function Drawable(x,y,primaryColor,secondaryColor,lineWidth){
     this.secondaryColor = secondaryColor;
     this.lineWidth = lineWidth;
 }
-
 Drawable.prototype.draw = function () {};
-
 Drawable.prototype.endCoordinates = function (x, y) {
     this.end_x = x;
     this.end_y= y;
 }
 
+
+/**********************************************************
+ *                  DRAWABLE FREEFORM
+ *  Implements pen tool functionality via Drawable base
+***********************************************************/
 function FreeForm (x, y, primaryColor, secondaryColor, lineWidth) {
         
     Drawable.call(this, x, y, primaryColor, secondaryColor, lineWidth);
@@ -42,11 +49,8 @@ function FreeForm (x, y, primaryColor, secondaryColor, lineWidth) {
     let point = {x: this.start_x, y: this.start_y};
     this.points.push(point);
 };
-
 FreeForm.prototype = Object.create(Drawable.prototype);
-
 FreeForm.prototype.constructor = FreeForm;
-
 FreeForm.prototype.draw = function (context) {
 
     context.strokeStyle = this.primaryColor;
@@ -67,16 +71,16 @@ FreeForm.prototype.draw = function (context) {
 };
 
 
-
+/********************************************************
+ *                  DRAWABLE LINE
+ *  Implements line tool functionality via Drawable base
+**********************************************************/
 function Line (x, y, primaryColor, secondaryColor, lineWidth) {
         
     Drawable.call(this, x, y, primaryColor, secondaryColor, lineWidth);
 };
-
 Line.prototype = Object.create(Drawable.prototype);
-
 Line.prototype.constructor = Line;
-
 Line.prototype.draw = function (context) {
     context.strokeStyle = this.primaryColor;
     context.fillStyle = this.secondaryColor;
@@ -89,7 +93,10 @@ Line.prototype.draw = function (context) {
 };
 
 
-
+/********************************************************
+ *                  DRAWABLE CIRCLE
+ *  Implements circle tool functionality via Drawable base
+**********************************************************/
 function Circle (x, y, primaryColor, secondaryColor, lineWidth) {
         
     Drawable.call(this, x, y, primaryColor, secondaryColor, lineWidth);
@@ -98,11 +105,8 @@ function Circle (x, y, primaryColor, secondaryColor, lineWidth) {
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
 };
-
 Circle.prototype = Object.create(Drawable.prototype);
-
 Circle.prototype.constructor = Circle;
-
 Circle.prototype.draw = function (context) {
     context.strokeStyle = this.primaryColor;
     context.fillStyle = this.secondaryColor;
@@ -134,17 +138,18 @@ Circle.prototype.draw = function (context) {
 };
 
 
+/**************************************************************
+ *                   DRAWABLE RECTANGLE
+ *  Implements rectangle tool functionality via Drawable base
+***************************************************************/
 function Rect (x, y, primaryColor, secondaryColor, lineWidth) {
         
     Drawable.call(this, x, y, primaryColor, secondaryColor, lineWidth);
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
 };
-
 Rect.prototype = Object.create(Drawable.prototype);
-
 Rect.prototype.constructor = Rect;
-
 Rect.prototype.draw = function (context) {
     context.strokeStyle = this.primaryColor;
     context.fillStyle = this.secondaryColor;
@@ -156,6 +161,10 @@ Rect.prototype.draw = function (context) {
 };
 
 
+/********************************************************
+ *                  DRAWABLE TEXT
+ *  Implements text tool functionality via Drawable base
+*********************************************************/
 function Text (x, y, primaryColor, secondaryColor, font, context) {
         
     Drawable.call(this, x, y, primaryColor, secondaryColor, 1);
@@ -200,11 +209,8 @@ function Text (x, y, primaryColor, secondaryColor, font, context) {
         } 
     });
 };
-
 Text.prototype = Object.create(Drawable.prototype);
-
 Text.prototype.constructor = Text;
-
 Text.prototype.draw = function (context) {
     
     context.strokeStyle = this.primaryColor;
@@ -221,10 +227,10 @@ Text.prototype.draw = function (context) {
 
 };
 
-
+/************************************
+ * Error check fill/stroke checkboxes
+ ************************************/
 $(document).ready(function(){
-    // OPTIMIZERS
-    // LINE WIDTH OPTIMIZER LOCATED IN CANVAS.JS
     $('.fillstroke').change(function (e) {
         let checked = $(".fillstroke:checked").length;
         if(checked == 0) { e.target.checked = true; }
