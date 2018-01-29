@@ -20,7 +20,7 @@ window.Drawio = {
     undo : [],
     strokeColor : null,
     fillColor : null,
-    selectedTool : "penTool",
+    selectedTool : "drawTool",
     currentElement : null,
     isDrawing : false
 }
