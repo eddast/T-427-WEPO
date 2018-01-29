@@ -258,6 +258,7 @@ $(document).ready(function(){
                 starty = e.pageY - canvas.offsetTop;
                 text = new Text (startx, starty, strokeColor, fillColor, context.font, context);
                 drawables.push(text);
+                isPainting = false;
             }
             $("#upperBars").mousedown(function(e) {
                 let textInput = document.getElementById("text_tool");
@@ -267,7 +268,7 @@ $(document).ready(function(){
             });
         });
         mousemoveAction = (function(e) { });
-        mouseupAction = (function(e) { isPainting = false; }); 
+        mouseupAction = (function(e) { }); 
     });
 
         // Draws text at some specific coordinates in canvas
