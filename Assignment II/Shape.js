@@ -7,7 +7,8 @@
  *      Assignment Due: 04.02.2018
  *      Authors:
  *              Darri Valgarðsson,
- *              Edda Steinunn
+ *              Edda Steinunn,
+ *              Sigurður Sturla Bjarnasson
  *
     ======================================================== */
 
@@ -174,6 +175,7 @@ class Text extends Drawable {
         this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
         this.font = font;
 
+        console.log("How far I´ll go????");
         this.textInputBox = document.createElement('input');
         this.textInputBox.setAttribute("id", "text_tool");
         if (this.stroke) { this.textInputBox.setAttribute('style', "-webkit-text-stroke: 1px " + primaryColor + ";"); }

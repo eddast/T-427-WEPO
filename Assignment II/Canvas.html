@@ -7,7 +7,8 @@
        Assignment Due: 04.02.2018
        Authors:
                Darri Valgarðsson,
-               Edda Steinunn
+               Edda Steinunn,
+               Sigurður Sturla Bjarnasson
  
     ========================================================-->
 
@@ -35,13 +36,13 @@
             <div id="optionBar">
                 <button id="undo" class="undoredo undo fa fa-undo" aria-hidden="true"></button>
                 <button id="redo" class="undoredo redo fa fa-repeat" aria-hidden="true"></button>
-                <p class="options keepHidden odraw oline lineWidth">line-width:</p>
-                <p class="options keepHidden ocircle orect otext">fill</p>
-                <input type="checkbox" id="fillMark" class="options keepHidden ocircle orect otext fillstroke" required>
-                <p class="options keepHidden ocircle orect otext">border</p>
-                <input type="checkbox" id="strokeMark" class="options keepHidden ocircle orect otext fillstroke" checked="checked" required>
-                <p class="options keepHidden ocircle orect">border-width:</p>
-                <form class="options keepHidden otext">
+                <p class="options keepHidden drawTool lineTool lineWidth">line-width:</p>
+                <p class="options keepHidden circleTool rectTool textTool">fill</p>
+                <input type="checkbox" id="fillMark" class="options keepHidden circleTool rectTool textTool fillstroke" required>
+                <p class="options keepHidden circleTool orect otext">border</p>
+                <input type="checkbox" id="strokeMark" class="options keepHidden circleTool rectTool textTool fillstroke" checked="checked" required>
+                <p class="options keepHidden circleTool rectTool">border-width:</p>
+                <form class="options keepHidden textTool">
                     <select id="fontSelect">
                       <option style="font-family: Arial, Helvetica, sans-serif">Arial</option>
                       <option style="font-family: Courier New, Arial, sans-serif">Courier New</option>
@@ -54,13 +55,13 @@
                       <option style="font-family: Lucida Console, Monaco, monospace">Lucida Console</option>
                     </select>
                   </form>
-                <p id="textPreview" class="keepHidden otext">preview</p>
+                <p id="textPreview" class="keepHidden textTool">preview</p>
                 <div class="leftOptionBtns">
                     <button id="save" class="saveclear undo w3-button w3-circle w3-teal">SAVE IMAGE</button>
                     <button id="clear" class="saveclear redo w3-button w3-circle w3-teal">CLEAR CANVAS</button>
                 </div>
-                    <p id="strokeWidthOutput" class="valueDisplay keepHidden odraw oline ocircle orect"></p>
-                    <input type="range" min="1" max="100" value="5" class="options keepHidden odraw oline ocircle orect slider" id="strokeWidth">
+                    <p id="strokeWidthOutput" class="valueDisplay keepHidden drawTool lineTool circleTool rectTool"></p>
+                    <input type="range" min="1" max="100" value="5" class="options keepHidden drawTool lineTool circleTool rectTool slider" id="strokeWidth">
                     <p id="textSizeOutput" class="valueDisplay keepHidden otext"></p>
                     <input type="range" min="8" max="300" value="50" class="options keepHidden otext slider" id="textSizeSlider">
             </div>

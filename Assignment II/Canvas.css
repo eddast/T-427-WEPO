@@ -357,3 +357,7 @@ body {
     white-space: nowrap;
     font: 50px Palatino, Arial, sans-serif;
 }
+
+.selected {
+    background-color: #9c7f7f;
+}
