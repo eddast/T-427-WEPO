@@ -26,6 +26,7 @@ window.Drawio = {
     currentElement : null,
     isDrawing : false,
     isTyping: false,
+    isMoving: false
 }
 
 $(document).ready(function() {
@@ -89,7 +90,7 @@ $(document).ready(function() {
         $(".valueDisplay").addClass("keepHidden");
         $("#textPreview").addClass("keepHidden");
         $("." + toShow).removeClass("keepHidden");
-    });
+    }); optimizeOptionBar("drawTool");
 
 
     /***************************
@@ -161,6 +162,11 @@ $(document).ready(function() {
         let startY = e.offsetY;
         Drawio.isDrawing = true;
         switch(Drawio.selectedTool) {
+
+            case "moveTool":
+                Drawio.currentElement = null;
+                Drawio.isDrawing = false;
+                return;
 
             case "drawTool":
                 Drawio.currentElement = new FreeForm (  startX, startY,
