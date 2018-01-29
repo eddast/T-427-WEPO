@@ -227,14 +227,5 @@ Text.prototype.draw = function (context) {
 
 };
 
-/************************************
- * Error check fill/stroke checkboxes
- ************************************/
-$(document).ready(function(){
-    $('.fillstroke').change(function (e) {
-        let checked = $(".fillstroke:checked").length;
-        if(checked == 0) { e.target.checked = true; }
-    });
-});
 
 
