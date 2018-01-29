@@ -174,40 +174,46 @@ function Text (x, y, e) {
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
     this.font = Drawio.context.font;
-    this.textBox = document.getElementById("textBox");
+    this.text = "";
+    let textBox = document.getElementById("textBox");
+    
     // Format textbox to be exactly as user specified text (size, color, etc)
     if (this.stroke) { 
-        this.textBox.setAttribute ( 'style',
-                                    "-webkit-text-stroke: 1px " +
-                                    this.primaryColor +
-                                    ";" );
+        textBox.setAttribute ( 'style',
+                                "-webkit-text-stroke: 1px " +
+                                this.primaryColor +
+                                ";" );
     } if (!this.stroke) { 
-        this.textBox.setAttribute ( 'style',
-                                    "-webkit-text-stroke: 1px " +
-                                    "transparent" +
-                                    ";" );
+        textBox.setAttribute ( 'style',
+                                "-webkit-text-stroke: 1px " +
+                                "transparent" +
+                                ";" );
     } if (this.fill) { 
-        this.textBox.style.color = this.secondaryColor;
+        textBox.style.color = this.secondaryColor;
     } if (!this.fill) {
-        this.textBox.style.color = "transparent";
-    } this.textBox.style.font = this.font;
-    this.text =  this.textBox.value;
+        textBox.style.color = "transparent";
+    }
+    textBox.style.font = this.font;
     var canvas = document.getElementById("canvas");
-    this.textBox.style.left = (this.start_x +  canvas.offsetLeft) + 'px';
-    this.textBox.style.top  = (this.start_y + canvas.offsetTop) + 'px';
-    this.textBox.style.display = "block";
-    this.textBox.focus();
+    textBox.style.left = (this.start_x +  canvas.offsetLeft) + 'px';
+    textBox.style.top  = (this.start_y + canvas.offsetTop) + 'px';
+    textBox.style.display = "block";
+    textBox.focus();
     e.preventDefault();
-    this.textBox.onkeydown = ( (e) => {
+    textBox.onkeydown = ( (e) => {
         // On enter or esc draw what is in textbox
-        if(e.keyCode==13 || e.keyCode ==27) { this.draw(Drawio.context); } 
+
+        if(e.keyCode==13 || e.keyCode ==27) { 
+            this.text = textBox.value;
+            textBox.value = "";
+            this.draw(Drawio.context); 
+        } 
     });
 };
 Text.prototype = Object.create(Drawable.prototype);
 Text.prototype.constructor = Text;
 Text.prototype.draw = function (context) {
 
-    this.text = this.textBox.value;
     context.lineWidth = 1;
     context.font = this.font;
     context.textBaseline = 'top';
@@ -218,7 +224,6 @@ Text.prototype.draw = function (context) {
     if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
     if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
     context.closePath();
-    textBox.value = "";
     textBox.style.display="none";
     Drawio.isTyping = false;
 

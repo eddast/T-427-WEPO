@@ -99,6 +99,7 @@ $(document).ready(function() {
      // Undoes last action
     $("#undo").click(function(e) {
 
+        console.log(Drawio.drawables);
           if(Drawio.drawables.length !== 0){
               let shape = Drawio.drawables.pop();
               Drawio.undo.push(shape);
@@ -152,17 +153,22 @@ $(document).ready(function() {
                 Drawio.currentElement = new Rect (startX, startY);
                 break;
             case "textTool":
-            if(!Drawio.isTyping) {
-                Drawio.isTyping = true;
-                Drawio.currentElement = new Text (startX, startY, e);
-                } else {
-                    Drawio.currentElement.draw(Drawio.context);
-                    $("#textBox").css("display", "none");
+                if(!Drawio.isTyping) {
+                    Drawio.isTyping = true;
+                    Drawio.currentElement = new Text (startX, startY, e);
+                    } else {
+                        let textBox = document.getElementById("textBox");
+                        Drawio.currentElement.text = textBox.value;
+                        textBox.value = "";
+                        Drawio.currentElement.draw(Drawio.context);
+                        $("#textBox").css("display", "none");
+                    }
+                    Drawio.isDrawing = false;
+                    break;
                 }
-                Drawio.isDrawing = false;
-                break;
+        if(!Drawio.currentElement.text || Drawio.currentElement.text != "") {
+            Drawio.drawables.push(Drawio.currentElement);
         }
-        Drawio.drawables.push(Drawio.currentElement);
     });
     // User moves mouse but hasn't released yet
     $("#canvas").mousemove(function(e) {
