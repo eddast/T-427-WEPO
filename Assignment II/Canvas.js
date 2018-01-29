@@ -13,7 +13,9 @@
  *
     ======================================================== */
 
-
+/*********************************
+ *  DRAWIO APPLICATION VARIABLES
+**********************************/
 window.Drawio = {
     context : document.getElementById("canvas").getContext("2d"),
     drawables : [],
@@ -24,12 +26,12 @@ window.Drawio = {
     currentElement : null,
     isDrawing : false
 }
-$(document).ready(function(){
 
+$(document).ready(function() {
 
-    /*********************************
-     * SET UP COLORS AND COLOR PICKERS
-     ********************************/
+    /************************************
+     *  SET UP COLORS AND COLOR PICKERS
+     ************************************/
 
     // Set up color picker for primary color
     $("#strokeColor").spectrum({
@@ -44,11 +46,11 @@ $(document).ready(function(){
         move: function(newColor) { updateFillColor(newColor.toString()); }
     });
     // Update values functions
-    let updateStrokeColor = (function (newColor){
+    let updateStrokeColor = (function (newColor) {
         Drawio.strokeColor = newColor;
         Drawio.context.strokeStyle = Drawio.strokeColor;
         $("#strokeColor").css("background-color", Drawio.strokeColor);
-    }); let updateFillColor = (function(newColor){
+    }); let updateFillColor = (function(newColor) {
         Drawio.fillColor = newColor
         Drawio.context.fillStyle = Drawio.fillColor;
         $("#fillColor").css("background-color", Drawio.fillColor);
@@ -56,7 +58,7 @@ $(document).ready(function(){
     // Initial color updates
     updateStrokeColor('#25323A'); updateFillColor('#fc295a');
     // Swap colors function
-    $('#changeColorsBtn').click(function(e){
+    $('#changeColorsBtn').click(function(e) {
 
         let tmpStrokeColor = Drawio.strokeColor;
         updateStrokeColor(Drawio.fillColor);
@@ -65,7 +67,7 @@ $(document).ready(function(){
 
 
     /*************************************
-     * SPECIFICATIONS FOR SELECTED ICONS
+     *  SPECIFICATIONS FOR SELECTED ICONS
      *************************************/
 
     // Selecting icons will cause them to appear selected
@@ -89,9 +91,9 @@ $(document).ready(function(){
     });
 
 
-    /****************************
-     * SETUP OPTION BAR ITEMS
-     ****************************/
+    /***************************
+     *  SETUP OPTION BAR ITEMS
+     ***************************/
 
      // Undoes last action
     $("#undo").click(function(e) {
@@ -124,9 +126,9 @@ $(document).ready(function(){
     });
 
 
-    /****************************
-     * SET UP I/O CANVAS ACTIONS
-     ****************************/
+    /*****************************
+     *  SET UP I/O CANVAS ACTIONS
+     *****************************/
     
     // User clicks the canvas but hasn't released yet
     $("#canvas").mousedown(function(e) {
@@ -203,9 +205,9 @@ $(document).ready(function(){
     });
 
 
-    /***********************
-     * SET UP RANGE SLIDERS
-     ***********************/
+    /************************
+     *  SET UP RANGE SLIDERS
+     ************************/
 
     // Line width slider optimization
     var lineWidthSlider = document.getElementById("strokeWidth");
@@ -231,12 +233,12 @@ $(document).ready(function(){
 
 
     /**************************
-     * SET UP FONT ON CHANGE
+     *  SET UP FONT ON CHANGE
      **************************/
 
     // Detects font drop down list change
     // Changes context's font accordingly 
-    $('#fontSelect').change(function(){
+    $('#fontSelect').change(function() {
 
         var textSlider = document.getElementById("textSizeSlider");
         let font = $('#fontSelect option:selected').css("font-family");
@@ -246,10 +248,10 @@ $(document).ready(function(){
     });
 
 
-    
-    /************************************
-     * Error check fill/stroke checkboxes
-     ************************************/
+    /***************************
+     *  ERROR CHECK CHECKBOXES
+     ***************************/
+
     $('.fillstroke').change(function (e) {
         let checked = $(".fillstroke:checked").length;
         if(checked == 0) { e.target.checked = true; }

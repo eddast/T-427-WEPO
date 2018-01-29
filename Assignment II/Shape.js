@@ -226,6 +226,3 @@ Text.prototype.draw = function (context) {
     context.closePath();
 
 };
-
-
-
