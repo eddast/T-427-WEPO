@@ -89,7 +89,7 @@ $(document).ready(function() {
         $(".valueDisplay").addClass("keepHidden");
         $("#textPreview").addClass("keepHidden");
         $("." + toShow).removeClass("keepHidden");
-    });
+    }); optimizeOptionBar("drawTool");
 
 
     /***************************
@@ -140,37 +140,21 @@ $(document).ready(function() {
         switch(Drawio.selectedTool) {
 
             case "drawTool":
-                Drawio.currentElement = new FreeForm (  startX, startY,
-                                                        Drawio.strokeColor,
-                                                        Drawio.fillColor,
-                                                        Drawio.context.lineWidth );
+                Drawio.currentElement = new FreeForm (startX, startY);
                 break;
             case "lineTool":
-                Drawio.currentElement = new Line (  startX, startY,
-                                                    Drawio.strokeColor,
-                                                    Drawio.fillColor,
-                                                    Drawio.context.lineWidth );
+                Drawio.currentElement = new Line (startX, startY);
                 break;
             case "circleTool":
-                Drawio.currentElement = new Circle (    startX, startY,
-                                                        Drawio.strokeColor,
-                                                        Drawio.fillColor,
-                                                        Drawio.context.lineWidth );
+                Drawio.currentElement = new Circle (startX, startY);
                 break;
             case "rectTool":
-                Drawio.currentElement = new Rect (  startX, startY,
-                                                    Drawio.strokeColor,
-                                                    Drawio.fillColor,
-                                                    Drawio.context.lineWidth );
+                Drawio.currentElement = new Rect (startX, startY);
                 break;
             case "textTool":
             if(!Drawio.isTyping) {
                 Drawio.isTyping = true;
-                Drawio.currentElement = new Text (  startX, startY,
-                                                    Drawio.strokeColor,
-                                                    Drawio.fillColor,
-                                                    Drawio.context.font,
-                                                    Drawio.context );
+                Drawio.currentElement = new Text (startX, startY, e);
                 } else {
                     Drawio.currentElement.draw(Drawio.context);
                     $("#textBox").css("display", "none");

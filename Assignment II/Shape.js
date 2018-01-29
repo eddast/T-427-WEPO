@@ -22,19 +22,18 @@
  *                  BASE CLASS DRAWABLE
  *  Each drawable implements the draw() functionality
 *************************************************************/
-function Drawable(x,y,primaryColor,secondaryColor,lineWidth){
-    this.start_x = x;
-    this.start_y = y;
-    this.end_x = x;
-    this.end_y = y;
-    this.primaryColor = primaryColor;
-    this.secondaryColor = secondaryColor;
-    this.lineWidth = lineWidth;
+
+function Drawable (x, y){
+
+    this.start_x = x; this.start_y = y;
+    this.end_x = x; this.end_y = y;
+    this.primaryColor = Drawio.context.strokeStyle;
+    this.secondaryColor = Drawio.context.fillStyle;
+    this.lineWidth = Drawio.context.lineWidth;
 }
 Drawable.prototype.draw = function () {};
 Drawable.prototype.endCoordinates = function (x, y) {
-    this.end_x = x;
-    this.end_y= y;
+    this.end_x = x; this.end_y= y;
 }
 
 
@@ -42,9 +41,10 @@ Drawable.prototype.endCoordinates = function (x, y) {
  *                  DRAWABLE FREEFORM
  *  Implements pen tool functionality via Drawable base
 ***********************************************************/
-function FreeForm (x, y, primaryColor, secondaryColor, lineWidth) {
+
+function FreeForm (x, y) {
         
-    Drawable.call(this, x, y, primaryColor, secondaryColor, lineWidth);
+    Drawable.call(this, x, y);
     this.points = [ ];
     let point = {x: this.start_x, y: this.start_y};
     this.points.push(point);
@@ -71,13 +71,13 @@ FreeForm.prototype.draw = function (context) {
 };
 
 
-/********************************************************
+/*********************************************************
  *                  DRAWABLE LINE
  *  Implements line tool functionality via Drawable base
 **********************************************************/
-function Line (x, y, primaryColor, secondaryColor, lineWidth) {
-        
-    Drawable.call(this, x, y, primaryColor, secondaryColor, lineWidth);
+
+function Line (x, y) {
+    Drawable.call(this, x, y);
 };
 Line.prototype = Object.create(Drawable.prototype);
 Line.prototype.constructor = Line;
@@ -93,13 +93,14 @@ Line.prototype.draw = function (context) {
 };
 
 
-/********************************************************
+/*********************************************************
  *                  DRAWABLE CIRCLE
  *  Implements circle tool functionality via Drawable base
-**********************************************************/
-function Circle (x, y, primaryColor, secondaryColor, lineWidth) {
+***********************************************************/
+
+function Circle (x, y) {
         
-    Drawable.call(this, x, y, primaryColor, secondaryColor, lineWidth);
+    Drawable.call(this, x, y);
     this.radiusX = 0; this.radiusY = 0;
     this.centerX = 0; this.centerY = 0;
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
@@ -138,13 +139,14 @@ Circle.prototype.draw = function (context) {
 };
 
 
-/**************************************************************
+/***************************************************************
  *                   DRAWABLE RECTANGLE
  *  Implements rectangle tool functionality via Drawable base
-***************************************************************/
-function Rect (x, y, primaryColor, secondaryColor, lineWidth) {
+****************************************************************/
+
+function Rect (x, y) {
         
-    Drawable.call(this, x, y, primaryColor, secondaryColor, lineWidth);
+    Drawable.call(this, x, y);
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
 };
@@ -161,39 +163,44 @@ Rect.prototype.draw = function (context) {
 };
 
 
-/********************************************************
+/*********************************************************
  *                  DRAWABLE TEXT
  *  Implements text tool functionality via Drawable base
-*********************************************************/
-function Text (x, y, primaryColor, secondaryColor, font, context) {
+**********************************************************/
+
+function Text (x, y, e) {
         
-    Drawable.call(this, x, y, primaryColor, secondaryColor, 1);
+    Drawable.call(this, x, y);
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
-    this.font = font;
+    this.font = Drawio.context.font;
     this.textBox = document.getElementById("textBox");
+    // Format textbox to be exactly as user specified text (size, color, etc)
     if (this.stroke) { 
-        this.textBox.setAttribute('style', "-webkit-text-stroke: 1px " + primaryColor + ";");
-    }
-    if (this.fill) { 
-        this.textBox.style.color = secondaryColor;
-    }
-    if (!this.fill) {
+        this.textBox.setAttribute ( 'style',
+                                    "-webkit-text-stroke: 1px " +
+                                    this.primaryColor +
+                                    ";" );
+    } if (!this.stroke) { 
+        this.textBox.setAttribute ( 'style',
+                                    "-webkit-text-stroke: 1px " +
+                                    "transparent" +
+                                    ";" );
+    } if (this.fill) { 
+        this.textBox.style.color = this.secondaryColor;
+    } if (!this.fill) {
         this.textBox.style.color = "transparent";
-    }
-    this.textBox.style.font = font;
+    } this.textBox.style.font = this.font;
     this.text =  this.textBox.value;
     var canvas = document.getElementById("canvas");
     this.textBox.style.left = (this.start_x +  canvas.offsetLeft) + 'px';
     this.textBox.style.top  = (this.start_y + canvas.offsetTop) + 'px';
     this.textBox.style.display = "block";
     this.textBox.focus();
+    e.preventDefault();
     this.textBox.onkeydown = ( (e) => {
-
-        if(e.keyCode==13 || e.keyCode ==27) {
-
-            this.draw(context);
-        } 
+        // On enter or esc draw what is in textbox
+        if(e.keyCode==13 || e.keyCode ==27) { this.draw(Drawio.context); } 
     });
 };
 Text.prototype = Object.create(Drawable.prototype);
@@ -201,7 +208,6 @@ Text.prototype.constructor = Text;
 Text.prototype.draw = function (context) {
 
     this.text = this.textBox.value;
-    let tmp = context;
     context.lineWidth = 1;
     context.font = this.font;
     context.textBaseline = 'top';
@@ -212,7 +218,6 @@ Text.prototype.draw = function (context) {
     if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
     if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
     context.closePath();
-    context = tmp;
     textBox.value = "";
     textBox.style.display="none";
     Drawio.isTyping = false;
