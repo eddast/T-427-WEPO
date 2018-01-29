@@ -302,10 +302,8 @@ $(document).ready(function(){
         let temp_pColor = context.strokeStyle;
         let temp_sColor = context.fillStyle;
         let temp_lWidth = context.lineWidth;
-        let i = 1;
         drawables.forEach(element => {
             element.draw(context);
-            i++;
         });
 
         context.strokeStyle = temp_pColor;

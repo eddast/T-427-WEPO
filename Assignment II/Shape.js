@@ -178,7 +178,7 @@ class Text extends Drawable {
         this.textInputBox.setAttribute("id", "text_tool");
         if (this.stroke) { this.textInputBox.setAttribute('style', "-webkit-text-stroke: 1px " + primaryColor + ";"); }
         if (this.fill) { this.textInputBox.style.color = secondaryColor; }
-        if(!this.fill) { this.textInputBox.style.color = "transparent"; }
+        if (!this.fill) { this.textInputBox.style.color = "transparent"; }
         this.textInputBox.style.font = font;
         this.textInputBox.style.display = "block";
         this.textInputBox.type = 'text';
@@ -200,8 +200,12 @@ class Text extends Drawable {
                 context.font = this.font;
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
+                context.strokeStyle = this.primaryColor;
+                context.fillStyle = this.secondaryColor;
+                context.beginPath();
                 if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
                 if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
+                context.closePath();
                 context = tmp;
                 this.textInputBox.parentNode.removeChild(this.textInputBox);
             } 
@@ -211,13 +215,20 @@ class Text extends Drawable {
 	draw (context) {
 
         let tmp = context;
+
+        context.strokeStyle = this.primaryColor;
+        context.fillStyle = this.secondaryColor;
+        console.log(context);
         context.lineWidth = 1;
         context.font = this.font;
         context.textBaseline = 'top';
         context.textAlign = 'left';
 
+        context.beginPath();
         if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
         if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
+        context.closePath();
+
         context = tmp;
     }
     
