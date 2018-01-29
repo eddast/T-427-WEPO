@@ -156,18 +156,20 @@ $(document).ready(function() {
                 if(!Drawio.isTyping) {
                     Drawio.isTyping = true;
                     Drawio.currentElement = new Text (startX, startY, e);
-                    } else {
+                } else {
                         let textBox = document.getElementById("textBox");
                         Drawio.currentElement.text = textBox.value;
                         textBox.value = "";
                         Drawio.currentElement.draw(Drawio.context);
                         $("#textBox").css("display", "none");
-                    }
-                    Drawio.isDrawing = false;
-                    break;
+                        Drawio.isTyping = false;
                 }
-        if(!Drawio.currentElement.text || Drawio.currentElement.text != "") {
+                Drawio.isDrawing = false;
+                break;
+        }
+        if(!Drawio.isTyping) {
             Drawio.drawables.push(Drawio.currentElement);
+            drawCanvas();
         }
     });
     // User moves mouse but hasn't released yet
