@@ -89,7 +89,7 @@ $(document).ready(function() {
         $(".valueDisplay").addClass("keepHidden");
         $("#textPreview").addClass("keepHidden");
         $("." + toShow).removeClass("keepHidden");
-    }); optimizeOptionBar("drawTool");
+    });
 
 
     /***************************
@@ -99,7 +99,6 @@ $(document).ready(function() {
      // Undoes last action
     $("#undo").click(function(e) {
 
-        console.log(Drawio.drawables);
           if(Drawio.drawables.length !== 0){
               let shape = Drawio.drawables.pop();
               Drawio.undo.push(shape);
@@ -127,6 +126,29 @@ $(document).ready(function() {
         drawCanvas();
     });
 
+    $("#save").click(function(e) {
+        var bannerImage = document.getElementById("canvas");
+        var imgData = getBase64Image(bannerImage);
+        localStorage.setItem("imgData", imgData);
+
+        console.log(localStorage);
+
+        window.alert("Saved in your localstorage");
+    });
+
+    function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    };
+
 
     /*****************************
      *  SET UP I/O CANVAS ACTIONS
@@ -141,16 +163,28 @@ $(document).ready(function() {
         switch(Drawio.selectedTool) {
 
             case "drawTool":
-                Drawio.currentElement = new FreeForm (startX, startY);
+                Drawio.currentElement = new FreeForm (  startX, startY,
+                                                        Drawio.strokeColor,
+                                                        Drawio.fillColor,
+                                                        Drawio.context.lineWidth );
                 break;
             case "lineTool":
-                Drawio.currentElement = new Line (startX, startY);
+                Drawio.currentElement = new Line (  startX, startY,
+                                                    Drawio.strokeColor,
+                                                    Drawio.fillColor,
+                                                    Drawio.context.lineWidth );
                 break;
             case "circleTool":
-                Drawio.currentElement = new Circle (startX, startY);
+                Drawio.currentElement = new Circle (    startX, startY,
+                                                        Drawio.strokeColor,
+                                                        Drawio.fillColor,
+                                                        Drawio.context.lineWidth );
                 break;
             case "rectTool":
-                Drawio.currentElement = new Rect (startX, startY);
+                Drawio.currentElement = new Rect (  startX, startY,
+                                                    Drawio.strokeColor,
+                                                    Drawio.fillColor,
+                                                    Drawio.context.lineWidth );
                 break;
             case "textTool":
                 if(!Drawio.isTyping) {
