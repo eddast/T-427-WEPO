@@ -52,9 +52,10 @@ $(document).ready(function(){
     });
 
     updateStrokeColor('#25323A');
-    updateFillColor('#fc295af3');
+    updateFillColor('#fc295a');
 
     $('#changeColorsBtn').click(function(e){
+
         let tmpStrokeColor = strokeColor;
         updateStrokeColor(fillColor);
         updateFillColor(tmpStrokeColor);
@@ -68,25 +69,29 @@ $(document).ready(function(){
     // Selecting icons will cause them to appear selected
     $(".icons").click(function(e) { makeIconLookSelected("#" + e.target.id); });
     let makeIconLookSelected = (function (iconid) {
+
         $(".icons").css("background-color", toolbarColor);
         $(iconid).css("background-color", '#9c7f7f');
     });
 
     // Lets option bar show relevant properties based on toShow tool
     let optimizeOptionBar = (function(toShow) {
+
         $(".options").addClass("keepHidden");
         $(".valueDisplay").addClass("keepHidden");
+        $("#textPreview").addClass("keepHidden");
         $(toShow).removeClass("keepHidden");
     });
 
     $(".slider").oninput = function() {
-        console.log("hello there");
+
         var slider = document.getElementById("lineWidthSlider");
         var display = document.getElementById("lineWidthDisplay");
         display.innerHTML += slider.value;
       }
 
       $("#undo").click(function(e) {
+
           if(drawables.length !== 0){
               let shape = drawables.pop();
               undo.push(shape);
@@ -95,6 +100,7 @@ $(document).ready(function(){
       })
 
       $("#redo").click(function(e) {
+
         if(undo.length !== 0){
             let shape = undo.pop();
             drawables.push(shape);
@@ -103,7 +109,7 @@ $(document).ready(function(){
     })
 
     $("#clear").click(function(e) {
-        console.log("OI");
+
         while(drawables.length !== 0){
             drawables.pop();
         }
@@ -128,13 +134,13 @@ $(document).ready(function(){
             starty = e.pageY - canvas.offsetTop;
             freeDraw = new FreeForm (startx, starty, strokeColor, fillColor, context.lineWidth);
             drawables.push(freeDraw);
-            
-            // context.moveTo(startx, starty);
+            drawCanvas();
         });
 
         mousemoveAction = (function(e) {
 
             if (isPainting === true) {
+
               let curr_x = e.pageX - canvas.offsetLeft;
               let curr_y = e.pageY - canvas.offsetTop;
               freeDraw.endCoordinates(curr_x, curr_y);
@@ -165,6 +171,7 @@ $(document).ready(function(){
         mousemoveAction = (function(e) {
             
             if(isPainting === true) {
+
                 let curr_x = e.pageX - canvas.offsetLeft;
                 let curr_y = e.pageY - canvas.offsetTop;
                 line.endCoordinates(curr_x, curr_y);
@@ -194,6 +201,7 @@ $(document).ready(function(){
         mousemoveAction = (function(e) {
             
             if(isPainting === true) {
+
                 let curr_x = e.pageX - canvas.offsetLeft;
                 let curr_y = e.pageY - canvas.offsetTop;
                 circle.endCoordinates(curr_x, curr_y);
@@ -224,6 +232,7 @@ $(document).ready(function(){
         mousemoveAction = (function(e) {
             
             if(isPainting === true) {
+
                 let curr_x = e.pageX - canvas.offsetLeft;
                 let curr_y = e.pageY - canvas.offsetTop;
                 rect.endCoordinates(curr_x, curr_y);
@@ -238,13 +247,37 @@ $(document).ready(function(){
     // implements it's own mouse event actions that are
     // then used by mouse event listeners on the canvas object
     $("#textTool").click(function(e) {
+
         optimizeOptionBar(".otext");
-        mousedownAction = defaultMousedownAction;
-        mousemoveAction = (function(e) {});
-        mouseupAction = (function(e) {
-            drawText ("BITCH", startx-30, starty-30, "Georgia", 30, true, false);
+        let text;
+
+        mousedownAction = (function(e) {
+            if(!isPainting) {
+                isPainting = true;
+                startx = e.pageX - canvas.offsetLeft;
+                starty = e.pageY - canvas.offsetTop;
+                text = new Text (startx, starty, strokeColor, fillColor, context.font, context);
+                drawables.push(text);
+            }
+            $("#upperBars").mousedown(function(e) {
+                let textInput = document.getElementById("text_tool");
+                if(textInput) {
+                    textInput.parentNode.removeChild(textInput);
+                }
+            });
         });
+        mousemoveAction = (function(e) { });
+        mouseupAction = (function(e) { isPainting = false; }); 
     });
+
+        // Draws text at some specific coordinates in canvas
+        let drawText = (function (text, x, y, font, size, stroke, fill) {
+        
+            context.font= size + "px " + font;
+            // context.measureText(text) <--- gets the width of text before placing it on canvas may be useful?
+            if ( fill === true) { context.fillText(text, startx, starty); }
+            if ( stroke === true) { context.strokeText(text, startx, starty); }
+        });
     
     $("#canvas").mousemove(function(e) { mousemoveAction(e, this); });
     $("#canvas").mouseup(function(e) { mouseupAction(e, this); });
@@ -254,6 +287,7 @@ $(document).ready(function(){
     // Default mousedown action marks the start coordinates
     // And initiates the user painting state
     let defaultMousedownAction = (function(e){
+
         isPainting = true;
         firstStroke = true;
         startx = e.pageX - canvas.offsetLeft;
@@ -261,6 +295,7 @@ $(document).ready(function(){
     });
 
     let drawCanvas = (function() {
+
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         let temp_pColor = context.strokeStyle;
@@ -277,13 +312,36 @@ $(document).ready(function(){
         context.lineWidth = temp_lWidth;
     });
 
-    var slider = document.getElementById("strokeWidth");
-    var output = document.getElementById("strokeWidthOutput");
-    output.innerHTML = slider.value + " px";
+    var lineWidthSlider = document.getElementById("strokeWidth");
+    var lineOutput = document.getElementById("strokeWidthOutput");
+    lineOutput.innerHTML = lineWidthSlider.value + " px";
 
-    slider.oninput = function() {
-        output.innerHTML = this.value + " px";
+    lineWidthSlider.oninput = function() {
+
+        lineOutput.innerHTML = this.value + " px";
         context.lineWidth = this.value;
     }
+
+    var textSlider = document.getElementById("textSizeSlider");
+    var textOutput = document.getElementById("textSizeOutput");
+    context.font = textSlider.value + "px" + " " + $('#fontSelect option:selected').css("font-family");
+    textOutput.innerHTML = textSlider.value + "px";
+
+    textSlider.oninput = function() {
+
+        let font = $('#fontSelect option:selected').css("font-family");
+        let size = this.value + "px";
+        textOutput.innerHTML = size;
+        context.font = size + " " + font;
+    }
+
+    $('#fontSelect').change(function(){
+
+        var textSlider = document.getElementById("textSizeSlider");
+        let font = $('#fontSelect option:selected').css("font-family");
+        let size = $('#textSizeSlider').val();
+        $("#textPreview").css('font-family', font);
+        context.font = size + "px " + font;
+    });
 
 });

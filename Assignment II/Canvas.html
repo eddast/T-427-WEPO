@@ -29,26 +29,39 @@
             <div id="mainBar">
                 <img id="appIcon" src="EditorIcons/AppIcon.png" alt="Draw">
                 <h1 id="mainHeading">CANVAS 2.0</h1>
-                <!--<p id="tagline">Everything you can imagine becomes real</p>-->
                 <p id="tagline">Draw stuff</p>
             </div>
             <div id="optionBar">
                 <button id="undo" class="undoredo undo fa fa-undo" aria-hidden="true"></button>
                 <button id="redo" class="undoredo redo fa fa-repeat" aria-hidden="true"></button>
                 <p class="options keepHidden odraw oline lineWidth">line-width:</p>
-                <p class="options keepHidden ocircle orect">fill</p>
-                <input type="checkbox" id="fillMark" class="options keepHidden ocircle orect fillstroke" required>
-                <p class="options keepHidden ocircle orect">border</p>
-                <input type="checkbox" id="strokeMark" class="options keepHidden ocircle orect fillstroke" checked="checked" required>
+                <p class="options keepHidden ocircle orect otext">fill</p>
+                <input type="checkbox" id="fillMark" class="options keepHidden ocircle orect otext fillstroke" required>
+                <p class="options keepHidden ocircle orect otext">border</p>
+                <input type="checkbox" id="strokeMark" class="options keepHidden ocircle orect otext fillstroke" checked="checked" required>
                 <p class="options keepHidden ocircle orect">border-width:</p>
-                <p class="options keepHidden otext">font</p>
-                <p class="options keepHidden otext">font-size</p>
+                <form class="options keepHidden otext">
+                    <select id="fontSelect">
+                      <option style="font-family: Arial, Helvetica, sans-serif">Arial</option>
+                      <option style="font-family: Courier New, Arial, sans-serif">Courier New</option>
+                      <option style="font-family: Palatino, Arial, sans-serif">Palatino</option>
+                      <option style="font-family: Verdana, Arial, sans-serif">Verdana</option>
+                      <option style="font-family: Georgia, Arial, sans-serif">Georgia</option>
+                      <option style="font-family: Times New Roman, Arial, sans-serif">Times New Roman</option>
+                      <option style="font-family: Comic Sans MS, cursive, sans-serif">Comic Sans MS</option>
+                      <option style="font-family: Impact, Charcoal, sans-serif">Impact</option>
+                      <option style="font-family: Lucida Console, Monaco, monospace">Lucida Console</option>
+                    </select>
+                  </form>
+                <p id="textPreview" class="keepHidden otext">preview</p>
                 <div class="leftOptionBtns">
                     <button id="save" class="saveclear undo w3-button w3-circle w3-teal">SAVE IMAGE</button>
                     <button id="clear" class="saveclear redo w3-button w3-circle w3-teal">CLEAR CANVAS</button>
                 </div>
-                        <p id="strokeWidthOutput" class="valueDisplay keepHidden odraw oline ocircle orect"></p>
-                        <input type="range" min="1" max="100" value="5" class="options keepHidden odraw oline ocircle orect slider" id="strokeWidth">
+                    <p id="strokeWidthOutput" class="valueDisplay keepHidden odraw oline ocircle orect"></p>
+                    <input type="range" min="1" max="100" value="5" class="options keepHidden odraw oline ocircle orect slider" id="strokeWidth">
+                    <p id="textSizeOutput" class="valueDisplay keepHidden otext"></p>
+                    <input type="range" min="8" max="300" value="50" class="options keepHidden otext slider" id="textSizeSlider">
             </div>
         </div>
         <div id="toolbar" width="100" height="500">

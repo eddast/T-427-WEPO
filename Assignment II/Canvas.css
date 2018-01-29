@@ -29,7 +29,7 @@ body {
 #optionBar {
     padding: 5px;
     padding-right: 100px;
-    margin-left: 50px;
+    margin-left: 30px;
     height: 30px;
     background:  #25323A;
     border : 1.5px solid #25323A;
@@ -83,7 +83,7 @@ body {
     padding: 0px;
     margin: 0px;
     margin-top: 14px;
-    width: 200px;
+    width: 170px;
     height: 4px;
     -webkit-appearance: none;
     background: #d3d3d3;
@@ -328,4 +328,32 @@ body {
     background: white;
     border: solid  1px white;
     box-shadow: 2px 1px 0px #fc295a6c;
+}
+
+#fontSelect {
+    position: absolute;
+    margin-top: 5px;
+}
+
+#textPreview {
+    float: left;
+    margin-left: 155px;
+    margin-right: 20px;
+    font-family: Helvetica, sans-serif;
+    align-content: center;
+    font-size: 13px;
+    color: #f8f8f827;
+    text-shadow: 2px 2px 4px #fc295a2a;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+#text_tool {
+	position: absolute;
+	border: 1px dashed #0000008c;
+	outline: 0;
+	display: none;
+	overflow: hidden;
+    white-space: nowrap;
+    font: 50px Palatino, Arial, sans-serif;
 }

@@ -167,29 +167,63 @@ class Rect extends Drawable {
 
 class Text extends Drawable {
 
-	constructor (x, y, primaryColor, secondaryColor) { super(x, y, primaryColor, secondaryColor); }
+    constructor (x, y, primaryColor, secondaryColor, font, context) {
 
-	endCoordinates (x,y) {
-		this.end_x = x;
-		this.end_y = y;
-	}
+        super(x, y, primaryColor, secondaryColor);
+        this.fill = $("#fillMark").is( ":checked" ) ? true : false;
+        this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
+        this.font = font;
+
+        this.textInputBox = document.createElement('input');
+        this.textInputBox.setAttribute("id", "text_tool");
+        if (this.stroke) { this.textInputBox.setAttribute('style', "-webkit-text-stroke: 1px " + primaryColor + ";"); }
+        if (this.fill) { this.textInputBox.style.color = secondaryColor; }
+        if(!this.fill) { this.textInputBox.style.color = "transparent"; }
+        this.textInputBox.style.font = font;
+        this.textInputBox.style.display = "block";
+        this.textInputBox.type = 'text';
+        this.text =  this.textInputBox.value;
+
+        this.textInputBox.style.left = (this.start_x +  document.getElementById("canvas").offsetLeft) + 'px';
+        this.textInputBox.style.top  = (this.start_y + document.getElementById("canvas").offsetTop) + 'px';
+
+        document.body.appendChild(this.textInputBox);
+        this.textInputBox.focus();
+
+        this.textInputBox.onkeydown = ( (e) => {
+
+            if(e.keyCode==13 || e.keyCode ==27) {
+
+                this.text = this.textInputBox.value;
+                let tmp = context;
+                context.lineWidth = 1;
+                context.font = this.font;
+                context.textBaseline = 'top';
+                context.textAlign = 'left';
+                if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
+                if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
+                context = tmp;
+                this.textInputBox.parentNode.removeChild(this.textInputBox);
+            } 
+        });
+    }
 
 	draw (context) {
-        
+
+        let tmp = context;
+        context.lineWidth = 1;
+        context.font = this.font;
+        context.textBaseline = 'top';
+        context.textAlign = 'left';
+
+        if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
+        if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
+        context = tmp;
     }
     
     erase (context) {
         // ?????
     }
-
-    // Draws text at some specific coordinates in canvas
-    _drawText (text, x, y, font, size, stroke, fill) {
-        
-        context.font= size + "px " + font;
-        // context.measureText(text) <--- gets the width of text before placing it on canvas may be useful?
-        if ( fill === true) { context.fillText(text, startx, starty); }
-        if ( stroke === true) { context.strokeText(text, startx, starty); }
-    };
 }
 
 
@@ -203,6 +237,8 @@ $(document).ready(function(){
         let checked = $(".fillstroke:checked").length;
         if(checked == 0) { e.target.checked = true; }
     });
+
+
 });
 
 
