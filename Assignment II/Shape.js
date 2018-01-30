@@ -30,8 +30,10 @@ function Drawable (x, y){
     this.primaryColor = Drawio.context.strokeStyle;
     this.secondaryColor = Drawio.context.fillStyle;
     this.lineWidth = Drawio.context.lineWidth;
+    this.rect = {A: null, B: null};
 }
 Drawable.prototype.draw = function () {};
+Drawable.prototype.isAt = function () {};
 Drawable.prototype.endCoordinates = function (x, y) {
     this.end_x = x; this.end_y= y;
 }
@@ -81,6 +83,7 @@ FreeForm.prototype.isAt = function (x, y) {
     for(let i = 0; i < this.points.length-1; i++) {
         A = outerPoints[i]; // rect startpt
         B = innerPoints[i+1]; // rect endpt
+        this.rect = {A: A, B: B};
         if(checkRange(x, y, A, B) === true) {
             return true;
         }
@@ -113,8 +116,28 @@ Line.prototype.draw = function (context) {
 // TODO: Hægt betra?
 Line.prototype.isAt = function (x, y) {
 
-    let A = { x: this.start_x-this.lineWidth, y: this.start_y-this.lineWidth}; //rect startpt
-    let B = { x: this.end_x+this.lineWidth, y: this.end_y+this.lineWidth}; //rect endpt
+    let A = { }; //rect startpt
+    let B = { }; //rect endpt
+    if (this.start_x < this.end_x) {
+        if(this.start_y > this.end_y) {
+            A = { x: this.start_x-this.lineWidth, y: this.start_y+this.lineWidth}; //rect startpt
+            B = { x: this.end_x+this.lineWidth, y: this.end_y-this.lineWidth}; //rect endpt
+        }
+        else {
+            A = { x: this.start_x-this.lineWidth, y: this.start_y-this.lineWidth}; //rect startpt
+            B = { x: this.end_x+this.lineWidth, y: this.end_y+this.lineWidth}; //rect endpt
+        }
+        this.rect = {A: A, B: B};
+    } else {
+        if(this.start_y > this.end_y) {
+            A = { x: this.start_x+this.lineWidth, y: this.start_y+this.lineWidth};
+            B = { x: this.end_x-this.lineWidth, y: this.end_y-this.lineWidth};
+        } else {
+            A = { x: this.start_x+this.lineWidth, y: this.start_y-this.lineWidth};
+            B = { x: this.end_x-this.lineWidth, y: this.end_y+this.lineWidth};
+        }
+        this.rect = {A: B, B: A};
+    }
 
     return checkRange(x,y, A, B);
 };
@@ -177,6 +200,11 @@ Circle.prototype.isAt = function (x, y) {
         A = { x: this.start_x, y: this.start_y}; //rect startpt
         B = { x: this.end_x, y: this.end_y}; //rect endpt
     }
+    if (A.y > B.y) {
+        this.rect = {A: A, B: B};
+    } else {
+        this.rect = {A: B, B: A};
+    }
 
     
     return checkRange(x,y, A, B);
@@ -216,6 +244,11 @@ Rect.prototype.isAt = function (x, y) {
     else {
         A = { x: this.start_x, y: this.start_y}; //rect startpt
         B = { x: this.end_x, y: this.end_y}; //rect endpt
+    }
+    if (A.y > B.y) {
+        this.rect = {A: A, B: B};
+    } else {
+        this.rect = {A: B, B: A};
     }
 
     
@@ -258,6 +291,7 @@ function Text (x, y, e) {
     this.textBox.style.top  = (this.start_y + canvas.offsetTop) + 'px';
     this.textBox.style.display = "block";
     this.textBox.focus();
+    this.textBoxSize = $("#textBox")[0].scrollHeight;
     e.preventDefault();
     this.textBox.onkeydown = ( (e) => {
 
@@ -284,10 +318,12 @@ Text.prototype.draw = function (context) {
     context.fillStyle = this.secondaryColor;
     context.beginPath();
     this.textSize = {   x: this.start_x+context.measureText(this.text).width,
-                        y: this.start_y+$("#textBox")[0].scrollHeight };
+                        y: this.start_y+this.textBoxSize    };
     if ( this.fill === true) { context.fillText(this.text, this.start_x, this.start_y); }
     if ( this.stroke === true) { context.strokeText(this.text, this.start_x, this.start_y); }
     context.closePath();
+    this.endCoordinates ( this.textSize.x,
+                          this.textSize.y);
     textBox.value = "";
     textBox.style.display="none";
 
@@ -296,7 +332,8 @@ Text.prototype.isAt = function (x, y) {
 
     let A = { x: this.start_x-this.lineWidth, y: this.start_y-this.lineWidth}; //rect startpt
     let B = this.textSize; //rect endpt
-    
+    this.rect = {A: A, B: B};
+
     return checkRange(x,y, A, B);
 };
 
@@ -305,10 +342,16 @@ Text.prototype.isAt = function (x, y) {
  **************************************************************/
 var checkRange = (function(x, y, upperRectPoint, lowerRectPoint ) {
 
-        if(upperRectPoint.x < lowerRectPoint.x) {
+        if(upperRectPoint.y < lowerRectPoint.y) {
             let tmp = upperRectPoint;
             upperRectPoint = lowerRectPoint;
             lowerRectPoint = tmp;
+            this.rect = {A: upperRectPoint, B: lowerRectPoint};
+        }
+        if(upperRectPoint.x < lowerRectPoint.x) {
+            this.rect = {A: lowerRectPoint, B: upperRectPoint};
+            return  ((x >= upperRectPoint.x && x <= lowerRectPoint.x) &&
+                     (y >= lowerRectPoint.y && y <= upperRectPoint.y));
         }
 
         return  ((x <= upperRectPoint.x && x >= lowerRectPoint.x) &&

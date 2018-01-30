@@ -27,7 +27,9 @@ window.Drawio = {
     movingElement: null,
     isDrawing : false,
     isTyping: false,
-    isMoving: false
+    isMoving: false,
+    moveX: 0,
+    moveY: 0
 }
 
 $(document).ready(function() {
@@ -168,12 +170,11 @@ $(document).ready(function() {
                 Drawio.currentElement = null;
                 Drawio.isDrawing = false;
                 Drawio.isMoving = true;
+                Drawio.moveX = startX;
+                Drawio.moveY = startY;
                 movingElement = getClickedShape(startX, startY);
-                if ( getClickedShape(startX,startY) !== null ) {
-                    console.log("FOUND SHAPE!!!");
-                } else {
-                    console.log("BOO, NO SHAPE FOUND! :(")
-                }
+                if (movingElement) { drawTmpLinesAround(movingElement); }
+
                 return;
 
             case "drawTool":
@@ -210,23 +211,38 @@ $(document).ready(function() {
     });
     // User moves mouse but hasn't released yet
     $("#canvas").mousemove(function(e) {
+
         let currX = e.offsetX; 
         let currY = e.offsetY;
+
         if ( Drawio.isDrawing ) {
             Drawio.currentElement.endCoordinates(currX, currY);
             drawCanvas();
         }
+
         if ( Drawio.isMoving &&  movingElement !== null) {
-            movingElement.start_x = currX;
-            movingElement.start_y = currY;
-            drawCanvas();
+
+            let diffX = currX - Drawio.moveX;
+            let diffY = currY - Drawio.moveY;
+            movingElement.start_x = movingElement.start_x + diffX;
+            movingElement.start_y = movingElement.start_y + diffY;
+            movingElement.endCoordinates((movingElement.end_x + diffX),
+                                        (movingElement.end_y + diffY) );
+            movingElement.isAt();
+            drawCanvas(); drawTmpLinesAround(movingElement);
+            Drawio.moveX = Drawio.moveX + diffX;
+            Drawio.moveY = Drawio.moveY + diffY;
         }
     });
     // User releases mouse
     $("#canvas").mouseup(function(e) {
 
         Drawio.isDrawing = false;
-        Drawio.isMoving = false;
+        if(Drawio.isMoving) {
+            Drawio.isMoving = false;
+            movingElement = null;
+            drawCanvas();
+        }
     });
     // Re-renders canvas and all it's drawables
     let drawCanvas = (function() {
@@ -244,6 +260,16 @@ $(document).ready(function() {
         Drawio.context.strokeStyle = temp_pColor;
         Drawio.context.fillStyle = temp_sColor;
         Drawio.context.lineWidth = temp_lWidth;
+    });
+    //Temporary draws frame around object
+    let drawTmpLinesAround = (function(movingElement) {
+        tmp = Drawio.context;
+        Drawio.context.strokeStyle = 'gray';
+        Drawio.context.lineWidth = 1;
+        Drawio.context.strokeRect  ( movingElement.rect.A.x, movingElement.rect.A.y,
+                                     movingElement.rect.B.x - movingElement.rect.A.x,
+                                     movingElement.rect.B.y - movingElement.rect.A.y );
+        Drawio.context = tmp;
     });
     // Gets if shape is within clicked index
     let getClickedShape = (function(x, y){
