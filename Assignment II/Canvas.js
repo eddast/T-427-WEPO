@@ -228,6 +228,10 @@ $(document).ready(function() {
             movingElement.start_y = movingElement.start_y + diffY;
             movingElement.endCoordinates((movingElement.end_x + diffX),
                                         (movingElement.end_y + diffY) );
+            if (movingElement.points !== undefined) {
+                console.log("ÉGHATAJAVASCRIPT");
+                movingElement.reDraw(Drawio.context, diffX, diffY);
+            }
             movingElement.isAt();
             drawCanvas(); drawTmpLinesAround(movingElement);
             Drawio.moveX = Drawio.moveX + diffX;
@@ -336,4 +340,9 @@ $(document).ready(function() {
         let checked = $(".fillstroke:checked").length;
         if(checked == 0) { e.target.checked = true; }
     });
+    $("#optionBar").click( (e) => {
+        var textBox = document.getElementById("textBox");
+        textBox.value = "";
+        textBox.style.display="none";
+    })
 });

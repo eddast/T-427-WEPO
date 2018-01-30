@@ -90,6 +90,24 @@ FreeForm.prototype.isAt = function (x, y) {
     }
     return false;
 };
+FreeForm.prototype.reDraw = function (context, diffX, diffY) {
+
+    context.strokeStyle = this.primaryColor;
+    context.fillStyle = this.secondaryColor;
+    context.lineWidth = this.lineWidth;
+    context.beginPath();
+    for(let i = 0; i < this.points.length; i++) {
+        let point = { x: this.points[i].x+diffX, y: this.points[i].y+diffY }
+        this.points[i] = point;
+    }
+
+    for(let i = 1; i < this.points.length; i++) {
+        let point = this.points[i];
+        context.lineTo(point.x, point.y);
+    }
+    context.stroke();
+    context.closePath();
+};
 
 
 /*********************************************************
@@ -293,6 +311,7 @@ function Text (x, y, e) {
     this.textBox.focus();
     this.textBoxSize = $("#textBox")[0].scrollHeight;
     e.preventDefault();
+    
     this.textBox.onkeydown = ( (e) => {
 
         // On enter or esc draw what is in textbox
