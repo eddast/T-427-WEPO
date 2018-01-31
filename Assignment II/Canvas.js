@@ -130,15 +130,104 @@ $(document).ready(function() {
         drawCanvas();
     });
 
+
+    //Geyma nöfnin í array
+    //Hugmynd að sava söguna og keyra hana í staðinn fyrir það að save-a sem mynd
     $("#save").click(function(e) {
-        var bannerImage = document.getElementById("canvas");
-        var imgData = getBase64Image(bannerImage);
-        localStorage.setItem("imgData", imgData);
-
-        console.log(localStorage);
-
-        window.alert("Saved in your localstorage");
+        //Náum í öll nöfnin í localStorage-inu
+        var listOfSavedFilesNames = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            listOfSavedFilesNames.push(localStorage.key(i));
+        }
+        //Náum í array-ið
+        var data = Drawio.drawables;
+        //Leyfum notendanum að skýra file-inn sinn
+        var nameOfSavedData = window.prompt("What do you want to name the file?");
+        if (listOfSavedFilesNames.length > 0){
+            var existsOrNot = true;
+            while (existsOrNot == true) {
+                for (var i = 0; i < listOfSavedFilesNames.length; i++) {
+                    if (listOfSavedFilesNames[i] == nameOfSavedData) {
+                        nameOfSavedData = window.prompt("That name is taken, try again");
+                        existsOrNot = true;
+                        break;
+                    }
+                    else {
+                        existsOrNot = false;
+                    }
+                }
+            }
+        }
+        //Ef notandinn valdi ekki cancel
+        if (nameOfSavedData != null){
+            localStorage.setItem(nameOfSavedData, data); 
+        }
+        window.alert(nameOfSavedData + " has been saved to your local storage");
     });
+
+    //Fallið sem að birtir alla file-ana sem að notandinn hefur save-að
+    $("#getAllSavedFiles").click(function (e) { 
+        var listOfSavedFilesNames = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            listOfSavedFilesNames.push(localStorage.key(i));
+        }
+        if (listOfSavedFilesNames.length != 0){
+            //Notum modal til að birta möguleikana
+            var modal = document.getElementById('myModal');
+            modal.style.display = "block";
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            //Removum alla li-ana af ul-inu áður en við setjum inn nýja
+            $('#insertFileNamesIntoMe li').remove();
+            var list = document.getElementById("insertFileNamesIntoMe");
+            for (var i = 0; i < listOfSavedFilesNames.length; i++){
+                //Búum til næstu nóðu
+                var newItem = document.createElement("li");
+                newItem.style.cursor = "pointer";
+                //Bætum við eventlistener á hverja nóðu fyrir sig
+                newItem.addEventListener('click', function(e) {
+                    fillCanvasWithSelectedSavedProject($(this).text());
+                })
+                var item = listOfSavedFilesNames[i];
+                var itemNode =  document.createTextNode(item);
+                newItem.appendChild(itemNode);
+                list.appendChild(newItem);
+            }
+        }
+        else{
+            window.alert("You don´t have any previously saved photos");
+        }
+    });
+
+    function fillCanvasWithSelectedSavedProject(name){
+        //Byrjum á að clear-a canvasinn
+        while (Drawio.drawables.length !== 0) {
+            Drawio.drawables.pop();
+        }
+        while (Drawio.undo.length !== 0) {
+            Drawio.undo.pop();
+        }
+        drawCanvas();
+
+        //Hérna eigum við að keyra inn array-ið af objectum sem að notandinn valdi
+        console.log("name in the function equals: " + name);
+        //Náum í array-ið af objectum og skýrum það item
+        var item = localStorage.getItem(name);
+        console.log("Item equals " + item);
+        //Hérna á eftir að keyra objectana sem að item geymir
+        //Drawio.drawables = item; //Einhvern veginn svona
+
+        //Lokum modal-inu
+        var modal = document.getElementById('myModal');
+        modal.style.display = "none";
+    }
 
     function getBase64Image(img) {
     var canvas = document.createElement("canvas");
