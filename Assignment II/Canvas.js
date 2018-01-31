@@ -140,7 +140,7 @@ $(document).ready(function() {
             listOfSavedFilesNames.push(localStorage.key(i));
         }
         //Náum í array-ið
-        var data = Drawio.drawables;
+        var data = JSON.stringify(Drawio.drawables);
         //Leyfum notendanum að skýra file-inn sinn
         var nameOfSavedData = window.prompt("What do you want to name the file?");
         if (listOfSavedFilesNames.length > 0){
@@ -160,9 +160,10 @@ $(document).ready(function() {
         }
         //Ef notandinn valdi ekki cancel
         if (nameOfSavedData != null){
+
             localStorage.setItem(nameOfSavedData, data); 
+            window.alert(nameOfSavedData + " has been saved to your local storage");
         }
-        window.alert(nameOfSavedData + " has been saved to your local storage");
     });
 
     //Fallið sem að birtir alla file-ana sem að notandinn hefur save-að
@@ -217,12 +218,32 @@ $(document).ready(function() {
         drawCanvas();
 
         //Hérna eigum við að keyra inn array-ið af objectum sem að notandinn valdi
-        console.log("name in the function equals: " + name);
         //Náum í array-ið af objectum og skýrum það item
-        var item = localStorage.getItem(name);
-        console.log("Item equals " + item);
+        var item = JSON.parse(localStorage.getItem(name));
+        for (let i = 0; i<item.length; i++){
+            let asger = item[i];
+            switch(asger.type){
+                case "pen":
+                    asger.__proto__ = FreeForm.prototype;
+                    break;
+                case "line":
+                    asger.__proto__ = Line.prototype;
+                    break;
+                case "circle":
+                    asger.__proto__ = Circle.prototype;
+                    break;
+                case "rect":
+                    asger.__proto__ = Rect.prototype;
+                    break;
+                case "text":
+                    asger.__proto__ = Text.prototype;
+                    break;
+            }
+            Drawio.drawables.push(asger);
+        }
         //Hérna á eftir að keyra objectana sem að item geymir
         //Drawio.drawables = item; //Einhvern veginn svona
+        drawCanvas();
 
         //Lokum modal-inu
         var modal = document.getElementById('myModal');

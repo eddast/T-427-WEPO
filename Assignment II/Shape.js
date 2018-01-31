@@ -23,7 +23,7 @@
  *  Each drawable implements the draw() functionality
 *************************************************************/
 
-function Drawable (x, y){
+function Drawable (x, y, type){
 
     this.start_x = x; this.start_y = y;
     this.end_x = x; this.end_y = y;
@@ -31,7 +31,9 @@ function Drawable (x, y){
     this.secondaryColor = Drawio.context.fillStyle;
     this.lineWidth = Drawio.context.lineWidth;
     this.rect = {A: null, B: null};
+    this.type = type;
 }
+
 Drawable.prototype.draw = function () {};
 Drawable.prototype.isAt = function () {};
 Drawable.prototype.endCoordinates = function (x, y) {
@@ -46,7 +48,7 @@ Drawable.prototype.endCoordinates = function (x, y) {
 
 function FreeForm (x, y) {
         
-    Drawable.call(this, x, y);
+    Drawable.call(this, x, y, "pen");
     this.points = [ ];
     this.outerPoints = [ ];
     this.innerPoints = [ ];
@@ -116,7 +118,7 @@ FreeForm.prototype.reDraw = function (context, diffX, diffY) {
 **********************************************************/
 
 function Line (x, y) {
-    Drawable.call(this, x, y);
+    Drawable.call(this, x, y, "line");
 };
 Line.prototype = Object.create(Drawable.prototype);
 Line.prototype.constructor = Line;
@@ -169,7 +171,7 @@ Line.prototype.isAt = function (x, y) {
 
 function Circle (x, y) {
         
-    Drawable.call(this, x, y);
+    Drawable.call(this, x, y, "circle");
     this.radiusX = 0; this.radiusY = 0;
     this.centerX = 0; this.centerY = 0;
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
@@ -236,7 +238,7 @@ Circle.prototype.isAt = function (x, y) {
 
 function Rect (x, y) {
         
-    Drawable.call(this, x, y);
+    Drawable.call(this, x, y, "rect");
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
 };
@@ -281,7 +283,7 @@ Rect.prototype.isAt = function (x, y) {
 
 function Text (x, y, e) {
         
-    Drawable.call(this, x, y);
+    Drawable.call(this, x, y, "text");
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
     this.font = Drawio.context.font;
