@@ -29,7 +29,9 @@ window.Drawio = {
     isTyping: false,
     isMoving: false,
     moveX: 0,
-    moveY: 0
+    moveY: 0,
+    isSaved: false,
+    keepName: ""
 }
 
 $(document).ready(function() {
@@ -128,6 +130,8 @@ $(document).ready(function() {
             Drawio.undo.pop();
         }
         drawCanvas();
+        Drawio.keepName = "";
+        Drawio.isSaved = false;
     });
 
 
@@ -142,27 +146,35 @@ $(document).ready(function() {
         //Náum í array-ið
         var data = JSON.stringify(Drawio.drawables);
         //Leyfum notendanum að skýra file-inn sinn
-        var nameOfSavedData = window.prompt("What do you want to name the file?");
-        if (listOfSavedFilesNames.length > 0){
-            var existsOrNot = true;
-            while (existsOrNot == true) {
-                for (var i = 0; i < listOfSavedFilesNames.length; i++) {
-                    if (listOfSavedFilesNames[i] == nameOfSavedData) {
-                        nameOfSavedData = window.prompt("That name is taken, try again");
-                        existsOrNot = true;
-                        break;
-                    }
-                    else {
-                        existsOrNot = false;
+        if (Drawio.isSaved == false){
+            var nameOfSavedData = window.prompt("What do you want to name the file?");
+            if (listOfSavedFilesNames.length > 0) {
+                var existsOrNot = true;
+                while (existsOrNot == true) {
+                    for (var i = 0; i < listOfSavedFilesNames.length; i++) {
+                        if (listOfSavedFilesNames[i] == nameOfSavedData) {
+                            nameOfSavedData = window.prompt("That name is taken, try again");
+                            existsOrNot = true;
+                            break;
+                        }
+                        else {
+                            existsOrNot = false;
+                        }
                     }
                 }
             }
+            //Ef notandinn valdi ekki cancel
+            if (nameOfSavedData != null) {
+                localStorage.setItem(nameOfSavedData, data);
+                window.alert(nameOfSavedData + " has been saved to your local storage");
+                Drawio.keepName = nameOfSavedData;
+                Drawio.isSaved = true;
+            }
         }
-        //Ef notandinn valdi ekki cancel
-        if (nameOfSavedData != null){
-
-            localStorage.setItem(nameOfSavedData, data); 
-            window.alert(nameOfSavedData + " has been saved to your local storage");
+        else{
+            var data = JSON.stringify(Drawio.drawables);
+            localStorage.setItem(Drawio.keepName, data);
+            window.alert("Saved changes on " + Drawio.keepName);
         }
     });
 
@@ -244,7 +256,8 @@ $(document).ready(function() {
         //Hérna á eftir að keyra objectana sem að item geymir
         //Drawio.drawables = item; //Einhvern veginn svona
         drawCanvas();
-
+        Drawio.isSaved = true;
+        Drawio.keepName = name;
         //Lokum modal-inu
         var modal = document.getElementById('myModal');
         modal.style.display = "none";
