@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import '../styles/site';
 import InitialPage from './components/containers/InitialPage';
 import Banner from './components/Banner';
+import Server from './services/API';
 
 class App extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class App extends React.Component {
         return (
             <div>
                 <Banner/>
-                <InitialPage/>
+                <InitialPage server={Server}/>
             </div>
         );
     }
