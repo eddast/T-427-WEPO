@@ -17,7 +17,14 @@ class NicknameChoice extends React.Component {
     }
 
     joinChatroomClick () {
-        this.server.setNickname(this.state.inputValue);
+        let isAvailable = this.server.setNickname(this.state.inputValue);
+        isAvailable.then((nicknameIsAvailable) => {
+            if(nicknameIsAvailable) {
+                console.log('nickname available');
+            } else {
+                console.log('nickname unavailable');
+            }
+        });
     };
 
     render() {

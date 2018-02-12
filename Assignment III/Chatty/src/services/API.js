@@ -14,12 +14,27 @@ export default class Server {
     };
 
     static setNickname(nickname) {
-        this.socket.emit('adduser', nickname, (nameOK) => {
-            if(nameOK) {
-                console.log('nickname set');
-            } else {
-                console.log('nickname unavailable');
-            }
+        return new Promise((resolve) => {
+            this.socket.emit('adduser', nickname, (nameOK) => {
+                if(nameOK) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+    static getUsers() {
+        this.socket.emit('users');
+        return this.checkUserlistUpdates();
+    }
+
+    static checkUserlistUpdates() {
+        return new Promise((resolve) => {
+            this.socket.on('userlist', userlist => {
+                resolve(userlist);
+            });
         });
     }
 }
