@@ -34,11 +34,12 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "express": "4.16.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
-    "express": "4.16.2",
     "socket.io": "2.0.3",
     "socket.io-client": "^1.7.2"
   }
