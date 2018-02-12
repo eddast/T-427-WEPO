@@ -1,6 +1,6 @@
 import React from 'react';
-import NicknameChoice from './NicknameChoice';
-//import Lobby from '../LobbyPage/Lobby'
+// import NicknameChoice from './NicknameChoice';
+import Lobby from '../LobbyPage/Lobby'
 
 class InitialPage extends React.Component {
     constructor(props, ctx) {
@@ -10,8 +10,8 @@ class InitialPage extends React.Component {
     render() {
         return (
             <div className='initialPageBody'>
-                <NicknameChoice server = {this.server}/>
-                {/* <Lobby server = {this.server}/> */}
+                {/* <NicknameChoice server = {this.server}/> */}
+                <Lobby server = {this.server}/>
             </div>
         );
     };
