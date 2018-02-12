@@ -47,7 +47,7 @@ Drawable.prototype.endCoordinates = function (x, y) {
 ***********************************************************/
 
 function FreeForm (x, y) {
-        
+
     Drawable.call(this, x, y, "pen");
     this.points = [ ];
     this.outerPoints = [ ];
@@ -123,7 +123,7 @@ function Line (x, y) {
 Line.prototype = Object.create(Drawable.prototype);
 Line.prototype.constructor = Line;
 Line.prototype.draw = function (context) {
-    
+
     context.strokeStyle = this.primaryColor;
     context.fillStyle = this.secondaryColor;
     context.lineWidth = this.lineWidth;
@@ -170,7 +170,7 @@ Line.prototype.isAt = function (x, y) {
 ***********************************************************/
 
 function Circle (x, y) {
-        
+
     Drawable.call(this, x, y, "circle");
     this.radiusX = 0; this.radiusY = 0;
     this.centerX = 0; this.centerY = 0;
@@ -207,7 +207,7 @@ Circle.prototype.draw = function (context) {
     if ( this.stroke === true)   { context.stroke(); }
     if ( this.fill === true )    { context.fill(); }
 
-    context.closePath();    
+    context.closePath();
 };
 Circle.prototype.isAt = function (x, y) {
 
@@ -226,7 +226,7 @@ Circle.prototype.isAt = function (x, y) {
         this.rect = {A: B, B: A};
     }
 
-    
+
     return checkRange(x,y, A, B);
 };
 
@@ -237,7 +237,7 @@ Circle.prototype.isAt = function (x, y) {
 ****************************************************************/
 
 function Rect (x, y) {
-        
+
     Drawable.call(this, x, y, "rect");
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
@@ -271,7 +271,7 @@ Rect.prototype.isAt = function (x, y) {
         this.rect = {A: B, B: A};
     }
 
-    
+
     return checkRange(x,y, A, B);
 };
 
@@ -282,7 +282,7 @@ Rect.prototype.isAt = function (x, y) {
 **********************************************************/
 
 function Text (x, y, e) {
-        
+
     Drawable.call(this, x, y, "text");
     this.fill = $("#fillMark").is( ":checked" ) ? true : false;
     this.stroke = $("#strokeMark").is( ":checked" ) ? true : false;
@@ -290,17 +290,17 @@ function Text (x, y, e) {
     this.textBox = document.getElementById("textBox");
     this.textSize = {x: 0, y: 0};
     // Format textbox to be exactly as user specified text (size, color, etc)
-    if (this.stroke) { 
+    if (this.stroke) {
         this.textBox.setAttribute ( 'style',
                                     "-webkit-text-stroke: 1px " +
                                     this.primaryColor +
                                     ";" );
-    } if (!this.stroke) { 
+    } if (!this.stroke) {
         this.textBox.setAttribute ( 'style',
                                     "-webkit-text-stroke: 1px " +
                                     "transparent" +
                                     ";" );
-    } if (this.fill) { 
+    } if (this.fill) {
         this.textBox.style.color = this.secondaryColor;
     } if (!this.fill) {
         this.textBox.style.color = "transparent";
@@ -313,24 +313,25 @@ function Text (x, y, e) {
     this.textBox.focus();
     this.textBoxSize = $("#textBox")[0].scrollHeight;
     e.preventDefault();
-    
+
     this.textBox.onkeydown = ( (e) => {
 
         // On enter or esc draw what is in textbox
-        if(e.keyCode==13 || e.keyCode ==27) { 
+        if(e.keyCode==13 || e.keyCode ==27) {
 
             Drawio.isTyping = false;
             this.text = this.textBox.value;
             Drawio.drawables.push(this);
             this.draw(Drawio.context);
 
-        } 
+        }
     });
 };
 Text.prototype = Object.create(Drawable.prototype);
 Text.prototype.constructor = Text;
 Text.prototype.draw = function (context) {
 
+    tmpLineWidth = context.lineWidth;
     context.lineWidth = 1;
     context.font = this.font;
     context.textBaseline = 'top';
@@ -347,6 +348,7 @@ Text.prototype.draw = function (context) {
                           this.textSize.y);
     textBox.value = "";
     textBox.style.display="none";
+    context.lineWidth = tmpLineWidth;
 
 };
 Text.prototype.isAt = function (x, y) {
@@ -358,9 +360,10 @@ Text.prototype.isAt = function (x, y) {
     return checkRange(x,y, A, B);
 };
 
-/**************************************************************
+/*****************************************************************
  *  HELPER FUNCTION: CHECKS IF X, Y ARE WITHIN SPECIFIED RECT
- **************************************************************/
+ *  EVERY ISAT FUNCTION CALLS FOR THIS RANGE CHECKER AS THEIR OWN
+ ******************************************************************/
 var checkRange = (function(x, y, upperRectPoint, lowerRectPoint ) {
 
         if(upperRectPoint.y < lowerRectPoint.y) {

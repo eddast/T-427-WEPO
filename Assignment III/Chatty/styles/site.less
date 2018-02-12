@@ -1,0 +1,150 @@
+// Insert your styles here, using LESS
+
+body {
+
+    background-color: #76F196;
+    width : 100%;
+    height : 100%;
+
+    .bannerDiv {
+
+        min-width: 100%;
+        padding: 2px;
+        background-color: #25323A;
+
+        .centerHeading {
+            display:flex;
+            align-items: center;
+            vertical-align: middle;
+        }
+
+        #bannerImg {
+            margin-left: 20px;
+            margin-top: 2px;
+        }
+        
+        #bannerTitle {
+            margin-left: 25px;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 40px;
+            color: white;
+            margin-left: 25px;
+            text-shadow: 2px 2px 4px #76f197a9;
+        }
+
+        #bannerTagline {
+            font-family: Brush Script MT, Courier New, Courier, monospace;
+            color: white;
+            font-size: 26px;
+            margin-left:170px;
+            padding-bottom: 5px;
+            color: #76F196;
+        }
+    }
+
+    .initialPageBody {
+        padding: 200px;
+        position: fixed;
+        min-height: 100%;
+        min-width: 100%;
+        left: 0;
+        top: 0;
+        margin: 0 auto;
+    }
+
+    .nicknameInput {
+        text-align: center;
+        margin: 0 auto;
+
+        .nicknamePrompt {
+            font-family: Helvetica, sans-serif;
+            align-content: center;
+            font-weight: bold;
+            font-size: 40px;
+            color: white;
+            display: block;
+            margin: auto;
+            text-shadow: 2px 2px 4px #444040;
+            margin-bottom: 40px;
+        }
+
+        .nicknameInputTextField {
+            border-radius: 20px;
+            font-family: Helvetica, sans-serif;
+            align-content: center;
+            font-size: 22px;
+            color: #25323A;
+            border: 5px, solid, #6956e273;
+            border-color:#6956e273;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        .nicknameInputTextField:focus {
+            border: 3px solid rgba(105, 86, 226, 0.589);
+            box-shadow: #6956e2b9;
+            -webkit-transition: 0.4s all;
+            transition: 0.4s all;
+        }
+
+        .nicknameInputButton {
+            font-family: Helvetica, sans-serif;
+            align-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+            padding: 15px 50px 15px 50px;
+            background: #6856E2;
+            text-shadow: 2px 2px 4px #6e6969;
+            border : 1.5px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            box-shadow: 1px 2px 2px 2px rgba(37, 50, 58, 0.651)
+        }
+
+        .nicknameButtonDiv::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+            transition: all 0.3s;
+            border-top-width: 1px;
+            border-bottom-width: 1px;
+            border-top-style: solid;
+            border-bottom-style: solid;
+            border-top-color: rgba(255,255,255,0.5);
+            border-bottom-color: rgba(255,255,255,0.5);
+            transform: scale(0.1, 1);
+        }
+
+        .nicknameInputButton:hover {
+            letter-spacing: 2px;
+        }
+
+        .nicknameButtonDiv:hover::before {
+            opacity: 5; 
+            transform: scale(1, 1); 
+        }
+        .nicknameButtonDiv::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            transition: all 0.3s;
+            background-color: rgba(255,255,255,0.1);
+        }
+        .nicknameButtonDiv:hover::after {
+            opacity: 0; 
+            transform: scale(0.1, 1);
+        }
+
+    }
+}
