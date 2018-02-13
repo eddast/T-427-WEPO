@@ -7,13 +7,20 @@ import PropTypes from 'prop-types'
 class Lobby extends React.Component {
     
     constructor(props, ctx) {
+
         super(props, ctx);
         this.state = {
-            userList : []
+            userList : [],
+            chatRoomList : []
         };
         this.server = this.context.serverAPI.server;
-        this.server.getUsers().then((userList) => {
-            this.setState({userList: userList});
+        this.server.getUsers();
+        this.server.listenToUserUpdates((userlist)=> {
+            this.setState({userList: userlist});
+        });
+        this.server.getChatrooms();
+        this.server.listenToChatroomUpdates((chatRoomlist) => {
+            this.setState({chatRoomList: chatRoomlist});
         });
     }
 
@@ -25,6 +32,9 @@ class Lobby extends React.Component {
                     <ListViewUsers value={this.state.userList}>
                         {this.state.userList.map((user) => (<ListItemUsers name={user}/>))}
                     </ListViewUsers>
+                    {/* <ListViewChatRooms value={this.state.userList}>
+                        {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms name={chatroom}/>))}
+                    </ListViewChatRooms> */}
                 </div>
             </div>
         );

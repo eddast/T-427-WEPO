@@ -5,7 +5,6 @@ body {
     height : 100%;
     overflow: hidden;
 
-    /*This is a comment*/
         .bannerDiv {
 
         margin: 0;
@@ -147,14 +146,15 @@ body {
         }
     }
 
-    .lobbyBody {
-        margin: 20px;
+    .LobbyBody {
+        margin: 10px;
         padding: 20px;
     }
 
     .usersActiveList {
 
         width: 200px;
+        float: left;
 
         #ListViewUsersHeading {
             font-family: Helvetica, sans-serif;
@@ -183,21 +183,38 @@ body {
         border: gray;
         border : 0.5px solid #25323a17;
 
-        #messageUserLogo {
+        #onlineIcon {
+            color: #17eb17;
             float: left;
+            display: flex;
+            font-size: 20px;
+            margin-top: 10px;
+            // animation-name: spin;
+            // animation-duration: 1000ms;
+            // animation-iteration-count: infinite;
+            // animation-timing-function: linear; 
+        }
+
+        @-moz-keyframes spin {
+            from { -moz-transform: rotate(0deg); }
+            to { -moz-transform: rotate(360deg); }
+        }
+        @-webkit-keyframes spin {
+            from { -webkit-transform: rotate(0deg); }
+            to { -webkit-transform: rotate(360deg); }
+        }
+        @keyframes spin {
+            from {transform:rotate(0deg);}
+            to {transform:rotate(360deg);}
         }
 
         #userName {
             font-family: Helvetica, Arial, sans-serif;
             font-style: bold;
-            font-size: 18px;
+            font-size: 14px;
             color: #25323A;
-        }
-        #userActive {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: italic;
-            font-size: 11px;
-            color: #61f561b9;
+            margin-top: 10px;
+            margin-left: 30px;
         }
     }
 }

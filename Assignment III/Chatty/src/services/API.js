@@ -27,14 +27,32 @@ export default class Server {
 
     static getUsers() {
         this.socket.emit('users');
-        return this.checkUserlistUpdates();
-    }
-
-    static checkUserlistUpdates() {
         return new Promise((resolve) => {
             this.socket.on('userlist', userlist => {
                 resolve(userlist);
             });
+        });
+    }
+
+    static listenToUserUpdates(resolve) {
+        this.socket.on('userlist', userlist => {
+            resolve(userlist);
+        });
+    }
+
+    static getChatrooms() {
+        this.socket.emit('users');
+        return new Promise((resolve) => {
+            this.socket.on('userlist', userlist => {
+                resolve(userlist);
+            });
+        });
+    }
+
+    static listenToChatroomUpdates(resolve) {
+        this.socket.on('userlist', userlist => {
+            console.log(userlist);
+            resolve(userlist);
         });
     }
 }
