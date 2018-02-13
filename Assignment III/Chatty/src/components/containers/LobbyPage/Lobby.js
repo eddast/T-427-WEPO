@@ -25,6 +25,7 @@ class Lobby extends React.Component {
     }
 
     render() {
+        console.log('Hello, can you see me');
         return (
             <div>
                 <Banner />
