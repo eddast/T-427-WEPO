@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ListViewUsers = ({ children }) => {
+const ListViewUsers = ({ children}) => {
     return (
         <div className="usersActiveList">
             <p id="ListViewUsersHeading">USERS ACTIVE</p>

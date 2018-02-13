@@ -1,6 +1,7 @@
 import React from 'react';
 import ListViewUsers from './ListViewUsers';
 import ListItemUsers from './ListItemUsers';
+//import ListViewChatRooms from './ListViewChatRooms';
 import Banner from '../../Banner'
 import PropTypes from 'prop-types'
 
@@ -29,14 +30,47 @@ class Lobby extends React.Component {
         return (
             <div>
                 <Banner />
-                <div className='LobbyBody'>
-                    <ListViewUsers value={this.state.userList}>
-                        {this.state.userList.map((user) => (<ListItemUsers name={user}/>))}
-                    </ListViewUsers>
-                    {/* <ListViewChatRooms value={this.state.userList}>
-                        {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms name={chatroom}/>))}
-                    </ListViewChatRooms> */}
+                <div class="lobbyPageIsHere">
+                    <div class="showUsersDiv">
+                        <div className='LobbyBody'>
+                        <ListViewUsers value={this.state.userList}>
+                            {this.state.userList.map((user) => (<ListItemUsers name={user}/>))}
+                        </ListViewUsers>
+                        {/* <ListViewChatRooms value={this.state.userList}>
+                            {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms name={chatroom}/>))}
+                        </ListViewChatRooms> */}
+                        </div>
+                    </div>
+                    <div class="showAvailableChatRoomsDiv">
+                        <div class="allChatRoomsDiv">
+                            <div class="emptySpaceBetweenChatRooms"></div>
+                            <div class="eachAndEveryChatRoom">
+                                <p class="nameOfTheChatRoomBox">My chatroom</p>
+                            </div>
+                            <div class="emptySpaceBetweenChatRooms"></div>
+                            <div class="eachAndEveryChatRoom">
+                                <p class="nameOfTheChatRoomBox">My chatroom</p>
+                            </div>
+                            <div class="emptySpaceBetweenChatRooms"></div>
+                            <div class="eachAndEveryChatRoom">
+                                <p class="nameOfTheChatRoomBox">My chatroom</p>
+                            </div>
+                            <div class="emptySpaceBetweenChatRooms"></div>
+                            <div class="eachAndEveryChatRoom">
+                                <p class="nameOfTheChatRoomBox">My chatroom</p>
+                            </div>
+                            <div class="emptySpaceBetweenChatRooms"></div>
+                            <div class="eachAndEveryChatRoom">
+                                <p class="nameOfTheChatRoomBox">My chatroom</p>
+                            </div>
+                            <div class="emptySpaceBetweenChatRooms"></div>
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         );
     };
