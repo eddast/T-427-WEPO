@@ -13,7 +13,7 @@ class Lobby extends React.Component {
         super(props, ctx);
         this.state = {
             userList : [],
-            chatRoomList : ['Lobby', 'Chatroom1', 'Chatroom2'],
+            chatRoomList : [],
             showChatRoomAvailable : true
         };
         this.server = this.context.serverAPI.server;
@@ -21,10 +21,11 @@ class Lobby extends React.Component {
         this.server.listenToUserUpdates((userlist)=> {
             this.setState({userList: userlist});
         });
-        // this.server.getChatrooms();
-        // this.server.listenToChatroomUpdates((chatRoomlist) => {
-        //     this.setState({chatRoomList: chatRoomlist});
-        // });
+        this.server.getChatrooms();
+        this.server.listenToChatroomUpdates((chatRoomlist) => {
+            this.setState({chatRoomList: chatRoomlist});
+            console.log(chatRoomlist);
+        });
     }
 
     switchViews() {
@@ -43,7 +44,7 @@ class Lobby extends React.Component {
                     </div> */}
                     <div className="chatroomListDisplay">
                         <ListViewChatRooms value={this.state.userList}>
-                            {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms name={chatroom}/>))}
+                            {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms info={chatroom}/>))}
                         </ListViewChatRooms>
                     </div>
                 </div>

@@ -16,11 +16,7 @@ export default class Server {
     static setNickname(nickname) {
         return new Promise((resolve) => {
             this.socket.emit('adduser', nickname, (nameOK) => {
-                if(nameOK) {
-                    resolve(true);
-                } else {
-                    resolve(false);
-                }
+                resolve(nameOK);
             });
         });
     }
@@ -41,8 +37,33 @@ export default class Server {
 
     static listenToChatroomUpdates(resolve) {
         this.socket.on('roomlist', rooms => {
-            resolve(rooms);
+            var roomlist = this.dictToArray(rooms);
+            resolve(roomlist);
         });
+    }
+
+    static addChatroom (name, topic) {
+        var newRoom = {room: name};
+        this.socket.emit('joinroom', newRoom, (creationOK) => {
+            if(creationOK) {
+                var newTopic = {topic: topic, room: name};
+                this.socket.emit('settopic', newTopic, (topicOK) => {
+                    console.log(topicOK);
+                    return topicOK;
+                });
+            }
+            return false;
+        });
+    }
+
+    static dictToArray (dict) {
+        var newArray = [];
+        for(var i in dict) {
+            dict[i].name = i;
+            newArray.push(dict[i]);
+        }
+
+        return newArray;
     }
 }
 
