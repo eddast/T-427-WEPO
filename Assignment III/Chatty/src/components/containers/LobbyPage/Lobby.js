@@ -10,6 +10,15 @@ class Lobby extends React.Component {
     constructor(props, ctx) {
 
         super(props, ctx);
+        //Use the next two functions to store all info about each and every chatRoom
+        this.allChatRooms = [];
+        this.eachChatRoom = {
+            name : 'dumdum',
+            id : 1, 
+            messageHistory : [],
+            userslist : [],
+
+        }
         this.state = {
             userList : [],
             chatRoomList : [],
@@ -18,10 +27,16 @@ class Lobby extends React.Component {
         this.server = this.context.serverAPI.server;
         this.server.getUsers();
         this.server.listenToUserUpdates((userlist)=> {
+            console.log('userList is: ');
+            console.log(userlist);
             this.setState({userList: userlist});
         });
         this.server.getChatrooms();
         this.server.listenToChatroomUpdates((chatRoomlist) => {
+            console.log('chatRoomList is: ');
+            console.log(chatRoomlist);
+            //Like this how we can get all objects inside chatRoomlist 
+            console.log(chatRoomlist.lobby.messageHistory); 
             this.setState({chatRoomList: chatRoomlist});
         });
     }
@@ -62,6 +77,11 @@ class Lobby extends React.Component {
                   <div class="showAvailableChatRoomsDiv">
                     <div class="allChatRoomsDiv">
                       <div class="emptySpaceBetweenChatRooms" />
+                        {/* This must be implemented */}
+                        {/* <ListViewChatRooms value={this.state.userList}>
+                            {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms name={chatroom}/>))}
+                        </ListViewChatRooms> */}
+
                       <div class="eachAndEveryChatRoom" onClick={evt => this.switchViews(evt)}>
                         <p class="nameOfTheChatRoomBox">
                           My chatroom

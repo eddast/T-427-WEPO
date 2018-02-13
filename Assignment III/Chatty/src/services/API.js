@@ -27,11 +27,6 @@ export default class Server {
 
     static getUsers() {
         this.socket.emit('users');
-        return new Promise((resolve) => {
-            this.socket.on('userlist', userlist => {
-                resolve(userlist);
-            });
-        });
     }
 
     static listenToUserUpdates(resolve) {
@@ -41,18 +36,12 @@ export default class Server {
     }
 
     static getChatrooms() {
-        this.socket.emit('users');
-        return new Promise((resolve) => {
-            this.socket.on('userlist', userlist => {
-                resolve(userlist);
-            });
-        });
+        this.socket.emit('rooms');
     }
 
     static listenToChatroomUpdates(resolve) {
-        this.socket.on('userlist', userlist => {
-            console.log(userlist);
-            resolve(userlist);
+        this.socket.on("roomlist", rooms => {
+          resolve(rooms);
         });
     }
 }
