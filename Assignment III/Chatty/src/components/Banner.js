@@ -8,7 +8,7 @@ class Banner extends React.Component {
             <div className='bannerDiv'>
                 <div className='centerHeading'>
                     <Logo id='bannerImg' width={120} height={80}/>
-                    <span id="bannerTitle">CHITCHAT</span>
+                    <span id='bannerTitle'>CHITCHAT</span>
                 </div>
                 <div className='row'>
                     <span className='col-md-12' id='bannerTagline'>Blah</span>

@@ -38,8 +38,8 @@ class App extends React.Component {
 
 var RouterPaths = (
     <Switch>
-        <Route exact path="/" component={InitialPage} />
-        <Route exact path="/lobby" component={Lobby} />
+        <Route exact path='/' component={InitialPage} />
+        <Route exact path='/lobby' component={Lobby} />
         <div> 404 not found </div>
     </Switch>
 );

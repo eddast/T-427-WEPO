@@ -1,8 +1,7 @@
 import React from 'react';
-// import ListViewUsers from './ListViewUsers';
-// import ListItemUsers from './ListItemUsers';
 import ListViewChatRooms from './ListViewChatRooms';
 import ListItemChatRooms from './ListItemChatRooms';
+import ChatRoomWindow from './ChatRoomWindow';
 import Banner from '../../Banner'
 import PropTypes from 'prop-types'
 
@@ -14,38 +13,36 @@ class Lobby extends React.Component {
         this.state = {
             userList : [],
             chatRoomList : [],
+            selectedChatroom: null,
             showChatRoomAvailable : true
         };
         this.server = this.context.serverAPI.server;
-        this.server.getUsers();
-        this.server.listenToUserUpdates((userlist)=> {
-            this.setState({userList: userlist});
-        });
+        // this.server.getUsers();
+        // this.server.listenToUserUpdates((userlist)=> {
+        //     this.setState({userList: userlist});
+        // });
         this.server.getChatrooms();
         this.server.listenToChatroomUpdates((chatRoomlist) => {
             this.setState({chatRoomList: chatRoomlist});
+            this.setState({selectedChatroom: chatRoomlist[0]});
         });
     }
 
-    switchViews() {
-        this.setState({showChatRoomAvailable: !this.state.showChatRoomAvailable});
+    selectChatroom (evt, chatroom) {
+        this.setState({selectedChatroom: chatroom});
     }
 
     render() {
         return (
             <div>
                 <Banner />
-                <div className="LobbyBody">
-                    {/* <div className="showUsers">
-                        <ListViewUsers value={this.state.userList}>
-                            {this.state.userList.map(user => (<ListItemUsers name={user} />))}
-                        </ListViewUsers>
-                    </div> */}
-                    <div className="chatroomListDisplay">
+                <div className='LobbyBody'>
+                    <div className='chatroomListDisplay'>
                         <ListViewChatRooms value={this.state.userList}>
-                            {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms info={chatroom}/>))}
+                            {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms onClick={evt => this.selectChatroom(evt, chatroom)} value={chatroom} info={chatroom}/>))}
                         </ListViewChatRooms>
                     </div>
+                    <ChatRoomWindow chatroom={this.state.selectedChatroom}/>
                 </div>
             </div>
         );
