@@ -54,7 +54,7 @@ class NicknameChoice extends React.Component {
 
 NicknameChoice.contextTypes = {
 
-    routeTools: PropTypes.shape({
+    routeTools: PropTypes.shape({°
         redirect: PropTypes.component,
     }),
     
