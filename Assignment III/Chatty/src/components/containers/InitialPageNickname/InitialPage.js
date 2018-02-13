@@ -1,17 +1,16 @@
 import React from 'react';
-// import NicknameChoice from './NicknameChoice';
-import Lobby from '../LobbyPage/Lobby'
+import NicknameChoice from './NicknameChoice';
+import Banner from '../../../components/Banner';
+
 
 class InitialPage extends React.Component {
-    constructor(props, ctx) {
-        super(props, ctx);
-        this.server = this.props.server;
-    }
     render() {
         return (
-            <div className='initialPageBody'>
-                {/* <NicknameChoice server = {this.server}/> */}
-                <Lobby server = {this.server}/>
+            <div>
+                <Banner/>
+                <div className='initialPageBody'>
+                    <NicknameChoice/>
+                </div>
             </div>
         );
     };
