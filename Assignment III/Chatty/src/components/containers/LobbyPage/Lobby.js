@@ -14,17 +14,25 @@ class Lobby extends React.Component {
             userList : [],
             chatRoomList : [],
             selectedChatroom: null,
-            showChatRoomAvailable : true
+            showChatRoomAvailable : true,
+            shouldreRender: false
         };
         this.server = this.context.serverAPI.server;
-        // this.server.getUsers();
-        // this.server.listenToUserUpdates((userlist)=> {
-        //     this.setState({userList: userlist});
-        // });
         this.server.getChatrooms();
         this.server.listenToChatroomUpdates((chatRoomlist) => {
             this.setState({chatRoomList: chatRoomlist});
             this.setState({selectedChatroom: chatRoomlist[0]});
+        });
+    }
+
+    addChatroom() {
+        this.server.addChatroom('f09wejfoiwejfoiwejf', 'mock topic', (didSucceed) => {
+            if(didSucceed) {
+                this.server.getChatrooms();
+                this.server.listenToChatroomUpdates((chatRoomlist) => {
+                    this.setState({chatRoomList: chatRoomlist});
+                });
+            }
         });
     }
 
@@ -38,7 +46,7 @@ class Lobby extends React.Component {
                 <Banner />
                 <div className='LobbyBody'>
                     <div className='chatroomListDisplay'>
-                        <ListViewChatRooms value={this.state.userList}>
+                        <ListViewChatRooms value={this.state.userList} addchatroom={() => this.addChatroom()}>
                             {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms onClick={evt => this.selectChatroom(evt, chatroom)} value={chatroom} info={chatroom}/>))}
                         </ListViewChatRooms>
                     </div>

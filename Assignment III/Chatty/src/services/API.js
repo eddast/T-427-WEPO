@@ -42,17 +42,16 @@ export default class Server {
         });
     }
 
-    static addChatroom (name, topic) {
+    static addChatroom (name, topic, resolve) {
         var newRoom = {room: name};
         this.socket.emit('joinroom', newRoom, (creationOK) => {
             if(creationOK) {
                 var newTopic = {topic: topic, room: name};
                 this.socket.emit('settopic', newTopic, (topicOK) => {
-                    console.log(topicOK);
-                    return topicOK;
+                    resolve(topicOK)
                 });
             }
-            return false;
+            resolve(false);
         });
     }
 
