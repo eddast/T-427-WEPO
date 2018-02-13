@@ -5,21 +5,23 @@ body {
     height : 100%;
     overflow: hidden;
 
-    .bannerDiv {
+    /*This is a comment*/
+        .bannerDiv {
 
+        margin: 0;
         min-width: 100%;
         padding: 2px;
         background-color: #25323A;
 
         .centerHeading {
-            display:flex;
+            display: flex;
             align-items: center;
             vertical-align: middle;
         }
 
         #bannerImg {
             margin-left: 20px;
-            margin-top: 2px;
+            margin-top: 10px;
         }
         
         #bannerTitle {
@@ -43,10 +45,7 @@ body {
     }
 
     .initialPageBody {
-        padding-top: 150px;
-        padding-left: 30px;
-        padding-right: 30px;
-        position: fixed;
+        position:relative;
         min-height: 100%;
         min-width: 100%;
         left: 0;
@@ -118,8 +117,8 @@ body {
             border-bottom-width: 1px;
             border-top-style: solid;
             border-bottom-style: solid;
-            border-top-color: rgba(255,255,255,0.5);
-            border-bottom-color: rgba(255,255,255,0.5);
+            border-top-color: rgba(255, 255, 255, 0);
+            border-bottom-color: rgba(255, 255, 255, 0);
             transform: scale(0.1, 1);
         }
 
