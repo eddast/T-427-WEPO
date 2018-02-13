@@ -1,10 +1,10 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
-const ListItemUsers = ({ name }) => {
+const ListItemChatRooms = ({ name }) => {
     return (
         <li className='chatroomListItem'>
-            <FontAwesome className="col-" id='onlineIcon' aria-hidden='false' name='user'/>
+            <FontAwesome className="col-" id='chatroomIcon' aria-hidden='false' name='comments'/>
             <div className="col-">
                 <p id='chatroomName'>{name}</p>
             </div>
@@ -12,4 +12,4 @@ const ListItemUsers = ({ name }) => {
     );
 };
 
-export default ListItemUsers;
+export default ListItemChatRooms;

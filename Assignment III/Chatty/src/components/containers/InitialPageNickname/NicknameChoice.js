@@ -40,9 +40,7 @@ class NicknameChoice extends React.Component {
                     <p className='nicknamePrompt'>Enter nickname:</p>
                     <div className='row'>
                         <span className='inputNickname'>
-                            <input type='text' value={this.state.inputValue} 
-                            onChange={evt => this.updateInputValue(evt)} className='nicknameInputTextField' 
-                            placeholder='nickname'></input>
+                            <input type='text' value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} className='nicknameInputTextField' placeholder='nickname'></input>
                         </span>
                     </div>
                     <span className='row nicknameButtonDiv'>

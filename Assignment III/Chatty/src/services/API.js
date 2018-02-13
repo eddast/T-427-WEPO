@@ -40,8 +40,8 @@ export default class Server {
     }
 
     static listenToChatroomUpdates(resolve) {
-        this.socket.on("roomlist", rooms => {
-          resolve(rooms);
+        this.socket.on('roomlist', rooms => {
+            resolve(rooms);
         });
     }
 }

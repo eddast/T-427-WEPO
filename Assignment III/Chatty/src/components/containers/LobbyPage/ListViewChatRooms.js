@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 const ListViewChatRooms = ({ children }) => {
-  return <div>
-      <div class="eachAndEveryChatRoom" onClick={evt => this.switchViews(evt)}>
-        <p class="nameOfTheChatRoomBox">{children}</p>
-      </div>;
-      <div class="emptySpaceBetweenChatRooms" />
-    </div>;
+    return (
+        <div className="chatroomsActiveList">
+            <p id="ListViewChatroomHeading">CHATROOMS ACTIVE</p>
+            <ul className='listViewChatroom'>{children}</ul>
+        </div>
+    );
 };
 
-export default ListViewUsers;
+export default ListViewChatRooms;

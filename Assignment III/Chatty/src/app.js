@@ -24,6 +24,9 @@ class App extends React.Component {
             },
             serverAPI : {
                 server: Server
+            },
+            userList : {
+                users: []
             }
         }
     }
@@ -51,6 +54,10 @@ App.childContextTypes = {
 
     serverAPI: PropTypes.shape({
         server: PropTypes.component
+    }),
+
+    userList: PropTypes.shape({
+        users: PropTypes.array
     })
 };
 

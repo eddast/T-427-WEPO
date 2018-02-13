@@ -146,11 +146,6 @@ body {
         }
     }
 
-    .LobbyBody {
-        margin: 10px;
-        padding: 20px;
-    }
-
     .usersActiveList {
 
         width: 200px;
@@ -177,54 +172,69 @@ body {
         }
     }
 
-    .chooseChatRoomBox {
-        margin-left: auto;
-        margin-right: auto;
-        width: 40%;
-        height: 30%;
-    }
-
-    .showAvailableChatRoomsDiv {
-        max-height: 500px;
-        width: 100%;
-        overflow-y: auto;
-    }
-
-    .allChatRoomsDiv{
-        width: 500px;
-    }
-
-    .lobbyPageIsHere {
+    .LobbyBody {
         display: flex;
         min-width: 100%;
         min-height: 100%;
+        margin: 10px;
+        padding: 20px;
     }
 
-    .showUsersDiv {
+    .showUsers {
         width: 300px;
         height: 100%;
     }
 
-    .eachAndEveryChatRoom{
+    .chatroomListDisplay {
         width: 300px;
-        margin-left: auto;
-        margin-right: auto;
-        height: 150px;
-        border: 1px solid grey;
-        cursor: pointer;
+        height: 100%;
     }
 
-    .nameOfTheChatRoomBox {
-        font-size: 16px;
-        color: black;
-        font-weight: bold;
-        text-align: center;
-        vertical-align: middle;
-        line-height: 150px;  
+    .chatroomListItem {
+        padding: 10px;
+        border: gray;
+        border : 0.5px solid #25323a17;
+
+        #chatroomIcon {
+            color: #76F196;
+            float: left;
+            display: flex;
+            font-size: 20px;
+        }
+
+        #chatroomName {
+            font-family: Helvetica, Arial, sans-serif;
+            font-style: bold;
+            font-size: 14px;
+            color: #25323A;
+            margin-left: 30px;
+        }
     }
 
-    .emptySpaceBetweenChatRooms{
-        height: 50px;
+    .chatroomsActiveList {
+        float: left;
+        width: 250px;
+
+        #ListViewChatroomHeading {
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            color: white;
+            font-size: 20px;
+            color: #ffffff;
+            text-align: center;
+            text-shadow: 2px 2px 4px #25323A;
+        }
+
+        .listViewChatroom {
+            max-height: 400px;
+            border : 2px solid #25323a11;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            background-color: white;
+            overflow-y: scroll;
+        }
+
     }
 
     .userListItem {
@@ -232,17 +242,14 @@ body {
         padding: 10px;
         border: gray;
         border : 0.5px solid #25323a17;
+        background-color: white;
 
         #onlineIcon {
-            color: #17eb17;
+            color: #76F196;
             float: left;
             display: flex;
             font-size: 20px;
-            margin-top: 10px;
-            // animation-name: spin;
-            // animation-duration: 1000ms;
-            // animation-iteration-count: infinite;
-            // animation-timing-function: linear; 
+            margin-top: 10px; 
         }
 
         @-moz-keyframes spin {
