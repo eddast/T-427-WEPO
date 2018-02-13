@@ -24,7 +24,6 @@ class Lobby extends React.Component {
         this.server.getChatrooms();
         this.server.listenToChatroomUpdates((chatRoomlist) => {
             this.setState({chatRoomList: chatRoomlist});
-            console.log(chatRoomlist);
         });
     }
 
