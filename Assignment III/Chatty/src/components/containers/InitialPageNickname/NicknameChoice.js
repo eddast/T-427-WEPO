@@ -60,6 +60,10 @@ NicknameChoice.contextTypes = {
     
     serverAPI: PropTypes.shape({
         server: PropTypes.component
+    }),
+
+    currentUser: PropTypes.shape({
+        userName: PropTypes.string
     })
 };
 

@@ -55,6 +55,13 @@ export default class Server {
         });
     }
 
+    static joinChatroom (name) {
+        var toJoin = {room: name};
+        this.socket.emit('joinroom', toJoin, (joinOK) => {
+            console.log(joinOK);
+        });
+    }
+
     static dictToArray (dict) {
         var newArray = [];
         for(var i in dict) {

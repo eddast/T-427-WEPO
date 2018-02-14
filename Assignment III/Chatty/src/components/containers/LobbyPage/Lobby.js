@@ -22,6 +22,7 @@ class Lobby extends React.Component {
             newChatroomTopic: ''
         };
         this.server = this.context.serverAPI.server;
+        this.server.joinChatroom('lobby');
         this.server.getChatrooms();
         this.server.listenToChatroomUpdates((chatRoomlist) => {
             this.setState({chatRoomList: chatRoomlist});
@@ -31,14 +32,6 @@ class Lobby extends React.Component {
 
     addChatroomPrompt() {
         this.setState({displayModal: true});
-        // this.server.addChatroom('f09wejfoiwejfoiwejf', 'mock topic', (didSucceed) => {
-        //     if(didSucceed) {
-        //         this.server.getChatrooms();
-        //         this.server.listenToChatroomUpdates((chatRoomlist) => {
-        //             this.setState({chatRoomList: chatRoomlist});
-        //         });
-        //     }
-        // });
     }
 
     updateNewChatroomName(evt) {
@@ -75,6 +68,7 @@ class Lobby extends React.Component {
         return (
             <div>
                 <Banner />
+                <h2 id='lobbyGreeting'>Hello, {this.context.currentUser.userName}!</h2>
                 <div className='LobbyBody'>
                     <div className='chatroomListDisplay'>
                         <ListViewChatRooms value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
@@ -89,7 +83,7 @@ class Lobby extends React.Component {
 
     getAddChatroomModal() {
         return (
-            <Modal className='addChatroomPrompt' isOpen='true'>
+            <Modal className='addChatroomPrompt' isOpen={true} ariaHideApp={false} >
                 <div className='row'>
                     <h1>Add Chatroom</h1>
                     <div className='col-md-10'>
@@ -132,6 +126,10 @@ Lobby.contextTypes = {
     
     serverAPI: PropTypes.shape({
         server: PropTypes.component
+    }),
+
+    currentUser: PropTypes.shape({
+        userName: PropTypes.string
     })
 };
 
