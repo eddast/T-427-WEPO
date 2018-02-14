@@ -12,7 +12,7 @@ class App extends React.Component {
 
     constructor(props, ctx) {
         super(props, ctx);
-        Server.connectToSocket();
+        Server.connect();
     }
 
     // Values to pass to each child component

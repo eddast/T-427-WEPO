@@ -1,6 +1,7 @@
 import React from 'react';
 import ListViewUsers from './ListViewUsers';
 import ListItemUsers from './ListItemUsers';
+import PropTypes from 'prop-types';
 
 // Renders the view on a chatroom window
 // Provides a method to swap out chatrooms in this view
@@ -9,9 +10,18 @@ class ChatRoomWindow extends React.Component {
 
     constructor(props, ctx) {
         super(props, ctx);
+        this.server = this.context.serverAPI.server;
         this.state = {
             chatroom: this.props.chatroom,
         }
+        this.server.listenToChatroomUserUpdates((roomName, newUserSet, newOps) => {
+            if(this.state.chatroom.name == roomName) {
+                var newChatroom = this.state.chatroom;
+                newChatroom.users = newUserSet;
+                newChatroom.ops = newOps;
+                this.setState({chatroom : newChatroom});
+            }
+        });
     }
 
     // Swaps chatroom the component renders
@@ -47,6 +57,14 @@ class ChatRoomWindow extends React.Component {
             </div>
         );
     }
+};
+
+// Variables lobby needs from parent context
+ChatRoomWindow.contextTypes = {
+    
+    serverAPI: PropTypes.shape({
+        server: PropTypes.component
+    }),
 };
 
 export default ChatRoomWindow;

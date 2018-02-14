@@ -3,45 +3,25 @@
  */
 import * as io from 'socket.io-client';
 
-export default class Server {
+var Server = {
 
-    constructor () {
-        this.socket = null;
-    };
+    socket : null,
+    connect: function() {
 
-    // Connects to socket running on localhost:8080
-    static connectToSocket () {
         this.socket = io.connect('http://localhost:8080');
-    };
+    },
 
-    // Sets user nickname
-    static setNickname(nickname) {
-        return new Promise((resolve) => {
-            this.socket.emit('adduser', nickname, (nameOK) => {
-                resolve(nameOK);
-            });
-        });
-    }
-
-    // Emits to chatserver.js for information on active users
-    static getUsers() {
-        this.socket.emit('users');
-    }
-
-    // Listens to chatserver.js socket for update on active users
-    static listenToUserUpdates(resolve) {
-        this.socket.on('userlist', userlist => {
-            resolve(userlist);
-        });
-    }
-
-    // Emits to chatserver.js for information on active chatrooms
-    static getChatrooms() {
-        this.socket.emit('rooms');
-    }
 
     // Listens to chatserver.js socket for update on active chatrooms
-    static listenToChatroomUpdates(resolve) {
+    listenToChatroomUserUpdates : function(resolve) {
+        this.socket.on('updateusers',  (roomName, newUserSet, newOps) => {
+            newUserSet = this.convertDict(newUserSet);
+            resolve(roomName, newUserSet, newOps);
+        });
+    },
+
+    // Listens to chatserver.js socket for update on active chatrooms
+    listenToChatroomUpdates : function(resolve) {
         this.socket.on('roomlist', rooms => {
             var roomlist = this.dictToArray(rooms);
             for(var i in roomlist) {
@@ -49,10 +29,50 @@ export default class Server {
             }
             resolve(roomlist);
         });
-    }
+    },
+
+    // Convert dict to array with new attribute name
+    dictToArray : function(dict) {
+        var newArray = [];
+        for(var i in dict) {
+            dict[i].name = i;
+            newArray.push(dict[i]);
+        }
+
+        return newArray;
+    },
+
+    // Convert dict to array
+    convertDict : function(dict) {
+        var newArray = [];
+        for(var i in dict) {
+            newArray.push(dict[i]);
+        }
+
+        return newArray;
+    },
+
+    // Sets user nickname
+    setNickname : function(nickname) {
+        return new Promise((resolve) => {
+            this.socket.emit('adduser', nickname, (nameOK) => {
+                resolve(nameOK);
+            });
+        });
+    },
+
+    // Emits to chatserver.js for information on active users
+    getUsers : function() {
+        this.socket.emit('users');
+    },
+
+    // Emits to chatserver.js for information on active chatrooms
+    getChatrooms : function() {
+        this.socket.emit('rooms');
+    },
 
     // Adds chatroom by name and topic
-    static addChatroom (name, topic, resolve) {
+    addChatroom : function(name, topic, resolve) {
         var newRoom = {room: name};
         this.socket.emit('joinroom', newRoom, (creationOK) => {
             if(creationOK) {
@@ -63,41 +83,20 @@ export default class Server {
             }
             resolve(false);
         });
-    }
+    },
 
     // Explicitly tell chatserver.js that user has parted a chatroom
-    static partChatroom (name) {
+    partChatroom : function(name) {
         this.socket.emit('partroom', name);
-    }
+    },
 
     // Explicitly tell chatserver.js that user has joined a chatroom
-    static joinChatroom (name) {
+    joinChatroom : function(name) {
         var toJoin = {room: name};
         this.socket.emit('joinroom', toJoin, (joinOK) => {
             return joinOK;
         });
     }
-
-    // Convert dict to array with new attribute name
-    static dictToArray (dict) {
-        var newArray = [];
-        for(var i in dict) {
-            dict[i].name = i;
-            newArray.push(dict[i]);
-        }
-
-        return newArray;
-    }
-
-    // Convert dict to array
-    static convertDict (dict) {
-        var newArray = [];
-        for(var i in dict) {
-            newArray.push(dict[i]);
-        }
-
-        return newArray;
-    }
 }
 
-
+export default Server;

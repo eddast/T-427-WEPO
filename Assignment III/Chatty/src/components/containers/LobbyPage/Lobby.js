@@ -104,7 +104,7 @@ class Lobby extends React.Component {
             );
         }
 
-        return <div></div>;
+        return <div>An error occurred resolving request</div>;
     }
 
     // JSX for add chatroom modal
