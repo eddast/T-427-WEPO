@@ -38,6 +38,9 @@ export default class Server {
     static listenToChatroomUpdates(resolve) {
         this.socket.on('roomlist', rooms => {
             var roomlist = this.dictToArray(rooms);
+            for(var i in roomlist) {
+                roomlist[i].users = this.convertDict(roomlist[i].users);
+            }
             resolve(roomlist);
         });
     }
@@ -55,10 +58,14 @@ export default class Server {
         });
     }
 
+    static partChatroom (name) {
+        this.socket.emit('partroom', name);
+    }
+
     static joinChatroom (name) {
         var toJoin = {room: name};
         this.socket.emit('joinroom', toJoin, (joinOK) => {
-            console.log(joinOK);
+            return joinOK;
         });
     }
 
@@ -66,6 +73,15 @@ export default class Server {
         var newArray = [];
         for(var i in dict) {
             dict[i].name = i;
+            newArray.push(dict[i]);
+        }
+
+        return newArray;
+    }
+
+    static convertDict (dict) {
+        var newArray = [];
+        for(var i in dict) {
             newArray.push(dict[i]);
         }
 

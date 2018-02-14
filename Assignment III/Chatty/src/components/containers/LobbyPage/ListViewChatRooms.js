@@ -5,7 +5,6 @@ class ListViewChatRooms extends React.Component {
 
     constructor(props, ctx) {
         super(props, ctx);
-        console.log(this.props)
     }
 
     render() {

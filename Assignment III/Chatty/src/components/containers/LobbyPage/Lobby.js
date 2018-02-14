@@ -28,6 +28,7 @@ class Lobby extends React.Component {
             this.setState({chatRoomList: chatRoomlist});
             this.setState({selectedChatroom: chatRoomlist[0]});
         });
+        this.getChildContext();
     }
 
     addChatroomPrompt() {
@@ -61,24 +62,33 @@ class Lobby extends React.Component {
     }
 
     selectChatroom (evt, chatroom) {
+        var currentRoom = this.state.selectedChatroom.name;
+        var newRoom = chatroom.name;
+        this.server.partChatroom(currentRoom);
+        this.server.joinChatroom(newRoom);
         this.setState({selectedChatroom: chatroom});
+        this.refs.window.swapChatrooms(chatroom);
     }
 
     getMainLobbyBody() {
-        return (
-            <div>
-                <Banner />
-                <h2 id='lobbyGreeting'>Hello, {this.context.currentUser.userName}!</h2>
-                <div className='LobbyBody'>
-                    <div className='chatroomListDisplay'>
-                        <ListViewChatRooms value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
-                            {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms onClick={evt => this.selectChatroom(evt, chatroom)} value={chatroom} info={chatroom}/>))}
-                        </ListViewChatRooms>
+        if(this.state.selectedChatroom) {
+            return (
+                <div>
+                    <Banner />
+                    <h2 id='lobbyGreeting'>Hello, {this.context.currentUser.userName}!</h2>
+                    <div className='LobbyBody'>
+                        <div className='chatroomListDisplay'>
+                            <ListViewChatRooms value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
+                                {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms onClick={evt => this.selectChatroom(evt, chatroom)} value={chatroom} info={chatroom}/>))}
+                            </ListViewChatRooms>
+                        </div>
+                        <ChatRoomWindow ref='window' chatroom={this.state.selectedChatroom}/>
                     </div>
-                    <ChatRoomWindow chatroom={this.state.selectedChatroom}/>
                 </div>
-            </div>
-        );
+            );
+        }
+
+        return <div></div>;
     }
 
     getAddChatroomModal() {
@@ -114,6 +124,14 @@ class Lobby extends React.Component {
 
         return this.getMainLobbyBody();
     };
+
+    getChildContext() {
+        return {
+            currentChatroom : {
+                chatroom: this.state.selectedChatroom
+            }
+        }
+    }
 }
 
 Lobby.contextTypes = {
@@ -130,6 +148,13 @@ Lobby.contextTypes = {
 
     currentUser: PropTypes.shape({
         userName: PropTypes.string
+    }),
+};
+
+Lobby.childContextTypes = {
+
+    currentChatroom: PropTypes.shape({
+        chatroom: PropTypes.object
     })
 };
 
