@@ -15,11 +15,10 @@ class App extends React.Component {
         Server.connectToSocket();
     }
 
+    // Values to pass to each child component
     getChildContext() {
         return {
             routeTools: {
-                router: Router,
-                route: Route,
                 redirect: Redirect
             },
             serverAPI : {
@@ -31,11 +30,13 @@ class App extends React.Component {
         }
     }
 
+    // Renders route paths, i.e. InitialPage as '/'
     render() {
         return RouterPaths;
     }
 }
 
+// Available paths in app
 var RouterPaths = (
     <Switch>
         <Route exact path='/' component={InitialPage} />
@@ -44,11 +45,10 @@ var RouterPaths = (
     </Switch>
 );
 
+// Format of values to pass to child component
 App.childContextTypes = {
 
     routeTools: PropTypes.shape({
-        router: PropTypes.component,
-        route: PropTypes.component,
         redirect: PropTypes.component,
     }),
 
@@ -58,7 +58,7 @@ App.childContextTypes = {
 
     currentUser: PropTypes.shape({
         userName: PropTypes.string
-    })
+    }),
 };
 
 ReactDOM.render(<Router><App /></Router>, document.getElementById('app'));

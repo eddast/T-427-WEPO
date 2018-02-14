@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Class containing prompt for user nickname and logic
+// Redirects user to chatroom selection when user
+// has provided a valid nickname to participate
 class NicknameChoice extends React.Component {
 
     constructor(props, ctx) {
@@ -13,12 +16,15 @@ class NicknameChoice extends React.Component {
         this.redirect = this.context.routeTools.redirect;
     }
 
+    // Constantly update input value as user nickname
     updateInputValue(evt) {
         this.setState({
             inputValue: evt.target.value
         });
     }
-
+    
+    // Calls to API to see if setting nickname for user was sucessful
+    // If so, redirects view to the chatroom selection page
     joinChatroomClick () {
         let isAvailable = this.server.setNickname(this.state.inputValue);
         isAvailable.then((nicknameIsAvailable) => {
@@ -52,6 +58,8 @@ class NicknameChoice extends React.Component {
     };
 };
 
+// Needs redirect component and server component
+// from parent context
 NicknameChoice.contextTypes = {
 
     routeTools: PropTypes.shape({
@@ -61,10 +69,6 @@ NicknameChoice.contextTypes = {
     serverAPI: PropTypes.shape({
         server: PropTypes.component
     }),
-
-    currentUser: PropTypes.shape({
-        userName: PropTypes.string
-    })
 };
 
 export default NicknameChoice;

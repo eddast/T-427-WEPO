@@ -1,8 +1,10 @@
 import React from 'react';
-// import FontAwesome from 'react-fontawesome';
 import ListViewUsers from './ListViewUsers';
 import ListItemUsers from './ListItemUsers';
 
+// Renders the view on a chatroom window
+// Provides a method to swap out chatrooms in this view
+// called by parent when necessary
 class ChatRoomWindow extends React.Component {
 
     constructor(props, ctx) {
@@ -12,6 +14,7 @@ class ChatRoomWindow extends React.Component {
         }
     }
 
+    // Swaps chatroom the component renders
     swapChatrooms(chatroom) {
         this.setState({chatroom: chatroom});
     }

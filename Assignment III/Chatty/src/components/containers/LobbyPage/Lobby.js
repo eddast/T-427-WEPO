@@ -11,6 +11,8 @@ class Lobby extends React.Component {
     constructor(props, ctx) {
 
         super(props, ctx);
+
+        // Lobby states
         this.state = {
             userList : [],
             chatRoomList : [],
@@ -21,6 +23,9 @@ class Lobby extends React.Component {
             newChatroomName: '',
             newChatroomTopic: ''
         };
+        
+        // User is initially joined to the lobby chatroom
+        // Get list of active chatroom to render
         this.server = this.context.serverAPI.server;
         this.server.joinChatroom('lobby');
         this.server.getChatrooms();
@@ -28,25 +33,30 @@ class Lobby extends React.Component {
             this.setState({chatRoomList: chatRoomlist});
             this.setState({selectedChatroom: chatRoomlist[0]});
         });
-        this.getChildContext();
     }
 
+    // Sets display modal to true, triggering a re-render
+    // with the add-chatroom modal displayed
     addChatroomPrompt() {
         this.setState({displayModal: true});
     }
 
+    // Updates chatroom name input value constantly
     updateNewChatroomName(evt) {
         this.setState({
             newChatroomName: evt.target.value
         });
     }
 
+    // Updates chatroom topic input value constantly
     updateNewChatroomTopic(evt) {
         this.setState({
             newChatroomTopic: evt.target.value
         });
     }
 
+    // Closes add chatroom modal and if user provided info,
+    // a new chatroom is added to the list of chatrooms
     closeModalAndAdd() {
         this.setState({displayModal: false});
         if(this.state.newChatroomName !== '') {
@@ -61,6 +71,10 @@ class Lobby extends React.Component {
         }
     }
 
+    // On chatroom select, user parts the room he's in
+    // and joins the new selected room
+    // Then chatroom rendered by ChatroomWindow component
+    // is changed to render a the new room
     selectChatroom (evt, chatroom) {
         var currentRoom = this.state.selectedChatroom.name;
         var newRoom = chatroom.name;
@@ -70,6 +84,8 @@ class Lobby extends React.Component {
         this.refs.window.swapChatrooms(chatroom);
     }
 
+    // JSX for main lobby body including banner, list of chatrooms,
+    // and the chatroom window displaying selected chatroom
     getMainLobbyBody() {
         if(this.state.selectedChatroom) {
             return (
@@ -91,6 +107,7 @@ class Lobby extends React.Component {
         return <div></div>;
     }
 
+    // JSX for add chatroom modal
     getAddChatroomModal() {
         return (
             <Modal className='addChatroomPrompt' isOpen={true} ariaHideApp={false} >
@@ -112,6 +129,9 @@ class Lobby extends React.Component {
         );
     }
 
+    // Renders view
+    // If add chatroom modal should be displayed it does
+    // Otherwise just the main body is displayed
     render() {
         if(this.state.displayModal) {
             return (
@@ -124,21 +144,12 @@ class Lobby extends React.Component {
 
         return this.getMainLobbyBody();
     };
-
-    getChildContext() {
-        return {
-            currentChatroom : {
-                chatroom: this.state.selectedChatroom
-            }
-        }
-    }
 }
 
+// Variables lobby needs from parent context
 Lobby.contextTypes = {
 
     routeTools: PropTypes.shape({
-        router: PropTypes.component,
-        route: PropTypes.component,
         redirect: PropTypes.component,
     }),
     
@@ -149,13 +160,6 @@ Lobby.contextTypes = {
     currentUser: PropTypes.shape({
         userName: PropTypes.string
     }),
-};
-
-Lobby.childContextTypes = {
-
-    currentChatroom: PropTypes.shape({
-        chatroom: PropTypes.object
-    })
 };
 
 

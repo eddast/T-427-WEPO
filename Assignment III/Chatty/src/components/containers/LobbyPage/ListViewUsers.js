@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Renders the list in active user list view along with heading
 const ListViewUsers = ({ children}) => {
     return (
         <div className='usersActiveList'>

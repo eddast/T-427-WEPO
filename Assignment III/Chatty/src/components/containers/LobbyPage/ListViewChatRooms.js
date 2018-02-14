@@ -1,6 +1,8 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
+// Renders the list of chatrooms along with heading
+// and an "add chatroom" button to add a new chatroom to list
 class ListViewChatRooms extends React.Component {
 
     constructor(props, ctx) {

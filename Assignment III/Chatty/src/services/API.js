@@ -9,10 +9,12 @@ export default class Server {
         this.socket = null;
     };
 
+    // Connects to socket running on localhost:8080
     static connectToSocket () {
         this.socket = io.connect('http://localhost:8080');
     };
 
+    // Sets user nickname
     static setNickname(nickname) {
         return new Promise((resolve) => {
             this.socket.emit('adduser', nickname, (nameOK) => {
@@ -21,20 +23,24 @@ export default class Server {
         });
     }
 
+    // Emits to chatserver.js for information on active users
     static getUsers() {
         this.socket.emit('users');
     }
 
+    // Listens to chatserver.js socket for update on active users
     static listenToUserUpdates(resolve) {
         this.socket.on('userlist', userlist => {
             resolve(userlist);
         });
     }
 
+    // Emits to chatserver.js for information on active chatrooms
     static getChatrooms() {
         this.socket.emit('rooms');
     }
 
+    // Listens to chatserver.js socket for update on active chatrooms
     static listenToChatroomUpdates(resolve) {
         this.socket.on('roomlist', rooms => {
             var roomlist = this.dictToArray(rooms);
@@ -45,6 +51,7 @@ export default class Server {
         });
     }
 
+    // Adds chatroom by name and topic
     static addChatroom (name, topic, resolve) {
         var newRoom = {room: name};
         this.socket.emit('joinroom', newRoom, (creationOK) => {
@@ -58,10 +65,12 @@ export default class Server {
         });
     }
 
+    // Explicitly tell chatserver.js that user has parted a chatroom
     static partChatroom (name) {
         this.socket.emit('partroom', name);
     }
 
+    // Explicitly tell chatserver.js that user has joined a chatroom
     static joinChatroom (name) {
         var toJoin = {room: name};
         this.socket.emit('joinroom', toJoin, (joinOK) => {
@@ -69,6 +78,7 @@ export default class Server {
         });
     }
 
+    // Convert dict to array with new attribute name
     static dictToArray (dict) {
         var newArray = [];
         for(var i in dict) {
@@ -79,6 +89,7 @@ export default class Server {
         return newArray;
     }
 
+    // Convert dict to array
     static convertDict (dict) {
         var newArray = [];
         for(var i in dict) {

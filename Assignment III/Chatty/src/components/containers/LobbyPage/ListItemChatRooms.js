@@ -1,6 +1,9 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
+// Renders a cell in chatroom list
+// Each cell has an on click event in parent
+// Displays name and topic of chatroom
 const ListItemChatRooms = ({ onClick, info }) => {
     const { name, topic } = info;
     return (
