@@ -37,6 +37,7 @@ body {
             color: white;
             font-size: 26px;
             margin-left:170px;
+            margin-top:-20px;
             padding-bottom: 5px;
             color: #76F196;
         }
@@ -49,6 +50,7 @@ body {
         left: 0;
         top: 0;
         margin: 0 auto;
+        margin-top: 50px;
     }
 
     .nicknameInput {
@@ -163,7 +165,7 @@ body {
         }
 
         .listViewUsers {
-            max-height: 500px;
+            max-height: 300px;
             padding: 0;
             margin: 0;
             list-style-type: none;
@@ -342,15 +344,34 @@ body {
         .infoAndUsers {
             margin: 10px;
             height: 75%;
-            overflow-y: scroll;
 
             .infoAndChat {
                 height: 100%;
 
                 .roomMessages {
-                    background-color: black;
-                    height: 100%;
+                    max-height: 270px;
                     overflow-y: scroll;
+                    margin-left: 10px;
+
+                    #messageTimeStamp {
+                        font-family: Helvetica, sans-serif;
+                        font-style: italic;
+                        color: #413c3c5e;
+                        font-size: 10px;
+                        text-transform: uppercase;
+                    }
+                    #messageSender {
+                        font-family: Helvetica, sans-serif;
+                        font-weight: bold;
+                        color: #25323a;
+                        font-size: 14px;
+                        text-transform: uppercase;
+                    }
+                    #messageContent {
+                        font-family: Helvetica, sans-serif;
+                        color: #32414b;
+                        font-size: 14px;
+                    }
                 }
             }
 
@@ -363,7 +384,29 @@ body {
             margin: 10px;
             width: 98%;
             height: 80px;
-            background-color: pink;
+            border-top: 1px solid #80808086;
+            
+            #messageInput {
+                resize: none;
+                margin-left: 10px;
+                margin-top: 10px;
+            }
+
+            #messageSendButton {
+                margin-top: 15px;
+                font-family: Helvetica, sans-serif;
+                align-content: center;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 14px;
+                color: white;
+                padding: 10px 50px 10px 50px;
+                background: #6856E2;
+                text-shadow: 2px 2px 4px #6e6969;
+                border : 1.5px;
+                border-radius: 20px;
+                box-shadow: 1px 2px 2px 2px rgba(37, 50, 58, 0.651)
+            }
         }
     }
 

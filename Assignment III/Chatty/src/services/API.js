@@ -96,6 +96,22 @@ var Server = {
         this.socket.emit('joinroom', toJoin, (joinOK) => {
             return joinOK;
         });
+    },
+
+    // Sends message to chatroom
+    sendMessage : function(toRoom, message) {
+        var data = {
+            roomName: toRoom,
+            msg: message
+        };
+        this.socket.emit('sendmsg', (data));
+    },
+
+    // Listens to new messages
+    listenToMessageUpdates : function(resolve) {
+        this.socket.on('updatechat', (roomName, newMessageHistory) => {
+            resolve(roomName, newMessageHistory);
+        });
     }
 }
 

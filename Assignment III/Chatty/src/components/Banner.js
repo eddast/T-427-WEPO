@@ -11,7 +11,7 @@ class Banner extends React.Component {
                     <span id='bannerTitle'>CHITCHAT</span>
                 </div>
                 <div className='row'>
-                    <span className='col-md-12' id='bannerTagline'>Blah</span>
+                    <span className='col-md-12' id='bannerTagline'>Message a galaxy far, far away!</span>
                 </div>
             </div>
         );

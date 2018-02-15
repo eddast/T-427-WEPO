@@ -13,6 +13,7 @@ class ChatRoomWindow extends React.Component {
         this.server = this.context.serverAPI.server;
         this.state = {
             chatroom: this.props.chatroom,
+            messageToSend: ''
         }
         this.server.listenToChatroomUserUpdates((roomName, newUserSet, newOps) => {
             if(this.state.chatroom.name == roomName) {
@@ -22,11 +23,28 @@ class ChatRoomWindow extends React.Component {
                 this.setState({chatroom : newChatroom});
             }
         });
+        this.server.listenToMessageUpdates((roomName, newMessageHistory) => {
+            if(this.state.chatroom.name == roomName) {
+                var newChatroom = this.state.chatroom;
+                newChatroom.messageHistory = newMessageHistory;
+                this.setState({chatroom : newChatroom});
+            }
+        });
     }
 
     // Swaps chatroom the component renders
     swapChatrooms(chatroom) {
         this.setState({chatroom: chatroom});
+    }
+
+    updateMessageInput(evt) {
+        this.setState({
+            messageToSend: evt.target.value
+        });
+    }
+
+    sendMessage() {
+        this.server.sendMessage(this.state.chatroom.name, this.state.messageToSend);
     }
 
     render() {
@@ -41,7 +59,19 @@ class ChatRoomWindow extends React.Component {
                             <p id='windowHeading'>{this.state.chatroom.name}</p>
                             <p id='windowTopic'>{this.state.chatroom.topic}</p>
                             <div className='roomMessages'>
-                                <p>I am message</p>
+                                {this.state.chatroom.messageHistory.map((message) => (
+                                    <p>
+                                        <span id='messageTimeStamp'>
+                                            [{message.timestamp}] &nbsp;
+                                        </span>
+                                        <span id='messageSender'>
+                                            {message.nick}: &nbsp;
+                                        </span>
+                                        <span id='messageContent'>
+                                            {message.message}
+                                        </span>
+                                    </p>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -52,7 +82,12 @@ class ChatRoomWindow extends React.Component {
                     </div>
                 </div>
                 <div className='row userChatInput'>
-                    <p>Here I am!</p>
+                    <div className='col-md-10'>
+                        <textarea className='form-control' id='messageInput' placeholder='I have the high ground, Anakin!' onChange={ evt => this.updateMessageInput(evt)}></textarea>
+                    </div>
+                    <div className='col-md-2'>
+                        <button id='messageSendButton' onClick={() => this.sendMessage()}>Send</button>
+                    </div>
                 </div>
             </div>
         );
