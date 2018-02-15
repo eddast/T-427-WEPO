@@ -354,23 +354,58 @@ body {
                     margin-left: 10px;
 
                     #messageTimeStamp {
+                        display: block;
                         font-family: Helvetica, sans-serif;
                         font-style: italic;
                         color: #413c3c5e;
-                        font-size: 10px;
+                        font-size: 8px;
+                        margin-left: 15px;
                         text-transform: uppercase;
                     }
                     #messageSender {
+                        display: inline-block;
                         font-family: Helvetica, sans-serif;
                         font-weight: bold;
                         color: #25323a;
                         font-size: 14px;
-                        text-transform: uppercase;
+                        vertical-align: top;
                     }
+
+                    .messageContent {
+                        margin: 5px;
+                        margin-left: 15px;
+                        margin-top: 2px;
+                        padding: 8px;
+                        display: inline-block;
+                        position: relative;
+                        max-width: 450px;
+                        min-width: 200px;
+                        height: auto;
+                        background-color: #6856E2;
+                        border-radius: 30px;
+                        -webkit-border-radius: 30px;
+                        -moz-border-radius: 30px;
+                    }
+
+                    .messageContent:after{
+                        content: ' ';
+                        position: absolute;
+                        margin-left: 10px;
+                        width: 0;
+                        height: 0;
+                        left: -20px;
+                        right: auto;
+                        top: 4px;
+                        bottom: auto;
+                        border: 12px solid;
+                        border-color: #6856E2 #6856E2 transparent transparent;
+                    }
+
                     #messageContent {
                         font-family: Helvetica, sans-serif;
-                        color: #32414b;
+                        color: #fdfdfd;
                         font-size: 14px;
+                        margin-left: 10px;
                     }
                 }
             }

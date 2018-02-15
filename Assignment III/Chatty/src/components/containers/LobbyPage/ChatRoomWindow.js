@@ -62,14 +62,16 @@ class ChatRoomWindow extends React.Component {
                                 {this.state.chatroom.messageHistory.map((message) => (
                                     <p>
                                         <span id='messageTimeStamp'>
-                                            [{message.timestamp}] &nbsp;
+                                            {message.timestamp}
                                         </span>
                                         <span id='messageSender'>
-                                            {message.nick}: &nbsp;
+                                            {message.nick}
                                         </span>
-                                        <span id='messageContent'>
-                                            {message.message}
-                                        </span>
+                                        <div className='messageContent'>
+                                            <span id='messageContent'>
+                                                {message.message}
+                                            </span>
+                                        </div>
                                     </p>
                                 ))}
                             </div>
