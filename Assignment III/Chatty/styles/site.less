@@ -349,9 +349,11 @@ body {
                 height: 100%;
 
                 .roomMessages {
+                    display: inline-block;
                     max-height: 270px;
                     overflow-y: scroll;
                     margin-left: 10px;
+                    width: 100%;
 
                     #messageTimeStamp {
                         display: block;
@@ -383,7 +385,11 @@ body {
                     }
 
                     .meMessages {
-                        float: right;
+                        width: auto;
+                        max-width: 100%;
+                    }
+                    .messageMeWrap {
+                        right: 0;
                     }
 
                     #messageSenderMe {
@@ -401,6 +407,7 @@ body {
                         padding: 8px;
                         display: inline-block;
                         position: relative;
+                        
                         max-width: 450px;
                         min-width: 200px;
                         height: auto;
@@ -416,6 +423,8 @@ body {
                         padding: 8px;
                         display: inline-block;
                         position: relative;
+                        text-align: right;
+                        padding-right: 15px;
                         max-width: 450px;
                         min-width: 200px;
                         height: auto;

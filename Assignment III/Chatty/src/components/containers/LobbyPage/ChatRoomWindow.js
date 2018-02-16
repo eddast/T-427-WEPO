@@ -29,8 +29,12 @@ class ChatRoomWindow extends React.Component {
                 var newChatroom = this.state.chatroom;
                 newChatroom.messageHistory = newMessageHistory;
                 this.setState({chatroom : newChatroom});
+                this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
             }
         });
+    }
+    componentDidMount() {
+        this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
     }
 
     // Swaps chatroom the component renders
@@ -46,6 +50,10 @@ class ChatRoomWindow extends React.Component {
 
     sendMessage() {
         this.server.sendMessage(this.state.chatroom.name, this.state.messageToSend);
+        this.refs.inputMsg.value = '';
+        this.setState({
+            messageToSend: ''
+        });
     }
 
     renderRoomMessages(message) {
@@ -67,18 +75,20 @@ class ChatRoomWindow extends React.Component {
             );
         } else {
             return (
-                <div className='col-md-5 col-md-offset-2 meMessages'>
-                    <span id='messageTimeStampMe'>
-                        {message.timestamp}
-                    </span>
-                    <div className='messageContentMe'>
-                        <span id='messageContent'>
-                            {message.message}
+                <div className='col-md-offset-4 col-md-8 þmeMessages'>
+                    <div className="messageMeWrap">
+                        <span id='messageTimeStampMe'>
+                            {message.timestamp}
+                        </span>
+                        <div className='messageContentMe col-md-10'>
+                            <span id='messageContent'>
+                                {message.message}
+                            </span>
+                        </div>
+                        <span id='messageSenderMe col-md-2'>
+                            {message.nick}
                         </span>
                     </div>
-                    <span id='messageSenderMe'>
-                        {message.nick}
-                    </span>
                 </div>
             );
         }
@@ -95,9 +105,9 @@ class ChatRoomWindow extends React.Component {
                         <div className='infoAndChat'>
                             <p id='windowHeading'>{this.state.chatroom.name}</p>
                             <p id='windowTopic'>{this.state.chatroom.topic}</p>   
-                            <div className='roomMessages'>
+                            <div ref='messages' className='roomMessages'>
                                 {this.state.chatroom.messageHistory.map((message) => (
-                                    <p className='row'>{this.renderRoomMessages(message)}</p>
+                                    <p>{this.renderRoomMessages(message)}</p>
                                 ))}
                             </div>
                         </div>
@@ -110,7 +120,7 @@ class ChatRoomWindow extends React.Component {
                 </div>
                 <div className='row userChatInput'>
                     <div className='col-md-10'>
-                        <textarea className='form-control' id='messageInput' placeholder='I have the high ground, Anakin!' onChange={ evt => this.updateMessageInput(evt)}></textarea>
+                        <textarea ref='inputMsg' className='form-control' id='messageInput' placeholder='I have the high ground, Anakin!' onChange={ evt => this.updateMessageInput(evt)}></textarea>
                     </div>
                     <div className='col-md-2'>
                         <button id='messageSendButton' onClick={() => this.sendMessage()}>Send</button>
