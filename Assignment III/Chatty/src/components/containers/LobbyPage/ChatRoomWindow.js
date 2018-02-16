@@ -67,7 +67,7 @@ class ChatRoomWindow extends React.Component {
             );
         } else {
             return (
-                <div className='col-md-7 col-md-offset-2 meMessages'>
+                <div className='col-md-5 col-md-offset-2 meMessages'>
                     <span id='messageTimeStampMe'>
                         {message.timestamp}
                     </span>
