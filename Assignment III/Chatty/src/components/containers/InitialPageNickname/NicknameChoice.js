@@ -38,7 +38,11 @@ class NicknameChoice extends React.Component {
 
     render() {
         if(this.state.nicknameAvailable) {
-            return <this.redirect push to='/lobby'/>
+            // return <this.redirect push to='/lobby' currentUser={this.state.inputValue} />
+            return <this.redirect to={{
+                pathname: '/lobby',
+                currentUser: { referrer: this.state.inputValue }
+            }} />
         }
         return (
             <div>

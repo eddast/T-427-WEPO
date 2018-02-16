@@ -88,17 +88,18 @@ class Lobby extends React.Component {
     // and the chatroom window displaying selected chatroom
     getMainLobbyBody() {
         if(this.state.selectedChatroom) {
+            var currentUser = this.props.location.currentUser && this.props.location.currentUser.referrer;
             return (
                 <div>
                     <Banner />
-                    <h2 id='lobbyGreeting'>Hello, {this.context.currentUser.userName}!</h2>
+                    <h2 id='lobbyGreeting'>Hello, {currentUser}!</h2>
                     <div className='LobbyBody'>
                         <div className='chatroomListDisplay'>
                             <ListViewChatRooms value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
                                 {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms onClick={evt => this.selectChatroom(evt, chatroom)} value={chatroom} info={chatroom}/>))}
                             </ListViewChatRooms>
                         </div>
-                        <ChatRoomWindow ref='window' chatroom={this.state.selectedChatroom}/>
+                        <ChatRoomWindow ref='window' currentUser={currentUser} chatroom={this.state.selectedChatroom}/>
                     </div>
                 </div>
             );
@@ -143,6 +144,7 @@ class Lobby extends React.Component {
     // If add chatroom modal should be displayed it does
     // Otherwise just the main body is displayed
     render() {
+        console.log( );
         if(this.state.displayModal) {
             return (
                 <div>

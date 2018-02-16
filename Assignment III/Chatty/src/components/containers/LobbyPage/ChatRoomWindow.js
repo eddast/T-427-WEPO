@@ -13,7 +13,8 @@ class ChatRoomWindow extends React.Component {
         this.server = this.context.serverAPI.server;
         this.state = {
             chatroom: this.props.chatroom,
-            messageToSend: ''
+            messageToSend: '',
+            currentUser: this.props.currentUser
         }
         this.server.listenToChatroomUserUpdates((roomName, newUserSet, newOps) => {
             if(this.state.chatroom.name == roomName) {
@@ -47,6 +48,42 @@ class ChatRoomWindow extends React.Component {
         this.server.sendMessage(this.state.chatroom.name, this.state.messageToSend);
     }
 
+    renderRoomMessages(message) {
+        if(this.state.currentUser != message.nick) {
+            return (
+                <div className='col-md-12'>
+                    <span id='messageTimeStamp'>
+                        {message.timestamp}
+                    </span>
+                    <span id='messageSender'>
+                        {message.nick}
+                    </span>
+                    <div className='messageContent'>
+                        <span id='messageContent'>
+                            {message.message}
+                        </span>
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div className='col-md-5 col-md-offset-6 meMessages'>
+                    <span id='messageTimeStampMe'>
+                        {message.timestamp}
+                    </span>
+                    <div className='messageContentMe'>
+                        <span id='messageContent'>
+                            {message.message}
+                        </span>
+                    </div>
+                    <span id='messageSenderMe'>
+                        {message.nick}
+                    </span>
+                </div>
+            );
+        }
+    }
+
     render() {
         if(this.props.chatroom === null) {
             return <div id='chatroomWindow' />
@@ -57,22 +94,10 @@ class ChatRoomWindow extends React.Component {
                     <div className='col-md-9'>
                         <div className='infoAndChat'>
                             <p id='windowHeading'>{this.state.chatroom.name}</p>
-                            <p id='windowTopic'>{this.state.chatroom.topic}</p>
+                            <p id='windowTopic'>{this.state.chatroom.topic}</p>   
                             <div className='roomMessages'>
                                 {this.state.chatroom.messageHistory.map((message) => (
-                                    <p>
-                                        <span id='messageTimeStamp'>
-                                            {message.timestamp}
-                                        </span>
-                                        <span id='messageSender'>
-                                            {message.nick}
-                                        </span>
-                                        <div className='messageContent'>
-                                            <span id='messageContent'>
-                                                {message.message}
-                                            </span>
-                                        </div>
-                                    </p>
+                                    <p className='row'>{this.renderRoomMessages(message)}</p>
                                 ))}
                             </div>
                         </div>
