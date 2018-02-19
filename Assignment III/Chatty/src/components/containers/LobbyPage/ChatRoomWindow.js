@@ -12,6 +12,7 @@ class ChatRoomWindow extends React.Component {
     constructor(props, ctx) {
         super(props, ctx);
         this.handleListenToMessages = this.handleListenToMessages.bind(this);
+        this.kickOutUser = this.kickOutUser.bind(this);
         this.remount();
     }
     
@@ -102,6 +103,14 @@ class ChatRoomWindow extends React.Component {
         });
     }
 
+    kickOutUser(user, room) {
+        console.log(this.server);
+        this.server.kickUser(user, room, (kickOK) => {
+            console.log(kickOK);
+            return false;
+        });
+    }
+
     // Renders chatroom messages
     renderRoomMessages(message) {
         if(this.state.currentUser != message.nick) {
@@ -162,7 +171,7 @@ class ChatRoomWindow extends React.Component {
                     </div>
                     <div className='col-md-3 activeUsersInRoom'>
                         <ListViewUsers>
-                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
+                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} kickOutUser={this.kickOutUser} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
                         </ListViewUsers>
                     </div>
                 </div>

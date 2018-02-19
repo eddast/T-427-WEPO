@@ -51,6 +51,7 @@ class ListItemUsers extends React.Component {
     }
 
     getOptionsForAdmin() {
+        console.log(this.props.kickOutUser)
         return (
             <div id='userOptions'>
                 <div className='row'>
@@ -61,7 +62,7 @@ class ListItemUsers extends React.Component {
                         <FontAwesome onClick={() => alert('HAH ban!')} id='banIcon' name='ban'/>
                     </div>
                     <div className='col-md-offset-1 col-md-1'>
-                        <FontAwesome onClick={() => alert('HAH kick!')} id='banIcon' name='sign-out'/>
+                        <FontAwesome onClick={() => this.props.kickOutUser(this.props.name, this.props.chatroom.name)} id='banIcon' name='sign-out'/>
                     </div>
                     <div className='col-md-offset-1 col-md-1'>
                         <FontAwesome onClick={() => this.setState({seesOptions: !this.state.seesOptions})} id='banIcon' name='times-circle'/>

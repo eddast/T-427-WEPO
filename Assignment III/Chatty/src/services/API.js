@@ -130,6 +130,16 @@ var Server = {
         this.socket.on('recv_privatemsg', (username, message) => {
             resolve(username, message);
         });
+    },
+
+    kickUser : function (user, room, resolve) {
+        var kickObj = {
+            room: room,
+            user: user
+        }
+        this.socket.emit('kick', kickObj, (kickOK) => {
+            resolve(kickOK);
+        });
     }
 }
 
