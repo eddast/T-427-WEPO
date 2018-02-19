@@ -78,7 +78,7 @@ var Server = {
             if(creationOK) {
                 var newTopic = {topic: topic, room: name};
                 this.socket.emit('settopic', newTopic, (topicOK) => {
-                    resolve(topicOK)
+                    resolve(topicOK);
                 });
             }
             resolve(false);
