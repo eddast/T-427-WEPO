@@ -87,6 +87,7 @@ class ListItemUsers extends React.Component {
 
     isAdminOfChatrrom() {
         var chatroomOps = this.props.chatroom.ops;
+        console.log(this.props.chatroom);
 
         if(chatroomOps[this.props.currentUser] !== undefined) {
             console.log(chatroomOps);
