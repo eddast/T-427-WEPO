@@ -38,7 +38,6 @@ class ChatRoomWindow extends React.Component {
                 this.handleUserUpdates(roomName, newUserSet, newOps);
             }
         });
-        
     }
 
     // Updates user in room, i.e. if user exits or quits room

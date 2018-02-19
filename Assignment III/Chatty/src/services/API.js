@@ -140,6 +140,12 @@ var Server = {
         this.socket.emit('kick', kickObj, (kickOK) => {
             resolve(kickOK);
         });
+    },
+
+    listenToKicksForUser : function (resolve) {
+        this.socket.on('kicked', (room, user) => {
+            resolve(room, user);
+        });
     }
 }
 

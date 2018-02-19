@@ -45,6 +45,15 @@ class Lobby extends React.Component {
         this.server.listenToPrivateMessage((username, message) => {
             this.handlePrivateMessageListen(username, message);
         });
+        var currentUser = this.props.location.currentUser && this.props.location.currentUser.referrer;
+        this.server.listenToKicksForUser((room, user) => {
+            var lobby = this.state.chatRoomList[0];
+            if(user == currentUser) {
+                this.server.joinChatroom('lobby');
+                this.setState({selectedChatroom: lobby});
+                this.refs.window.swapChatrooms(lobby);
+            }
+        });
     }
 
     // Sets display modal to true, triggering a re-render
