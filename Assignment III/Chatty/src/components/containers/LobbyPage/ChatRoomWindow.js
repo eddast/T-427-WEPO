@@ -8,12 +8,18 @@ import PropTypes from 'prop-types';
 // called by parent when necessary
 class ChatRoomWindow extends React.Component {
 
+    // Mounts component
     constructor(props, ctx) {
         super(props, ctx);
         this.handleListenToMessages = this.handleListenToMessages.bind(this);
         this.remount();
-        
     }
+    
+    // If component mounts, isMounted is set to true so that
+    // We can initiate our listening functions
+    // This is done because once component is unmounted,
+    // the listen functions would run forever unless we have
+    // A check for whether component is mounted 
     componentDidMount() {
         this.setState({
             isMounted: true
@@ -34,6 +40,7 @@ class ChatRoomWindow extends React.Component {
         
     }
 
+    // Updates user in room, i.e. if user exits or quits room
     handleUserUpdates(roomName, newUserSet, newOps) {
         if(this.state.chatroom.name == roomName) {
             var newChatroom = this.state.chatroom;
@@ -43,6 +50,8 @@ class ChatRoomWindow extends React.Component {
         }
     }
 
+    // Listens to messages in chatroom
+    // Updates chatroom and scrolls down if necessary
     handleListenToMessages(roomName, newMessageHistory) {
         if(this.state.chatroom.name == roomName) {
             var newChatroom = this.state.chatroom;
@@ -52,10 +61,14 @@ class ChatRoomWindow extends React.Component {
         }
     }
 
+    // On unmount, we want the listen functions to stop
+    // So we set the isMounted state to false, hence
+    // stopping all listening functions
     componentWillUnmount() {
         this.state.isMounted = false;
     }
 
+    // Mounts the component
     remount() {
         this.server = this.context.serverAPI.server;
         this.state = {
@@ -73,12 +86,14 @@ class ChatRoomWindow extends React.Component {
         this.setState({chatroom: chatroom});
     }
 
+    // Updates message to be send on each input
     updateMessageInput(evt) {
         this.setState({
             messageToSend: evt.target.value
         });
     }
 
+    // Sends message to chatroom
     sendMessage() {
         this.server.sendMessage(this.state.chatroom.name, this.state.messageToSend);
         this.refs.inputMsg.value = '';
@@ -87,6 +102,7 @@ class ChatRoomWindow extends React.Component {
         });
     }
 
+    // Renders chatroom messages
     renderRoomMessages(message) {
         if(this.state.currentUser != message.nick) {
             return (
@@ -125,6 +141,7 @@ class ChatRoomWindow extends React.Component {
         }
     }
 
+    // Renders chatroom as a whole
     render() {
         if(this.props.chatroom === null) {
             return <div id='chatroomWindow' />
@@ -163,6 +180,7 @@ class ChatRoomWindow extends React.Component {
 };
 
 // Variables lobby needs from parent context
+// Get server object for service calls
 ChatRoomWindow.contextTypes = {
     
     serverAPI: PropTypes.shape({

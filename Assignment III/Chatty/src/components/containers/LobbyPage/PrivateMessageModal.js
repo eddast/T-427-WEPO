@@ -2,19 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
-// Renders the list of chatrooms along with heading
-// and an "add chatroom" button to add a new chatroom to list
+// Renders the modal of a private conversation between two users
+// They can send messages which the modal 'stores' for each session
+// These messages however are lost when modal is closed
 class PrivateMessageModal extends React.Component {
 
     constructor(props, ctx) {
+
         super(props, ctx);
+
         this.state = {
             toUser : this.props.toUser,
             chatHistory: [],
             isMounted: false
         }
+
         this.server = this.context.serverAPI.server;
         this.closePrivateChatroom = this.props.closePrivateChatroom;
+
+        // Catch the first message which triggered the private conversation modal
+        // If the first message exists, this indicates that the conversation
+        // was initiated by the other person, hence we display proper feedback for this
         if(this.props.firstMessage !== '') {
             var firstEntry = this.state.toUser + ' initiated a private conversation with you';
             var historyEntry = this.state.toUser + ': ' + this.props.firstMessage;
@@ -22,6 +30,8 @@ class PrivateMessageModal extends React.Component {
             newChatHistory.push(firstEntry);
             newChatHistory.push(historyEntry);
             this.setState({chatHistory: newChatHistory});
+        // If the first message does not exist, this indicates that the conversation
+        // was initiated by the current person, hence we display proper feedback for this
         } else {
             var firstEntry = 'You initiated a private conversation with ' + this.state.toUser;
             var newChatHistory = this.state.chatHistory;
@@ -30,6 +40,10 @@ class PrivateMessageModal extends React.Component {
         }
     }
 
+    // Initiate listen to private message
+    // Beware of is mounted state,
+    // as these listen function can execute continously
+    // even when module has been unmounted
     componentDidMount() {
         this.state.isMounted = true;
         this.server.listenToPrivateMessage((username, message) => {
@@ -37,6 +51,10 @@ class PrivateMessageModal extends React.Component {
         });
     }
     
+    // Listen to private message from the other person
+    // Only displayed in the private conversation modal though
+    // If it's from the person we're having conversation with
+    // Updates chat history when message is received
     handlePrivateMessageListen(username, message) {
         if(this.state.isMounted) {
             if(username == this.state.toUser) {
@@ -49,6 +67,8 @@ class PrivateMessageModal extends React.Component {
         }
     }
     
+    // isMounted is set to false so that listening function
+    // Can stop running now that component has unmounted
     componentWillUnmount() {
         this.server.sendPrivateMessage(this.state.toUser, 'left the conversation', (sendOK) => {
             if(sendOK) {
@@ -58,6 +78,8 @@ class PrivateMessageModal extends React.Component {
         this.state.isMounted = false;
     }
 
+    // Sends message to the other user
+    // updates chat history accordingly
     sendMessage() {
         this.server.sendPrivateMessage(this.state.toUser, this.refs.messageBox.value, (sendOK) => {
             if(sendOK) {
@@ -71,6 +93,7 @@ class PrivateMessageModal extends React.Component {
         })
     }
 
+    // Renders the modal
     render() {
         if(!this.state.toUser) {
             return <div/>
@@ -79,7 +102,7 @@ class PrivateMessageModal extends React.Component {
         return (
             <Modal className='privateMessageChat' isOpen={true} ariaHideApp={false} >
                 <div className='row'>
-                    <h3>Private Conversation with {this.state.toUser}</h3>
+                    <h2>Private Conversation with {this.state.toUser}</h2>
                     <div className='row messagesPrivateChat' ref='chatWindow'>
                         <ul id="privateMessages">
                             {this.state.chatHistory.map((previousMessage) => (<li key={previousMessage}> {previousMessage} </li>))}
@@ -95,11 +118,13 @@ class PrivateMessageModal extends React.Component {
                 <div className='row'>
                     <button id='exitButton' onClick={() => this.closePrivateChatroom()}>Exit Private Conversation</button>
                 </div>
+                <p>NOTE: All messages in this conversation will be lost when this window is exited</p>
             </Modal>
         );
     }
 };
 
+// Obtain server and current user
 PrivateMessageModal.contextTypes = {
     
     serverAPI: PropTypes.shape({

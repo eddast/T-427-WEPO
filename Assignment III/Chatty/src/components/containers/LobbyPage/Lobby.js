@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import PrivateMessageModal from './PrivateMessageModal';
 
+// The main page: contains active chatrooms
+// Displays those chatrooms once user joins,
+// along with all it's logic
 class Lobby extends React.Component {
     
     constructor(props, ctx) {
@@ -109,7 +112,6 @@ class Lobby extends React.Component {
             isSendingPrivateMessage: true,
             privateMessageTo: user
         });
-        // this.setState({privateMessageTo: user});
     }
 
     // Closes private chatroom modal between two users
@@ -142,7 +144,8 @@ class Lobby extends React.Component {
                 </div>
             );
         }
-
+        // Error message for when something has gone wrong
+        // (or page is briefly loading)
         return (
             <div>
                 <h1>Our pigeon lost your messages in transit!</h1>
@@ -182,14 +185,19 @@ class Lobby extends React.Component {
     // If add chatroom modal should be displayed it does
     // Otherwise just the main body is displayed
     render() {
+
         if(this.state.displayModal) {
             return (
+                // Renders modal to create new chatroom
+                // If that modal is required
                 <div>
                     {this.getMainLobbyBody()}
                     {this.getAddChatroomModal()}
                 </div>
             );
         } else if(this.state.isSendingPrivateMessage) {
+            // Renders private chatroom as modal when
+            // user is sending private messages
             return (
                 <div>
                     {this.getMainLobbyBody()}
@@ -198,6 +206,8 @@ class Lobby extends React.Component {
             );
         }
 
+        // If no modal should be displayed,
+        // the core view is displayed
         return this.getMainLobbyBody();
     };
 }
