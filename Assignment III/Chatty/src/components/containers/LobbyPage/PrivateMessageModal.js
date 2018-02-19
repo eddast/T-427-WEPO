@@ -10,16 +10,61 @@ class PrivateMessageModal extends React.Component {
         super(props, ctx);
         this.state = {
             toUser : this.props.toUser,
-            chatHistory: []
+            chatHistory: [],
+            isMounted: false
         }
         this.server = this.context.serverAPI.server;
         this.closePrivateChatroom = this.props.closePrivateChatroom;
+        if(this.props.firstMessage !== '') {
+            var firstEntry = this.state.toUser + ' initiated a private conversation with you';
+            var historyEntry = this.state.toUser + ': ' + this.props.firstMessage;
+            var newChatHistory = this.state.chatHistory;
+            newChatHistory.push(firstEntry);
+            newChatHistory.push(historyEntry);
+            this.setState({chatHistory: newChatHistory});
+        } else {
+            var firstEntry = 'You initiated a private conversation with ' + this.state.toUser;
+            var newChatHistory = this.state.chatHistory;
+            newChatHistory.push(firstEntry);
+            this.setState({chatHistory: newChatHistory});
+        }
+    }
+
+    componentDidMount() {
+        this.state.isMounted = true;
+        this.server.listenToPrivateMessage((username, message) => {
+            this.handlePrivateMessageListen(username, message);
+        });
+    }
+    
+    handlePrivateMessageListen(username, message) {
+        if(this.state.isMounted) {
+            if(username == this.state.toUser) {
+                var historyEntry = username + ': ' + message;
+                var newChatHistory = this.state.chatHistory;
+                newChatHistory.push(historyEntry);
+                this.setState({chatHistory: newChatHistory});
+            }
+        }
+    }
+    
+    componentWillUnmount() {
+        this.server.sendPrivateMessage(this.state.toUser, 'left the conversation', (sendOK) => {
+            if(sendOK) {
+                this.state.isMounted = false;
+            }
+        });
+        this.state.isMounted = false;
     }
 
     sendMessage() {
         this.server.sendPrivateMessage(this.state.toUser, this.refs.messageBox.value, (sendOK) => {
             if(sendOK) {
-                this.setState({chatHistory: this.state.chatHistory.push(this.refs.messageBox.value)});
+                var historyEntry = 'You: ' + this.refs.messageBox.value;
+                var newChatHistory = this.state.chatHistory;
+                newChatHistory.push(historyEntry);
+                this.setState({chatHistory: newChatHistory});
+                this.refs.messageBox.value = '';
             }
         })
     }
@@ -35,7 +80,7 @@ class PrivateMessageModal extends React.Component {
                     <h1>Private Conversation with {this.state.toUser}</h1>
                     <div className='row'>
                         <ul>
-                            {this.state.chatHistory.map((previousMessage) => (<li> {previousMessage} </li>))}
+                            {this.state.chatHistory.map((previousMessage) => (<li key={previousMessage}> {previousMessage} </li>))}
                         </ul>
                     </div>
                 </div>
@@ -55,7 +100,11 @@ PrivateMessageModal.contextTypes = {
     
     serverAPI: PropTypes.shape({
         server: PropTypes.component
-    })
+    }),
+
+    currentUser: PropTypes.shape({
+        userName: PropTypes.string
+    }),
 };
 
 export default PrivateMessageModal;

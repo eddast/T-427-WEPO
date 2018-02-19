@@ -31,6 +31,7 @@ class ChatRoomWindow extends React.Component {
                 this.handleUserUpdates(roomName, newUserSet, newOps);
             }
         });
+        
     }
 
     handleUserUpdates(roomName, newUserSet, newOps) {
@@ -47,13 +48,11 @@ class ChatRoomWindow extends React.Component {
             var newChatroom = this.state.chatroom;
             newChatroom.messageHistory = newMessageHistory;
             this.setState({chatroom : newChatroom});
-            console.log(this.refs);
             this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
         }
     }
 
     componentWillUnmount() {
-        console.log('destroyed');
         this.state.isMounted = false;
     }
 

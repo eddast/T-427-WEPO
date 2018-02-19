@@ -24,7 +24,8 @@ class Lobby extends React.Component {
             newChatroomName: '',
             newChatroomTopic: '',
             isSendingPrivateMessage: false,
-            privateMessageTo: null
+            privateMessageTo: null,
+            firstPrivateMessageRecieved: ''
         };
         
         // User is initially joined to the lobby chatroom
@@ -38,6 +39,9 @@ class Lobby extends React.Component {
         });
         this.sendPrivateMessage = this.sendPrivateMessage.bind(this);
         this.closePrivateChatroom = this.closePrivateChatroom.bind(this);
+        this.server.listenToPrivateMessage((username, message) => {
+            this.handlePrivateMessageListen(username, message);
+        });
     }
 
     // Sets display modal to true, triggering a re-render
@@ -58,6 +62,16 @@ class Lobby extends React.Component {
         this.setState({
             newChatroomTopic: evt.target.value
         });
+    }
+
+    handlePrivateMessageListen(username, message) {
+        if(message !== 'left the conversation') {
+            this.setState({
+                isSendingPrivateMessage : true,
+                privateMessageTo: username,
+                firstPrivateMessageRecieved: message
+            });
+        }
     }
 
     // Closes add chatroom modal and if user provided info,
@@ -178,7 +192,7 @@ class Lobby extends React.Component {
             return (
                 <div>
                     {this.getMainLobbyBody()}
-                    <PrivateMessageModal key='privatemessage' closePrivateChatroom={this.closePrivateChatroom} toUser={this.state.privateMessageTo}/>
+                    <PrivateMessageModal firstMessage={this.state.firstPrivateMessageRecieved} key='privatemessage' closePrivateChatroom={this.closePrivateChatroom} toUser={this.state.privateMessageTo}/>
                 </div>
             );
         }

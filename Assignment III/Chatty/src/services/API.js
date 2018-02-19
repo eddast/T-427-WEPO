@@ -120,7 +120,7 @@ var Server = {
             nick : toUser,
             message : msg
         }
-        this.socket.on('privatemsg', message, (sendOK) => {
+        this.socket.emit('privatemsg', message, (sendOK) => {
             resolve(sendOK);
         })
     },
