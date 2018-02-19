@@ -6,12 +6,18 @@
 
 ### The Login Page: Specifying a Nickname
 
-### The Lobby: Veiwing Active Rooms
+### The Lobby
 
-### The Lobby: Joining and Parting a Chatroom
+#### Veiwing Active Rooms
 
-### Chatroom in Lobby: Sending, Viewing and Recieving of Messages
+#### Joining and Parting a Chatroom
 
-### Chatroom in Lobby: Private Messages to Other Users
+### The Lobby: The Chatroom Component
 
-### Chatroom in Lobby: Kick or Ban a User
+#### Sending, Viewing and Recieving of Messages in Chatroom
+
+#### Private Messages to Other Users from Chatroom User List
+
+#### Kicking or Banning a User from Chatroom
+
+## Known Limitations
