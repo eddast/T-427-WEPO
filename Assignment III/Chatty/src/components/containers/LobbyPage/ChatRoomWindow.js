@@ -162,7 +162,7 @@ class ChatRoomWindow extends React.Component {
                     </div>
                     <div className='col-md-3 activeUsersInRoom'>
                         <ListViewUsers>
-                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} name={user}/>))}
+                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
                         </ListViewUsers>
                     </div>
                 </div>

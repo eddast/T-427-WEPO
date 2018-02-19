@@ -31,6 +31,29 @@ class ListItemUsers extends React.Component {
         return (
             <div id='userOptions'>
                 <div className='row'>
+                    <div className='col-md-offset-2 col-md-2'>
+                        <FontAwesome onClick={() => this.props.sendPrivateMessage(this.props.name)} id="privateMessageIcon" name="envelope"/>
+                    </div>
+                    <div className='col-md-offset-2 col-md-2'>
+                        <FontAwesome onClick={() => this.setState({seesOptions: !this.state.seesOptions})} id='banIcon' name='times-circle'/>
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='col-md-offset-2 col-md-2'>
+                        <p className='optionsDescription'>Private Convo</p>
+                    </div>
+                    <div className='col-md-offset-2 col-md-2'>   
+                        <p className='optionsDescription'>Hide options</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    getOptionsForAdmin() {
+        return (
+            <div id='userOptions'>
+                <div className='row'>
                     <div className='col-md-offset-1 col-md-1'>
                         <FontAwesome onClick={() => this.props.sendPrivateMessage(this.props.name)} id="privateMessageIcon" name="envelope"/>
                     </div>
@@ -62,14 +85,34 @@ class ListItemUsers extends React.Component {
         );
     }
 
+    isAdminOfChatrrom() {
+        var chatroomOps = this.props.chatroom.ops;
+
+        if(chatroomOps[this.props.currentUser] !== undefined) {
+            console.log(chatroomOps);
+            return true;
+        }
+
+        return false;
+    }
+
     render() {
         if(this.state.seesOptions) {
-            return (
-                <li>
-                    {this.getListItem()}
-                    {this.getOptions()}
-                </li>
-            );
+            if(this.isAdminOfChatrrom() && this.props.name !== this.props.currentUser) {
+                return (
+                    <li>
+                        {this.getListItem()}
+                        {this.getOptionsForAdmin()}
+                    </li>
+                );
+            } else {
+                return (
+                    <li>
+                        {this.getListItem()}
+                        {this.getOptions()}
+                    </li>
+                );
+            }
         }
         return (
             <li>
