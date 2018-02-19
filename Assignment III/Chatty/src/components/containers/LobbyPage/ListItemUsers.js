@@ -59,7 +59,7 @@ class ListItemUsers extends React.Component {
                         <FontAwesome onClick={() => this.props.sendPrivateMessage(this.props.name)} id="privateMessageIcon" name="envelope"/>
                     </div>
                     <div className='col-md-offset-1 col-md-1'>
-                        <FontAwesome onClick={() => alert('HAH ban!')} id='banIcon' name='ban'/>
+                        <FontAwesome onClick={() => this.props.banOutUser(this.props.name, this.props.chatroom.name)} id='banIcon' name='ban'/>
                     </div>
                     <div className='col-md-offset-1 col-md-1'>
                         <FontAwesome onClick={() => this.props.kickOutUser(this.props.name, this.props.chatroom.name)} id='banIcon' name='sign-out'/>

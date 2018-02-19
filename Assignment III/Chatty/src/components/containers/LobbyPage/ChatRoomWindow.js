@@ -13,6 +13,7 @@ class ChatRoomWindow extends React.Component {
         super(props, ctx);
         this.handleListenToMessages = this.handleListenToMessages.bind(this);
         this.kickOutUser = this.kickOutUser.bind(this);
+        this.banOutUser = this.banOutUser.bind(this);
         this.remount();
     }
     
@@ -83,6 +84,7 @@ class ChatRoomWindow extends React.Component {
 
     // Swaps chatroom the component renders
     swapChatrooms(chatroom) {
+        console.log(chatroom);
         this.setState({chatroom: chatroom});
     }
 
@@ -103,8 +105,14 @@ class ChatRoomWindow extends React.Component {
     }
 
     kickOutUser(user, room) {
-        console.log(this.server);
         this.server.kickUser(user, room, (kickOK) => {
+            console.log(kickOK);
+            return false;
+        });
+    }
+
+    banOutUser(user, room) {
+        this.server.banUser(user, room, (kickOK) => {
             console.log(kickOK);
             return false;
         });
@@ -170,7 +178,7 @@ class ChatRoomWindow extends React.Component {
                     </div>
                     <div className='col-md-3 activeUsersInRoom'>
                         <ListViewUsers>
-                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} kickOutUser={this.kickOutUser} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
+                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} kickOutUser={this.kickOutUser} banOutUser={this.banOutUser} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
                         </ListViewUsers>
                     </div>
                 </div>

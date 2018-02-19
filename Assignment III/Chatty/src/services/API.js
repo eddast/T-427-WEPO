@@ -146,7 +146,30 @@ var Server = {
         this.socket.on('kicked', (room, user) => {
             resolve(room, user);
         });
+    },
+
+    banUser : function (user, room, resolve) {
+        this.kickUser(user, room , (kickOK) => {
+            if(kickOK) {
+                var banObj = {
+                    room: room,
+                    user: user
+                }
+                this.socket.emit('ban', banObj, (banOK) => {
+                    resolve(banOK);
+                });
+            }
+        });
+    },
+
+    listenToBansForUser : function (resolve) {
+        this.socket.on('banned', (room, user) => {
+            console.log(user + ' banned from ' + room);
+            resolve(room, user);
+        });
     }
+
+
 }
 
 export default Server;

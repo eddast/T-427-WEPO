@@ -54,6 +54,15 @@ class Lobby extends React.Component {
                 this.refs.window.swapChatrooms(lobby);
             }
         });
+        this.server.listenToBansForUser((room, user) => {
+            var lobby = this.state.chatRoomList[0];
+            if(user == currentUser) {
+                this.server.joinChatroom('lobby');
+                this.setState({selectedChatroom: lobby});
+                this.refs.window.swapChatrooms(lobby);
+                this.server.getChatrooms();
+            }
+        });
     }
 
     // Sets display modal to true, triggering a re-render
@@ -145,7 +154,7 @@ class Lobby extends React.Component {
                     <div className='LobbyBody'>
                         <div className='chatroomListDisplay'>
                             <ListViewChatRooms key='chatrooms' value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
-                                {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms key={chatroom.name} onClick={evt => this.selectChatroom(evt, chatroom)} value={chatroom} info={chatroom}/>))}
+                                {this.state.chatRoomList.map((chatroom) => ( <ListItemChatRooms key={chatroom.name} onClick={evt => this.selectChatroom(evt, chatroom)} currentUser={currentUser} value={chatroom} info={chatroom}/>))}
                             </ListViewChatRooms>
                         </div>
                         <ChatRoomWindow sendPrivateMessage={this.sendPrivateMessage} key='window' ref='window' currentUser={currentUser} chatroom={this.state.selectedChatroom}/>
