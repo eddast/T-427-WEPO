@@ -165,7 +165,7 @@ class ChatRoomWindow extends React.Component {
                     <div className='col-md-9'>
                         <div className='infoAndChat'>
                             <p id='windowHeading'>{this.state.chatroom.name}</p>
-                            <p id='windowTopic'>{this.state.chatroom.topic}</p>   
+                            <p id='windowTopic'>{this.state.chatroom.topic}</p>  
                             <div ref='messages' className='roomMessages'>
                                 {this.state.chatroom.messageHistory.map((message) => (
                                     <p>{this.renderRoomMessages(message)}</p>
