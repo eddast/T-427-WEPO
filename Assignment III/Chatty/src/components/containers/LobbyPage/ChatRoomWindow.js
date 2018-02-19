@@ -10,31 +10,63 @@ class ChatRoomWindow extends React.Component {
 
     constructor(props, ctx) {
         super(props, ctx);
+        this.handleListenToMessages = this.handleListenToMessages.bind(this);
+        this.remount();
+        
+    }
+    componentDidMount() {
+        this.setState({
+            isMounted: true
+        });
+        if(this.refs.messages) {
+            this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
+        }
+        this.server.listenToMessageUpdates((roomName, newMessageHistory) => {
+            if (this.state.isMounted) {
+                this.handleListenToMessages(roomName, newMessageHistory) 
+            }
+        });
+        this.server.listenToChatroomUserUpdates((roomName, newUserSet, newOps) => {
+            if (this.state.isMounted) {
+                this.handleUserUpdates(roomName, newUserSet, newOps);
+            }
+        });
+    }
+
+    handleUserUpdates(roomName, newUserSet, newOps) {
+        if(this.state.chatroom.name == roomName) {
+            var newChatroom = this.state.chatroom;
+            newChatroom.users = newUserSet;
+            newChatroom.ops = newOps;
+            this.setState({chatroom : newChatroom});
+        }
+    }
+
+    handleListenToMessages(roomName, newMessageHistory) {
+        if(this.state.chatroom.name == roomName) {
+            var newChatroom = this.state.chatroom;
+            newChatroom.messageHistory = newMessageHistory;
+            this.setState({chatroom : newChatroom});
+            console.log(this.refs);
+            this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
+        }
+    }
+
+    componentWillUnmount() {
+        console.log('destroyed');
+        this.state.isMounted = false;
+    }
+
+    remount() {
         this.server = this.context.serverAPI.server;
         this.state = {
             chatroom: this.props.chatroom,
             messageToSend: '',
-            currentUser: this.props.currentUser
+            currentUser: this.props.currentUser,
+            isMounted: false
         }
-        this.server.listenToChatroomUserUpdates((roomName, newUserSet, newOps) => {
-            if(this.state.chatroom.name == roomName) {
-                var newChatroom = this.state.chatroom;
-                newChatroom.users = newUserSet;
-                newChatroom.ops = newOps;
-                this.setState({chatroom : newChatroom});
-            }
-        });
-        this.server.listenToMessageUpdates((roomName, newMessageHistory) => {
-            if(this.state.chatroom.name == roomName) {
-                var newChatroom = this.state.chatroom;
-                newChatroom.messageHistory = newMessageHistory;
-                this.setState({chatroom : newChatroom});
-                this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
-            }
-        });
-    }
-    componentDidMount() {
-        this.refs.messages.scrollTop = this.refs.messages.scrollHeight;
+        
+        this.sendPrivateMessage = this.props.sendPrivateMessage;
     }
 
     // Swaps chatroom the component renders
@@ -114,7 +146,7 @@ class ChatRoomWindow extends React.Component {
                     </div>
                     <div className='col-md-3 activeUsersInRoom'>
                         <ListViewUsers>
-                            {this.state.chatroom.users.map((user) => (<ListItemUsers name={user}/>))}
+                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} name={user}/>))}
                         </ListViewUsers>
                     </div>
                 </div>

@@ -171,6 +171,7 @@ body {
             list-style-type: none;
             background-color: white;
             overflow-y: scroll;
+            overflow-x: visible;
         }
     }
 
@@ -248,7 +249,7 @@ body {
         }
 
         .listViewChatroom {
-            max-height: 450px;
+            max-height: 350px;
             padding: 0;
             margin: 0;
             list-style-type: none;
@@ -304,10 +305,57 @@ body {
         }
     }
 
+    #privateMessageToolTip {
+
+
+        #privateMessageIcon {
+            margin-top: 13px;
+            color: #25323A;
+        }
+        .toolTipText {
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            visibility: hidden;
+            font-size: 11px;
+            width: 120px;
+            background-color: #000000cb;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            margin-left: -35px;
+            margin-top: 5px;
+            position: absolute;
+            z-index: 1;
+            top: 1px;
+            left: 105%;
+        }
+        .toolTipText::after {
+            content: ' ';
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent #000000cb transparent transparent;
+        }
+    }
+
+    #privateMessageToolTip:hover .toolTipText {
+        visibility: visible;
+        overflow: visible;
+    }
+
+    #privateMessageToolTip {
+        position: relative;
+        display: inline;
+    }
+
     #chatroomWindow {
         float: right;
         height: 460px;
-        width: 100%;
+        width: 80%;
         margin-left: 30px;
         margin-right: 30px;
         background-color: white;
@@ -551,10 +599,13 @@ body {
 
     .userListItem {
 
+        position: relative;
         padding: 10px;
         border: gray;
+        width: 220px;
         border : 0.5px solid #25323a17;
         background-color: white;
+        overflow-x: visible;
 
         #onlineIcon {
             color: #76F196;

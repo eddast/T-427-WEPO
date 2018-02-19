@@ -5,6 +5,7 @@ import ChatRoomWindow from './ChatRoomWindow';
 import Banner from '../../Banner';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import PrivateMessageModal from './PrivateMessageModal';
 
 class Lobby extends React.Component {
     
@@ -21,7 +22,9 @@ class Lobby extends React.Component {
             shouldreRender: false,
             displayModal: false,
             newChatroomName: '',
-            newChatroomTopic: ''
+            newChatroomTopic: '',
+            isSendingPrivateMessage: false,
+            privateMessageTo: null
         };
         
         // User is initially joined to the lobby chatroom
@@ -33,6 +36,8 @@ class Lobby extends React.Component {
             this.setState({chatRoomList: chatRoomlist});
             this.setState({selectedChatroom: chatRoomlist[0]});
         });
+        this.sendPrivateMessage = this.sendPrivateMessage.bind(this);
+        this.closePrivateChatroom = this.closePrivateChatroom.bind(this);
     }
 
     // Sets display modal to true, triggering a re-render
@@ -84,6 +89,24 @@ class Lobby extends React.Component {
         this.refs.window.swapChatrooms(chatroom);
     }
 
+    // Triggers display of private chatroom modal between two users
+    sendPrivateMessage (user) {
+        this.setState({
+            isSendingPrivateMessage: true,
+            privateMessageTo: user
+        });
+        // this.setState({privateMessageTo: user});
+    }
+
+    // Closes private chatroom modal between two users
+    closePrivateChatroom() {
+        this.setState({
+            isSendingPrivateMessage: false,
+            privateMessageTo: null
+        });
+        // this.setState({privateMessageTo: null});
+    }
+
     // JSX for main lobby body including banner, list of chatrooms,
     // and the chatroom window displaying selected chatroom
     getMainLobbyBody() {
@@ -91,15 +114,15 @@ class Lobby extends React.Component {
             var currentUser = this.props.location.currentUser && this.props.location.currentUser.referrer;
             return (
                 <div>
-                    <Banner />
+                    <Banner key='banner'/>
                     <h2 id='lobbyGreeting'>Hello, {currentUser}!</h2>
                     <div className='LobbyBody'>
                         <div className='chatroomListDisplay'>
-                            <ListViewChatRooms value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
-                                {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms onClick={evt => this.selectChatroom(evt, chatroom)} value={chatroom} info={chatroom}/>))}
+                            <ListViewChatRooms key='chatrooms' value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
+                                {this.state.chatRoomList.map((chatroom) => (<ListItemChatRooms key={chatroom.name} onClick={evt => this.selectChatroom(evt, chatroom)} value={chatroom} info={chatroom}/>))}
                             </ListViewChatRooms>
                         </div>
-                        <ChatRoomWindow ref='window' currentUser={currentUser} chatroom={this.state.selectedChatroom}/>
+                        <ChatRoomWindow sendPrivateMessage={this.sendPrivateMessage} key='window' ref='window' currentUser={currentUser} chatroom={this.state.selectedChatroom}/>
                     </div>
                 </div>
             );
@@ -144,12 +167,18 @@ class Lobby extends React.Component {
     // If add chatroom modal should be displayed it does
     // Otherwise just the main body is displayed
     render() {
-        console.log( );
         if(this.state.displayModal) {
             return (
                 <div>
                     {this.getMainLobbyBody()}
                     {this.getAddChatroomModal()}
+                </div>
+            );
+        } else if(this.state.isSendingPrivateMessage) {
+            return (
+                <div>
+                    {this.getMainLobbyBody()}
+                    <PrivateMessageModal key='privatemessage' closePrivateChatroom={this.closePrivateChatroom} toUser={this.state.privateMessageTo}/>
                 </div>
             );
         }

@@ -112,6 +112,24 @@ var Server = {
         this.socket.on('updatechat', (roomName, newMessageHistory) => {
             resolve(roomName, newMessageHistory);
         });
+    },
+
+    // Sends private message 'message' to user 'toUser'
+    sendPrivateMessage : function(toUser, msg, resolve) {
+        var message = {
+            nick : toUser,
+            message : msg
+        }
+        this.socket.on('privatemsg', message, (sendOK) => {
+            resolve(sendOK);
+        })
+    },
+
+    // Listen to private messages incoming
+    listenToPrivateMessage : function (resolve) {
+        this.socket.on('recv_privatemsg', (username, message) => {
+            resolve(username, message);
+        });
     }
 }
 
