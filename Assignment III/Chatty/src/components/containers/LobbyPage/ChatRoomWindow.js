@@ -84,7 +84,6 @@ class ChatRoomWindow extends React.Component {
 
     // Swaps chatroom the component renders
     swapChatrooms(chatroom) {
-        console.log(chatroom);
         this.setState({chatroom: chatroom});
     }
 
@@ -106,15 +105,13 @@ class ChatRoomWindow extends React.Component {
 
     kickOutUser(user, room) {
         this.server.kickUser(user, room, (kickOK) => {
-            console.log(kickOK);
-            return false;
+            return kickOK;
         });
     }
 
     banOutUser(user, room) {
         this.server.banUser(user, room, (kickOK) => {
-            console.log(kickOK);
-            return false;
+            return kickOK;
         });
     }
 

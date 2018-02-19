@@ -57,6 +57,7 @@ class Lobby extends React.Component {
         this.server.listenToBansForUser((room, user) => {
             var lobby = this.state.chatRoomList[0];
             if(user == currentUser) {
+                alert('You have been banned from chatroom \"' + room + '\"');
                 this.server.joinChatroom('lobby');
                 this.setState({selectedChatroom: lobby});
                 this.refs.window.swapChatrooms(lobby);

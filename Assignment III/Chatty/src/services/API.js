@@ -164,7 +164,6 @@ var Server = {
 
     listenToBansForUser : function (resolve) {
         this.socket.on('banned', (room, user) => {
-            console.log(user + ' banned from ' + room);
             resolve(room, user);
         });
     }
