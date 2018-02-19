@@ -44,6 +44,7 @@ class PrivateMessageModal extends React.Component {
                 var newChatHistory = this.state.chatHistory;
                 newChatHistory.push(historyEntry);
                 this.setState({chatHistory: newChatHistory});
+                this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
             }
         }
     }
@@ -65,6 +66,7 @@ class PrivateMessageModal extends React.Component {
                 newChatHistory.push(historyEntry);
                 this.setState({chatHistory: newChatHistory});
                 this.refs.messageBox.value = '';
+                this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
             }
         })
     }
@@ -77,19 +79,21 @@ class PrivateMessageModal extends React.Component {
         return (
             <Modal className='privateMessageChat' isOpen={true} ariaHideApp={false} >
                 <div className='row'>
-                    <h1>Private Conversation with {this.state.toUser}</h1>
-                    <div className='row'>
-                        <ul>
+                    <h3>Private Conversation with {this.state.toUser}</h3>
+                    <div className='row messagesPrivateChat' ref='chatWindow'>
+                        <ul id="privateMessages">
                             {this.state.chatHistory.map((previousMessage) => (<li key={previousMessage}> {previousMessage} </li>))}
                         </ul>
                     </div>
                 </div>
                 <div className='row'>
-                    <input className='form-control' type='text' ref='messageBox' placeholder='send your secret message...'/>
-                    <button onClick={() => this.sendMessage()}>Send</button>
+                    <span className='col-md-9'>
+                        <input className='form-control' type='text' ref='messageBox' placeholder='send your secret message...'/>
+                    </span>
+                    <button id='sendButton' className='col-md-3' onClick={() => this.sendMessage()}>Send</button>
                 </div>
                 <div className='row'>
-                    <button onClick={() => this.closePrivateChatroom()}>Exit Private Conversation</button>
+                    <button id='exitButton' onClick={() => this.closePrivateChatroom()}>Exit Private Conversation</button>
                 </div>
             </Modal>
         );

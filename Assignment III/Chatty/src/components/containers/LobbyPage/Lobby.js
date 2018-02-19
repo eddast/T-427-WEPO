@@ -116,7 +116,8 @@ class Lobby extends React.Component {
     closePrivateChatroom() {
         this.setState({
             isSendingPrivateMessage: false,
-            privateMessageTo: null
+            privateMessageTo: null,
+            firstPrivateMessageRecieved: ''
         });
         // this.setState({privateMessageTo: null});
     }
