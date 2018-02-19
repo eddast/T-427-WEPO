@@ -1,4 +1,4 @@
-# ChitChat: for a better IM-experience
+# ChitChat: Your Gateway For Better IM Experience
 
 ## Installation and running ChitChat
 
