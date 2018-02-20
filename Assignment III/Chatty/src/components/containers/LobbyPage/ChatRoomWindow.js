@@ -168,7 +168,7 @@ class ChatRoomWindow extends React.Component {
                             <p id='windowTopic'>{this.state.chatroom.topic}</p>  
                             <div ref='messages' className='roomMessages'>
                                 {this.state.chatroom.messageHistory.map((message, i) => (
-                                    <p key={i}>{this.renderRoomMessages(message)}</p>
+                                    <div key={i}>{this.renderRoomMessages(message)}</div>
                                 ))}
                             </div>
                         </div>
