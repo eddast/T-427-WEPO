@@ -34,7 +34,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        port: 9008,
+        port: 9009,
         open: true
     },
     devtool: 'inline-source-map',
