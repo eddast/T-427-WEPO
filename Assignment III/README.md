@@ -89,5 +89,8 @@ A user can also be banned from a chatroom by an admin/OP. When user is banned fr
 ![alt text](https://image.ibb.co/jvvYTH/Ban.png "OP Bans User from Chatroom")
 
 ## Known Limitations
+### Functionality
 When a user is currently in a private conversation with another user, neither users can be private messaged by a third party. This is because once in a private converstation, both users in that conversation focus only on messages from each other. Due to lack of time and reluctancy to change 'chatserver.js' more than needed, this was not fixed before the due date of the assignment.
+### Testing
+We did not feel that the 'tools' we were given by lectures and lab classes were in any way adequate for us to actually be able to test a project on the level of our project. We did not have enough examples of Jest testing nor knowledge of the matter, even after watching the one lecture that covered this multiple times and even after hours and hours of Google-ing. We tried our best but we could not get anywhere with the tests, so only the dummy component InitialPage.js and the small component NicknameChoice.js are fully tested. Also, we could not surpress an annoying error that npm test yielded which involved that loading .svg images was not possible, despite having included an svg-loader in our webpack and despite that it works fine on npm start.
 
