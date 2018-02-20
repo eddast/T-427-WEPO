@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Redirect } from 'react-router';
 import InitialPage from './components/containers/InitialPageNickname/InitialPage';
-import Lobby from './components/containers/LobbyPage/Lobby'
+import Lobby from './components/containers/LobbyPage/Lobby/Lobby'
 import Server from './services/API';
 
 class App extends React.Component {

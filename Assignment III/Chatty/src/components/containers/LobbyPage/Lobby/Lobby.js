@@ -1,11 +1,11 @@
 import React from 'react';
-import ListViewChatRooms from './ListViewChatRooms';
-import ListItemChatRooms from './ListItemChatRooms';
-import ChatRoomWindow from './ChatRoomWindow';
-import Banner from '../../Banner';
+import ListViewChatRooms from '../ListViewChatRooms';
+import ListItemChatRooms from '..//ListItemChatRooms';
+import ChatRoomWindow from '../ChatRoomWindow';
+import Banner from '../../../Banner';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
-import PrivateMessageModal from './PrivateMessageModal';
+import PrivateMessageModal from '../PrivateMessageModal';
 
 // The main page: contains active chatrooms
 // Displays those chatrooms once user joins,
