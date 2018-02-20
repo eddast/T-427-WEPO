@@ -105,7 +105,7 @@ class PrivateMessageModal extends React.Component {
                     <h2>Private Conversation with {this.state.toUser}</h2>
                     <div className='row messagesPrivateChat' ref='chatWindow'>
                         <ul id="privateMessages">
-                            {this.state.chatHistory.map((previousMessage) => (<li key={previousMessage}> {previousMessage} </li>))}
+                            {this.state.chatHistory.map((previousMessage, i) => (<li key={i}> {previousMessage} </li>))}
                         </ul>
                     </div>
                 </div>

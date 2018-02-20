@@ -156,7 +156,7 @@ class Lobby extends React.Component {
                     <div className='LobbyBody'>
                         <div className='chatroomListDisplay'>
                             <ListViewChatRooms key='chatrooms' value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
-                                {this.state.chatRoomList.map((chatroom) => ( <ListItemChatRooms key={chatroom.name} onClick={evt => this.selectChatroom(evt, chatroom)} currentUser={currentUser} value={chatroom} info={chatroom}/>))}
+                                {this.state.chatRoomList.map((chatroom, i) => ( <ListItemChatRooms key={i} onClick={evt => this.selectChatroom(evt, chatroom)} currentUser={currentUser} value={chatroom} info={chatroom}/>))}
                             </ListViewChatRooms>
                         </div>
                         <ChatRoomWindow sendPrivateMessage={this.sendPrivateMessage} key='window' ref='window' currentUser={currentUser} chatroom={this.state.selectedChatroom}/>

@@ -167,15 +167,15 @@ class ChatRoomWindow extends React.Component {
                             <p id='windowHeading'>{this.state.chatroom.name}</p>
                             <p id='windowTopic'>{this.state.chatroom.topic}</p>  
                             <div ref='messages' className='roomMessages'>
-                                {this.state.chatroom.messageHistory.map((message) => (
-                                    <p>{this.renderRoomMessages(message)}</p>
+                                {this.state.chatroom.messageHistory.map((message, i) => (
+                                    <p key={i}>{this.renderRoomMessages(message)}</p>
                                 ))}
                             </div>
                         </div>
                     </div>
                     <div className='col-md-3 activeUsersInRoom'>
                         <ListViewUsers>
-                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} kickOutUser={this.kickOutUser} banOutUser={this.banOutUser} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
+                            {this.state.chatroom.users.map((user, i) => (<ListItemUsers key={i} sendPrivateMessage={this.sendPrivateMessage} kickOutUser={this.kickOutUser} banOutUser={this.banOutUser} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
                         </ListViewUsers>
                     </div>
                 </div>
