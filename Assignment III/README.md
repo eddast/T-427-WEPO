@@ -86,7 +86,7 @@ A user can be kicked from a chatroom by an admin/OP, that is the user who create
 A user can also be banned from a chatroom by an admin/OP. When user is banned from a chatroom it means that the user is forced to part with that chatroom and cannot re-join it it. In our implementation of a chatroom ban, user automatically joines the lobby when banned since as described before, it is an optimal default chatroom. User is explicitly informed when he or she is banned from a chatroom and cannot join a chatroom (can't click it from the active chatroom bar) but can still see it, with a message reminding user he or she has been banned to join this chatroom. The admin/OP of a chatroom bans a user by clicking the 'ban' option icon visible in user list options (an option only visible to OPs). See below figure for an example of a ban. Here, Yoda is admin/OP of the chatroom and bans Anakin from ever joining his chatroom again:
 
 
-![alt text](https://ibb.co/ffJnoH "OP Bans User from Chatroom")
+![alt text](https://image.ibb.co/jvvYTH/Ban.png "OP Bans User from Chatroom")
 
 ## Known Limitations
 When a user is currently in a private conversation with another user, neither users can be private messaged by a third party. This is because once in a private converstation, both users in that conversation focus only on messages from each other. Due to lack of time and reluctancy to change 'chatserver.js' more than needed, this was not fixed before the due date of the assignment.
