@@ -36,6 +36,7 @@
   "dependencies": {
     "express": "4.16.2",
     "font-awesome": "^4.7.0",
+    "mock-socket": "^7.1.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

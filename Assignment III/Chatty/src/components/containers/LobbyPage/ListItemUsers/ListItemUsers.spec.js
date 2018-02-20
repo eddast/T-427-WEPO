@@ -23,13 +23,28 @@ describe("List Item tests", () => {
   // });
 
   it("should be 12", () => {
-    const message = "message";
-    const component = shallow(<Lobby />, {});
+    const component = shallow(<ListItemUsers />, {});
 
     expect(12).toBe(12);
-    //expect(message).toBe("message");
-    //expect(component.state().messages.length).toBe(1);
-    //expect(component.state().messages[0]).toEqual(`${new Date().toLocaleTimeString()} - ${message}`);
+  });
+
+  it("Value from state should be false", () => {
+    const component = shallow(<ListItemUsers />, {});
+
+    expect(component.state().seesOptions).toEqual(false);
+  });
+
+  it("Trying to make the value from state be true", () => {
+    const component = shallow(<ListItemUsers />, {});
+    component.state().seesOptions = true;
+    component.isAdminOfChatrrom = true;
+    // component.props.name = 'Stulli';
+    // component.props.currentUser = 'Darrína';
+    // component.find('#banIcon').simulate('click');
+    
+
+    expect(component.state().seesOptions).toEqual(true);
+    expect(component.isAdminOfChatrrom).toEqual(true);
   });
 
   // afterEach(() => {
