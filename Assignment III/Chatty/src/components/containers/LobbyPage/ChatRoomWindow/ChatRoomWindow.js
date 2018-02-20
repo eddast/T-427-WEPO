@@ -1,5 +1,5 @@
 import React from 'react';
-import ListViewUsers from '../ListViewUsers';
+import ListViewUsers from '../ListViewUsers/ListViewUsers';
 import ListItemUsers from '../ListItemUsers/ListItemUsers';
 import propTypes from 'prop-types';
 

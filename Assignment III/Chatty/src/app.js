@@ -4,7 +4,7 @@ import '../styles/site';
 import propTypes from 'prop-types'
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Redirect } from 'react-router';
-import InitialPage from './components/containers/InitialPageNickname/InitialPage';
+import InitialPage from './components/containers/InitialPageNickname/InitialPage/InitialPage';
 import Lobby from './components/containers/LobbyPage/Lobby/Lobby'
 import Server from './services/API';
 

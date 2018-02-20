@@ -1,6 +1,6 @@
 import React from 'react';
-import NicknameChoice from './NicknameChoice';
-import Banner from '../../../components/Banner';
+import NicknameChoice from './../NicknameChoice/NicknameChoice';
+import Banner from '../../../containers/Banner/Banner';
 
 // Dummy class rendering the view for initial displaying page
 // Prompts user for his or her nickname
