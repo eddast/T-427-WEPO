@@ -1,7 +1,7 @@
 import React from 'react';
 import ListViewUsers from './ListViewUsers';
 import ListItemUsers from './ListItemUsers/ListItemUsers';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 // Renders the view on a chatroom window
 // Provides a method to swap out chatrooms in this view
@@ -196,9 +196,22 @@ class ChatRoomWindow extends React.Component {
 // Get server object for service calls
 ChatRoomWindow.contextTypes = {
     
-    serverAPI: PropTypes.shape({
-        server: PropTypes.component
+    serverAPI: propTypes.shape({
+        server: propTypes.component
     }),
 };
+
+// Documentation via propTypes
+// Required 'parameter' props for ChatRoomWindow to function
+ChatRoomWindow.propTypes = {
+    sendPrivateMessage: propTypes.func.isRequired,
+    currentUser: propTypes.string.isRequired,
+    chatroom : propTypes.shape({
+        name: propTypes.string.isRequired,
+        topic: propTypes.string.isRequired,
+        messageHistory: propTypes.array.isRequired,
+        users: propTypes.array.isRequired
+    })
+}
 
 export default ChatRoomWindow;

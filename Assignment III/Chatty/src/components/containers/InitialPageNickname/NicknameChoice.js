@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 // Class containing prompt for user nickname and logic
 // Redirects user to chatroom selection when user
@@ -38,7 +38,6 @@ class NicknameChoice extends React.Component {
 
     render() {
         if(this.state.nicknameAvailable) {
-            // return <this.redirect push to='/lobby' currentUser={this.state.inputValue} />
             return <this.redirect to={{
                 pathname: '/lobby',
                 currentUser: { referrer: this.state.inputValue }
@@ -66,13 +65,26 @@ class NicknameChoice extends React.Component {
 // from parent context
 NicknameChoice.contextTypes = {
 
-    routeTools: PropTypes.shape({
-        redirect: PropTypes.component,
+    routeTools: propTypes.shape({
+        redirect: propTypes.component,
     }),
     
-    serverAPI: PropTypes.shape({
-        server: PropTypes.component
+    serverAPI: propTypes.shape({
+        server: propTypes.component
     }),
 };
+
+// Documentation via PropTypes
+// Required 'parameter' props for ListItemUsers to function
+// Same as it's contextType declaration declared in parent component
+NicknameChoice.propTypes = {
+    routeTools: propTypes.shape({
+        redirect: propTypes.component,
+    }),
+    
+    serverAPI: propTypes.shape({
+        server: propTypes.component
+    }),
+}
 
 export default NicknameChoice;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../styles/site';
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Redirect } from 'react-router';
 import InitialPage from './components/containers/InitialPageNickname/InitialPage';
@@ -48,16 +48,16 @@ var RouterPaths = (
 // Format of values to pass to child component
 App.childContextTypes = {
 
-    routeTools: PropTypes.shape({
-        redirect: PropTypes.component,
+    routeTools: propTypes.shape({
+        redirect: propTypes.component,
     }),
 
-    serverAPI: PropTypes.shape({
-        server: PropTypes.component
+    serverAPI: propTypes.shape({
+        server: propTypes.component
     }),
 
-    currentUser: PropTypes.shape({
-        userName: PropTypes.string
+    currentUser: propTypes.shape({
+        userName: propTypes.string
     }),
 };
 

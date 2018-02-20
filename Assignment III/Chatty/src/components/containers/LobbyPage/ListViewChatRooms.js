@@ -1,5 +1,6 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
+import propTypes from 'prop-types';
 
 // Renders the list of chatrooms along with heading
 // and an "add chatroom" button to add a new chatroom to list
@@ -24,5 +25,11 @@ class ListViewChatRooms extends React.Component {
         );
     }
 };
+
+// Documentation via propTypes
+// Required 'parameter' props for ListViewChatrooms to function
+ListViewChatRooms.propTypes = {
+    addchatroom : propTypes.func.isRequired
+}
 
 export default ListViewChatRooms;

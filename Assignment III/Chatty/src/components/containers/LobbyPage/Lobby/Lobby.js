@@ -3,7 +3,7 @@ import ListViewChatRooms from '../ListViewChatRooms';
 import ListItemChatRooms from '..//ListItemChatRooms';
 import ChatRoomWindow from '../ChatRoomWindow';
 import Banner from '../../../Banner';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import Modal from 'react-modal';
 import PrivateMessageModal from '../PrivateMessageModal';
 
@@ -234,19 +234,19 @@ class Lobby extends React.Component {
 
 // Variables lobby needs from parent context
 Lobby.contextTypes = {
-
-    routeTools: PropTypes.shape({
-        redirect: PropTypes.component,
-    }),
     
-    serverAPI: PropTypes.shape({
-        server: PropTypes.component
-    }),
-
-    currentUser: PropTypes.shape({
-        userName: PropTypes.string
-    }),
+    serverAPI: propTypes.shape({
+        server: propTypes.component
+    })
 };
 
+// Documentation via propTypes
+// Required 'parameter' props for Lobby to function
+// Same as it's contextType declaration declared in parent component
+Lobby.propTypes = {
+    serverAPI: propTypes.shape({
+        server: propTypes.component
+    })
+}
 
 export default Lobby;

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import Modal from 'react-modal';
 
 // Renders the modal of a private conversation between two users
@@ -127,13 +127,30 @@ class PrivateMessageModal extends React.Component {
 // Obtain server and current user
 PrivateMessageModal.contextTypes = {
     
-    serverAPI: PropTypes.shape({
-        server: PropTypes.component
+    serverAPI: propTypes.shape({
+        server: propTypes.component
     }),
 
-    currentUser: PropTypes.shape({
-        userName: PropTypes.string
+    currentUser: propTypes.shape({
+        userName: propTypes.string
     }),
 };
+
+// Documentation via propTypes
+// Required 'parameter' props for PrivateMessageModal to function
+PrivateMessageModal.propTypes = {
+    firstMessage: propTypes.string.isRequired,
+    closePrivateChatroom: propTypes.func.isRequired,
+    toUser: propTypes.string.isRequired,
+
+    // From context types (parent component/s)
+    serverAPI: propTypes.shape({
+        server: propTypes.component
+    }),
+
+    currentUser: propTypes.shape({
+        userName: propTypes.string
+    }),
+}
 
 export default PrivateMessageModal;
