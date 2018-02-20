@@ -40,15 +40,52 @@ The following shows an example of an invalid nickname, that is, user has attempt
 The lobby contains all functionality related to joining and parting chatrooms, creating chatrooms, keeping track of users in chatrooms, chatroom interactions and user interactions. Lobby is composed of a greeting, stating the user's nickname at top, then displays a list of active chatrooms to the left and then displayes the chatroom to which the user is currently joined in the middle along with it's messages and users in chat.
 
 #### Veiwing Active Rooms
+Active rooms can be viewed to left of the lobby and any active chatroom is visible at all times. The chatrooms and their information update in real time so user is always viewing this list in the state it currently is in. See below:
+
+![alt text](https://image.ibb.co/i1BhoH/Active_Chatrooms.png "Active Chatrooms Bar")
 
 #### Creating Chatrooms
+To create a new chatroom, i.e. add it to the list of active chatrooms in real-time with all corresponding functionality, user clicks the plus symbol beside the active chatroom list. User is then presented with a module over the lobby page, prompting him or her to insert name and topic of a chatroom. Once user has inserted all information he or she clicks "create" button in module which will update all user's chatroom list in real time, adding the new chatroom. It can then immediately be joined and used for communications. Invalid creations of chatrooms or creating chatrooms identical to other chatrooms will have no affect. An example of an invalid chatroom creation is not inserting a name (topic does not need to be inserted). The following figure illustrates the process of a user creating a chatroom in the system:
+
+![alt text](https://image.ibb.co/iOHQax/Create_Chatroom.png "Creating New Chatroom")
 
 #### Joining and Parting a Chatroom
+Our version of implementation of joining and parting a chatroom is quite implicit; joining happens whenever user clicks on an active chatroom in list, resulting in user parting the previous chatroom he or she was joined to. Once chatroom is joined, the chatroom along with all it's messages and active users is displayed in the center of the page. User is essentially always joined to exactly one chatroom. When user logs in, he or she is automatically joined with the lobby chatroom since it's a "constant" chatroom - i.e. without any admin/op meaning it cannot be deleted and a user cannot be kicked from it nor banned - and therefore suits well for a default chatroom. The following demonstrates when a user changes chatrooms, meaning user parts with a chatroom and joins a new one:
+
+![alt text](https://image.ibb.co/eRd92c/Join_Part.png "Joining and Parting a Chatroom")
+
+Here, the user Yoda switches chatrooms - parts with the Lobby room and joins the Jedi Council room. Once Yoda has parted with the Lobby and joined the Jedi Council, he has left the lobby, thus is not displayed in the user list of the lobby. The user list is updated in real time. Here's what the Lobby looks like to other users in the lobby after Yoda has left:
+
+
+![alt text](https://image.ibb.co/gN9tTH/Join_Part_Recipient.png "Chatroom After User Parts with it")
+
+The user list is also updated in real time when user enters a room, meaning that the user list any user in a chatroom sees is always the current user list of a chatroom.
 
 ### The Lobby: The Chatroom Component
+The chatroom is perhaps the most complex part of the lobby, containing the lobby page's most important functionality and logic. The chatroom essentially displays information on user's joined chatroom, it's message history and list of all users joined to that room.
 
 #### Sending, Viewing and Recieving of Messages in Chatroom
+All messages that are sent and recieved are done so in real time. Therefore the message history displayed each time in a chatroom is always the current state of the message history of that chatroom. Once user joins a chatroom, the chatroom's entire message history is displayed, whether user was joined to that chatroom at the time the message was sent or not. User can always send to a chatroom he or she is joined to by inputting message in a text box and clicking the 'send' button to the right of it. Immediately messages are shown to the sender and recievers. ChitChat makes a distiction between whether messages are from the current user (myself) in which case messages are displayed to the right of the chatroom and are yellow, or other users in which case messages are displayed to the left of the chatroom and are purple. Below is an example of when a users sends a message to a chatroom:
+
+![alt text](https://preview.ibb.co/haLYTH/SendMsg.png "Messages Sent to Chatroom")
 
 #### Private Messages to Other Users from Chatroom User List
+In addition to broadcasting messages to a chatroom, user can send a private message to another user. In a chatroom, the list of users have options, denoted as three dots to the right of a user list item in the active users list. Once clicked, all available options appear. The options are only two for regular users, that is to send a private message and to close options, but are more for admins/OPs which are described in a section below. Below image illustrates how to display these options for a user:
+
+![alt text](https://image.ibb.co/cKABFx/Private_Convo1.png "Options for User Displayed")
+
+When the option 'private message' is clicked (the envelope icon), the current user initiates a private conversation with that user via a private conversation module. Once a message is sent to that conversation module, the reciever is immediately presented with such a module, displaying that message from the sender. The module displays whether messages are from 'you' (current user) or from the user whom the current user is communicating with. The module stores the private messages temporarily (are lost when users exit the module) and explicitly notifies who started the conversation and when either party leaves a conversation. Below illustrates how the private conversation module works: 
+
+![alt text](https://image.ibb.co/eGgwhc/Private_Convo2.png "Example Private Conversation")
 
 #### Kicking or Banning a User from Chatroom
+A user can be kicked from a chatroom by an admin/OP, that is the user who created the chatroom. When user is kicked from a chatroom it means that the user is forced to part with that chatroom but still can re-join it if he or she pleases. In our implementation of a chatroom kick, user automatically joines the lobby when kicked since as described before, it is an optimal default chatroom. User is explicitly informed when he or she is kicked from a chatroom. The admin/OP of a chatroom kicks a user by clicking the 'kick' option icon visible in user list options (an option only visible to OPs). See below figure for an example of a kick. Here, Yoda is admin/OP of the chatroom and kicks Anakin Out:
+
+![alt text](https://image.ibb.co/bVYWFx/Kick.png "OP Kicks User from Chatroom");
+
+A user can also be banned from a chatroom by an admin/OP. When user is banned from a chatroom it means that the user is forced to part with that chatroom and cannot re-join it it. In our implementation of a chatroom ban, user automatically joines the lobby when banned since as described before, it is an optimal default chatroom. User is explicitly informed when he or she is banned from a chatroom and cannot join a chatroom (can't click it from the active chatroom bar) but can still see it, with a message reminding user he or she has been banned to join this chatroom. The admin/OP of a chatroom bans a user by clicking the 'ban' option icon visible in user list options (an option only visible to OPs). See below figure for an example of a ban. Here, Yoda is admin/OP of the chatroom and bans Anakin from ever joining his chatroom again:
+
+
+![alt text](https://ibb.co/ffJnoH "OP Bans User from Chatroom");
+
+
