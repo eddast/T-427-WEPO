@@ -1,4 +1,4 @@
-# ChitChat: Your Gateway For Better IM Experience
+# ChitChat: Your Gateway For a Better IM Experience
 ChitChat is a small IM-messaging client developed for the course T-427-WEPO Web Programming by Darri Valgarðsson, Edda Steinunn Rúnarsdóttir and Sigurður Sturla Bjarnason.
 
 ## Installation and running ChitChat
