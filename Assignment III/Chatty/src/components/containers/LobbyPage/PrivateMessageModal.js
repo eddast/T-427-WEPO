@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import Modal from 'react-modal';
 
 // Renders the modal of a private conversation between two users
@@ -16,10 +16,19 @@ class PrivateMessageModal extends React.Component {
             chatHistory: [],
             isMounted: false
         }
-
         this.server = this.context.serverAPI.server;
         this.closePrivateChatroom = this.props.closePrivateChatroom;
+    }
 
+    // Initiate listen to private message
+    // Beware of is mounted state,
+    // as these listen function can execute continously
+    // even when module has been unmounted
+    componentDidMount() {
+        this.state.isMounted = true;
+        this.server.listenToPrivateMessage((username, message) => {
+            this.handlePrivateMessageListen(username, message);
+        });
         // Catch the first message which triggered the private conversation modal
         // If the first message exists, this indicates that the conversation
         // was initiated by the other person, hence we display proper feedback for this
@@ -38,17 +47,6 @@ class PrivateMessageModal extends React.Component {
             newChatHistory.push(firstEntry);
             this.setState({chatHistory: newChatHistory});
         }
-    }
-
-    // Initiate listen to private message
-    // Beware of is mounted state,
-    // as these listen function can execute continously
-    // even when module has been unmounted
-    componentDidMount() {
-        this.state.isMounted = true;
-        this.server.listenToPrivateMessage((username, message) => {
-            this.handlePrivateMessageListen(username, message);
-        });
     }
     
     // Listen to private message from the other person
@@ -81,16 +79,18 @@ class PrivateMessageModal extends React.Component {
     // Sends message to the other user
     // updates chat history accordingly
     sendMessage() {
-        this.server.sendPrivateMessage(this.state.toUser, this.refs.messageBox.value, (sendOK) => {
-            if(sendOK) {
-                var historyEntry = 'You: ' + this.refs.messageBox.value;
-                var newChatHistory = this.state.chatHistory;
-                newChatHistory.push(historyEntry);
-                this.setState({chatHistory: newChatHistory});
-                this.refs.messageBox.value = '';
-                this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
-            }
-        })
+        if(this.state.isMounted) {
+            this.server.sendPrivateMessage(this.state.toUser, this.refs.messageBox.value, (sendOK) => {
+                if(sendOK) {
+                    var historyEntry = 'You: ' + this.refs.messageBox.value;
+                    var newChatHistory = this.state.chatHistory;
+                    newChatHistory.push(historyEntry);
+                    this.setState({chatHistory: newChatHistory});
+                    this.refs.messageBox.value = '';
+                    this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
+                }
+            });
+        }
     }
 
     // Renders the modal
@@ -105,7 +105,7 @@ class PrivateMessageModal extends React.Component {
                     <h2>Private Conversation with {this.state.toUser}</h2>
                     <div className='row messagesPrivateChat' ref='chatWindow'>
                         <ul id="privateMessages">
-                            {this.state.chatHistory.map((previousMessage) => (<li key={previousMessage}> {previousMessage} </li>))}
+                            {this.state.chatHistory.map((previousMessage, i) => (<li key={i}> {previousMessage} </li>))}
                         </ul>
                     </div>
                 </div>
@@ -127,13 +127,30 @@ class PrivateMessageModal extends React.Component {
 // Obtain server and current user
 PrivateMessageModal.contextTypes = {
     
-    serverAPI: PropTypes.shape({
-        server: PropTypes.component
+    serverAPI: propTypes.shape({
+        server: propTypes.component
     }),
 
-    currentUser: PropTypes.shape({
-        userName: PropTypes.string
+    currentUser: propTypes.shape({
+        userName: propTypes.string
     }),
 };
+
+// Documentation via propTypes
+// Required 'parameter' props for PrivateMessageModal to function
+PrivateMessageModal.propTypes = {
+    firstMessage: propTypes.string.isRequired,
+    closePrivateChatroom: propTypes.func.isRequired,
+    toUser: propTypes.string.isRequired,
+
+    // From context types (parent component/s)
+    serverAPI: propTypes.shape({
+        server: propTypes.component
+    }),
+
+    currentUser: propTypes.shape({
+        userName: propTypes.string
+    }),
+}
 
 export default PrivateMessageModal;

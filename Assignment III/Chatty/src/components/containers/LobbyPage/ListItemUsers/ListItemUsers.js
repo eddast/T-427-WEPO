@@ -1,5 +1,6 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
+import propTypes from 'prop-types';
 
 // Renders a cell in user list view
 // Has an icon indicating user is online and user name
@@ -120,5 +121,20 @@ class ListItemUsers extends React.Component {
         );
     }
 };
+
+// Documentation via propTypes
+// Required 'parameter' props for ListItemUsers to function
+ListItemUsers.propTypes = {
+    sendPrivateMessage: propTypes.func.isRequired,
+    kickOutUser: propTypes.func.isRequired,
+    banOutUser: propTypes.func.isRequired,
+    
+    chatroom: propTypes.shape({
+        name: propTypes.string,
+    //     ops: propTypes.array // TODO
+    }),
+    currentUser: propTypes.string.isRequired,
+    name: propTypes.string.isRequired,
+}
 
 export default ListItemUsers;

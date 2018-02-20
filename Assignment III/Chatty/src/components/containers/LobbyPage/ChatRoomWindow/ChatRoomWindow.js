@@ -1,7 +1,7 @@
 import React from 'react';
 import ListViewUsers from '../ListViewUsers';
 import ListItemUsers from '../ListItemUsers/ListItemUsers';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 // Renders the view on a chatroom window
 // Provides a method to swap out chatrooms in this view
@@ -167,15 +167,15 @@ class ChatRoomWindow extends React.Component {
                             <p id='windowHeading'>{this.state.chatroom.name}</p>
                             <p id='windowTopic'>{this.state.chatroom.topic}</p>  
                             <div ref='messages' className='roomMessages'>
-                                {this.state.chatroom.messageHistory.map((message) => (
-                                    <p>{this.renderRoomMessages(message)}</p>
+                                {this.state.chatroom.messageHistory.map((message, i) => (
+                                    <div key={i}>{this.renderRoomMessages(message)}</div>
                                 ))}
                             </div>
                         </div>
                     </div>
                     <div className='col-md-3 activeUsersInRoom'>
                         <ListViewUsers>
-                            {this.state.chatroom.users.map((user) => (<ListItemUsers key={user} sendPrivateMessage={this.sendPrivateMessage} kickOutUser={this.kickOutUser} banOutUser={this.banOutUser} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
+                            {this.state.chatroom.users.map((user, i) => (<ListItemUsers key={i} sendPrivateMessage={this.sendPrivateMessage} kickOutUser={this.kickOutUser} banOutUser={this.banOutUser} chatroom={this.state.chatroom} currentUser={this.props.currentUser} name={user}/>))}
                         </ListViewUsers>
                     </div>
                 </div>
@@ -196,9 +196,22 @@ class ChatRoomWindow extends React.Component {
 // Get server object for service calls
 ChatRoomWindow.contextTypes = {
     
-    serverAPI: PropTypes.shape({
-        server: PropTypes.component
+    serverAPI: propTypes.shape({
+        server: propTypes.component
     }),
 };
+
+// Documentation via propTypes
+// Required 'parameter' props for ChatRoomWindow to function
+ChatRoomWindow.propTypes = {
+    sendPrivateMessage: propTypes.func.isRequired,
+    currentUser: propTypes.string.isRequired,
+    chatroom : propTypes.shape({
+        name: propTypes.string.isRequired,
+        topic: propTypes.string.isRequired,
+        messageHistory: propTypes.array.isRequired,
+        users: propTypes.array.isRequired
+    })
+}
 
 export default ChatRoomWindow;

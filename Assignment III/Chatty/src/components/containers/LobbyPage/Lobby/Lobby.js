@@ -3,7 +3,7 @@ import ListViewChatRooms from '../ListViewChatRooms';
 import ListItemChatRooms from '..//ListItemChatRooms';
 import ChatRoomWindow from '../ChatRoomWindow/ChatRoomWindow';
 import Banner from '../../../Banner';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import Modal from 'react-modal';
 import PrivateMessageModal from '../PrivateMessageModal';
 
@@ -156,7 +156,7 @@ class Lobby extends React.Component {
                     <div className='LobbyBody'>
                         <div className='chatroomListDisplay'>
                             <ListViewChatRooms key='chatrooms' value={this.state.userList} addchatroom={() => this.addChatroomPrompt()}>
-                                {this.state.chatRoomList.map((chatroom) => ( <ListItemChatRooms key={chatroom.name} onClick={evt => this.selectChatroom(evt, chatroom)} currentUser={currentUser} value={chatroom} info={chatroom}/>))}
+                                {this.state.chatRoomList.map((chatroom, i) => ( <ListItemChatRooms key={i} onClick={evt => this.selectChatroom(evt, chatroom)} currentUser={currentUser} value={chatroom} info={chatroom}/>))}
                             </ListViewChatRooms>
                         </div>
                         <ChatRoomWindow sendPrivateMessage={this.sendPrivateMessage} key='window' ref='window' currentUser={currentUser} chatroom={this.state.selectedChatroom}/>
@@ -234,19 +234,19 @@ class Lobby extends React.Component {
 
 // Variables lobby needs from parent context
 Lobby.contextTypes = {
-
-    routeTools: PropTypes.shape({
-        redirect: PropTypes.component,
-    }),
     
-    serverAPI: PropTypes.shape({
-        server: PropTypes.component
-    }),
-
-    currentUser: PropTypes.shape({
-        userName: PropTypes.string
-    }),
+    serverAPI: propTypes.shape({
+        server: propTypes.component
+    })
 };
 
+// Documentation via propTypes
+// Required 'parameter' props for Lobby to function
+// Same as it's contextType declaration declared in parent component
+Lobby.propTypes = {
+    serverAPI: propTypes.shape({
+        server: propTypes.component
+    })
+}
 
 export default Lobby;
