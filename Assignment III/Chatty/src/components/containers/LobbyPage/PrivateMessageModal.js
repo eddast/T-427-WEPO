@@ -16,10 +16,19 @@ class PrivateMessageModal extends React.Component {
             chatHistory: [],
             isMounted: false
         }
-
         this.server = this.context.serverAPI.server;
         this.closePrivateChatroom = this.props.closePrivateChatroom;
+    }
 
+    // Initiate listen to private message
+    // Beware of is mounted state,
+    // as these listen function can execute continously
+    // even when module has been unmounted
+    componentDidMount() {
+        this.state.isMounted = true;
+        this.server.listenToPrivateMessage((username, message) => {
+            this.handlePrivateMessageListen(username, message);
+        });
         // Catch the first message which triggered the private conversation modal
         // If the first message exists, this indicates that the conversation
         // was initiated by the other person, hence we display proper feedback for this
@@ -38,17 +47,6 @@ class PrivateMessageModal extends React.Component {
             newChatHistory.push(firstEntry);
             this.setState({chatHistory: newChatHistory});
         }
-    }
-
-    // Initiate listen to private message
-    // Beware of is mounted state,
-    // as these listen function can execute continously
-    // even when module has been unmounted
-    componentDidMount() {
-        this.state.isMounted = true;
-        this.server.listenToPrivateMessage((username, message) => {
-            this.handlePrivateMessageListen(username, message);
-        });
     }
     
     // Listen to private message from the other person
@@ -81,16 +79,18 @@ class PrivateMessageModal extends React.Component {
     // Sends message to the other user
     // updates chat history accordingly
     sendMessage() {
-        this.server.sendPrivateMessage(this.state.toUser, this.refs.messageBox.value, (sendOK) => {
-            if(sendOK) {
-                var historyEntry = 'You: ' + this.refs.messageBox.value;
-                var newChatHistory = this.state.chatHistory;
-                newChatHistory.push(historyEntry);
-                this.setState({chatHistory: newChatHistory});
-                this.refs.messageBox.value = '';
-                this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
-            }
-        })
+        if(this.state.isMounted) {
+            this.server.sendPrivateMessage(this.state.toUser, this.refs.messageBox.value, (sendOK) => {
+                if(sendOK) {
+                    var historyEntry = 'You: ' + this.refs.messageBox.value;
+                    var newChatHistory = this.state.chatHistory;
+                    newChatHistory.push(historyEntry);
+                    this.setState({chatHistory: newChatHistory});
+                    this.refs.messageBox.value = '';
+                    this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
+                }
+            });
+        }
     }
 
     // Renders the modal
