@@ -1,6 +1,6 @@
 import React from 'react';
 import ListViewUsers from './ListViewUsers';
-import ListItemUsers from './ListItemUsers';
+import ListItemUsers from './ListItemUsers/ListItemUsers';
 import PropTypes from 'prop-types';
 
 // Renders the view on a chatroom window
