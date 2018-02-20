@@ -6,13 +6,13 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Redirect } from 'react-router';
 import InitialPage from './components/containers/InitialPageNickname/InitialPage/InitialPage';
 import Lobby from './components/containers/LobbyPage/Lobby/Lobby'
-import Server from './services/API';
+import Service from './services/API';
 
 class App extends React.Component {
 
     constructor(props, ctx) {
         super(props, ctx);
-        Server.connect();
+        Service.connect();
     }
 
     // Values to pass to each child component
@@ -22,7 +22,7 @@ class App extends React.Component {
                 redirect: Redirect
             },
             serverAPI : {
-                server: Server
+                server: Service
             },
             currentUser : {
                 userName: 'nobody'

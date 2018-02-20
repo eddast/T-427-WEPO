@@ -3,7 +3,7 @@
  */
 import * as io from 'socket.io-client';
 
-var Server = {
+var Service = {
 
     socket : null,
     connect: function() {
@@ -171,4 +171,4 @@ var Server = {
 
 }
 
-export default Server;
+export default Service;
