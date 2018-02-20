@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 // import { SocketIO, Server } from "mock-socket";
 import ListItemUsers from "./ListItemUsers";
+import propTypes from "prop-types";
 
 jest.useFakeTimers();
 
@@ -38,10 +39,23 @@ describe("List Item tests", () => {
     const component = shallow(<ListItemUsers />, {});
     component.state().seesOptions = true;
     component.isAdminOfChatrrom = true;
-    // component.props.name = 'Stulli';
-    // component.props.currentUser = 'Darrína';
+
+    component.propTypes = {
+      sendPrivateMessage: propTypes.func.isRequired,
+      kickOutUser: propTypes.func.isRequired,
+      banOutUser: propTypes.func.isRequired,
+      
+      chatroom: propTypes.shape({
+          name: propTypes.string,
+      //     ops: propTypes.array // TODO
+      }),
+      currentUser: 'Stullman',
+      name: 'Darína',
+    }
+
+    //This is not working properly, and we do not know why
+    //Does not find one note with id banIcon
     // component.find('#banIcon').simulate('click');
-    
 
     expect(component.state().seesOptions).toEqual(true);
     expect(component.isAdminOfChatrrom).toEqual(true);
