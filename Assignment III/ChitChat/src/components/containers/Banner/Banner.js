@@ -1,5 +1,5 @@
 import React from 'react';
-// import Logo from '../resources/Icon.svg';
+import Logo from '../../../resources/Icon.svg';
 
 class Banner extends React.Component {
 
@@ -7,7 +7,7 @@ class Banner extends React.Component {
         return (
             <div className='bannerDiv'>
                 <div className='centerHeading'>
-                    {/* <Logo id='bannerImg' width={120} height={80}/> */}
+                    <Logo id='bannerImg' width={120} height={80}/>
                     <span id='bannerTitle'>CHITCHAT</span>
                 </div>
                 <div className='row'>

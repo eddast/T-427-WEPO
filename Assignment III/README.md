@@ -67,7 +67,7 @@ The chatroom is perhaps the most complex part of the Lobby page, containing the 
 #### Sending, Viewing and Recieving of Messages in Chatroom
 All messages that are sent and recieved are done so in real time. Therefore the message history displayed each time in a chatroom is always the current state of the message history of that chatroom. Once user joins a chatroom, the chatroom's entire message history is displayed, whether user was joined to that chatroom at the time the message was sent or not. The message history displayed is scrollable, and when user sends a message it automatically scrolls down to it. User can always send to a chatroom he or she is joined to by inputting message in a text box and clicking the 'send' button to the right of it. Immediately messages are shown to the sender and recievers. ChitChat makes a distiction between whether messages are from the current user (myself) in which case messages are displayed to the right of the chatroom and are yellow, or other users in which case messages are displayed to the left of the chatroom and are purple. Below is an example of when a users sends a message to a chatroom:
 
-![alt text](https://preview.ibb.co/haLYTH/SendMsg.png "Messages Sent to Chatroom")
+![alt text](https://image.ibb.co/neXE2c/send.png "Messages Sent to Chatroom")
 
 #### Private Messages to Other Users from Chatroom User List
 In addition to broadcasting messages to a chatroom, user can send a private message to another user. In a chatroom, the list of users is displayed for all users in chatroom and the list is scrollable when many users enough are in chatroom. The users in the user list have options, denoted as three dots to the right of a user list item in the active users list. Once clicked, all available options appear. The options are only two for regular users, that is to send a private message and to close options, but are more for admins/OPs which are described in a section below. Below image illustrates how to display these options for a user:
@@ -89,5 +89,8 @@ A user can also be banned from a chatroom by an admin/OP. When user is banned fr
 ![alt text](https://image.ibb.co/jvvYTH/Ban.png "OP Bans User from Chatroom")
 
 ## Known Limitations
+### Functionality
 When a user is currently in a private conversation with another user, neither users can be private messaged by a third party. This is because once in a private converstation, both users in that conversation focus only on messages from each other. Due to lack of time and reluctancy to change 'chatserver.js' more than needed, this was not fixed before the due date of the assignment.
+### Testing
+We did not feel that the 'tools' we were given by lectures and lab classes were in any way adequate for us to actually be able to test a project on the level of our project. We did not have enough examples of Jest testing nor knowledge of the matter, even after watching the one lecture that covered this multiple times and even after hours and hours of Google-ing. We tried our best but we could not get anywhere with the tests, so only the dummy component InitialPage.js and the small component NicknameChoice.js are fully tested. Also, we could not surpress an annoying error that npm test yielded which involved that loading .svg images was not possible, despite having included an svg-loader in our webpack and despite that it works fine on npm start.
 

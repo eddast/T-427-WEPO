@@ -24,7 +24,9 @@ module.exports = {
                         options: { jsx: true }
                     }
                 ]
-            }
+            },
+            { test: /(\.css$)/, loaders: ['style-loader', 'css-loader', 'postcss-loader'] },
+            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
         ]
     },
     watch: true,
@@ -34,12 +36,12 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        port: 9023,
+        port: 9000,
         open: true
     },
     devtool: 'inline-source-map',
     plugins: [new HtmlWebpackPlugin({
-        title: 'ChatRoomJS',
+        title: 'PizzeriaUno',
         template: './index.html'
     })]
 };
