@@ -2,8 +2,8 @@ body {
     
     background-color: #fc7a00;
 
-    .initialPage {
-        background-image: url('https://image.ibb.co/bwCZDH/Pizza_Background.jpg');
+    .pizzaBackground {
+        background-image: url('http://www.gsfdcy.com/data/img/66/1904933-pizza-wallpaper.jpg');
         background-size: cover;
         min-height:150%;
         background-repeat: no-repeat;
@@ -14,70 +14,104 @@ body {
         top: 0;
         left: 0;
         z-index: -100; 
+    }
 
-        .initialPageContainer {
-            margin: auto 0;
+    .initialPageContainer {
+        margin: auto 0;
+        padding: 15px;
+        text-align: center;
+        background: #2b0909c5;
+
+        #greeting {
             margin: 20px;
-            padding: 15px;
-            margin-left: 100px;
-            margin-right: 100px;
-            margin-top: 40px;
+            font-family: Helvetica, sans-serif;
+            text-transform: uppercase;
+            font-size: 20px;
+            color: white;
+            margin-left: 25px;
+            font-stretch: ultra-expanded;
+        }
+
+        #tagline {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 220px;
             text-align: center;
-            background: #2b0909d3;
-            border : 4px solid #2b0909d8;
-            border-radius: 20px;
+            font-family: Brush Script MT, Courier New, Courier, monospace;
+            font-size: 35px;
+            color: white;
+            text-shadow: 2px 2px 4px #ff0000;
+            background: #0000009a;
+        }
 
-            #greeting {
-                margin: 20px;
-                font-family: Helvetica, sans-serif;
-                text-transform: uppercase;
-                font-size: 20px;
-                color: white;
-                margin-left: 25px;
-                font-stretch: ultra-expanded;
+        #logo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 24%;
+        }
+
+        .optionBar {
+            margin: 10px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-family: Helvetica, sans-serif;
+            font-weight: bolder;
+            font-stretch: extra-expanded;
+            font-size: 21px;
+            color: white;
+            margin-left: 25px;
+            text-shadow: 3px 3px 4px #070707;
+            cursor: pointer;
+
+            .options {
+                margin: 55px;
+                background: #fdf90196;
+                border: 2px solid black;
+                padding: 10px 15px 10px 15px;
+                border-radius: 20px;
             }
-
-            #tagline {
-                margin: 12px;
-                font-family: Brush Script MT, Courier New, Courier, monospace;
-                font-size: 35px;
-                color: white;
-                text-shadow: 2px 2px 4px #ff0000;
-            }
-
-            #logo {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 28%;
-            }
-
-            .optionBar {
-                margin: 10px;
-                margin-top: 50px;
-                margin-bottom: 20px;
-                text-transform: uppercase;
-                font-family: Helvetica, sans-serif;
-                font-weight: bolder;
-                font-stretch: extra-expanded;
-                font-size: 20px;
-                color: white;
-                margin-left: 25px;
+            
+            .options:hover {
+                color: #fc7a00;
+                background: #fdf90156;
                 text-shadow: 2px 2px 4px #070707;
-                cursor: pointer;
-
-                .options {
-                    margin: 50px;
-                    background: #db572367;
-                    padding: 10px 15px 10px 15px;
-                    border-radius: 20px;
-                }
-                
-                .options:hover {
-                    color: #fc7a00;
-                    text-shadow: 2px 2px 4px #070707;
-                }
             }
+        }
+    }
+
+    .loaderPage {
+        background: #2b0909bb;
+        padding: 20px;
+
+        #loadImage {
+            margin-top: 60px;
+            margin-bottom: 40px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 17%;
+            animation: Loader-spin infinite 1500ms linear;
+        }
+
+        @keyframes Loader-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #loadingMessage {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+            text-align: center;
+            font-family: Brush Script MT, Courier New, Courier, monospace;
+            font-size: 50px;
+            color: white;
+            text-shadow: 2px 2px 4px #ff0000;
+            background: black;
         }
     }
 }
