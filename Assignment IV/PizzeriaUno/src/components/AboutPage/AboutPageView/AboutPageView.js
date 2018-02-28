@@ -4,7 +4,7 @@ import AboutPageBody from '../AboutPageBody/AboutPageBody';
 
 const AboutPageView = () => {
     return(
-        <div>
+        <div className="pizzaBackground">
             <NavigationBar />
             <AboutPageBody />
         </div>

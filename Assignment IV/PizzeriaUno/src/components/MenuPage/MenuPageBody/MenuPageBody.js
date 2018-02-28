@@ -9,7 +9,8 @@ class MenuPageBody extends React.Component {
     constructor (props, ctx) {
         super(props, ctx);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            selectedPizza: null
         };
     }
 
@@ -22,13 +23,17 @@ class MenuPageBody extends React.Component {
     render() {
         const { pizza } = this.props;
         if(this.state.isLoading) { return <LoadingScreen />; }
-        return (
-            <div className='row menuBody'>
-                <div className='pizzasInMenu'>
-                    {pizza.map(p => <PizzaListItem key={p.id} pizza={p}/>)}
+        if(this.state.selectedPizza === null) {
+            return (
+                <div className='row menuBody'>
+                    <div className='pizzasInMenu'>
+                        {pizza.map(p => <PizzaListItem key={p.id} pizza={p}/>)}
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+
+        return <div />;
     }
 };
 

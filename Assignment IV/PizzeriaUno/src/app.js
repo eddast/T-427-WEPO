@@ -9,6 +9,7 @@ import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import About from './components/AboutPage/AboutPageView/AboutPageView';
 import Menu from './components/MenuPage/MenuPageView/MenuPageView';
 import Offers from './components/OfferPage/OfferPageView/OfferPageView';
+// import Pizza from './components/MenuPage/PizzaDetailView/PizzaDetailView';
 import Home from './components/HomePage/HomePage';
 import '../styles/site';
 

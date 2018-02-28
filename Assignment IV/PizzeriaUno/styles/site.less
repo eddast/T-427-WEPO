@@ -19,7 +19,8 @@ body {
         text-align: center;
         background: #2b0909c5;
         display: block;
-        height: 550px;
+        height: 100%;
+        overflow: hidden;
 
         #greeting {
             margin: 20px;
@@ -87,7 +88,7 @@ body {
     .loaderPage {
         background: #2b0909bb;
         padding: 20px;
-        height: 550px;
+        height: 100%;
 
         #loadImage {
             margin-top: 60px;
@@ -199,6 +200,10 @@ body {
             }
             .pizzaDescription {
                 padding: 10px;
+                font-family: Helvetica, sans-serif;
+                font-size: 13px;
+                font-style: italic;
+                color: #3a3636;
             }
             .pizzaPrice {
                 font-family: Helvetica, sans-serif;
@@ -211,32 +216,38 @@ body {
 
         .pizzaOptions {
             height: 7%;
-            font-family: Helvetica, sans-serif;
-            font-weight: bold;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: 200;
             text-transform: uppercase;
-            font-size: 14px;
-            color: white;
-            text-shadow: 1px 1px 1px black;
+            font-size: 12px;
+            color: black;
 
             .pizzaDetails {
                 width: 43%;
                 margin-right: 20px;
                 margin-left: 0px;
-                background: green;
-                padding: 10px;
+                background: #435a25ce;
+                padding: 5px;
+                padding-right: 30px;
                 float: right;
                 border-radius: 0px 0px 20px 0px;
-
+                border: 2px solid black;
+                text-align: center;
+                cursor: pointer;
             }
 
             .pizzaOrder {
                 width: 43%;
                 margin-left: 20px;
                 margin-right: 0px;
-                background: yellow;
-                padding: 10px;
+                background: #fcc100ab;
+                padding: 5px;
+                padding-left: 20px;
                 float: left;
                 border-radius: 0px 0px 0px 20px;
+                border: 2px solid black;
+                text-align: center;
+                cursor: pointer;
             }
         }
     }

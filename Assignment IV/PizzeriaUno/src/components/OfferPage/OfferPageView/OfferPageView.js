@@ -4,7 +4,7 @@ import OfferPageBody from '../OfferPageBody/OfferPageBody';
 
 const OfferPageView = () => {
     return(
-        <div>
+        <div className="pizzaBackground">
             <NavigationBar />
             <OfferPageBody />
         </div>
