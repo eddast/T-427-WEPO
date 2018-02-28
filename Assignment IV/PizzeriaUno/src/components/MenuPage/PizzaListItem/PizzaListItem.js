@@ -9,7 +9,7 @@ const PizzaListItem = ({ pizza }) => {
                 <p className="pizzaName">{name}</p>
                 <span><img className="pizzaImg" src={image} alt={name} /></span>
                 <p className="pizzaDescription">{description}</p>
-                <p className="pizzaPrice">{price},-</p>
+                <p className="pizzaPrice">{price} kr</p>
             </div>
             <div className="pizzaOptions">
                 <span className="pizzaOrder">YUM! Order!</span>
