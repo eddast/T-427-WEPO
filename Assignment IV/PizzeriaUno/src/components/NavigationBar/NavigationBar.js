@@ -24,12 +24,11 @@ const NavigationBar = () => {
     return (
         <div className="pizzaBackground NavigationBar">
             <nav id="navBar">
-                <img id='navBarLogo'src={Logo} alt="Home Page" />
                 <NavLink
                     exact
                     to="/"
                     activeClassName="active"
-                    className="navBarItem">Home</NavLink>
+                    id="navBarLogo"><img id='navBarLogo'src={Logo} alt="Home Page" /></NavLink>
                 <NavLink
                     to="/pizzas"
                     activeClassName="active"

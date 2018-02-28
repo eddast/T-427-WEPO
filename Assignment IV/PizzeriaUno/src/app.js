@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom';
 import '../styles/site';
 import InitialPage from './components/InitialPage/InitialPage';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
-// import NavBar from './components/NavigationBar/NavigationBar';
 import AboutPage from './components/AboutPage/AboutPage';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
+// import reducers from './reducers/reducers';
 
 class App extends React.Component {
-
-    // Renders route paths, i.e. InitialPage as '/'
     render() {
         return RouterPaths;
     }
@@ -28,4 +27,5 @@ var RouterPaths = (
     </Switch>
 );
 
+// ReactDOM.render(<Provider store={createStore()}><Router><App /></Router></Provider>, document.getElementById('app'));
 ReactDOM.render(<Router><App /></Router>, document.getElementById('app'));
