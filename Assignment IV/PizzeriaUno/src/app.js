@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import '../styles/site';
 import InitialPage from './components/InitialPage/InitialPage';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
-import AboutPage from './components/AboutPage/AboutPageView/AboutPageView';
+import About from './components/AboutPage/AboutPageView/AboutPageView';
+import Menu from './components/MenuPage/MenuPageView/MenuPageView';
+import Offers from './components/OfferPage/OfferPageView/OfferPageView';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // import { Provider } from 'react-redux';
 // import { createStore } from 'redux';
@@ -19,10 +21,10 @@ class App extends React.Component {
 var RouterPaths = (
     <Switch>
         <Route exact path='/' component={InitialPage} />
-        <Route exact path='/pizzas' component={LoadingScreen} />
-        <Route exact path='/offers' component={LoadingScreen} />
+        <Route exact path='/pizzas' component={Menu} />
+        <Route exact path='/offers' component={Offers} />
         <Route exact path='/cart' component={LoadingScreen} />
-        <Route exact path='/about' component={AboutPage} />
+        <Route exact path='/about' component={About} />
         <div> 404 not found </div>
     </Switch>
 );

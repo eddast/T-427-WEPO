@@ -1,9 +1,9 @@
 import React from 'react';
 
-const AboutPageBody = () => {
+const OfferPageBody = () => {
     return (
-        <div className='row aboutPageBody belowNavBarComponent'>
-            <h1>About Us</h1>
+        <div className='row offerBody belowNavBarComponent'>
+            <h1>Offers</h1>
             <p>
                 Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say
                 that they were perfectly normal, thank you very much. They were the last
@@ -42,6 +42,6 @@ const AboutPageBody = () => {
             </p>
         </div>
     );
-}
+};
 
-export default AboutPageBody;
+export default OfferPageBody;

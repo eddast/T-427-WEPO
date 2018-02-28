@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../../resources/PizzeriaUno.png';
+import FontAwesome from 'react-fontawesome';
 
 const InitialPage = () => {
     return(
@@ -9,10 +10,10 @@ const InitialPage = () => {
                 <img id='logo' src={Logo} alt='logo'/>
                 <h2 id='tagline'>"Love at first bite"</h2>
                 <div className='optionBar'>
-                    <a href='/pizzas' className='options'>M e n u</a>
-                    <a href='/offers' className='options'>O f f e r s</a>
-                    <a href='/about' className='options'>A b o u t &nbsp; U s</a>
-                    <a href='/cart' className='options'>C a r t</a>
+                    <a href='/pizzas' className='options'>M e n u &nbsp;&nbsp;<FontAwesome name='fire'/></a>
+                    <a href='/offers' className='options'>O f f e r s &nbsp;&nbsp;<FontAwesome name='thumbs-up'/></a>
+                    <a href='/cart' className='options'>C a r t &nbsp;&nbsp;<FontAwesome name='shopping-cart'/></a>
+                    <a href='/about' className='options'>A b o u t &nbsp; U s &nbsp;&nbsp;<FontAwesome name='info-circle'/></a>
                 </div>
             </div>
         </div>
