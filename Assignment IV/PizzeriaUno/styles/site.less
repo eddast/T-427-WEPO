@@ -12,7 +12,7 @@ body {
         height: 100%;
         position: fixed;
         top: 0;
-        left: 0;
+        left: 0; 
         z-index: -100; 
     }
 
@@ -21,6 +21,8 @@ body {
         padding: 15px;
         text-align: center;
         background: #2b0909c5;
+        display: block;
+        height: 600px;
 
         #greeting {
             margin: 20px;
@@ -30,6 +32,7 @@ body {
             color: white;
             margin-left: 25px;
             font-stretch: ultra-expanded;
+            overflow: hidden;
         }
 
         #tagline {
@@ -39,7 +42,7 @@ body {
             width: 220px;
             text-align: center;
             font-family: Brush Script MT, Courier New, Courier, monospace;
-            font-size: 35px;
+            font-size: 32px;
             color: white;
             text-shadow: 2px 2px 4px #ff0000;
             background: #0000009a;
@@ -49,18 +52,18 @@ body {
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 24%;
+            width: 22%;
         }
 
         .optionBar {
             margin: 10px;
-            margin-top: 50px;
+            margin-top: 70px;
             margin-bottom: 20px;
             text-transform: uppercase;
             font-family: Helvetica, sans-serif;
             font-weight: bolder;
             font-stretch: extra-expanded;
-            font-size: 21px;
+            font-size: 20px;
             color: white;
             margin-left: 25px;
             text-shadow: 3px 3px 4px #070707;
@@ -72,12 +75,14 @@ body {
                 border: 2px solid black;
                 padding: 10px 15px 10px 15px;
                 border-radius: 20px;
+                color: white;
             }
             
             .options:hover {
                 color: #fc7a00;
                 background: #fdf90156;
                 text-shadow: 2px 2px 4px #070707;
+                text-decoration: none;
             }
         }
     }
@@ -85,6 +90,7 @@ body {
     .loaderPage {
         background: #2b0909bb;
         padding: 20px;
+        height: 600px;
 
         #loadImage {
             margin-top: 60px;
@@ -113,5 +119,59 @@ body {
             text-shadow: 2px 2px 4px #ff0000;
             background: black;
         }
+    }
+
+    .NavigationBar {
+        display: block;
+
+        #navBar {
+            display: inline-block;
+            background: #0f1111f8;
+            padding: 10px;
+            width: 100%;
+            height: 117px;
+
+            #navBarLogo {
+                width: 12%;
+                padding-left: 10px;
+                padding-right: 50px;
+            }
+
+            .navBarItem {
+                margin-top: 10px;
+                padding: 2px 40px 10px 2px;
+                padding-right: 70px;
+                font-family: Brush Script MT, Courier New, Courier, monospace;
+                font-size: 30px;
+                color: white;
+                text-shadow: 2px 2px 4px #ff0000;
+            }
+
+            .navBarItem:hover {
+                text-decoration: none;
+                color: #fc7a00;
+                text-shadow: 1px 1px 1px white;
+            }
+
+            .navBarItemRight {
+                margin-top: 15px;
+                float: right;
+            }
+        }
+    }  
+    .belowNavBarComponent {
+        // Total: 600px, a standard for the website
+        margin-top: 117px;
+        height: 483px;
+    }
+    
+    .aboutPageBody {
+        display: block;
+        padding: 120px;
+        padding-top: 30px;
+        background-color: #2b0909d3;
+        border-radius: 1px 1px 20px 20px;
+        font-family: Helvetica, sans-serif;
+        color: white;
     }
 }
