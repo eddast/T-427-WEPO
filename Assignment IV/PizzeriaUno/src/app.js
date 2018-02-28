@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import '../styles/site';
 import InitialPage from './components/InitialPage/InitialPage';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
-import AboutPage from './components/AboutPage/AboutPage';
+import AboutPage from './components/AboutPage/AboutPageView/AboutPageView';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // import { Provider } from 'react-redux';
 // import { createStore } from 'redux';
