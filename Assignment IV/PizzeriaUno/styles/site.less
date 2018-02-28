@@ -119,28 +119,56 @@ body {
         }
     }
 
-    #navBar {
-        display: inline-block;
-        background: #25323ac9;
-        padding: 10px;
-        width: 100%;
+    .NavigationBar {
+        display: block;
 
-        #navBarLogo {
-            width: 12%;
-            padding-right: 70px;
-        }
+        #navBar {
+            display: inline-block;
+            background: #1a2227ee;
+            padding: 10px;
+            width: 100%;
 
-        .navBarItem {
-            padding: 2px 40px 10px 2px;
-            padding-right: 80px;
-            font-family: Brush Script MT, Courier New, Courier, monospace;
-            font-size: 25px;
-            color: white;
-            text-shadow: 2px 2px 4px #ff0000;
+            #navBarLogo {
+                width: 13%;
+                padding-left: 20px;
+                padding-right: 70px;
+            }
+
+            .navBarItem {
+                margin-top: 10px;
+                padding: 2px 40px 10px 2px;
+                padding-right: 70px;
+                font-family: Brush Script MT, Courier New, Courier, monospace;
+                font-size: 30px;
+                color: white;
+                text-shadow: 2px 2px 4px #ff0000;
+            }
+
+            .navBarItem:hover {
+                text-decoration: none;
+                color: #fc7a00;
+                text-shadow: 1px 1px 1px white;
+            }
+
+            .navBarItemRight {
+                margin-top: 15px;
+                float: right;
+            }
         }
-        .navBarItemRight {
-            margin-top: 10px;
-            float: right;
-        }
+    }  
+    .belowNavBarComponent {
+        margin-top: 150px;
+    }
+    
+    .aboutPageBody {
+        display: block;
+        margin-left: 100px;
+        margin-right: 100px;
+        min-height: 90%;
+        min-width: 85%;
+        padding: 30px;
+        background-color: #1d0606cc;
+        font-family: Helvetica, sans-serif;
+        color: white;
     }
 }
