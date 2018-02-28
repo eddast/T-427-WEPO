@@ -12,7 +12,7 @@ body {
         height: 100%;
         position: fixed;
         top: 0;
-        left: 0;
+        left: 0; 
         z-index: -100; 
     }
 
@@ -21,6 +21,7 @@ body {
         padding: 15px;
         text-align: center;
         background: #2b0909c5;
+        display: block;
 
         #greeting {
             margin: 20px;
@@ -30,6 +31,7 @@ body {
             color: white;
             margin-left: 25px;
             font-stretch: ultra-expanded;
+            overflow: hidden;
         }
 
         #tagline {
@@ -39,7 +41,7 @@ body {
             width: 220px;
             text-align: center;
             font-family: Brush Script MT, Courier New, Courier, monospace;
-            font-size: 35px;
+            font-size: 32px;
             color: white;
             text-shadow: 2px 2px 4px #ff0000;
             background: #0000009a;
@@ -49,18 +51,18 @@ body {
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 24%;
+            width: 22%;
         }
 
         .optionBar {
             margin: 10px;
-            margin-top: 50px;
+            margin-top: 70px;
             margin-bottom: 20px;
             text-transform: uppercase;
             font-family: Helvetica, sans-serif;
             font-weight: bolder;
             font-stretch: extra-expanded;
-            font-size: 21px;
+            font-size: 20px;
             color: white;
             margin-left: 25px;
             text-shadow: 3px 3px 4px #070707;
@@ -72,12 +74,14 @@ body {
                 border: 2px solid black;
                 padding: 10px 15px 10px 15px;
                 border-radius: 20px;
+                color: white;
             }
             
             .options:hover {
                 color: #fc7a00;
                 background: #fdf90156;
                 text-shadow: 2px 2px 4px #070707;
+                text-decoration: none;
             }
         }
     }
@@ -112,6 +116,31 @@ body {
             color: white;
             text-shadow: 2px 2px 4px #ff0000;
             background: black;
+        }
+    }
+
+    #navBar {
+        display: inline-block;
+        background: #25323ac9;
+        padding: 10px;
+        width: 100%;
+
+        #navBarLogo {
+            width: 12%;
+            padding-right: 70px;
+        }
+
+        .navBarItem {
+            padding: 2px 40px 10px 2px;
+            padding-right: 80px;
+            font-family: Brush Script MT, Courier New, Courier, monospace;
+            font-size: 25px;
+            color: white;
+            text-shadow: 2px 2px 4px #ff0000;
+        }
+        .navBarItemRight {
+            margin-top: 10px;
+            float: right;
         }
     }
 }
