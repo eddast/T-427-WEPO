@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../../resources/PizzeriaUno.png';
 import FontAwesome from 'react-fontawesome';
 
-const InitialPage = () => {
+const HomePage = () => {
     return(
         <div className='pizzaBackground'>
             <div className='initialPageContainer'>
@@ -20,4 +20,4 @@ const InitialPage = () => {
     );
 };
 
-export default InitialPage;
+export default HomePage;

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../styles/site';
-import InitialPage from './components/InitialPage/InitialPage';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import About from './components/AboutPage/AboutPageView/AboutPageView';
 import Menu from './components/MenuPage/MenuPageView/MenuPageView';
 import Offers from './components/OfferPage/OfferPageView/OfferPageView';
+import Home from './components/HomePage/HomePage';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // import { Provider } from 'react-redux';
 // import { createStore } from 'redux';
@@ -20,7 +20,7 @@ class App extends React.Component {
 // Available paths in app
 var RouterPaths = (
     <Switch>
-        <Route exact path='/' component={InitialPage} />
+        <Route exact path='/' component={Home} />
         <Route exact path='/pizzas' component={Menu} />
         <Route exact path='/offers' component={Offers} />
         <Route exact path='/cart' component={LoadingScreen} />
