@@ -1,77 +1,81 @@
 body {
+    
     background-color: #fc7a00;
-    background-image: url('https://image.ibb.co/bwCZDH/Pizza_Background.jpg');
-    background-size: cover;
-    min-height:150%;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    width : 100%;
-    height: 150%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -100; 
 
     .initialPage {
-        margin: auto 0;
-        margin: 40px;
-        padding: 15px;
-        margin-left: 100px;
-        margin-right: 100px;
-        text-align: center;
-        background: #2b0909d3;
-        border : 4px solid #2b0909d8;
-        border-radius: 20px;
+        background-image: url('https://image.ibb.co/bwCZDH/Pizza_Background.jpg');
+        background-size: cover;
+        min-height:150%;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        width : 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -100; 
 
-        #greeting {
-            margin: 20px;
-            font-family: Helvetica, sans-serif;
-            text-transform: uppercase;
-            font-size: 20px;
-            color: white;
-            margin-left: 25px;
-            font-stretch: ultra-expanded;
-        }
+        .initialPageContainer {
+            margin: auto 0;
+            margin: 40px;
+            padding: 15px;
+            margin-left: 100px;
+            margin-right: 100px;
+            text-align: center;
+            background: #2b0909d3;
+            border : 4px solid #2b0909d8;
+            border-radius: 20px;
 
-        #tagline {
-            margin: 12px;
-            font-family: Brush Script MT, Courier New, Courier, monospace;
-            font-size: 35px;
-            color: white;
-            text-shadow: 2px 2px 4px #ff0000;
-        }
-
-        #logo {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 30%;
-        }
-
-        .optionBar {
-            margin: 10px;
-            margin-top: 50px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            font-family: Helvetica, sans-serif;
-            font-weight: bolder;
-            font-stretch: extra-expanded;
-            font-size: 20px;
-            color: white;
-            margin-left: 25px;
-            text-shadow: 2px 2px 4px #070707;
-            cursor: pointer;
-
-            .options {
-                margin: 50px;
-                background: #db572367;
-                padding: 10px 15px 10px 15px;
-                border-radius: 20px;
+            #greeting {
+                margin: 20px;
+                font-family: Helvetica, sans-serif;
+                text-transform: uppercase;
+                font-size: 20px;
+                color: white;
+                margin-left: 25px;
+                font-stretch: ultra-expanded;
             }
-            
-            .options:hover {
-                color: #fc7a00;
+
+            #tagline {
+                margin: 12px;
+                font-family: Brush Script MT, Courier New, Courier, monospace;
+                font-size: 35px;
+                color: white;
+                text-shadow: 2px 2px 4px #ff0000;
+            }
+
+            #logo {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 30%;
+            }
+
+            .optionBar {
+                margin: 10px;
+                margin-top: 50px;
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                font-family: Helvetica, sans-serif;
+                font-weight: bolder;
+                font-stretch: extra-expanded;
+                font-size: 20px;
+                color: white;
+                margin-left: 25px;
                 text-shadow: 2px 2px 4px #070707;
+                cursor: pointer;
+
+                .options {
+                    margin: 50px;
+                    background: #db572367;
+                    padding: 10px 15px 10px 15px;
+                    border-radius: 20px;
+                }
+                
+                .options:hover {
+                    color: #fc7a00;
+                    text-shadow: 2px 2px 4px #070707;
+                }
             }
         }
     }
