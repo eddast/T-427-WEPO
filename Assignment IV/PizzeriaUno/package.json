@@ -39,6 +39,7 @@
   "dependencies": {
     "express": "4.16.2",
     "font-awesome": "^4.7.0",
+    "isomorphic-fetch": "^2.2.1",
     "mock-socket": "^7.1.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
@@ -52,6 +53,7 @@
     "react-scripts": "1.0.17",
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "socket.io": "2.0.3",
     "socket.io-client": "^1.7.2"
   }

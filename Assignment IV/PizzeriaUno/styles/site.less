@@ -1,5 +1,4 @@
 body {
-    
     background-color: #fc7a00;
 
     .pizzaBackground {
@@ -7,10 +6,8 @@ body {
         background-size: cover;
         min-height:150%;
         background-repeat: no-repeat;
-        overflow: hidden;
         width : 100%;
         height: 100%;
-        position: fixed;
         top: 0;
         left: 0; 
         z-index: -100; 
@@ -123,6 +120,7 @@ body {
 
     .NavigationBar {
         display: block;
+        z-index: 1000;
 
         #navBar {
             display: inline-block;
@@ -158,22 +156,88 @@ body {
                 float: right;
             }
         }
-    }  
-    .belowNavBarComponent {
-        // Total: 600px, a standard for the website
-        margin-top: 117px;
-        height: 433px;
     }
     
     .menuBody,
     .offerBody,
     .aboutPageBody {
         display: block;
-        padding: 120px;
+        padding: 40px;
         padding-top: 15px;
-        background-color: #2b0909d3;
+        background-color: #2b0909c5;
         border-radius: 1px 1px 20px 20px;
         font-family: Helvetica, sans-serif;
         color: white;
+        align-content: center;
+    }
+
+    .pizzaWrapper {
+        display: inline-block;
+        height: 470px;
+        margin-bottom: 30px;
+
+        .pizzaInfo {
+            height: 90%;
+            background: white;
+            padding: 5px;
+            border-radius: 20px;
+            text-align: center;
+            color: black;
+            cursor: pointer;
+
+            .pizzaImg {
+                width: 78%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .pizzaName {
+                font-family: Brush Script MT, Courier New, Courier, monospace;
+                font-size: 45px;
+                color: black;
+                text-shadow: 1px 1px 2px #ff0000;
+            }
+            .pizzaDescription {
+                padding: 10px;
+            }
+            .pizzaPrice {
+                font-family: Helvetica, sans-serif;
+                font-weight: 900;
+                font-size: 30px;
+                color: #ff0000;
+                text-shadow: 1px 1px 1px black;
+            }
+        }
+
+        .pizzaOptions {
+            height: 7%;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+
+            .pizzaDetails {
+                width: 43%;
+                margin-right: 20px;
+                margin-left: 0px;
+                background: green;
+                padding: 10px;
+                float: right;
+                border-radius: 0px 0px 20px 0px;
+
+            }
+
+            .pizzaOrder {
+                width: 43%;
+                margin-left: 20px;
+                margin-right: 0px;
+                background: yellow;
+                padding: 10px;
+                float: left;
+                border-radius: 0px 0px 0px 20px;
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ import Logo from '../../resources/PizzeriaUno.png';
 
 const NavigationBar = () => {
     return (
-        <div className="pizzaBackground NavigationBar">
+        <div className="NavigationBar">
             <nav id="navBar">
                 <NavLink
                     exact

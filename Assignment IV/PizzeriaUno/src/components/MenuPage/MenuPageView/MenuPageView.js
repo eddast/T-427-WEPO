@@ -4,7 +4,7 @@ import MenuPageBody from '../MenuPageBody/MenuPageBody';
 
 const MenuPageView = () => {
     return(
-        <div>
+        <div className="pizzaBackground">
             <NavigationBar />
             <MenuPageBody />
         </div>

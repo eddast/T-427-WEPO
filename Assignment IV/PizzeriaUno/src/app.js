@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../styles/site';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducers from './reducers/reducers';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import About from './components/AboutPage/AboutPageView/AboutPageView';
 import Menu from './components/MenuPage/MenuPageView/MenuPageView';
 import Offers from './components/OfferPage/OfferPageView/OfferPageView';
 import Home from './components/HomePage/HomePage';
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-// import { Provider } from 'react-redux';
-// import { createStore } from 'redux';
-// import reducers from './reducers/reducers';
+import '../styles/site';
 
 class App extends React.Component {
     render() {
@@ -29,5 +30,4 @@ var RouterPaths = (
     </Switch>
 );
 
-// ReactDOM.render(<Provider store={createStore()}><Router><App /></Router></Provider>, document.getElementById('app'));
-ReactDOM.render(<Router><App /></Router>, document.getElementById('app'));
+ReactDOM.render(<Provider store={createStore(reducers, applyMiddleware(thunk))}><Router><App /></Router></Provider>, document.getElementById('app'));
