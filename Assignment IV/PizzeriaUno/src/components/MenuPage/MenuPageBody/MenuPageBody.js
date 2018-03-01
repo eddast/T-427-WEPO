@@ -22,7 +22,7 @@ class MenuPageBody extends React.Component {
 
     render() {
         const { pizza } = this.props;
-        if(this.state.isLoading) { return <LoadingScreen />; }
+        if(this.state.isLoading || !Array.isArray(pizza)) { return <LoadingScreen />; }
         if(this.state.selectedPizza === null) {
             return (
                 <div className='row menuBody'>
