@@ -9,7 +9,7 @@ import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import About from './components/AboutPage/AboutPageView/AboutPageView';
 import Menu from './components/MenuPage/MenuPageView/MenuPageView';
 import Offers from './components/OfferPage/OfferPageView/OfferPageView';
-// import Pizza from './components/MenuPage/PizzaDetailView/PizzaDetailView';
+import Pizza from './components/MenuPage/PizzaDetailView/PizzaDetailView';
 import Home from './components/HomePage/HomePage';
 import '../styles/site';
 
@@ -24,6 +24,7 @@ var RouterPaths = (
     <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/pizzas' component={Menu} />
+        <Route exact path='/pizzas/:pizzaid' component={Pizza} />
         <Route exact path='/offers' component={Offers} />
         <Route exact path='/cart' component={LoadingScreen} />
         <Route exact path='/about' component={About} />

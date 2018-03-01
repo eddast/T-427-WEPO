@@ -1,1 +1,7 @@
-export const GET_ALL_PIZZAS = 'GET_ALL_PIZZAS';
+const GET_ALL_PIZZAS = 'GET_ALL_PIZZAS';
+const GET_PIZZA_BY_ID = 'GET_PIZZA_BY_ID';
+
+export {
+    GET_ALL_PIZZAS,
+    GET_PIZZA_BY_ID
+}
