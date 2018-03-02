@@ -24,11 +24,14 @@ class OfferPageBody extends React.Component {
         const { offer } = this.props;
         if(this.state.isLoading || !Array.isArray(offer)) { return <LoadingScreen />; }
         return (
-            <div className='row offerBody'>
-                <h1>Offers</h1>
-                <h3>Don't miss out!</h3>
-                <div className='offersActive'>
-                    {offer.map(o => <OfferListItem key={o.id} itemoffer={o}/>)}
+            <div className="offerBody">
+                <div className='row'>
+                    <div className='offersActive'>
+                        {offer.map(o => <OfferListItem key={o.id} itemoffer={o}/>)}
+                    </div>
+                </div>
+                <div className='row'>
+                    <p id="offerExpl">*Offers are automatically recognized when placing an order, so go ahead and use them!</p>
                 </div>
             </div>
         );
