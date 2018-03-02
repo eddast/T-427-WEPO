@@ -16,7 +16,9 @@ const PizzaListItem = ({ pizza }) => {
             </Link>
             <div className="pizzaOptions">
                 <span className="pizzaOrder">Add to cart</span>
-                <span className="pizzaDetails">Details</span>
+                <Link to={'/pizzas/' + id} >
+                    <span className="pizzaDetails">Details</span>
+                </Link>
             </div>
         </span>
     );

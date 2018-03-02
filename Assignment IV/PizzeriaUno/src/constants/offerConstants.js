@@ -1,0 +1,7 @@
+const GET_ALL_OFFERS = 'GET_ALL_OFFERS';
+const GET_OFFER_BY_ID = 'GET_OFFER_BY_ID';
+
+export {
+    GET_ALL_OFFERS,
+    GET_OFFER_BY_ID
+}

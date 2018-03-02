@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPizzaByID } from '../../../actions/pizzaAction';
 import NavigationBar from '../../NavigationBar/NavigationBar'
+import FontAwesome from 'react-fontawesome';
+import { Link } from 'react-router-dom';
 
 class PizzaDetailView extends React.Component {
 
@@ -17,6 +19,10 @@ class PizzaDetailView extends React.Component {
         return(
             <div className="whiteBackground">
                 <NavigationBar />
+
+                <Link to={'/pizzas'} >
+                    <FontAwesome id="back" name='arrow-circle-left'/>
+                </Link>
                 <div className="pizzaDetail" style={{backgroundImage: 'url(' + pizza.image + ')'}}>
                     <div className="pizzaInfo">
                         <p className="pizzaName">{pizza.name}</p>
