@@ -1,14 +1,14 @@
 import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
-import AboutPageBody from '../AboutPageBody/AboutPageBody';
+import MenuPageBody from '../MenuPageBody/MenuPageBody';
 
-const AboutPageView = () => {
+const MenuPageView = () => {
     return(
         <div className="pizzaBackground">
             <NavigationBar />
-            <AboutPageBody />
+            <MenuPageBody />
         </div>
     );
 };
 
-export default AboutPageView;
+export default MenuPageView;

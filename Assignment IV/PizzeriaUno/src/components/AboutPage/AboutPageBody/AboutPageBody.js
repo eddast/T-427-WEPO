@@ -1,21 +1,24 @@
 import React from 'react';
+import Chefs from '../../../resources/OurChefs.png'
 
 const AboutPageBody = () => {
     return (
         <div className='row aboutPageBody belowNavBarComponent'>
-            <h1>About Us</h1>
-            <p>
-                Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt
-                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum
-            </p>
+            <div className="description col-md-offset-2 col-md-5">
+                <h1>About Us</h1>
+                <p>If you’re hoping to experience a Italian gourmet feast in the heart of Reykjavik, there’s nothing quite like PizzeriaUno. Located only a few short blocks from Reykjavík central area at Reykjavík University, we’re conveniently accessible from anywhere in the city.</p>
+                <p>Our chefs are not only culinary experts that make our pizza whole-heartedly delicious, but quite the talented web designers. We know you won’t be impressed with technology until you can download a pizza, but with our new amazing PizzeriaUno home page your pizza is only a click away!</p>
+            </div>
+            <div className="col-md-offset-1 col-md-4">
+                <div className="row">
+                    <img id='chefs' src={Chefs} alt='logo'/>
+                </div>
+                <div className="row">
+                    <p id="inPizzaWeCrust">In pizza we crust!</p>
+                </div>
+            </div>
         </div>
     );
-};
+}
 
 export default AboutPageBody;

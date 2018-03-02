@@ -1,14 +1,14 @@
 import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
-import AboutPageBody from '../AboutPageBody/AboutPageBody';
+import OfferPageBody from '../OfferPageBody/OfferPageBody';
 
-const AboutPageView = () => {
+const OfferPageView = () => {
     return(
         <div className="pizzaBackground">
             <NavigationBar />
-            <AboutPageBody />
+            <OfferPageBody />
         </div>
     );
 };
 
-export default AboutPageView;
+export default OfferPageView;
