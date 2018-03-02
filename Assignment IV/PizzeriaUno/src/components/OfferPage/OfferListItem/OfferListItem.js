@@ -11,7 +11,7 @@ const OfferListItem = ({ itemoffer }) => {
                 <div className="offerImgWrapper">
                     <img className="offerImg" src={LogoOffer} alt="PizzeriaUno"/>
                 </div>
-                <p className="offerPrice">{price} kr</p>
+                <p className="offerPrice">{price} kr*</p>
                 <p className="offerValidFor">Good for {validFor}</p>
             </div>
         </span>
