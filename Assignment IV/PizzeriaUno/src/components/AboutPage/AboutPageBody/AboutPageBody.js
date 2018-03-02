@@ -1,45 +1,22 @@
 import React from 'react';
+import Chefs from '../../../resources/OurChefs.png'
 
 const AboutPageBody = () => {
     return (
         <div className='row aboutPageBody belowNavBarComponent'>
-            <h1>About Us</h1>
-            <p>
-                Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say
-                that they were perfectly normal, thank you very much. They were the last
-                people you'd expect to be involved in anything strange or mysterious,
-                because they just didn't hold with such nonsense.
-            </p>
-            <p>
-                Mr. Dursley was the director of a firm called Grunnings, which made
-                drills. He was a big, beefy man with hardly any neck, although he did
-                have a very large mustache. Mrs. Dursley was thin and blonde and had
-                nearly twice the usual amount of neck, which came in very useful as she
-                spent so much of her time craning over garden fences, spying on the
-                neighbors. The Dursleys had a small son called Dudley and in their
-                opinion there was no finer boy anywhere.
-            </p>
-            <p>
-                The Dursleys had everything they wanted, but they also had a secret, and
-                their greatest fear was that somebody would discover it. They didn't
-                think they could bear it if anyone found out about the Potters. Mrs.
-                Potter was Mrs. Dursley's sister, but they hadn't met for several years;
-                in fact, Mrs. Dursley pretended she didn't have a sister, because her
-                sister and her good-for-nothing husband were as unDursleyish as it was
-                possible to be. The Dursleys shuddered to think what the neighbors would
-                say if the Potters arrived in the street. The Dursleys knew that the
-                Potters had a small son, too, but they had never even seen him. This boy
-                was another good reason for keeping the Potters away; they didn't want
-                Dudley mixing with a child like that.
-            </p>
-            <p>
-                When Mr. and Mrs. Dursley woke up on the dull, gray Tuesday our story
-                starts, there was nothing about the cloudy sky outside to suggest that
-                strange and mysterious things would soon be happening all over the
-                country. Mr. Dursley hummed as he picked out his most boring tie for
-                work, and Mrs. Dursley gossiped away happily as she wrestled a screaming
-                Dudley into his high chair.
-            </p>
+            <div className="description col-md-offset-2 col-md-5">
+                <h1>About Us</h1>
+                <p>If you’re hoping to experience a Italian gourmet feast in the heart of Reykjavik, there’s nothing quite like PizzeriaUno. Located only a few short blocks from Reykjavík central area at Reykjavík University, we’re conveniently accessible from anywhere in the city.</p>
+                <p>Our chefs are not only culinary experts that make our pizza whole-heartedly delicious, but quite the talented web designers. We know you won’t be impressed with technology until you can download a pizza, but with our new amazing PizzeriaUno home page your pizza is only a click away!</p>
+            </div>
+            <div className="col-md-offset-1 col-md-4">
+                <div className="row">
+                    <img id='chefs' src={Chefs} alt='logo'/>
+                </div>
+                <div className="row">
+                    <p id="inPizzaWeCrust">In pizza we crust!</p>
+                </div>
+            </div>
         </div>
     );
 }
