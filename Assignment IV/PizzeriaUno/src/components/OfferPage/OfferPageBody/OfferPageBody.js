@@ -25,6 +25,10 @@ class OfferPageBody extends React.Component {
         if(this.state.isLoading || !Array.isArray(offer)) { return <LoadingScreen />; }
         return (
             <div className="offerBody">
+                <div className="pageViewHeadings">
+                    <h1>Our Offers</h1>
+                    <h2>Che meraviglia! Offers last a limited time only - don't miss out!</h2>
+                </div>
                 <div className='row'>
                     <div className='offersActive'>
                         {offer.map(o => <OfferListItem key={o.id} itemoffer={o}/>)}

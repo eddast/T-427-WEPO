@@ -22,15 +22,14 @@ class CartPageBody extends React.Component {
 
     // Removes pizza from 'cart' in local storage
     removeFromLocalStorage(pizza) {
-        console.log(this);
         var pizzasInCart = JSON.parse(localStorage.getItem('cartPizzasInventory'));
         for(var i = 0; i < pizzasInCart.length; i++) {
             if(pizzasInCart[i].id === pizza.id) {
                 pizzasInCart.splice(i, 1);
                 localStorage.setItem('cartPizzasInventory', JSON.stringify(pizzasInCart));
+                break;
             }
         }
-        console.log(this);
         this.setState({pizzasInCart: JSON.parse(localStorage.getItem('cartPizzasInventory'))});
         alert(pizza.name + ' removed from cart!');
     }   
@@ -41,15 +40,20 @@ class CartPageBody extends React.Component {
         } else if(this.state.pizzasInCart.length === 0) {
             return (
                 <div className='cartBody'>
-                    <h1>Cart is empty!</h1>
-                    <h2>Explore our menu under the 'menu' page. We have delicious pizzas!</h2>
+                    <div className="pageViewHeadings">
+                        <h1>Cart is empty!</h1>
+                        <h2>Che orribile! Go explore our menu under the 'menu' page. We have delicious pizzas!</h2>
+                    </div>
                 </div>
             );
         } else {
             return (
                 <div className='cartBody'>
                     <div className='row'>
-                        <h1>Cart contents:</h1>
+                        <div className="pageViewHeadings">
+                            <h1>Your cart</h1>
+                            <h2>Mamma mia! You're clearly in for a feast!</h2>
+                        </div>
                         <div className='pizzasInMenu'>
                             {this.state.pizzasInCart.map(p => <PizzaListCartItem key={p.id} pizza={p} removeFromLocalStorage={this.removeFromLocalStorage}/>)}
                         </div>

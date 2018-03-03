@@ -35,8 +35,10 @@ class MenuPageBody extends React.Component {
         if(this.state.selectedPizza === null) {
             return (
                 <div className='row menuBody'>
-                    <h1>The Menu</h1>
-                    <h2>Our Delicious Pizzas</h2>
+                    <div className="pageViewHeadings">
+                        <h1>The Menu</h1>
+                        <h2>Mamma mia, che delizioso sembra!</h2>
+                    </div>
                     <div className='pizzasInMenu'>
                         {pizza.map(p => <PizzaListItem key={p.id} pizza={p} addToLocalStorage={this.addToLocalStorage}/>)}
                     </div>
