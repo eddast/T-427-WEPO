@@ -160,6 +160,7 @@ body {
     }
     
     .menuBody,
+    .cartBody,
     .offerBody,
     .aboutPageBody {
         display: block;
@@ -253,6 +254,20 @@ body {
                 padding-right: 30px;
                 float: right;
                 border-radius: 0px 0px 20px 0px;
+                border: 2px solid black;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .pizzaRemove {
+                width: 44%;
+                margin-left: 20px;
+                margin-right: 0px;
+                background: #ff0000;
+                padding: 5px;
+                padding-left: 20px;
+                float: left;
+                border-radius: 0px 0px 0px 20px;
                 border: 2px solid black;
                 text-align: center;
                 cursor: pointer;
@@ -363,11 +378,83 @@ body {
         }
     }
 
+    #checkoutButton {
+        float: right;
+        min-width: 300px;
+        font-family: Helvetica, sans-serif;
+        font-size: 30px;
+        font-weight: 900;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 10px;
+        background-color: #1dfa00;
+        border: 2px solid #050e04;
+        border-radius:20px;
+        color: white;
+        text-shadow: 4px 4px 6px black;
+        cursor: pointer;
+    }
+
+    #pizzaDeleteCartToolTip:hover .toolTipText {
+        margin-left:170px;
+        visibility: visible;
+    }
+
+    #pizzaDeleteCartToolTip {
+        position: relative;
+        display: block;
+    }
+
+    .toolTipText {
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        visibility: hidden;
+        font-size: 10px;
+        width: 120px;
+        background-color: #00000075;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 10px;
+        position: relative;
+        margin: 10px;
+        z-index: 1;
+        top: 50%;
+        left: 0%;
+    }
+
+    .toolTipText::after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        left: 100%; /* To the left of the tooltip */
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent #00000075;
+    }
+
+    .pizzaDeleteCart {
+        font-size: 30px;
+        color: red;
+        float: right;
+    }
+
     #back {
         font-size: 70px;
         color: #ff0000;
         position: fixed;
         cursor: pointer;
+
+        #backToMenu {
+            font-family: Brush Script MT, Courier New, Courier, monospace;
+            margin-left: 70px;
+            margin-top: 10px;
+            font-size: 40px;
+            font-style: 900;
+            font-weight: bold;
+            color: red;
+        }
     }
 
     .aboutPageBody {

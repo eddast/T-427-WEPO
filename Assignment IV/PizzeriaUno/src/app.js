@@ -5,12 +5,12 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers/reducers';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import About from './components/AboutPage/AboutPageView/AboutPageView';
 import Menu from './components/MenuPage/MenuPageView/MenuPageView';
 import Offers from './components/OfferPage/OfferPageView/OfferPageView';
 import Pizza from './components/MenuPage/PizzaDetailView/PizzaDetailView';
 import Home from './components/HomePage/HomePage';
+import Cart from './components/CartPage/CartPageView/CartPageView';
 import '../styles/site';
 
 class App extends React.Component {
@@ -26,7 +26,7 @@ var RouterPaths = (
         <Route exact path='/pizzas' component={Menu} />
         <Route exact path='/pizzas/:pizzaid' component={Pizza} />
         <Route exact path='/offers' component={Offers} />
-        <Route exact path='/cart' component={LoadingScreen} />
+        <Route exact path='/cart' component={Cart} />
         <Route exact path='/about' component={About} />
         <div> 404 not found </div>
     </Switch>

@@ -21,7 +21,10 @@ class PizzaDetailView extends React.Component {
                 <NavigationBar />
 
                 <Link to={'/pizzas'} >
-                    <FontAwesome id="back" name='arrow-circle-left'/>
+                    <div id="back">
+                        <FontAwesome id="back" name='arrow-circle-left'/>
+                        <p id="backToMenu">Menu</p>
+                    </div>
                 </Link>
                 <div className="pizzaDetail" style={{backgroundImage: 'url(' + pizza.image + ')'}}>
                     <div className="pizzaInfo">
