@@ -11,6 +11,10 @@ import Offers from './components/OfferPage/OfferPageView/OfferPageView';
 import Pizza from './components/MenuPage/PizzaDetailView/PizzaDetailView';
 import Home from './components/HomePage/HomePage';
 import Cart from './components/CartPage/CartPageView/CartPageView';
+import Checkout from './components/Checkout/CheckoutOpeningScreen/Checkout';
+import Delivery from './components/Checkout/HaveItDelivered/HaveItDelivered';
+import PickItUp from './components/Checkout/PickUp/PickUp';
+
 import '../styles/site';
 
 class App extends React.Component {
@@ -28,6 +32,9 @@ var RouterPaths = (
         <Route exact path='/offers' component={Offers} />
         <Route exact path='/cart' component={Cart} />
         <Route exact path='/about' component={About} />
+        <Route exact path='/checkout' component={Checkout} />
+        <Route exact path='/delivery' component={Delivery} />
+        <Route exact path='/pickItUp' component={PickItUp} />
         <div> 404 not found </div>
     </Switch>
 );

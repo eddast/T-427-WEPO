@@ -18,9 +18,9 @@ module.exports = {
             ]},
             { test: /\.svg$/,
                 use: [
-                    { loader: "babel-loader"},
+                    { loader: 'babel-loader'},
                     {
-                        loader: "react-svg-loader",
+                        loader: 'react-svg-loader',
                         options: { jsx: true }
                     }
                 ]
@@ -36,7 +36,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        port: 9000,
+        port: 9003,
         open: true
     },
     devtool: 'inline-source-map',

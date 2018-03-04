@@ -2,6 +2,7 @@ import React from 'react';
 import PizzaListCartItem from '../PizzaListCartItem/PizzaListCartItem';
 import LoadingScreen from '../../LoadingScreen/LoadingScreen';
 import FontAwesome from 'react-fontawesome';
+import { Link } from 'react-router-dom';
 
 class CartPageBody extends React.Component {
 
@@ -59,10 +60,12 @@ class CartPageBody extends React.Component {
                         </div>
                     </div>
                     <div className='row'>
-                        <span id="checkoutButton">
-                            Checkout &nbsp; &nbsp;
-                            <FontAwesome name="arrow-right"/>
-                        </span>
+                        <Link to={'/checkout/'} >
+                            <span id="checkoutButton">
+                                Checkout &nbsp; &nbsp;
+                                <FontAwesome name="arrow-right"/>
+                            </span>
+                        </Link>
                     </div>
                 </div>
             );
