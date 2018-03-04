@@ -13,6 +13,15 @@ class PizzaDetailView extends React.Component {
         getPizzaByID(pizzaid);
     }
 
+    // Adds pizza to 'cart' in local storage
+    addToLocalStorage(pizza) {
+        var pizzasInCart = JSON.parse(localStorage.getItem('cartPizzasInventory'));
+        if(pizzasInCart == null) { pizzasInCart = []; }
+        pizzasInCart.push(pizza);
+        localStorage.setItem('cartPizzasInventory', JSON.stringify(pizzasInCart));
+        alert(pizza.name + ' added to your cart!');
+    }   
+
     render() {
         const { pizza } = this.props;
         // const backgroundImage =  "url(" + { pizza.image } + ")"
@@ -21,7 +30,10 @@ class PizzaDetailView extends React.Component {
                 <NavigationBar />
 
                 <Link to={'/pizzas'} >
-                    <FontAwesome id="back" name='arrow-circle-left'/>
+                    <div id="back">
+                        <FontAwesome id="back" name='arrow-circle-left'/>
+                        <p id="backToMenu">Menu</p>
+                    </div>
                 </Link>
                 <div className="pizzaDetail" style={{backgroundImage: 'url(' + pizza.image + ')'}}>
                     <div className="pizzaInfo">
@@ -29,7 +41,7 @@ class PizzaDetailView extends React.Component {
                         <p className="pizzaDescription">{pizza.description}</p>
                         <p className="pizzaPrice">{pizza.price} kr</p>
                         <p className="pizzaDontMissOut">Don't miss out!</p>
-                        <span className="pizzaAddToCart">Add to cart</span>
+                        <span onClick={() => this.addToLocalStorage(pizza)}className="pizzaAddToCart">Add to cart</span>
                     </div>
                 </div>
             </div>
