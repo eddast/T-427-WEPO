@@ -1,5 +1,5 @@
 import React from 'react';
- import NavigationBar from '../../NavigationBar/NavigationBar';
+import NavigationBar from '../../NavigationBar/NavigationBar';
 
 const HaveItDelivered = () => {
     return (
