@@ -1,7 +1,10 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getCustomerInfo, setCustomerInfo } from '../../../../actions/customerAction';
 
 class PickUpForm extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = { 
@@ -14,6 +17,30 @@ class PickUpForm extends React.Component {
         this.handleChangeForName = this.handleChangeForName.bind(this);
         this.handleChangeForTelephone = this.handleChangeForTelephone.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        var getCustomer = this.props.getCustomerInfo;
+        getCustomer();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.customer !== this.props.customer) {
+            this.setInputValues();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.customer !== this.props.customer) {
+            this.setInputValues();
+        }
+    }
+
+    setInputValues() {
+        this.setState({
+            name: this.props.customer.name,
+            telephone: this.props.customer.telephone
+        });
     }
 
     handleChangeForName(event) {
@@ -38,6 +65,8 @@ class PickUpForm extends React.Component {
         }
         this.setState({ customerInfo: customer});
         event.preventDefault();
+        var setCustomer = this.props.setCustomerInfo;
+        setCustomer(customer);
     }
 
     onKeyPressed(event) {
@@ -80,4 +109,8 @@ class PickUpForm extends React.Component {
     };
 };
 
-export default PickUpForm;
+const mapStateToProps = ({ customer }) => {
+    return { customer };
+}
+
+export default connect(mapStateToProps, { getCustomerInfo, setCustomerInfo })(PickUpForm);
