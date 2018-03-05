@@ -3,42 +3,24 @@ import PizzaListCartItem from '../PizzaListCartItem/PizzaListCartItem';
 import LoadingScreen from '../../LoadingScreen/LoadingScreen';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getCartContents } from '../../../actions/cartAction';
 
 class CartPageBody extends React.Component {
 
     constructor (props, ctx) {
         super(props, ctx);
-        this.state = {
-            pizzasInCart: null
-        };
-        this.removeFromLocalStorage = this.removeFromLocalStorage.bind(this);
     }
 
-    // Get 'cart' from local storage
+    // Get 'cart' from local storage from redux reducer
     componentDidMount() {
-        var pizzasInCart = JSON.parse(localStorage.getItem('cartPizzasInventory'));
-        if(pizzasInCart === null) { pizzasInCart = []; }
-        this.setState({pizzasInCart : pizzasInCart});
-    }
-
-    // Removes pizza from 'cart' in local storage
-    removeFromLocalStorage(pizza) {
-        var pizzasInCart = JSON.parse(localStorage.getItem('cartPizzasInventory'));
-        for(var i = 0; i < pizzasInCart.length; i++) {
-            if(pizzasInCart[i].id === pizza.id) {
-                pizzasInCart.splice(i, 1);
-                localStorage.setItem('cartPizzasInventory', JSON.stringify(pizzasInCart));
-                break;
-            }
-        }
-        this.setState({pizzasInCart: JSON.parse(localStorage.getItem('cartPizzasInventory'))});
-        alert(pizza.name + ' removed from cart!');
-    }   
+        this.props.getCartContents();
+    }  
 
     render() {
-        if (this.state.pizzasInCart === null) {
+        if (this.props.cart === null) {
             return <LoadingScreen />;
-        } else if(this.state.pizzasInCart.length === 0) {
+        } else if(this.props.cart.length === 0) {
             return (
                 <div className='cartBody'>
                     <div className="pageViewHeadings">
@@ -56,7 +38,7 @@ class CartPageBody extends React.Component {
                             <h2>Mamma mia! You're clearly in for a feast!</h2>
                         </div>
                         <div className='pizzasInMenu'>
-                            {this.state.pizzasInCart.map(p => <PizzaListCartItem key={p.id} pizza={p} removeFromLocalStorage={this.removeFromLocalStorage}/>)}
+                            {this.props.cart.map((pizza, i) => <PizzaListCartItem key={i} pizza={pizza} removeFromLocalStorage={this.removeFromLocalStorage}/>)}
                         </div>
                     </div>
                     <div className='row'>
@@ -73,4 +55,8 @@ class CartPageBody extends React.Component {
     }
 };
 
-export default CartPageBody;
+const mapStateToProps = ({ cart }) => {
+    return { cart };
+}
+
+export default connect(mapStateToProps, { getCartContents })(CartPageBody);

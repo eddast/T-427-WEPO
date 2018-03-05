@@ -20,15 +20,6 @@ class MenuPageBody extends React.Component {
         this.setState({ isLoading: false});
     }
 
-    // Adds pizza to 'cart' in local storage
-    addToLocalStorage(pizza) {
-        var pizzasInCart = JSON.parse(localStorage.getItem('cartPizzasInventory'));
-        if(pizzasInCart == null) { pizzasInCart = []; }
-        pizzasInCart.push(pizza);
-        localStorage.setItem('cartPizzasInventory', JSON.stringify(pizzasInCart));
-        alert(pizza.name + ' added to your cart!');
-    }   
-
     render() {
         const { pizza } = this.props;
         if(this.state.isLoading || !Array.isArray(pizza)) { return <LoadingScreen />; }
@@ -40,7 +31,7 @@ class MenuPageBody extends React.Component {
                         <h2>Mamma mia, che delizioso sembra!</h2>
                     </div>
                     <div className='pizzasInMenu'>
-                        {pizza.map(p => <PizzaListItem key={p.id} pizza={p} addToLocalStorage={this.addToLocalStorage}/>)}
+                        {pizza.map(p => <PizzaListItem key={p.id} pizza={p}/>)}
                     </div>
                 </div>
             );
