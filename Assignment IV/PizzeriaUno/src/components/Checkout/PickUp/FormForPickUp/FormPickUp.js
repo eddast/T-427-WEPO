@@ -44,7 +44,6 @@ class PickUpForm extends React.Component {
         if (event.key === 'e' || event.key === 'E') {
             return false;
         }
-        console.log('I pressed key: ' + event.key);
     }
 
     showChangesForDebuggingPurposes() {

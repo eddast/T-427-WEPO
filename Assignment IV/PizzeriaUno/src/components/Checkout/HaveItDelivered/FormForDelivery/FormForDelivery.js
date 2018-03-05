@@ -1,10 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getCustomerInfo, setCustomerInfo } from '../../../../actions/customerAction';
 
 class DeliveryForm extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             name: '',
             address: '',
             city: '',
@@ -21,6 +24,17 @@ class DeliveryForm extends React.Component {
         this.handleChangeForPostalCode = this.handleChangeForPostalCode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
+    }
+
+    componentDidMount() {
+        var getCustomer = this.props.getCustomerInfo;
+        getCustomer();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.customer !== this.props.customer) {
+            this.setInputValues();
+        }
     }
 
     handleChangeForName(event) {
@@ -54,6 +68,18 @@ class DeliveryForm extends React.Component {
         }
         this.setState({ customerInfo: customer});
         event.preventDefault();
+        var setCustomer = this.props.setCustomerInfo;
+        setCustomer(customer);
+    }
+
+    setInputValues() {
+        this.setState({
+            name: this.props.customer.name,
+            address: this.props.customer.address,
+            city: this.props.customer.city,
+            telephone: this.props.customer.telephone,
+            postalCode: this.props.customer.postalCode
+        });
     }
 
     render() {
@@ -108,4 +134,8 @@ class DeliveryForm extends React.Component {
     }
 }
 
-export default DeliveryForm;
+const mapStateToProps = ({ customer }) => {
+    return { customer };
+}
+
+export default connect(mapStateToProps, { getCustomerInfo, setCustomerInfo })(DeliveryForm);
