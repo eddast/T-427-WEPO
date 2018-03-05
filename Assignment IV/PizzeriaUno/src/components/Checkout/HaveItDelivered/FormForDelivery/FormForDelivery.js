@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 class DeliveryForm extends React.Component {
     constructor(props) {
@@ -8,7 +9,9 @@ class DeliveryForm extends React.Component {
             address: '',
             city: '',
             telephone: '',
-            postalCode: '' 
+            postalCode: '',
+            toConfirmation : false,
+            customer: null
         };
 
         this.handleChangeForName = this.handleChangeForName.bind(this);
@@ -17,11 +20,11 @@ class DeliveryForm extends React.Component {
         this.handleChangeForTelephone = this.handleChangeForTelephone.bind(this);
         this.handleChangeForPostalCode = this.handleChangeForPostalCode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     handleChangeForName(event) {
         this.setState({ name: event.target.value });
-        this.showChangesForDebug();
     }
 
     handleChangeForAddress(event) {
@@ -41,19 +44,22 @@ class DeliveryForm extends React.Component {
     }
 
     handleSubmit(event) {
-        alert('You will be notified when the pizza is ready');
+        this.setState({ toConfirmation: true })
+        var customer = {
+            name: this.state.name,
+            address: this.state.address,
+            city: this.state.city,
+            telephone: this.state.telephone,
+            postalCode: this.state.postalCode,
+        }
+        this.setState({ customerInfo: customer});
         event.preventDefault();
     }
 
-    showChangesForDebug() {
-        console.log('name: ' + this.state.name);
-        console.log('address: ' + this.state.address);
-        console.log('city: ' + this.state.city);
-        console.log('telephone: ' + this.state.telephone);
-        console.log('postal code: ' + this.state.postalCode);
-    }
-
     render() {
+        if (this.state.toConfirmation === true ) {
+            return <Redirect to={{pathname: '/checkout/delivery/confirmation'}} />;
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <label className='formsForDeliveryAndPickUp'>

@@ -2,7 +2,7 @@ import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
 import FormForPickUp from './FormForPickUp/FormPickUp'
 
-const PickItUp = () => {
+const PickUp = () => {
     return (
         <div className="pizzaBackground">
             <NavigationBar />
@@ -15,4 +15,4 @@ const PickItUp = () => {
     );
 };
 
-export default PickItUp;
+export default PickUp;

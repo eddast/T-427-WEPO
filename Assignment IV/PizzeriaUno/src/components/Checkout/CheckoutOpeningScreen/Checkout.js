@@ -8,13 +8,13 @@ const CheckoutPageView = () => {
             <NavigationBar />
             <div className="emptySpaceBetweenCheckoutOptions"></div>
             <div className="showOptionsForCheckout">
-                <Link to={'/pickItUp/'} >
+                <Link to={'/checkout/pickup'} >
                     <p className="showOptionsForCheckoutText">Pickup the pizza</p>
                 </Link>
             </div>
             <div className="emptySpaceBetweenCheckoutOptions"></div>
             <div className="showOptionsForCheckout">
-                <Link to={'/delivery/'} >
+                <Link to={'/checkout/delivery'} >
                     <p className="showOptionsForCheckoutText">Have it delivered to your addres</p>
                 </Link>
             </div>

@@ -13,7 +13,9 @@ import Home from './components/HomePage/HomePage';
 import Cart from './components/CartPage/CartPageView/CartPageView';
 import Checkout from './components/Checkout/CheckoutOpeningScreen/Checkout';
 import Delivery from './components/Checkout/HaveItDelivered/HaveItDelivered';
-import PickItUp from './components/Checkout/PickUp/PickUp';
+import PickUp from './components/Checkout/PickUp/PickUp';
+import DeliveryConfirmation from './components/Checkout/DeliveryConfirmation/DeliveryConfirmation';
+import PickUpConfirmation from './components/Checkout/PickUpConfirmation/PickUpConfirmation';
 
 import '../styles/site';
 
@@ -33,8 +35,10 @@ var RouterPaths = (
         <Route exact path='/cart' component={Cart} />
         <Route exact path='/about' component={About} />
         <Route exact path='/checkout' component={Checkout} />
-        <Route exact path='/delivery' component={Delivery} />
-        <Route exact path='/pickItUp' component={PickItUp} />
+        <Route exact path='/checkout/delivery' component={Delivery} />
+        <Route exact path='/checkout/pickup' component={PickUp} />
+        <Route exact path='/checkout/delivery/confirmation' component={DeliveryConfirmation} />
+        <Route exact path='/checkout/pickup/confirmation' component={PickUpConfirmation} />
         <div> 404 not found </div>
     </Switch>
 );

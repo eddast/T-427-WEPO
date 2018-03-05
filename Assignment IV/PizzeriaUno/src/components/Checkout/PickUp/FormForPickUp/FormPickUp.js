@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 class PickUpForm extends React.Component {
     constructor(props) {
@@ -6,6 +7,8 @@ class PickUpForm extends React.Component {
         this.state = { 
             name: '',
             telephone: '',
+            customer: null,
+            toConfirmation: false
         };
 
         this.handleChangeForName = this.handleChangeForName.bind(this);
@@ -23,14 +26,18 @@ class PickUpForm extends React.Component {
     }
 
     handleSubmit(event) {
-        //Needs to be implemented
-        event.preventDefault();
+
         if (this.state.name === '' || this.state.telephone === '') {
             alert('You left some form empty. That´s a big no no');
-            return false;
+            return;
         }
-        //Do stuff here, f.x. save data to local storage 
-        alert('Your pizza is now in the oven, we will notify you when it is ready for pick up');
+        this.setState({ toConfirmation: true })
+        var customer = {
+            name: this.state.name,
+            telephone: this.state.telephone,
+        }
+        this.setState({ customerInfo: customer});
+        event.preventDefault();
     }
 
     onKeyPressed(event) {
@@ -46,6 +53,9 @@ class PickUpForm extends React.Component {
     }
 
     render() {
+        if(this.state.toConfirmation === true ) {
+            return <Redirect to={{pathname: '/checkout/pickup/confirmation'}} />;
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <label className='formsForDeliveryAndPickUp'>
