@@ -26,7 +26,7 @@ const NavigationBar = () => {
                 <NavLink
                     to="/order"
                     activeClassName="active"
-                    className="navBarItem navBarItemRight">Order</NavLink>
+                    className="navBarItem navBarItemRight navBarOrder">Order</NavLink>
                 <NavLink
                     to="/about"
                     activeClassName="active"

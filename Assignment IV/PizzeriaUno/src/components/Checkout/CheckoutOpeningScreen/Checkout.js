@@ -6,17 +6,18 @@ const CheckoutPageView = () => {
     return (
         <div className="pizzaBackground">
             <NavigationBar />
-            <div className="emptySpaceBetweenCheckoutOptions"></div>
-            <div className="showOptionsForCheckout">
-                <Link to={'/checkout/pickup'} >
-                    <p className="showOptionsForCheckoutText">Pickup the pizza</p>
-                </Link>
-            </div>
-            <div className="emptySpaceBetweenCheckoutOptions"></div>
-            <div className="showOptionsForCheckout">
-                <Link to={'/checkout/delivery'} >
-                    <p className="showOptionsForCheckoutText">Have it delivered to your addres</p>
-                </Link>
+            <div className="checkoutBody">
+                <h1 id="checkoutOrPickupMessage">Please choose your preferred delivery option</h1>
+                <div className="showOptionsForCheckout">
+                    <Link to={'/checkout/delivery'} >
+                        <p className="showOptionsForCheckoutText">Delivery</p>
+                    </Link>
+                </div>
+                <div className="showOptionsForCheckout">
+                    <Link to={'/checkout/pickup'} >
+                        <p className="showOptionsForCheckoutText">Pick Up</p>
+                    </Link>
+                </div>
             </div>
         </div>
     );

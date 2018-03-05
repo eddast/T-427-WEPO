@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { getCartContents } from '../../../actions/cartAction';
 import { getCustomerInfo } from '../../../actions/customerAction';
 import { postOrder } from '../../../actions/orderAction';
-import PizzaListItem from '../../MenuPage/PizzaListItem/PizzaListItem';
+import CartItem from '../CartItem/CartItem';
 import NavigationBar from '../../NavigationBar/NavigationBar';
 
 class OrderReview extends React.Component {
@@ -14,10 +14,14 @@ class OrderReview extends React.Component {
         this.state = {
             isLoading: true,
             selectedPizza: null,
-            confirmed: false
+            confirmed: false,
+            redirectToCart: false,
+            redirectToCustomerInfo: false
         };
 
         this.confirmOrder = this.confirmOrder.bind(this);
+        this.redirectToCart = this.redirectToCart.bind(this);
+        this.redirectToCustomerInfo = this.redirectToCustomerInfo.bind(this);
     }
 
     componentDidMount() {
@@ -32,11 +36,11 @@ class OrderReview extends React.Component {
     }
 
     redirectToCart() {
-        alert('should redirect to cart');
+        this.setState({redirectToCart: !this.state.redirectToCart});
     }
 
     redirectToCustomerInfo() {
-        alert('should redirect to customer info');
+        this.setState({redirectToCustomerInfo: !this.state.redirectToCustomerInfo});
     }
 
     render() {
@@ -45,6 +49,22 @@ class OrderReview extends React.Component {
         const { customer } = this.props;
         if(!cart) {
             return <div>Loading</div>;
+        }
+        if(this.state.redirectToCart === true) {
+            return < Redirect to={{
+                pathname: '/cart',
+            }} />;
+        }
+        if(this.state.redirectToCustomerInfo === true) {
+            if(delivery) {
+                return < Redirect to={{
+                    pathname: '/checkout/delivery',
+                }} />;
+            } else {
+                return < Redirect to={{
+                    pathname: '/checkout/pickup',
+                }} />;
+            }
         }
         if(this.state.confirmed === true) {
             var orderModel = {
@@ -66,14 +86,20 @@ class OrderReview extends React.Component {
         return (
             <div className="pizzaBackground">
                 <NavigationBar />
-                <h1>Please review your order </h1>
-                <h3>Items to checkout: </h3>
-                <div className='pizzasInMenu'>
-                    {cart.map(pizza => <PizzaListItem key={pizza.id} pizza={pizza}/>)}
+                <div className="confirmationBody">
+                    <div className="row">
+                        <h1>Please review your order </h1>
+                        <h2>Items to checkout: </h2>
+                        <div className='pizzasInMenu'>
+                            {cart.map((pizza, i) => <CartItem key={i} pizza={pizza}/>)}
+                        </div>
+                    </div>
+                    <div className="row confirmOptions">
+                        <div className="confirmOption" onClick={this.confirmOrder}>Confirm</div>
+                        <div className="confirmOption" onClick={this.redirectToCart}>Edit cart</div>
+                        <div className="confirmOption" onClick={this.redirectToCustomerInfo}>Edit information</div>
+                    </div>
                 </div>
-                <span onClick={this.confirmOrder}>Confirm</span>
-                <span onClick={this.redirectToCart}>Edit cart</span>
-                <span onClick={this.redirectToCustomerInfo}>Edit information</span>
             </div>
 
         );

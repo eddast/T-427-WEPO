@@ -3,6 +3,7 @@ import NavigationBar from '../../NavigationBar/NavigationBar';
 import { connect } from 'react-redux';
 import { getOrder } from '../../../actions/orderAction';
 import { getCustomerInfo } from '../../../actions/customerAction';
+import Loader from '../../../resources/PizzeriaUno.png';
 
 class ConfirmOrder extends React.Component {
 
@@ -21,8 +22,12 @@ class ConfirmOrder extends React.Component {
         return (
             <div className="pizzaBackground">
                 <NavigationBar />
-                <h1>PIZZA IS GOING IN THE OVEN </h1>
-                <h3>In just a couple of minutes you'll get your promised italian gourmet feast!</h3>
+                <div className="confirmationBody">
+                    <h1>PIZZA IS GOING IN THE OVEN </h1>
+                    <h2>In just a couple of minutes you'll get your promised italian gourmet feast!</h2>
+                    <img id='loadImage' src={Loader} alt='loading...'/>
+                    <p>Loading pizza...</p>
+                </div>
             </div>
 
         );

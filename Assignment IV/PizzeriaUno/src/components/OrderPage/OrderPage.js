@@ -68,7 +68,7 @@ class OrderPage extends React.Component {
     // Explicitly notifies user that cart is empty (option unavailable)
     getEmptyChartOption() {
         return (
-            <div className="pizzaBackground">
+            <div className="pizzaBackground orderPage">
                 <NavigationBar />
                 <div className='row'>Checkout My Cart</div>
                 <div>Cart Empty!</div>
@@ -83,8 +83,10 @@ class OrderPage extends React.Component {
         return (
             <div className="pizzaBackground">
                 <NavigationBar />
-                <h1>You must either have placed an order before or have items in cart to order</h1>
-                <h2>Look at our delicious pizzas in the menu section, add to cart and have yourself a feast!</h2>
+                <div className="orderPage">
+                    <h1>You must either have placed an order before or have items in cart to order</h1>
+                    <h2>Look at our delicious pizzas in the menu section, add to cart and have yourself a feast!</h2>
+                </div>
             </div>
         );
     }
@@ -94,9 +96,11 @@ class OrderPage extends React.Component {
         return (
             <div className="pizzaBackground">
                 <NavigationBar />
-                <div className='row'>Checkout My Cart</div>
-                <div className='row'>Place the Same Order As Last Time</div>
-                <div>No Previous Order!</div>
+                <div className="orderPage">
+                    <div className='row'>Checkout My Cart</div>
+                    <div className='row'>Place the Same Order As Last Time</div>
+                    <div>No Previous Order!</div>
+                </div>
             </div>
         );
     }
@@ -106,8 +110,10 @@ class OrderPage extends React.Component {
         return (
             <div className="pizzaBackground">
                 <NavigationBar />
-                <div className='row'>Checkout My Cart</div>
-                <div className='row'>Place the Same Order As Last Time</div>
+                <div className="orderPage">
+                    <div className='row'>Checkout My Cart</div>
+                    <div className='row'>Place the Same Order As Last Time</div>
+                </div>
             </div>
         );
     }
