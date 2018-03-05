@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const PizzaListItem = ({ pizza }) => {
+const PizzaListItem = ({ pizza, addToLocalStorage }) => {
     const { id, name, description, price, image } = pizza;
     return (
         <span className="pizzaWrapper col-md-3">
@@ -15,7 +15,7 @@ const PizzaListItem = ({ pizza }) => {
                 </div>
             </Link>
             <div className="pizzaOptions">
-                <span className="pizzaOrder">Add to cart</span>
+                <span className="pizzaOrder" onClick={() => addToLocalStorage(pizza)}>Add to cart</span>
                 <Link to={'/pizzas/' + id} >
                     <span className="pizzaDetails">Details</span>
                 </Link>
@@ -30,7 +30,8 @@ PizzaListItem.propTypes = {
         description: propTypes.string,
         price: propTypes.number,
         image: propTypes.string
-    })
+    }),
+    addToLocalStorage: propTypes.func.isRequired
 }
 
 export default PizzaListItem;
