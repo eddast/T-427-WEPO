@@ -8,10 +8,6 @@ import { getCartContents } from '../../../actions/cartAction';
 
 class CartPageBody extends React.Component {
 
-    constructor (props, ctx) {
-        super(props, ctx);
-    }
-
     // Get 'cart' from local storage from redux reducer
     componentDidMount() {
         this.props.getCartContents();
@@ -42,7 +38,7 @@ class CartPageBody extends React.Component {
                         </div>
                     </div>
                     <div className='row'>
-                        <Link to={'/checkout/'} >
+                        <Link to={'/checkout'} >
                             <span id="checkoutButton">
                                 Checkout &nbsp; &nbsp;
                                 <FontAwesome name="arrow-right"/>

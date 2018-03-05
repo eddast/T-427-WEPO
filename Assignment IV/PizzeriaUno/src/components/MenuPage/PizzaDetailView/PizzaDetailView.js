@@ -3,10 +3,17 @@ import { connect } from 'react-redux';
 import { getPizzaByID } from '../../../actions/pizzaAction';
 import NavigationBar from '../../NavigationBar/NavigationBar'
 import FontAwesome from 'react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { addToCart } from '../../../actions/cartAction';
 
 class PizzaDetailView extends React.Component {
+
+    constructor (props, ctx) {
+        super(props, ctx);
+        this.state = {
+            toCheckout : false
+        }
+    }
 
     componentDidMount() {
         const {pizzaid} = this.props.match.params;
@@ -18,16 +25,18 @@ class PizzaDetailView extends React.Component {
     addToLocalStorage(pizza) {
         var addToLocalStorageCart = this.props.addToCart;
         addToLocalStorageCart(pizza);
-        alert(pizza.name + ' added to your cart!');
+        var toCheckout = confirm(pizza.name + ' added to your cart!\nDo you wish to checkout your cart?\n(Press OK to checkout, cancel to keep browsing)');
+        this.setState({toCheckout: toCheckout});
     } 
 
     render() {
         const { pizza } = this.props;
-        // const backgroundImage =  "url(" + { pizza.image } + ")"
+        if(this.state.toCheckout === true) {
+            return <Redirect to={{pathname: '/checkout'}} />;
+        }
         return(
             <div className="whiteBackground">
                 <NavigationBar />
-
                 <Link to={'/pizzas'} >
                     <div id="back">
                         <FontAwesome id="back" name='arrow-circle-left'/>
