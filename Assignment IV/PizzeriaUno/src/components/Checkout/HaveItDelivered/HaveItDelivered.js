@@ -1,14 +1,13 @@
 import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
+import DeliveryForm from './FormForDelivery/FormForDelivery';
 
 const HaveItDelivered = () => {
     return (
         <div className="pizzaBackground">
             <NavigationBar />
             <div className="emptySpaceBetweenCheckoutOptions"></div>
-            <div className="showOptionsForCheckout">
-                <p className="showOptionsForCheckoutText">Pizza delivered to user const</p>
-            </div>
+            <DeliveryForm />
         </div>
     );
 };
