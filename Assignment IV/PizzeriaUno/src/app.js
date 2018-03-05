@@ -14,8 +14,9 @@ import Cart from './components/CartPage/CartPageView/CartPageView';
 import Checkout from './components/Checkout/CheckoutOpeningScreen/Checkout';
 import Delivery from './components/Checkout/HaveItDelivered/HaveItDelivered';
 import PickUp from './components/Checkout/PickUp/PickUp';
-import DeliveryConfirmation from './components/Checkout/DeliveryConfirmation/DeliveryConfirmation';
-import PickUpConfirmation from './components/Checkout/PickUpConfirmation/PickUpConfirmation';
+import OrderReview from './components/Checkout/OrderReview/OrderReview';
+import ConfirmOrder from './components/Checkout/ConfirmOrder/ConfirmOrder';
+import Order from './components/OrderPage/OrderPage';
 
 import '../styles/site';
 
@@ -34,11 +35,14 @@ var RouterPaths = (
         <Route exact path='/offers' component={Offers} />
         <Route exact path='/cart' component={Cart} />
         <Route exact path='/about' component={About} />
+        <Route exact path='/order' component={Order} />
         <Route exact path='/checkout' component={Checkout} />
         <Route exact path='/checkout/delivery' component={Delivery} />
         <Route exact path='/checkout/pickup' component={PickUp} />
-        <Route exact path='/checkout/delivery/confirmation' component={DeliveryConfirmation} />
-        <Route exact path='/checkout/pickup/confirmation' component={PickUpConfirmation} />
+        <Route exact path='/checkout/delivery/confirmation' component={OrderReview} />
+        <Route exact path='/checkout/pickup/confirmation' component={OrderReview} />
+        <Route exact path='/checkout/delivery/confirmation/done' component={ConfirmOrder} />
+        <Route exact path='/checkout/pickup/confirmation/done' component={ConfirmOrder} />
         <div> 404 not found </div>
     </Switch>
 );

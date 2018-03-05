@@ -1,11 +1,11 @@
 import { GET_CUSTOMER_INFO, SET_CUSTOMER_INFO } from '../constants/customerConstants';
 
 const emptyCustomer = {
-    name: 'No one',
-    telephone: '12345',
-    address: 'Nope',
-    city: 'Metrocity',
-    postalCode: '298'
+    name: '',
+    telephone: '',
+    address: '',
+    city: '',
+    postalCode: ''
 }
 
 const cartReducer = (state = emptyCustomer, action) => {

@@ -45,7 +45,6 @@ class PickUpForm extends React.Component {
 
     handleChangeForName(event) {
         this.setState({ name: event.target.value });
-        this.showChangesForDebuggingPurposes();
     }
 
     handleChangeForTelephone(event) {
@@ -75,14 +74,12 @@ class PickUpForm extends React.Component {
         }
     }
 
-    showChangesForDebuggingPurposes() {
-        console.log('name: ' + this.state.name);
-        console.log('telephone: ' + this.state.telephone);
-    }
-
     render() {
         if(this.state.toConfirmation === true ) {
-            return <Redirect to={{pathname: '/checkout/pickup/confirmation'}} />;
+            return <Redirect to={{
+                pathname: '/checkout/pickup/confirmation',
+                delivery: { referrer: false }
+            }} />;
         }
         return (
             <form onSubmit={this.handleSubmit}>

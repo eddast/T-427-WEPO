@@ -84,7 +84,10 @@ class DeliveryForm extends React.Component {
 
     render() {
         if (this.state.toConfirmation === true ) {
-            return <Redirect to={{pathname: '/checkout/delivery/confirmation'}} />;
+            return <Redirect to={{
+                pathname: '/checkout/delivery/confirmation',
+                delivery: { referrer: true }
+            }} />;
         }
         return (
             <form onSubmit={this.handleSubmit}>

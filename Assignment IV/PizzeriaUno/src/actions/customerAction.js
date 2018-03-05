@@ -14,15 +14,12 @@ const getCustomerInfo = () => {
 
 // Adds customer info to local storage
 const setCustomerInfo = (customer) => {
-    if(customer.address === undefined) {
+    if(customer.address === undefined && customer.city === undefined && customer.postalCode === undefined) {
         customer.address = '';
-    }
-    if(customer.city === undefined) {
         customer.city = '';
-    }
-    if(customer.postalCode === undefined) {
         customer.postalCode = '';
     }
+    
     var data = JSON.stringify(customer);
     localStorage.setItem(customerInfoKey, data);
 

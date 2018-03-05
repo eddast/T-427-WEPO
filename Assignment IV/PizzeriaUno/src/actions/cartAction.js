@@ -38,7 +38,9 @@ const addToCart = (pizza) => {
 
 const getCartContents = () => {
     var pizzasInCart = JSON.parse(localStorage.getItem(pizzasInCartKey));
-
+    if(pizzasInCart === null) {
+        pizzasInCart = [];
+    }
     return {
         type: GET_CART_CONTENTS,
         payload: pizzasInCart

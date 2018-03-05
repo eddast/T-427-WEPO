@@ -24,6 +24,10 @@ const NavigationBar = () => {
                     activeClassName="active"
                     className="navBarItem">Cart</NavLink>
                 <NavLink
+                    to="/order"
+                    activeClassName="active"
+                    className="navBarItem navBarItemRight">Order</NavLink>
+                <NavLink
                     to="/about"
                     activeClassName="active"
                     className="navBarItem navBarItemRight">About Us</NavLink>
