@@ -9,6 +9,7 @@ class PizzaListCartItem extends React.Component {
 
     removeFromLocalStorage(pizza) {
         this.props.removeFromCart(pizza);
+        alert(pizza.name + ' removed from cart!');
     }
 
     render() {

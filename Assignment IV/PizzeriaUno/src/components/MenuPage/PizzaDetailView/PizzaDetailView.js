@@ -4,6 +4,7 @@ import { getPizzaByID } from '../../../actions/pizzaAction';
 import NavigationBar from '../../NavigationBar/NavigationBar'
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../../../actions/cartAction';
 
 class PizzaDetailView extends React.Component {
 
@@ -13,14 +14,12 @@ class PizzaDetailView extends React.Component {
         getPizzaByID(pizzaid);
     }
 
-    // Adds pizza to 'cart' in local storage
+    // Adds pizza to local storage cart via react redux function
     addToLocalStorage(pizza) {
-        var pizzasInCart = JSON.parse(localStorage.getItem('cartPizzasInventory'));
-        if(pizzasInCart == null) { pizzasInCart = []; }
-        pizzasInCart.push(pizza);
-        localStorage.setItem('cartPizzasInventory', JSON.stringify(pizzasInCart));
+        var addToLocalStorageCart = this.props.addToCart;
+        addToLocalStorageCart(pizza);
         alert(pizza.name + ' added to your cart!');
-    }   
+    } 
 
     render() {
         const { pizza } = this.props;
@@ -52,4 +51,4 @@ const mapStateToProps = ({ pizza }) => {
     return { pizza };
 }
 
-export default connect(mapStateToProps, { getPizzaByID })(PizzaDetailView);
+export default connect(mapStateToProps, { getPizzaByID, addToCart })(PizzaDetailView);

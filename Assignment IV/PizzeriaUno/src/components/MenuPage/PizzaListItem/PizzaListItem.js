@@ -6,10 +6,11 @@ import { addToCart } from '../../../actions/cartAction';
 
 class PizzaListItem extends React.Component {
 
-    // Adds pizza to local storage via react redux function
+    // Adds pizza to local storage cart via react redux function
     addToLocalStorage(pizza) {
         var addToLocalStorageCart = this.props.addToCart;
         addToLocalStorageCart(pizza);
+        alert(pizza.name + ' added to your cart!');
     }
 
     render() {

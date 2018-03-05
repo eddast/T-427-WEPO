@@ -13,7 +13,6 @@ const removeFromCart = (pizza) => {
         }
     }
     var newCartContents = JSON.parse(localStorage.getItem(pizzasInCartKey));
-    alert(pizza.name + ' removed from cart!');
 
     return {
         type: REMOVE_FROM_CART,
@@ -30,7 +29,6 @@ const addToCart = (pizza) => {
     var newCartContents = JSON.stringify(pizzasInCart);
     localStorage.setItem(pizzasInCartKey, newCartContents);
     newCartContents = JSON.parse(newCartContents);
-    alert(pizza.name + ' added to your cart!');
 
     return {
         type: ADD_TO_CART,
