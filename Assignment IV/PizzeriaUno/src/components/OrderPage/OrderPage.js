@@ -101,7 +101,7 @@ class OrderPage extends React.Component {
                 <div className="orderPage">
                     <div className='unclickableOrderOption col-centered row'>Checkout My Cart</div>
                     <div className='col-centered row orderErrorMsg'>Cart is Empty</div>
-                    <div className='clickableOrderOption col-centered row' onClick={() => this.placeSameOrderAsLast()}>Place the Same Order As Last Time (will replace cart contents)</div>
+                    <div className='clickableOrderOption col-centered row' onClick={() => this.placeSameOrderAsLast()}>Place the Same Order As Last Time</div>
                 </div>
             </div>
         );
@@ -128,7 +128,7 @@ class OrderPage extends React.Component {
                 <NavigationBar />
                 <div className="orderPage">
                     <div className='clickableOrderOption col-centered row' onClick={() => this.checkoutCart()}>Checkout My Cart</div>
-                    <div className='unclickableOrderOption col-centered  row'>Place the Same Order As Last Time (will replace cart contents)</div>
+                    <div className='unclickableOrderOption col-centered  row'>Place the Same Order As Last Time</div>
                     <div className='col-centered row orderErrorMsg'>No Previous Order!</div>
                 </div>
             </div>
@@ -142,7 +142,7 @@ class OrderPage extends React.Component {
                 <NavigationBar />
                 <div className="orderPage">
                     <div className='clickableOrderOption col-centered row' onClick={() => this.checkoutCart()}>Checkout My Cart</div>
-                    <div className='clickableOrderOption col-centered row' onClick={() => this.placeSameOrderAsLast()}>Place the Same Order As Last Time (will replace cart contents)</div>
+                    <div className='clickableOrderOption col-centered row' onClick={() => this.placeSameOrderAsLast()}>Place the Same Order As Last Time</div>
                 </div>
             </div>
         );
