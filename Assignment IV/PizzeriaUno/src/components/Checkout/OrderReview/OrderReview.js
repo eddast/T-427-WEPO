@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { getCartContents } from '../../../actions/cartAction';
+import { getCartContents, replaceCart } from '../../../actions/cartAction';
 import { getCustomerInfo } from '../../../actions/customerAction';
 import { postOrder } from '../../../actions/orderAction';
 import CartItem from '../CartItem/CartItem';
@@ -38,7 +38,6 @@ class OrderReview extends React.Component {
     
     // Get total price of cart
     getCartTotal(cart) {
-        console.log(cart);
         let sum = 0;
         for(let i = 0; i < cart.length; i++ ) {
             sum = sum + cart[i].price;
@@ -48,9 +47,11 @@ class OrderReview extends React.Component {
     }
 
     render() {
+
         var delivery = this.props.location.delivery && this.props.location.delivery.referrer;
         const { cart } = this.props;
         const { customer } = this.props;
+
         if(!cart) {
             return <div>Loading</div>;
         }
@@ -71,6 +72,9 @@ class OrderReview extends React.Component {
             }
             var confirmOrder = this.props.postOrder;
             confirmOrder(orderModel);
+            var replaceCart = this.props.replaceCart;
+            var emptyCart = []
+            replaceCart(emptyCart);
             if(delivery) {
                 return < Redirect to={{
                     pathname: '/checkout/delivery/confirmation/done',
@@ -81,6 +85,7 @@ class OrderReview extends React.Component {
                 }} />;
             }
         }
+
         return (
             <div className="pizzaBackground">
                 <NavigationBar />
@@ -135,4 +140,4 @@ const mapStateToProps = (storeState) => {
     };
 }
 
-export default connect(mapStateToProps, { getCartContents, postOrder, getCustomerInfo })(OrderReview);
+export default connect(mapStateToProps, { getCartContents, postOrder, getCustomerInfo, replaceCart })(OrderReview);

@@ -13,6 +13,7 @@ body {
         z-index: -100; 
     }
 
+    .orderPage,
     .pageViewHeadings {
         text-align: center;
         margin-bottom: 40px;
@@ -698,6 +699,11 @@ body {
         }
     }
 
+    .col-centered {
+        float: none;
+        margin: 0 auto;
+    }
+
     .confirmOptions {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -766,5 +772,58 @@ body {
                 text-shadow: 1px 1px 1px black;
             }
         }
+    }
+
+    .clickableOrderOption {
+        width: 300px;
+        font-family: Helvetica, sans-serif;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: white;
+        font-weight: 900;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        background: #fdf90196;
+        border: 2px solid black;
+        padding: 10px 15px 10px 15px;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .clickableOrderOption:hover {
+        color: #fc7a00;
+        background: #fdf90156;
+        text-shadow: 2px 2px 4px #070707;
+        text-decoration: none;
+    }
+
+    .unclickableOrderOption {
+        width: 300px;
+        font-family: Helvetica, sans-serif;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: white;
+        font-weight: 900;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        background: #45444494;
+        border: 2px solid #00000049;
+        padding: 10px 15px 10px 15px;
+        border-radius: 20px;
+        color: #ffffffa6;
+        cursor: not-allowed;
+    }
+
+    .orderErrorMsg {
+        text-align: center;
+        font-family: Helvetica, sans-serif;
+        text-transform: uppercase;
+        font-size: 10px;
+        font-style: italic;
+        color: red;
+        margin: 0 auto;
+        margin-top: -10px;
+        margin-bottom: 20px;
     }
 }

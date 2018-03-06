@@ -3,10 +3,19 @@ import NavigationBar from '../NavigationBar/NavigationBar';
 import { connect } from 'react-redux';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import { getCustomerInfo } from '../../actions/customerAction';
-import { getCartContents } from '../../actions/cartAction';
+import { getCartContents, replaceCart } from '../../actions/cartAction';
 import { getOrder } from '../../actions/orderAction';
+import { Redirect } from 'react-router-dom';
 
 class OrderPage extends React.Component {
+
+    constructor(props, ctx) {
+        super(props, ctx);
+        this.state = {
+            checkoutCart: false,
+            checkoutPreviousOrder: false
+        }
+    }
 
     componentDidMount() {
         const { getCustomerInfo } = this.props;
@@ -37,6 +46,15 @@ class OrderPage extends React.Component {
         const { cart } = this.props;
         const { order } = this.props;
 
+        if(this.state.checkoutCart === true) {
+            return <Redirect to={{pathname: '/checkout'}} />;
+        }
+
+        if(this.state.checkoutPreviousOrder === true) {
+            replaceCart(order.cart);
+            return <Redirect to={{pathname: '/checkout'}} />;
+        }
+
         // Get order when customer telephone has been retrieved
         if(!this.customerNotLoaded(customer) && order == null) {
             if(customer != null && customer.name != '') {
@@ -62,6 +80,13 @@ class OrderPage extends React.Component {
     }
 
     /***************************
+     * ON CLICK OPTION FUNCTIONS
+     ***************************/
+    placeSameOrderAsLast() { this.setState({checkoutPreviousOrder: true}); }
+
+    checkoutCart() { this.setState({checkoutCart: true}); }
+
+    /***************************
      *  RENDER HELPER FUNCTIONS
      ***************************/
 
@@ -71,9 +96,9 @@ class OrderPage extends React.Component {
             <div className="pizzaBackground">
                 <NavigationBar />
                 <div className="orderPage">
-                    <div className='row'>Checkout My Cart</div>
-                    <div>Cart Empty!</div>
-                    <div className='row'>Place the Same Order As Last Time</div>
+                    <div className='unclickableOrderOption col-centered row' onClick={() => this.checkoutCart()}>Checkout My Cart</div>
+                    <div className='col-centered row orderErrorMsg'>Cart is Empty</div>
+                    <div className='clickableOrderOption col-centered row' onClick={() => this.placeSameOrderAsLast()}>Place the Same Order As Last Time (will replace cart contents)</div>
                 </div>
             </div>
         );
@@ -86,7 +111,7 @@ class OrderPage extends React.Component {
             <div className="pizzaBackground">
                 <NavigationBar />
                 <div className="orderPage">
-                    <h1>You must either have placed an order before or have items in cart to order</h1>
+                    <h1>No previous order nor cart selection available</h1>
                     <h2>Look at our delicious pizzas in the menu section, add to cart and have yourself a feast!</h2>
                 </div>
             </div>
@@ -99,9 +124,9 @@ class OrderPage extends React.Component {
             <div className="pizzaBackground">
                 <NavigationBar />
                 <div className="orderPage">
-                    <div className='row'>Checkout My Cart</div>
-                    <div className='row'>Place the Same Order As Last Time</div>
-                    <div>No Previous Order!</div>
+                    <div className='clickableOrderOption col-centered row' onClick={() => this.checkoutCart()}>Checkout My Cart</div>
+                    <div className='unclickableOrderOption col-centered  row'>Place the Same Order As Last Time (will replace cart contents)</div>
+                    <div className='col-centered row orderErrorMsg'>No Previous Order!</div>
                 </div>
             </div>
         );
@@ -113,8 +138,8 @@ class OrderPage extends React.Component {
             <div className="pizzaBackground">
                 <NavigationBar />
                 <div className="orderPage">
-                    <div className='row'>Checkout My Cart</div>
-                    <div className='row'>Place the Same Order As Last Time</div>
+                    <div className='clickableOrderOption col-centered row' onClick={() => this.checkoutCart()}>Checkout My Cart</div>
+                    <div className='clickableOrderOption col-centered row' onClick={() => this.placeSameOrderAsLast()}>Place the Same Order As Last Time (will replace cart contents)</div>
                 </div>
             </div>
         );
@@ -131,4 +156,4 @@ const mapStateToProps = (storeState) => {
     };
 }
 
-export default connect(mapStateToProps, { getCustomerInfo, getOrder, getCartContents }) (OrderPage);
+export default connect(mapStateToProps, { getCustomerInfo, getOrder, getCartContents, replaceCart }) (OrderPage);

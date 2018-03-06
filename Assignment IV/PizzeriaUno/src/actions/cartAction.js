@@ -1,4 +1,4 @@
-import { GET_CART_CONTENTS, ADD_TO_CART, REMOVE_FROM_CART } from '../constants/cartConstants';
+import { GET_CART_CONTENTS, ADD_TO_CART, REMOVE_FROM_CART, REPLACE_CART } from '../constants/cartConstants';
 
 const pizzasInCartKey = 'cartPizzasInventory';
 
@@ -36,6 +36,17 @@ const addToCart = (pizza) => {
     };
 } 
 
+const replaceCart = (cartContents) => {
+    var newCartContents = JSON.stringify(cartContents);
+    localStorage.setItem(pizzasInCartKey, newCartContents);
+    newCartContents = JSON.parse(newCartContents);
+
+    return {
+        type: REPLACE_CART,
+        payload: newCartContents
+    };
+} 
+
 const getCartContents = () => {
     var pizzasInCart = JSON.parse(localStorage.getItem(pizzasInCartKey));
     if(pizzasInCart === null) {
@@ -50,5 +61,6 @@ const getCartContents = () => {
 export {
     removeFromCart,
     addToCart,
-    getCartContents
+    getCartContents,
+    replaceCart
 }
