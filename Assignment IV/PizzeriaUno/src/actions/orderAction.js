@@ -2,6 +2,7 @@ import { GET_ORDER_BY_TELEPHONE, POST_ORDER_BY_TELEPHONE} from '../constants/ord
 import fetch from 'isomorphic-fetch';
 
 const getOrder = (telephone) => {
+    console.log('HELLO FROM HERE');
     return dispatch => fetch('http://localhost:3500/api/orders/' + telephone).then(function(response) {
         if(response.status >= 200 && response.status < 300) {
             response.json().then(data => dispatch(getOrderSuccess(data)));

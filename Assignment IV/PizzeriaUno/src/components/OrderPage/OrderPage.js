@@ -24,6 +24,18 @@ class OrderPage extends React.Component {
         getCartContents();
     }
 
+    componentDidUpdate(prevProps) {
+        const { customer } = this.props;
+        if(customer != prevProps.customer) {
+            if(customer != null && customer.name != '') {
+                console.log('getting order');
+                const { getOrder } = this.props;
+                console.log('calling getOrder');
+                getOrder(customer.telephone);
+            }
+        }
+    }
+
     customerNotLoaded(customer) {
         return (customer != null) && (customer === undefined || customer.name === '');
     }
@@ -48,15 +60,6 @@ class OrderPage extends React.Component {
 
         if(this.state.checkoutCart === true) {
             return <Redirect to={{pathname: '/checkout'}} />;
-        }
-
-        // Get order when customer telephone has been retrieved
-        if(!this.customerNotLoaded(customer) && order == null) {
-            if(customer != null && customer.name != '') {
-                console.log('getting order');
-                const { getOrder } = this.props;
-                getOrder(customer.telephone);
-            }
         }
 
         if(this.state.checkoutPreviousOrder === true) {
