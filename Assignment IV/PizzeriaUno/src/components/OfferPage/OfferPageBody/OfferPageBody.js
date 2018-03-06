@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAllOffers } from '../../../actions/offerAction';
 import LoadingScreen from '../../LoadingScreen/LoadingScreen';
 import OfferListItem from '../OfferListItem/OfferListItem';
+import { Redirect } from 'react-router-dom';
 
 class OfferPageBody extends React.Component {
 
@@ -10,8 +11,10 @@ class OfferPageBody extends React.Component {
         super(props, ctx);
         this.state = {
             isLoading: true,
-            selectedPizza: null
+            selectedPizza: null,
+            redirectToOffer: false
         };
+        this.redirectToOfferFunction = this.redirectToOfferFunction.bind(this)
     }
 
     componentDidMount() {
@@ -20,7 +23,17 @@ class OfferPageBody extends React.Component {
         this.setState({ isLoading: false});
     }
 
+    redirectToOfferFunction (offer) {
+        this.setState({redirectToOffer: offer});
+    }
+
     render() {
+        if(this.state.redirectToOffer !== false) {
+            return <Redirect to={{
+                pathname: '/offers/selection',
+                offerSelected: { referrer: this.state.redirectToOffer }
+            }} />
+        }
         const { offer } = this.props;
         if(this.state.isLoading || !Array.isArray(offer)) { return <LoadingScreen />; }
         return (
@@ -31,11 +44,8 @@ class OfferPageBody extends React.Component {
                 </div>
                 <div className='row'>
                     <div className='offersActive'>
-                        {offer.map(o => <OfferListItem key={o.id} itemoffer={o}/>)}
+                        {offer.map(o => <OfferListItem key={o.id} onClick={() => this.redirectToOfferFunction(o)} itemoffer={o}/>)}
                     </div>
-                </div>
-                <div className='row'>
-                    <p id="offerExpl">*Offers are automatically recognized when placing an order, so go ahead and use them!</p>
                 </div>
             </div>
         );

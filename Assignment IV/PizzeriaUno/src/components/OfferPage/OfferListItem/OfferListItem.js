@@ -2,10 +2,10 @@ import React from 'react';
 import propTypes from 'prop-types';
 import LogoOffer from '../../../resources/PizzeriaUnoOffer.png';
 
-const OfferListItem = ({ itemoffer }) => {
+const OfferListItem = ({ itemoffer, onClick }) => {
     const { offer, price, validFor } = itemoffer;
     return (
-        <span className="offerWrapper col-md-3">
+        <span className="offerWrapper col-md-3" onClick={onClick}>
             <div className="offerInfo">
                 <p className="offerName">{offer}</p>
                 <p className="offerPrice">{price} kr*</p>

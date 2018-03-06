@@ -15,6 +15,7 @@ body {
     
     .pickupBody,
     .orderPage,
+    .offerSelectionBody,
     .deliveryHeadings,
     .pageViewHeadings {
         text-align: center;
@@ -35,6 +36,22 @@ body {
             color: white;
             text-shadow: 2px 2px 4px #ff0000;
         }
+
+        h3 {
+            font-family: Helvetica, sans-serif;
+            text-transform: uppercase;
+            font-size: 16px;
+            color: white;
+            font-weight: 900;
+            margin-left: 25px;
+            font-stretch: ultra-expanded;
+            overflow: hidden;
+        }
+    }
+
+    .offerSelectionBody {
+        text-align: left;
+        h1,h2,h3 { text-align: center; }
     }
 
     .initialPageContainer {
@@ -207,6 +224,7 @@ body {
     .orderPage,
     .confirmationBody,
     .checkoutBody,
+    .offerSelectionBody,
     .menuBody,
     .cartBody,
     .offerBody,
@@ -735,6 +753,7 @@ body {
         }
     }
 
+    .offerSelectionItemWrapper,
     .cartItemWrapper {
         font-family: Helvetica, sans-serif;
         font-size: 14px;
@@ -860,4 +879,21 @@ body {
         margin-bottom: 30px;
         margin-top: 20px;
     }
+
+    .offerSelectionItemWrapper:hover {
+        opacity: 0.7;
+        color: #df8621de;
+        cursor: pointer;
+    }
+
+    .pizzaInfoSelected {
+        background-color: #ffff0071;
+    }
+
+    .offerCheck {
+        padding-left:20px;
+        font-size: 40px;
+        color: green;
+    }
+
 }

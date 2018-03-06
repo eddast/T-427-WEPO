@@ -28,9 +28,7 @@ class OrderPage extends React.Component {
         const { customer } = this.props;
         if(customer != prevProps.customer) {
             if(customer != null && customer.name != '') {
-                console.log('getting order');
                 const { getOrder } = this.props;
-                console.log('calling getOrder');
                 getOrder(customer.telephone);
             }
         }

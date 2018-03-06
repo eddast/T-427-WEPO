@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import About from './components/AboutPage/AboutPageView/AboutPageView';
 import Menu from './components/MenuPage/MenuPageView/MenuPageView';
 import Offers from './components/OfferPage/OfferPageView/OfferPageView';
+import OfferPageSelection from './components/OfferPage/OfferPageSelection/OfferPageSelection';
 import Pizza from './components/MenuPage/PizzaDetailView/PizzaDetailView';
 import Home from './components/HomePage/HomePage';
 import Cart from './components/CartPage/CartPageView/CartPageView';
@@ -33,6 +34,7 @@ var RouterPaths = (
         <Route exact path='/pizzas' component={Menu} />
         <Route exact path='/pizzas/:pizzaid' component={Pizza} />
         <Route exact path='/offers' component={Offers} />
+        <Route exact path='/offers/selection' component={OfferPageSelection} /> 
         <Route exact path='/cart' component={Cart} />
         <Route exact path='/about' component={About} />
         <Route exact path='/order' component={Order} />
