@@ -3,6 +3,7 @@ import NavigationBar from '../../NavigationBar/NavigationBar';
 import { connect } from 'react-redux';
 import SelectionItem from '../OfferSelectionListItem/OfferSelectionListItem';
 import { getAllPizzas } from '../../../actions/pizzaAction';
+import FontAwesome from 'react-fontawesome';
 
 class OfferPageSelection extends React.Component {
 
@@ -63,7 +64,7 @@ class OfferPageSelection extends React.Component {
                     <div>
                         {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
                     </div>
-                    <div className="proceedToCheckoutOffer">Proceed</div>
+                    {this.getProceed(max, offer)}
                 </div>
             </div>
         );
@@ -81,7 +82,7 @@ class OfferPageSelection extends React.Component {
                     <div>
                         {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
                     </div>
-                    <div className="proceedToCheckoutOffer">Proceed</div>
+                    {this.getProceed(max, offer)}
                 </div>
             </div>
         );
@@ -99,10 +100,41 @@ class OfferPageSelection extends React.Component {
                     <div>
                         {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
                     </div>
-                    <div className="proceedToCheckoutOffer">Proceed</div>
+                    {this.getProceed(max, offer)}
                 </div>
             </div>
         );
+    }
+
+    getProceed(max, offer) {
+        if(this.canProceed(max)) {
+            return(
+                <div className="proceedToCheckoutOffer row" onClick={() => this.proceedToCheckout(offer)}>
+                    Proceed &nbsp; &nbsp;
+                    <FontAwesome name='arrow-circle-right'/>
+                </div>
+            );
+        } else {
+            return(
+                <div className="proceedToCheckoutOffer proceedToCheckoutOfferDisabled row" onClick={() => this.displayNotAllowedToProceed(max)}>
+                    Proceed &nbsp; &nbsp;
+                    <FontAwesome name='arrow-circle-right'/>
+                </div>
+            );
+        }
+    }
+
+    displayNotAllowedToProceed(max) {
+        alert('Please select at least ' + max + ' pizzas for offer')
+    }
+
+    proceedToCheckout(offer) {
+        console.log(offer);
+        alert('Should redirect to user info on ' + offer.validFor);
+    }
+
+    canProceed(max) {
+        return this.state.pizzaSelection.length === max;
     }
 
     isSelected (pizza) {

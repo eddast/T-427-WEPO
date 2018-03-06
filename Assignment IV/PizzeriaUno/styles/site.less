@@ -765,13 +765,23 @@ body {
         font-size: 14px;
         margin-top: 10px;
 
+        .pizzaInfoSelected {
+            background-color: #9df79dd5;
+            padding: 10px;
+            border-radius: 10px;
+            color: black;
+            margin-bottom: 5px;
+        }
         .pizzaInfo {
             background-color: white;
             padding: 10px;
             border-radius: 10px;
             color: black;
             margin-bottom: 5px;
-            
+        }
+
+        .pizzaInfoSelected,
+        .pizzaInfo { 
             .pizzaImg {
                 margin-left: 30px;
                 padding: 20px;
@@ -892,14 +902,55 @@ body {
         cursor: pointer;
     }
 
+    .offerSelectionItemWrapper {
+        .pizzaDes {
+            margin-left: 10px;
+            font-size: 11px;
+            color: gray;
+        }
+        .pizzaImag {
+            margin-left: 10px;
+            padding: 2px;
+            width: 8%;
+            display: inline-block;
+        }
+    }
+
     .pizzaInfoSelected {
         background-color: #ffff0071;
     }
 
     .offerCheck {
-        padding-left:20px;
-        font-size: 40px;
+        padding-left:5px;
+        font-size: 30px;
         color: green;
     }
+
+    .proceedToCheckoutOffer {
+        position: fixed;
+        right: 0; 
+        top: 50%; 
+        font-family: Helvetica, sans-serif;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: white;
+        font-weight: 900;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        background: #fdf90196;
+        border: 2px solid black;
+        padding: 10px 15px 10px 15px;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .proceedToCheckoutOfferDisabled {
+        opacity: 0.7;
+        background: gray;
+        cursor: not-allowed;
+    }
+
+    
 
 }

@@ -12,23 +12,23 @@ class OfferSelectionListItem extends React.Component {
 
         if (isSelected(this.props.pizza)) {
             return (
-                <span className="offerSelectionItemWrapper col-md-12">
-                    <div onClick={() => onClick(this.props.pizza, max)} className="pizzaInfo pizzaInfoSelected">
+                <span className="offerSelectionItemWrapper col-md-10">
+                    <div onClick={() => onClick(this.props.pizza, max)} className="pizzaInfoSelected">
                         <FontAwesome className="offerCheck" name='check-circle' color="green"/>
-                        <span><img className="pizzaImg" src={image} alt={name} /></span>
+                        <span><img className="pizzaImag" src={image} alt={name} /></span>
                         <span className="pizzaName">{name}</span>
-                        <span className="pizzaDescription">{description}</span>
+                        <span className="pizzaDes">{description}</span>
                         <span className="pizzaPrice">{price} kr</span>
                     </div>
                 </span>
             );
         } else {
             return (
-                <span className="offerSelectionItemWrapper col-md-12">
+                <span className="offerSelectionItemWrapper col-md-10">
                     <div onClick={() => onClick(this.props.pizza, max)} className="pizzaInfo">
-                        <span><img className="pizzaImg" src={image} alt={name} /></span>
+                        <span><img className="pizzaImag" src={image} alt={name} /></span>
                         <span className="pizzaName">{name}</span>
-                        <span className="pizzaDescription">{description}</span>
+                        <span className="pizzaDes">{description}</span>
                         <span className="pizzaPrice">{price} kr</span>
                     </div>
                 </span>
