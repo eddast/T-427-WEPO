@@ -8,14 +8,17 @@ import { getCartContents } from '../../../actions/cartAction';
 
 class CartPageBody extends React.Component {
 
-    // Get 'cart' from local storage from redux reducer
+    // Get user 'cart' from local storage from redux reducer
     componentDidMount() {
         this.props.getCartContents();
     }  
 
     render() {
+        // Display loading message while still fetching cart
         if (this.props.cart === null) {
             return <LoadingScreen />;
+        
+        // Display appropriate message for an empty cart
         } else if(this.props.cart.length === 0) {
             return (
                 <div className='cartBody'>
@@ -25,6 +28,9 @@ class CartPageBody extends React.Component {
                     </div>
                 </div>
             );
+
+        // Display cart contents for a non-empty cart
+        // Includes a checkout button which links to checkout
         } else {
             return (
                 <div className='cartBody'>
@@ -51,6 +57,7 @@ class CartPageBody extends React.Component {
     }
 };
 
+// Maps redux store state attribute to component props 
 const mapStateToProps = ({ cart }) => {
     return { cart };
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import Logo from '../../resources/PizzeriaUno.png';
 import FontAwesome from 'react-fontawesome';
 
+// Home Page with greeting
+// Dummy component: renders links to navigate the web page, logo and tagline
 const HomePage = () => {
     return(
         <div className='pizzaBackground'>

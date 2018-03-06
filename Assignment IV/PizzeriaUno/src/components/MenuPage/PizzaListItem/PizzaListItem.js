@@ -4,16 +4,18 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addToCart } from '../../../actions/cartAction';
 
+// List item for pizza used in menu view
 class PizzaListItem extends React.Component {
 
     constructor (props, ctx) {
         super(props, ctx);
-        this.state = {
-            toCheckout : false
-        }
+        this.state = { toCheckout : false } // Determines wheter user should be redirected to checkout
     }
 
     // Adds pizza to local storage cart via react redux function
+    // Explicitly notifies user once added to cart
+    // Offer user to immediately checkout cart
+    // If so, sets redirect to true and redirects user to checkout
     addToLocalStorage(pizza) {
         var addToLocalStorageCart = this.props.addToCart;
         addToLocalStorageCart(pizza);
@@ -22,10 +24,17 @@ class PizzaListItem extends React.Component {
     }
 
     render() {
+
+        // Extract all attributes of pizza to display them
         const { id, name, description, price, image } = this.props.pizza;
+
+        // Redirects user to checkout if appropriate
         if(this.state.toCheckout === true) {
             return <Redirect to={{pathname: '/checkout'}} />;
         }
+
+        // Otherwise, renders pizza list item with all appropriate values displayed
+        // Provides method to add pizza to cart and a link to detail view for pizza
         return (
             <span className="pizzaWrapper col-md-3">
                 <Link to={'/pizzas/' + id} >
@@ -47,7 +56,12 @@ class PizzaListItem extends React.Component {
     }
 };
 
+// Variables pizzalistitem needs provided
 PizzaListItem.propTypes = {
+
+    /** Pizza obj needed to render list item in view
+        Contains name, description, pice and image
+    */
     pizza: propTypes.shape({
         name: propTypes.string,
         description: propTypes.string,

@@ -7,13 +7,20 @@ import { removeFromCart } from '../../../actions/cartAction';
 
 class PizzaListCartItem extends React.Component {
 
+    // Function which removes pizza from cart
+    // Uses the removeFromCart redux function
     removeFromLocalStorage(pizza) {
         this.props.removeFromCart(pizza);
         alert(pizza.name + ' removed from cart!');
     }
 
     render() {
+
+        // Access attributes of pizza to display
         const { id, name, description, price, image } = this.props.pizza;
+
+        // Render all relevant information on pizza attributes
+        // Provides a method to delete item (both via minus-circle icon and below button)
         return (
             <span className="pizzaWrapper col-md-3">
                 <div className="pizzaInfo">
@@ -37,7 +44,10 @@ class PizzaListCartItem extends React.Component {
     }
 };
 
+// Variables pizza cart item needs provided
 PizzaListCartItem.propTypes = {
+
+    // The list item pizza to display
     pizza: propTypes.shape({
         name: propTypes.string,
         description: propTypes.string,
@@ -45,6 +55,8 @@ PizzaListCartItem.propTypes = {
         image: propTypes.string
     })
 }
+
+// Maps redux store state attribute to component props
 const mapStateToProps = ({ cart }) => {
     return { cart };
 }

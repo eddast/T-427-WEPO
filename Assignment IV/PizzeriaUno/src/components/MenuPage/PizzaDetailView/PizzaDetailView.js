@@ -6,15 +6,18 @@ import FontAwesome from 'react-fontawesome';
 import { Redirect, Link } from 'react-router-dom';
 import { addToCart } from '../../../actions/cartAction';
 
+// Pizza list item detail view
+// Gets pizza by id and retrieves it
+// Redirects user to checkout if he or she wishes
 class PizzaDetailView extends React.Component {
 
     constructor (props, ctx) {
         super(props, ctx);
-        this.state = {
-            toCheckout : false
-        }
+        this.state = { toCheckout : false } // Determines wheter user should be redirected to checkout
     }
 
+    // Immediately retrieve pizza by id via redux action
+    // Uses the dynamic part of url to retrieve pizza
     componentDidMount() {
         const {pizzaid} = this.props.match.params;
         const { getPizzaByID } = this.props;
@@ -22,6 +25,9 @@ class PizzaDetailView extends React.Component {
     }
 
     // Adds pizza to local storage cart via react redux function
+    // Explicitly notifies user once added to cart
+    // Offer user to immediately checkout cart
+    // If so, sets redirect to true and redirects user to checkout
     addToLocalStorage(pizza) {
         var addToLocalStorageCart = this.props.addToCart;
         addToLocalStorageCart(pizza);
@@ -30,10 +36,16 @@ class PizzaDetailView extends React.Component {
     } 
 
     render() {
+        
+        // Retrieve pizza from props
         const { pizza } = this.props;
+
+        // Redirect user to checkout if he or she wishes
         if(this.state.toCheckout === true) {
             return <Redirect to={{pathname: '/checkout'}} />;
         }
+
+        // Otherwise display detail view with relevant information on pizza
         return(
             <div className="whiteBackground">
                 <NavigationBar />
@@ -56,6 +68,8 @@ class PizzaDetailView extends React.Component {
         );
     }
 };
+
+// Map store state attribute to component props
 const mapStateToProps = ({ pizza }) => {
     return { pizza };
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Chefs from '../../../resources/OurChefs.png'
 
+// Dummy component: renders hard coded mock information on restaurant
 const AboutPageBody = () => {
     return (
         <div className='row aboutPageBody belowNavBarComponent'>

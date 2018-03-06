@@ -2,6 +2,7 @@ import React from 'react';
 import Loader from '../../resources/PizzeriaUno.png';
 import NavigationBar from '../NavigationBar/NavigationBar';
 
+// Dummy component: renders spinning pizza logo to indicate content is loading
 const LoadingScreen = () => {
     return(
         <div className='pizzaBackground'>
