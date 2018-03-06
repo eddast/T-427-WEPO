@@ -139,7 +139,6 @@ class DeliveryForm extends React.Component {
     }
 
     getSubmitButton() {
-        console.log(this.canSubmit());
         if(this.canSubmit()) {
             return (
                 <div className="row">
@@ -210,8 +209,8 @@ class DeliveryForm extends React.Component {
             return 'Postal code required';
         } else if (!/^\d+$/.test(postalCode)) {
             return 'Postal code invalid'
-        } else if (postalCode.length > 10) {
-            return 'Postal code invalid (no more than 10 digits)'
+        } else if (postalCode.length > 10 || postalCode.length < 2) {
+            return 'Postal code invalid (must be between 2-10 digits)'
         }
         
         return '';

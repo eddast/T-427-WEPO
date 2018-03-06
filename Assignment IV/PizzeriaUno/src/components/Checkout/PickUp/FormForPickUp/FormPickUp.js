@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCustomerInfo, setCustomerInfo } from '../../../../actions/customerAction';
+import TextInput from '../../FormAttributes/TextInput/TextInput';
 
 class PickUpForm extends React.Component {
 
@@ -54,20 +55,17 @@ class PickUpForm extends React.Component {
     }
 
     handleSubmit(event) {
-
-        if (this.state.name === '' || this.state.telephone === '') {
-            alert('You left some form empty. That´s a big no no');
-            return;
+        if(this.canSubmit) {
+            this.setState({ toConfirmation: true })
+            var customer = {
+                name: this.state.name,
+                telephone: this.state.telephone,
+            }
+            this.setState({ customerInfo: customer});
+            event.preventDefault();
+            var setCustomer = this.props.setCustomerInfo;
+            setCustomer(customer);
         }
-        this.setState({ toConfirmation: true })
-        var customer = {
-            name: this.state.name,
-            telephone: this.state.telephone,
-        }
-        this.setState({ customerInfo: customer});
-        event.preventDefault();
-        var setCustomer = this.props.setCustomerInfo;
-        setCustomer(customer);
     }
 
     render() {
@@ -88,36 +86,80 @@ class PickUpForm extends React.Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="formAttributes col-centered">
-                    <div className="row">
-                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
-                            Name:
-                        </label>
-                        <div className="col-md-4">
-                            <input className="form-control"
-                                type='text'
-                                value={this.state.name}
-                                onChange={this.handleChangeForName}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
-                            Telephone:
-                        </label>
-                        <div className="col-md-4">
-                            <input className="form-control"
-                                type='number'
-                                value={this.state.telephone}
-                                onChange={this.handleChangeForTelephone}
-                            />
-                        </div>
-                    </div>
-                    <div className="row"><div className="submitBtn text-center col-md-12"><input className="btn btn-info" type="submit" value="Order" /></div></div>
+                    <TextInput
+                        label="Name:"
+                        name={this.state.name}
+                        value={this.state.name}
+                        onChange={(e) => this.handleChangeForName(e)}
+                        validate={(val) => this.validateOnlyLetterInput(val)}
+                    />
+                    <TextInput
+                        label="Telephone:"
+                        type="number"
+                        name={this.state.telephone}
+                        value={this.state.telephone}
+                        onChange={(e) => this.handleChangeForTelephone(e)}
+                        validate={val => this.validateTelephone(val)}
+                    />
                 </div>
+                {this.getSubmitButton()}
             </form>
         );
-    };
-};
+    }
+
+    getSubmitButton() {
+        if(this.canSubmit()) {
+            return (
+                <div className="row">
+                    <div className="submitBtn text-center col-md-12">
+                        <input className="btn btn-lg btn-primary" type="submit" value="Order" />
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <div className="row">
+                        <div className="submitBtn text-center col-md-12">
+                            <input disabled="true" className="btn btn-secondary btn-lg btn-disabled" type="submit" value="Order" />
+                        </div>
+                    </div>
+                    <div className="row text-center">
+                        <span className="formErrorText">Cannot proceed; some fields are invalid - please review your info</span>
+                    </div>
+                </div>
+            );
+        }
+
+    }
+
+    canSubmit() {
+        return (
+            this.validateOnlyLetterInput(this.state.name)==='' &&
+            this.validateTelephone(this.state.telephone)===''
+        );
+    }
+
+    validateOnlyLetterInput(name) {
+        if(name==='') {
+            return 'This field is required';
+        } else if(!(/^[A-Za-z\u00C0-\u017F\s]+$/.test(name))) {
+            return 'Invalid input (only letters allowed)';
+        }
+        
+        return '';
+    }
+
+    validateTelephone(tel) {
+        if(tel==='') {
+            return 'Telephone required';
+        } else if (!/^\d+$/.test(tel)) {
+            return 'Telephone number invalid'
+        }
+        
+        return '';
+    }
+}
 
 const mapStateToProps = ({ customer }) => {
     return { customer };

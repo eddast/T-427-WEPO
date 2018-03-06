@@ -126,16 +126,26 @@ class OfferPageSelection extends React.Component {
     getProceed(max, offer) {
         if(this.canProceed(max)) {
             return(
-                <div className="proceedToCheckoutOffer row" onClick={() => this.proceedToCheckout(offer)}>
-                    Proceed &nbsp; &nbsp;
-                    <FontAwesome name='arrow-circle-right'/>
+                <div>
+                    <div className="proceedToCheckoutOffer row" onClick={() => this.proceedToCheckout(offer)}>
+                        Proceed &nbsp; &nbsp;
+                        <FontAwesome name='arrow-circle-right'/>
+                    </div>
+                    <div className="row">
+                        <div>&nbsp;</div>
+                    </div>
                 </div>
             );
         } else {
             return(
-                <div className="proceedToCheckoutOffer proceedToCheckoutOfferDisabled row" onClick={() => this.displayNotAllowedToProceed(max)}>
-                    Proceed &nbsp; &nbsp;
-                    <FontAwesome name='arrow-circle-right'/>
+                <div>
+                    <div className="proceedToCheckoutOffer proceedToCheckoutOfferDisabled row" onClick={() => this.displayNotAllowedToProceed(max)}>
+                        Proceed &nbsp; &nbsp;
+                        <FontAwesome name='arrow-circle-right'/>
+                    </div>
+                    <div className="row">
+                        <div>&nbsp;</div>
+                    </div>
                 </div>
             );
         }
