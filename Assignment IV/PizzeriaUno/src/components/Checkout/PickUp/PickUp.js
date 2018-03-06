@@ -6,11 +6,11 @@ const PickUp = () => {
     return (
         <div className="pizzaBackground">
             <NavigationBar />
-            <div className="emptySpaceBetweenCheckoutOptions"></div>
-            {/* <div className="showOptionsForCheckout">
-                <p className="showOptionsForCheckoutText">User picks pizza up himself const</p>
-            </div> */}
-            <FormForPickUp />
+            <div className="pickupBody">
+                <h1>Fill out your information</h1>
+                <h2>We need your name and phone number to process your delicious order!</h2>
+                <FormForPickUp />
+            </div>
         </div>
     );
 };

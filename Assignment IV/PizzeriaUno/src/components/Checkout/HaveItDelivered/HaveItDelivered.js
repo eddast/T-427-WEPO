@@ -6,8 +6,11 @@ const HaveItDelivered = () => {
     return (
         <div className="pizzaBackground">
             <NavigationBar />
-            <div className="emptySpaceBetweenCheckoutOptions"></div>
-            <DeliveryForm />
+            <div className="deliveryBody">
+                <h1>Fill out your information</h1>
+                <h2>Please provide accurate information on address so that the pizza will not get lost!</h2>
+                <DeliveryForm />
+            </div>
         </div>
     );
 };
