@@ -36,7 +36,7 @@ class PizzaDetailView extends React.Component {
     } 
 
     render() {
-        
+
         // Retrieve pizza from props
         const { pizza } = this.props;
 

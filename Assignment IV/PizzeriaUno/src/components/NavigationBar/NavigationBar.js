@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../resources/PizzeriaUno.png';
 
+
+// Dummy component: renders navigation bar with all links
 const NavigationBar = () => {
     return (
         <div className="NavigationBar navbar-inverse bg-inverse">
@@ -35,4 +37,5 @@ const NavigationBar = () => {
         </div>
     );
 };
+
 export default NavigationBar;
