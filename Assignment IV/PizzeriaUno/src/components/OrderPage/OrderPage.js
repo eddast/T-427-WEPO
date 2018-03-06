@@ -58,6 +58,7 @@ class OrderPage extends React.Component {
         // Get order when customer telephone has been retrieved
         if(!this.customerNotLoaded(customer) && order == null) {
             if(customer != null && customer.name != '') {
+                console.log('getting order');
                 const { getOrder } = this.props;
                 getOrder(customer.telephone);
             }

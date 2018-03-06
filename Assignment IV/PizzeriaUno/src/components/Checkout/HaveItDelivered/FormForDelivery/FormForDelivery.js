@@ -91,47 +91,69 @@ class DeliveryForm extends React.Component {
         }
         return (
             <form onSubmit={this.handleSubmit}>
-                <label className='formsForDeliveryAndPickUp'>
-                Name:
-                    <input
-                        type='text'
-                        value={this.state.name}
-                        onChange={this.handleChangeForName}
-                    />
-                </label>
-                <label className='formsForDeliveryAndPickUp'>
-                Address:
-                    <input
-                        type='text'
-                        value={this.state.address}
-                        onChange={this.handleChangeForAddress}
-                    />
-                </label>
-                <label className='formsForDeliveryAndPickUp'>
-                City:
-                    <input
-                        type='text'
-                        value={this.state.city}
-                        onChange={this.handleChangeForCity}
-                    />
-                </label>
-                <label className='formsForDeliveryAndPickUp'>
-                Telephone:
-                    <input
-                        type='number'
-                        value={this.state.telephone}
-                        onChange={this.handleChangeForTelephone}
-                    />
-                </label>
-                <label className='formsForDeliveryAndPickUp'>
-                Postal code:
-                    <input
-                        type='number'
-                        value={this.state.postalCode}
-                        onChange={this.handleChangeForPostalCode}
-                    />
-                </label>
-                <input type="submit" value="Submit" />
+                <div className="formAttributes col-centered">
+                    <div className="row">
+                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
+                            Name:
+                        </label>
+                        <div className="col-md-4">
+                            <input className="form-control"
+                                type='text'
+                                value={this.state.name}
+                                onChange={this.handleChangeForName}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
+                            Address:
+                        </label>
+                        <div className="col-md-4">
+                            <input className="form-control"
+                                type='text'
+                                value={this.state.address}
+                                onChange={this.handleChangeForAddress}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
+                            Postal code:
+                        </label>
+                        <div className="col-md-4">
+                            <input className="form-control"
+                                type='number'
+                                value={this.state.postalCode}
+                                onChange={this.handleChangeForPostalCode}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
+                        City:
+                        </label>
+                        <div className="col-md-4">
+                            <input className="form-control"
+                                type='text'
+                                value={this.state.city}
+                                onChange={this.handleChangeForCity}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
+                            Telephone:
+                        </label>
+                        <div className="col-md-4">
+                            <input className="form-control"
+                                type='number'
+                                value={this.state.telephone}
+                                onChange={this.handleChangeForTelephone}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="row"><div className="submitBtn text-center col-md-12"><input className="btn btn-info" type="submit" value="Order" /></div></div>
             </form>
         );
     }

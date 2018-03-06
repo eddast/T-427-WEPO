@@ -7,9 +7,13 @@ const HaveItDelivered = () => {
         <div className="pizzaBackground">
             <NavigationBar />
             <div className="deliveryBody">
-                <h1>Fill out your information</h1>
-                <h2>Please provide accurate information on address so that the pizza will not get lost!</h2>
-                <DeliveryForm />
+                <div className="deliveryHeadings">
+                    <h1>Fill out your information</h1>
+                    <h2>Please provide accurate information on address so that the pizza will not get lost!</h2>
+                </div>
+                <div className="customerForm">
+                    <DeliveryForm />
+                </div>
             </div>
         </div>
     );

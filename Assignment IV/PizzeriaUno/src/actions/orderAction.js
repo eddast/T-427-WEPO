@@ -31,6 +31,7 @@ export {
 }
 
 const getOrderSuccess = (order) => {
+    console.log(order);
     return {
         type: GET_ORDER_BY_TELEPHONE,
         payload: order[order.length-1]

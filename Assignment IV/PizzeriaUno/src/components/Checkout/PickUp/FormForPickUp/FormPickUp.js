@@ -68,12 +68,6 @@ class PickUpForm extends React.Component {
         setCustomer(customer);
     }
 
-    onKeyPressed(event) {
-        if (event.key === 'e' || event.key === 'E') {
-            return false;
-        }
-    }
-
     render() {
         if(this.state.toConfirmation === true ) {
             return <Redirect to={{
@@ -83,24 +77,33 @@ class PickUpForm extends React.Component {
         }
         return (
             <form onSubmit={this.handleSubmit}>
-                <label className='formsForDeliveryAndPickUp'>
-                Name:
-                    <input
-                        type='text'
-                        value={this.state.name}
-                        onChange={this.handleChangeForName}
-                    />
-                </label>
-                <label className='formsForDeliveryAndPickUp'>
-                Telephone:
-                    <input
-                        type='number'
-                        onKeyDown={(e) => this.onKeyPressed(e)}
-                        value={this.state.telephone}
-                        onChange={this.handleChangeForTelephone}
-                    />
-                </label>
-                <input type="submit" value="Submit" />
+                <div className="formAttributes col-centered">
+                    <div className="row">
+                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
+                            Name:
+                        </label>
+                        <div className="col-md-4">
+                            <input className="form-control"
+                                type='text'
+                                value={this.state.name}
+                                onChange={this.handleChangeForName}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <label className='formsForDeliveryAndPickUp col-md-offset-3 col-md-2'>
+                            Telephone:
+                        </label>
+                        <div className="col-md-4">
+                            <input className="form-control"
+                                type='number'
+                                value={this.state.telephone}
+                                onChange={this.handleChangeForTelephone}
+                            />
+                        </div>
+                    </div>
+                    <div className="row"><div className="submitBtn text-center col-md-12"><input className="btn btn-info" type="submit" value="Order" /></div></div>
+                </div>
             </form>
         );
     };

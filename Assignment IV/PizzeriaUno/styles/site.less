@@ -13,9 +13,9 @@ body {
         z-index: -100; 
     }
     
-    .deliveryBody,
     .pickupBody,
     .orderPage,
+    .deliveryHeadings,
     .pageViewHeadings {
         text-align: center;
         margin-bottom: 40px;
@@ -207,8 +207,6 @@ body {
     .orderPage,
     .confirmationBody,
     .checkoutBody,
-    .deliveryBody,
-    .pickupBody,
     .menuBody,
     .cartBody,
     .offerBody,
@@ -829,5 +827,37 @@ body {
         margin: 0 auto;
         margin-top: -10px;
         margin-bottom: 20px;
+    }
+
+    .pickupBody,
+    .deliveryBody {
+        display: block;
+        background-color: #2b0909c5;
+        padding: 40px;
+        padding-top: 15px;
+        border-radius: 1px 1px 20px 20px;
+        font-family: Helvetica, sans-serif;
+        align-content: center;
+    }
+
+    .customerForm {
+        margin-top: 70px;
+        margin-bottom: 40px;
+
+        label {
+            color: white;
+        }
+
+        .submitBtn {
+            padding: 30px;
+            margin-top: 0px;
+            margin-bottom: 40px;
+        }
+
+    }
+
+    .formAttributes {
+        margin-bottom: 30px;
+        margin-top: 20px;
     }
 }

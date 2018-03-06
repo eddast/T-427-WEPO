@@ -9,7 +9,9 @@ const PickUp = () => {
             <div className="pickupBody">
                 <h1>Fill out your information</h1>
                 <h2>We need your name and phone number to process your delicious order!</h2>
-                <FormForPickUp />
+                <div className="customerForm">
+                    <FormForPickUp />
+                </div>
             </div>
         </div>
     );
