@@ -4,13 +4,17 @@ import { connect } from 'react-redux';
 import SelectionItem from '../OfferSelectionListItem/OfferSelectionListItem';
 import { getAllPizzas } from '../../../actions/pizzaAction';
 import FontAwesome from 'react-fontawesome';
+import { Redirect } from 'react-router-dom';
+import { replaceCart } from '../../../actions/cartAction';
 
 class OfferPageSelection extends React.Component {
 
     constructor(props, ctx) {
         super(props, ctx)
         this.state = {
-            pizzaSelection : []
+            offer: null,
+            pizzaSelection : [],
+            redirectTo: false
         }
 
         this.checkSelection = this.checkSelection.bind(this);
@@ -22,20 +26,33 @@ class OfferPageSelection extends React.Component {
         getAllPizzas();
     }
 
-    isOfferOne(offer) {
-        return offer.offer === 'Two for the prize of one (pay for more expensive pizza)';
-    }
-
-    isOfferTwo(offer) {
-        return offer.offer === 'Two pizzas and a coke';
-    }
-
-    isOfferThree(offer) {
-        return offer.offer === 'One pizza and a coke';
-    }
+    // Identify offer
+    isOfferOne(offer)   { return offer.id === 1; }
+    isOfferTwo(offer)   { return offer.id === 2; }
+    isOfferThree(offer) { return offer.id === 3; }
 
     render() {
+
         var offerSelected = this.props.location.offerSelected && this.props.location.offerSelected.referrer;
+        this.state.offer = offerSelected;
+
+        // User has selected
+        if(this.state.redirectTo !== false) {
+            var replaceCart = this.props.replaceCart;
+            var newCart = this.state.pizzaSelection;
+            replaceCart(newCart);
+            if(this.state.redirectTo === 'delivery') {
+                return <Redirect to={{
+                    pathname: '/checkout/delivery',
+                    offerSelected: { referrer: this.state.offer }
+                }} />
+            } else {
+                return <Redirect to={{
+                    pathname: '/checkout/pickup',
+                    offerSelected: { referrer: this.state.offer }
+                }} />
+            }
+        }
         const {pizza} = this.props;
         if(pizza !== undefined) { 
             if(this.isOfferOne(offerSelected)) {
@@ -129,8 +146,7 @@ class OfferPageSelection extends React.Component {
     }
 
     proceedToCheckout(offer) {
-        console.log(offer);
-        alert('Should redirect to user info on ' + offer.validFor);
+        this.setState({redirectTo: offer.validFor});
     }
 
     canProceed(max) {
@@ -167,4 +183,4 @@ const mapStateToProps = ({ pizza }) => {
     return { pizza };
 }
 
-export default connect(mapStateToProps, { getAllPizzas })(OfferPageSelection);
+export default connect(mapStateToProps, { getAllPizzas, replaceCart })(OfferPageSelection);

@@ -4,10 +4,10 @@ import { Redirect } from 'react-router-dom';
 import { getCartContents, replaceCart } from '../../../actions/cartAction';
 import { getCustomerInfo } from '../../../actions/customerAction';
 import { postOrder } from '../../../actions/orderAction';
-import CartItem from '../CartItem/CartItem';
+import CartItem from '../../Checkout/CartItem/CartItem';
 import NavigationBar from '../../NavigationBar/NavigationBar';
 
-class OrderReview extends React.Component {
+class OfferOrderReview extends React.Component {
 
     constructor (props, ctx) {
         super(props, ctx);
@@ -37,18 +37,22 @@ class OrderReview extends React.Component {
     redirectToCustomerInfo() { this.setState({redirectToCustomerInfo: !this.state.redirectToCustomerInfo}); }
     
     // Get total price of cart
-    getCartTotal(cart) {
-        let sum = 0;
-        for(let i = 0; i < cart.length; i++ ) {
-            sum = sum + cart[i].price;
+    getCartTotalForOffer(cart, offer) {
+        console.log(offer);
+        if(offer.id === 1) {
+            console.log(cart);
+            if(cart[0].price > cart[1].price) {
+                return cart[0].price;
+            } else {
+                return cart[1].price;
+            }
+        } else {
+            return offer.price;
         }
-        
-        return sum;
     }
 
     render() {
-
-        var offer = this.props.location.offer && this.props.location.delivery.referrer;
+        var offer = this.props.location.offer.referrer;
         const { cart } = this.props;
         const { customer } = this.props;
 
@@ -59,7 +63,7 @@ class OrderReview extends React.Component {
             return < Redirect to={{pathname: '/cart'}} />;
         }
         if(this.state.redirectToCustomerInfo === true) {
-            if(delivery) {
+            if(offer.delivery === 'delivery') {
                 return < Redirect to={{pathname: '/checkout/delivery'}} />;
             } else {
                 return < Redirect to={{pathname: '/checkout/pickup'}} />;
@@ -75,7 +79,7 @@ class OrderReview extends React.Component {
             var replaceCart = this.props.replaceCart;
             var emptyCart = []
             replaceCart(emptyCart);
-            if(delivery) {
+            if(offer.delivery === 'delivery') {
                 return < Redirect to={{
                     pathname: '/checkout/delivery/confirmation/done',
                 }} />;
@@ -93,29 +97,54 @@ class OrderReview extends React.Component {
                     <div className="row">
                         <h1>Please review your order </h1>
                         <div className="row">
-                            <div className="userInfoReview col-centered col-md-7">{this.getUserInfo(customer, delivery)}</div>
+                            <div className="userInfoReview col-centered col-md-7">{this.getUserInfo(customer, offer.delivery)}</div>
                         </div>
                         <h2>Items to checkout: </h2>
                         <div className='pizzasInMenu'>
                             {cart.map((pizza, i) => <CartItem key={i} pizza={pizza}/>)}
+                            {this.getCoke(offer)}
                         </div>
                     </div>
                     <div className="row">
-                        <h1 className="reviewTotal">Order Total: {this.getCartTotal(cart)} kr</h1>
+                        <h1 className="reviewTotal">Order Total: {this.getCartTotalForOffer(cart, offer)} kr*</h1>
+                        <h2>{this.getExplainationText(offer)}</h2>
                     </div>
                     <div className="row confirmOptions">
                         <div className="confirmOption" onClick={this.confirmOrder}>Confirm</div>
-                        <div className="confirmOption" onClick={this.redirectToCart}>Edit Cart</div>
-                        <div className="confirmOption" onClick={this.redirectToCustomerInfo}>Edit Customer Information</div>
                     </div>
                 </div>
             </div>
 
         );
     }
+
+    getCoke(offer) {
+        if(offer.id > 1) {
+            return (
+                <span className="cartItemWrapper col-md-12">
+                    <div className="pizzaInfo">
+                        <span><img className="pizzaImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBN-z8mJj6F_BVKOQeeMapyijZV9EZWCkTosu2-oDZh1JAyXHA" alt="Coke" /></span>
+                        <span className="pizzaName">Coca-Cola</span>
+                        <span className="pizzaDescription">A refreshing delicious 2L Coca-Cola</span>
+                        <span className="pizzaPrice">0 kr*</span>
+                    </div>
+                </span>
+            );
+        }
+    }
+
+    getExplainationText(offer) {
+        if (offer.id === 1) {
+            return '*Special offer price: two pizzas for the price of one (pay for more expensive pizza)';
+        } else if (offer.id === 2) {
+            return '*Special offer price: valid for two pizzas and a coke';
+        } else if (offer.id === 3) {
+            return '*Special offer price: valid for a pizzas and a coke';
+        }
+    }
  
     getUserInfo(customer, delivery) {
-        if(delivery) {
+        if(delivery === 'delivery') {
             return (
                 <div>
                     <p>Customer Name:  {customer.name}, tel. {customer.telephone}</p>
@@ -140,4 +169,4 @@ const mapStateToProps = (storeState) => {
     };
 }
 
-export default connect(mapStateToProps, { getCartContents, postOrder, getCustomerInfo, replaceCart })(OrderReview);
+export default connect(mapStateToProps, { getCartContents, postOrder, getCustomerInfo, replaceCart })(OfferOrderReview);

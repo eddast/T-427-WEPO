@@ -17,6 +17,7 @@ import Delivery from './components/Checkout/HaveItDelivered/HaveItDelivered';
 import PickUp from './components/Checkout/PickUp/PickUp';
 import OrderReview from './components/Checkout/OrderReview/OrderReview';
 import ConfirmOrder from './components/Checkout/ConfirmOrder/ConfirmOrder';
+import OfferOrderReview from './components/OfferPage/OfferOrderReview/OfferOrderReview';
 import Order from './components/OrderPage/OrderPage';
 
 import '../styles/site';
@@ -45,6 +46,8 @@ var RouterPaths = (
         <Route exact path='/checkout/pickup/confirmation' component={OrderReview} />
         <Route exact path='/checkout/delivery/confirmation/done' component={ConfirmOrder} />
         <Route exact path='/checkout/pickup/confirmation/done' component={ConfirmOrder} />
+        <Route exact path='/offers/confirmation' component={OfferOrderReview} />
+        <Route exact path='/offers/confirmation/done' component={ConfirmOrder} />
         <div> 404 not found </div>
     </Switch>
 );
