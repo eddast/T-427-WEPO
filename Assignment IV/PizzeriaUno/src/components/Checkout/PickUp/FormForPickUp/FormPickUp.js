@@ -37,10 +37,12 @@ class PickUpForm extends React.Component {
     }
 
     setInputValues() {
-        this.setState({
-            name: this.props.customer.name,
-            telephone: this.props.customer.telephone
-        });
+        if(this.props.customer !== null) {
+            this.setState({
+                name: this.props.customer.name,
+                telephone: this.props.customer.telephone
+            });
+        }
     }
 
     handleChangeForName(event) {

@@ -50,11 +50,6 @@ class OrderPage extends React.Component {
             return <Redirect to={{pathname: '/checkout'}} />;
         }
 
-        if(this.state.checkoutPreviousOrder === true) {
-            replaceCart(order.cart);
-            return <Redirect to={{pathname: '/checkout'}} />;
-        }
-
         // Get order when customer telephone has been retrieved
         if(!this.customerNotLoaded(customer) && order == null) {
             if(customer != null && customer.name != '') {
@@ -63,6 +58,12 @@ class OrderPage extends React.Component {
                 getOrder(customer.telephone);
             }
         }
+
+        if(this.state.checkoutPreviousOrder === true) {
+            replaceCart(order.cart);
+            return <Redirect to={{pathname: '/checkout'}} />;
+        }
+
         if(this.customerNotLoaded(customer) && this.cartNotLoaded(cart)) {
             return <LoadingScreen />;
 

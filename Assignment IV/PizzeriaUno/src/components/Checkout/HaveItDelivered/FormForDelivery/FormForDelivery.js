@@ -73,13 +73,15 @@ class DeliveryForm extends React.Component {
     }
 
     setInputValues() {
-        this.setState({
-            name: this.props.customer.name,
-            address: this.props.customer.address,
-            city: this.props.customer.city,
-            telephone: this.props.customer.telephone,
-            postalCode: this.props.customer.postalCode
-        });
+        if(this.props.customer !== null) {
+            this.setState({
+                name: this.props.customer.name,
+                address: this.props.customer.address,
+                city: this.props.customer.city,
+                telephone: this.props.customer.telephone,
+                postalCode: this.props.customer.postalCode
+            });
+        }
     }
 
     render() {
