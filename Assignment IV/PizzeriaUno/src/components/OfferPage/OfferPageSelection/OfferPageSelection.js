@@ -41,10 +41,10 @@ class OfferPageSelection extends React.Component {
                 return this.twoForOneOffer(offerSelected, pizza);
 
             } else if (this.isOfferTwo(offerSelected)) {
-                return this.twoPizzasAndCoke(offerSelected);
+                return this.twoPizzasAndCoke(offerSelected, pizza);
 
             } else if (this.isOfferThree(offerSelected)) {
-                return this.onePizzaAndACoke(offerSelected);
+                return this.onePizzaAndACoke(offerSelected, pizza);
             }
         }
 
@@ -59,10 +59,47 @@ class OfferPageSelection extends React.Component {
                 <div className="offerSelectionBody">
                     <h1>Get two pizzas for one</h1>
                     <h2>Select two pizzas from the menu for the price of one!</h2>
-                    <h3>Make your selection (two pizzas):</h3>
+                    <h3>Make your selection:</h3>
                     <div>
                         {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
                     </div>
+                    <div className="proceedToCheckoutOffer">Proceed</div>
+                </div>
+            </div>
+        );
+    }
+
+    twoPizzasAndCoke(offer, pizzas) {
+        const max = 2;
+        return (
+            <div className="pizzaBackground">
+                <NavigationBar />
+                <div className="offerSelectionBody">
+                    <h1>Get a free coke with Joey's special!</h1>
+                    <h2>Select two pizzas from the menu and get a free coke to go with it for only {offer.price} kr</h2>
+                    <h3>Make your selection:</h3>
+                    <div>
+                        {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
+                    </div>
+                    <div className="proceedToCheckoutOffer">Proceed</div>
+                </div>
+            </div>
+        );
+    }
+
+    onePizzaAndACoke(offer, pizzas) {
+        const max = 1;
+        return (
+            <div className="pizzaBackground">
+                <NavigationBar />
+                <div className="offerSelectionBody">
+                    <h1>Get a free coke with your pizza!</h1>
+                    <h2>Select a pizza from the menu and get a free coke to go with it for only {offer.price}:</h2>
+                    <h3>Make your selection:</h3>
+                    <div>
+                        {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
+                    </div>
+                    <div className="proceedToCheckoutOffer">Proceed</div>
                 </div>
             </div>
         );
@@ -91,26 +128,6 @@ class OfferPageSelection extends React.Component {
             var newPizzasSelected = this.state.pizzaSelection;
             this.setState({pizzaSelection: newPizzasSelected});
         }
-    }
-
-    twoPizzasAndCoke(offer) {
-        return (
-            <div>
-                <NavigationBar />
-                <h1>You want two pizzas and a coke</h1>
-                <h2>Select two pizzas from the menu and get a free coke for only {offer.price} kr</h2>
-            </div>
-        );
-    }
-
-    onePizzaAndACoke(offer) {
-        return(
-            <div>
-                <NavigationBar />
-                <h1>You want one pizza and a coke</h1>
-                <h2>Select a pizzas from the menu and get a free coke for only {offer.price}:</h2>
-            </div>
-        );
     }
 };
 
