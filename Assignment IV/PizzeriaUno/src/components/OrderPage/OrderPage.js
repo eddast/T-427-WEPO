@@ -68,11 +68,13 @@ class OrderPage extends React.Component {
     // Explicitly notifies user that cart is empty (option unavailable)
     getEmptyChartOption() {
         return (
-            <div className="pizzaBackground orderPage">
+            <div className="pizzaBackground">
                 <NavigationBar />
-                <div className='row'>Checkout My Cart</div>
-                <div>Cart Empty!</div>
-                <div className='row'>Place the Same Order As Last Time</div>
+                <div className="orderPage">
+                    <div className='row'>Checkout My Cart</div>
+                    <div>Cart Empty!</div>
+                    <div className='row'>Place the Same Order As Last Time</div>
+                </div>
             </div>
         );
     }

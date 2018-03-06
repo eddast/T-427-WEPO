@@ -35,6 +35,17 @@ class OrderReview extends React.Component {
     confirmOrder() { this.setState({confirmed: !this.state.confirmed}); }
     redirectToCart() { this.setState({redirectToCart: !this.state.redirectToCart}); }
     redirectToCustomerInfo() { this.setState({redirectToCustomerInfo: !this.state.redirectToCustomerInfo}); }
+    
+    // Get total price of cart
+    getCartTotal(cart) {
+        console.log(cart);
+        let sum = 0;
+        for(let i = 0; i < cart.length; i++ ) {
+            sum = sum + cart[i].price;
+        }
+        
+        return sum;
+    }
 
     render() {
         var delivery = this.props.location.delivery && this.props.location.delivery.referrer;
@@ -83,6 +94,9 @@ class OrderReview extends React.Component {
                         <div className='pizzasInMenu'>
                             {cart.map((pizza, i) => <CartItem key={i} pizza={pizza}/>)}
                         </div>
+                    </div>
+                    <div className="row">
+                        <h1 className="reviewTotal">Order Total: {this.getCartTotal(cart)} kr</h1>
                     </div>
                     <div className="row confirmOptions">
                         <div className="confirmOption" onClick={this.confirmOrder}>Confirm</div>
