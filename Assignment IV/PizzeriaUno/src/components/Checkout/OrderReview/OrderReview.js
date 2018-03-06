@@ -31,17 +31,10 @@ class OrderReview extends React.Component {
         getCustomer();
     }
 
-    confirmOrder() {
-        this.setState({confirmed: !this.state.confirmed});
-    }
-
-    redirectToCart() {
-        this.setState({redirectToCart: !this.state.redirectToCart});
-    }
-
-    redirectToCustomerInfo() {
-        this.setState({redirectToCustomerInfo: !this.state.redirectToCustomerInfo});
-    }
+    // Navigation
+    confirmOrder() { this.setState({confirmed: !this.state.confirmed}); }
+    redirectToCart() { this.setState({redirectToCart: !this.state.redirectToCart}); }
+    redirectToCustomerInfo() { this.setState({redirectToCustomerInfo: !this.state.redirectToCustomerInfo}); }
 
     render() {
         var delivery = this.props.location.delivery && this.props.location.delivery.referrer;
@@ -51,19 +44,13 @@ class OrderReview extends React.Component {
             return <div>Loading</div>;
         }
         if(this.state.redirectToCart === true) {
-            return < Redirect to={{
-                pathname: '/cart',
-            }} />;
+            return < Redirect to={{pathname: '/cart'}} />;
         }
         if(this.state.redirectToCustomerInfo === true) {
             if(delivery) {
-                return < Redirect to={{
-                    pathname: '/checkout/delivery',
-                }} />;
+                return < Redirect to={{pathname: '/checkout/delivery'}} />;
             } else {
-                return < Redirect to={{
-                    pathname: '/checkout/pickup',
-                }} />;
+                return < Redirect to={{pathname: '/checkout/pickup'}} />;
             }
         }
         if(this.state.confirmed === true) {
@@ -89,6 +76,9 @@ class OrderReview extends React.Component {
                 <div className="confirmationBody">
                     <div className="row">
                         <h1>Please review your order </h1>
+                        <div className="row">
+                            <div className="userInfoReview col-centered col-md-7">{this.getUserInfo(customer, delivery)}</div>
+                        </div>
                         <h2>Items to checkout: </h2>
                         <div className='pizzasInMenu'>
                             {cart.map((pizza, i) => <CartItem key={i} pizza={pizza}/>)}
@@ -96,15 +86,32 @@ class OrderReview extends React.Component {
                     </div>
                     <div className="row confirmOptions">
                         <div className="confirmOption" onClick={this.confirmOrder}>Confirm</div>
-                        <div className="confirmOption" onClick={this.redirectToCart}>Edit cart</div>
-                        <div className="confirmOption" onClick={this.redirectToCustomerInfo}>Edit information</div>
+                        <div className="confirmOption" onClick={this.redirectToCart}>Edit Cart</div>
+                        <div className="confirmOption" onClick={this.redirectToCustomerInfo}>Edit Customer Information</div>
                     </div>
                 </div>
             </div>
 
         );
     }
-        
+ 
+    getUserInfo(customer, delivery) {
+        if(delivery) {
+            return (
+                <div>
+                    <p>Customer Name:  {customer.name}, tel. {customer.telephone}</p>
+                    <p>Delivery Method: Pizza Delivered to  {customer.address}, {customer.postalCode} {customer.city}</p>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <p>Customer Name:  {customer.name}, tel. {customer.telephone}</p>
+                    <p>Delivery Method: Pickup at PizzeriaUno</p>
+                </div>
+            );
+        }
+    }
 }
 
 const mapStateToProps = (storeState) => {
