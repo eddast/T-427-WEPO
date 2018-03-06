@@ -71,7 +71,15 @@ class PickUpForm extends React.Component {
     }
 
     render() {
-        if(this.state.toConfirmation === true ) {
+
+        const { offerSelected } = this.props;
+
+        if(this.state.toConfirmation === true && offerSelected !== null) {
+            return <Redirect to={{
+                pathname: '/offers/confirmation',
+                offer: { referrer: offerSelected }
+            }} />;
+        } else if(this.state.toConfirmation === true ) {
             return <Redirect to={{
                 pathname: '/checkout/pickup/confirmation',
                 delivery: { referrer: false }

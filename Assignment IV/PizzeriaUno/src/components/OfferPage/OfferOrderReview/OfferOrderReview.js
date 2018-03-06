@@ -38,9 +38,7 @@ class OfferOrderReview extends React.Component {
     
     // Get total price of cart
     getCartTotalForOffer(cart, offer) {
-        console.log(offer);
         if(offer.id === 1) {
-            console.log(cart);
             if(cart[0].price > cart[1].price) {
                 return cart[0].price;
             } else {
@@ -126,7 +124,7 @@ class OfferOrderReview extends React.Component {
                         <span><img className="pizzaImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBN-z8mJj6F_BVKOQeeMapyijZV9EZWCkTosu2-oDZh1JAyXHA" alt="Coke" /></span>
                         <span className="pizzaName">Coca-Cola</span>
                         <span className="pizzaDescription">A refreshing delicious 2L Coca-Cola</span>
-                        <span className="pizzaPrice">0 kr*</span>
+                        <span className="pizzaPrice">free*</span>
                     </div>
                 </span>
             );
@@ -139,7 +137,7 @@ class OfferOrderReview extends React.Component {
         } else if (offer.id === 2) {
             return '*Special offer price: valid for two pizzas and a coke';
         } else if (offer.id === 3) {
-            return '*Special offer price: valid for a pizzas and a coke';
+            return '*Special offer price: valid for a pizza and a coke';
         }
     }
  
