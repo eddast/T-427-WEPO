@@ -31,7 +31,27 @@ class OfferOrderReview extends React.Component {
 
     // Triggered when user clicks confirmed to confirm order
     // Results in redirect to confirmation site
-    confirmOrder() { this.setState({confirmed: !this.state.confirmed}); }
+    // On confirm we post the order to the API and empty cart
+    confirmOrder() {
+
+        // Trigger redirect in next render
+        this.setState({confirmed: true});
+
+        // create order model
+        var orderModel = {
+            telephone: this.props.customer.telephone,
+            cart: this.props.cart
+        }
+
+        // Post order to API
+        var confirmOrder = this.props.postOrder;
+        confirmOrder(orderModel);
+
+        // Empty cart
+        var replaceCart = this.props.replaceCart;
+        var emptyCart = []
+        replaceCart(emptyCart);
+    }
 
     render() {
 
@@ -49,19 +69,6 @@ class OfferOrderReview extends React.Component {
         // Post order to API on confirm
         // (excluding coca colas since the API doesn't recognize those)
         if(this.state.confirmed === true) {
-
-            // Create new order
-            var orderModel = {
-                telephone: customer.telephone,
-                cart: cart
-            }
-
-            // Post the order to server
-            var confirmOrder = this.props.postOrder;
-            confirmOrder(orderModel);
-            var replaceCart = this.props.replaceCart;
-            var emptyCart = []
-            replaceCart(emptyCart);
 
             // Redirect to confirmation site for explicit user feedback
             if(offer.delivery === 'delivery') {

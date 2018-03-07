@@ -35,8 +35,30 @@ class OrderReview extends React.Component {
     }
 
     // Triggered when user clicks buttons
-    // Results in redirect to either confirmation site, cart or customer info
-    confirmOrder() { this.setState({confirmed: !this.state.confirmed}); }
+    // Results in redirect to confirmation site
+    // When order is confirmed, we post it to API and empty cart
+    confirmOrder() {
+
+        // Trigger redirect in next render
+        this.setState({confirmed: true});
+
+        // create order model
+        var orderModel = {
+            telephone: this.props.customer.telephone,
+            cart: this.props.cart
+        }
+
+        // Post order to API
+        var confirmOrder = this.props.postOrder;
+        confirmOrder(orderModel);
+
+        // Empty cart
+        var replaceCart = this.props.replaceCart;
+        var emptyCart = []
+        replaceCart(emptyCart);
+    }
+
+    // Redirect to cart or customer info if customer wants to change info
     redirectToCart() { this.setState({redirectToCart: !this.state.redirectToCart}); }
     redirectToCustomerInfo() { this.setState({redirectToCustomerInfo: !this.state.redirectToCustomerInfo}); }
 
@@ -71,15 +93,6 @@ class OrderReview extends React.Component {
         // Redirect user to checkout on confirm
         // Post order to API on confirm
         if(this.state.confirmed === true) {
-            var orderModel = {
-                telephone: customer.telephone,
-                cart: cart
-            }
-            var confirmOrder = this.props.postOrder;
-            confirmOrder(orderModel);
-            var replaceCart = this.props.replaceCart;
-            var emptyCart = []
-            replaceCart(emptyCart);
             if(delivery) {
                 return < Redirect to={{
                     pathname: '/checkout/delivery/confirmation/done',
