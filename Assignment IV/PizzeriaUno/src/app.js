@@ -12,14 +12,13 @@ import OfferPageSelection from './components/OfferPage/OfferPageSelection/OfferP
 import Pizza from './components/MenuPage/PizzaDetailView/PizzaDetailView';
 import Home from './components/HomePage/HomePage';
 import Cart from './components/CartPage/CartPageView/CartPageView';
-import Checkout from './components/Checkout/CheckoutOpeningScreen/Checkout';
+import Checkout from './components/Checkout/CheckoutPageView/CheckoutPageView';
 import Delivery from './components/Checkout/HaveItDelivered/HaveItDelivered';
 import PickUp from './components/Checkout/PickUp/PickUp';
 import OrderReview from './components/Checkout/OrderReview/OrderReview';
 import ConfirmOrder from './components/Checkout/ConfirmOrder/ConfirmOrder';
 import OfferOrderReview from './components/OfferPage/OfferOrderReview/OfferOrderReview';
 import Order from './components/OrderPage/OrderPage';
-
 import '../styles/site';
 
 class App extends React.Component {

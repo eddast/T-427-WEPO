@@ -58,9 +58,4 @@ PizzaListCartItem.propTypes = {
     })
 }
 
-// Maps redux store state attribute to component props
-const mapStateToProps = ({ cart }) => {
-    return { cart };
-}
-
-export default connect(mapStateToProps, { removeFromCart })(PizzaListCartItem);
+export default connect(null, { removeFromCart })(PizzaListCartItem);

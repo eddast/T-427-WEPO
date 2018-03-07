@@ -12,11 +12,11 @@ const HomePage = () => {
                 <img id='logo' src={Logo} alt='logo'/>
                 <h2 id='tagline'>"Love at first bite"</h2>
                 <div className='optionBar'>
-                    <a href='/pizzas' className='options'>M e n u &nbsp;&nbsp;<FontAwesome name='fire'/></a>
-                    <a href='/offers' className='options'>O f f e r s &nbsp;&nbsp;<FontAwesome name='thumbs-up'/></a>
-                    <a href='/cart' className='options'>C a r t &nbsp;&nbsp;<FontAwesome name='shopping-cart'/></a>
-                    <a href='/about' className='options'>A b o u t &nbsp; U s &nbsp;&nbsp;<FontAwesome name='info-circle'/></a>
-                    <a href='/order' className='options optionsOrder'>O r d e r &nbsp;&nbsp;<FontAwesome name='credit-card'/></a>
+                    <a href='/pizzas' className='options' id='menuOption' >M e n u &nbsp;&nbsp;<FontAwesome name='fire'/></a>
+                    <a href='/offers' className='options' id='offersOption'>O f f e r s &nbsp;&nbsp;<FontAwesome name='thumbs-up'/></a>
+                    <a href='/cart' className='options' id='cartOption'>C a r t &nbsp;&nbsp;<FontAwesome name='shopping-cart'/></a>
+                    <a href='/about' className='options' id='aboutUsOption'>A b o u t &nbsp; U s &nbsp;&nbsp;<FontAwesome name='info-circle'/></a>
+                    <a href='/order' className='options optionsOrder' id='orderOption'>O r d e r &nbsp;&nbsp;<FontAwesome name='credit-card'/></a>
                 </div>
             </div>
         </div>

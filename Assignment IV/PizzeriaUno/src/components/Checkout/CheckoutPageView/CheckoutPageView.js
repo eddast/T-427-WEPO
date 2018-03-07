@@ -10,12 +10,12 @@ const CheckoutPageView = () => {
             <div className="checkoutBody">
                 <h1 id="checkoutOrPickupMessage">Please choose your preferred delivery option</h1>
                 <div className="showOptionsForCheckout">
-                    <Link to={'/checkout/delivery'} >
+                    <Link id='deliveryLink' to={'/checkout/delivery'} >
                         <p className="showOptionsForCheckoutText">Delivery</p>
                     </Link>
                 </div>
                 <div className="showOptionsForCheckout">
-                    <Link to={'/checkout/pickup'} >
+                    <Link id='pickupLink' to={'/checkout/pickup'} >
                         <p className="showOptionsForCheckoutText">Pick Up</p>
                     </Link>
                 </div>

@@ -9,7 +9,7 @@ const ConfirmOrder =() => {
         <div className="pizzaBackground">
             <NavigationBar />
             <div className="confirmationBody">
-                <h1>PIZZA IS GOING IN THE OVEN </h1>
+                <h1 id="inOven">PIZZA IS GOING IN THE OVEN </h1>
                 <h2>In just a couple of minutes you'll get your promised italian gourmet feast!</h2>
                 <img id='loadImage' src={Loader} alt='loading...'/>
                 <p>Loading pizza...</p>
