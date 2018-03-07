@@ -13,7 +13,6 @@ class OfferOrderReview extends React.Component {
         super(props, ctx);
         this.state = {
             isLoading: true,
-            selectedPizza: null,
             confirmed: false,
             redirectToCart: false,
             redirectToCustomerInfo: false

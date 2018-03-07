@@ -17,26 +17,28 @@ class OfferPageSelection extends React.Component {
             redirectTo: false
         }
 
+        // Bind component functions to this context (called from subcomponents)
         this.checkSelection = this.checkSelection.bind(this);
         this.isSelected = this.isSelected.bind(this);
     }
 
+    // Immediately load all pizzas into view
+    // Needed to prompt user for selecting pizzas
     componentDidMount() {
         const { getAllPizzas } = this.props;
         getAllPizzas();
     }
 
-    // Identify offer
-    isOfferOne(offer)   { return offer.id === 1; }
-    isOfferTwo(offer)   { return offer.id === 2; }
-    isOfferThree(offer) { return offer.id === 3; }
+    // Triggered for user to be redirected to checkout
+    proceedToCheckout(offer) { this.setState({redirectTo: offer.validFor}); }
 
     render() {
 
+        // Extract offer from redirect location variable to use for rendering
         var offerSelected = this.props.location.offerSelected && this.props.location.offerSelected.referrer;
         this.state.offer = offerSelected;
 
-        // User has selected
+        // If user has selected he is redirected to checkout for offer
         if(this.state.redirectTo !== false) {
             var replaceCart = this.props.replaceCart;
             var newCart = this.state.pizzaSelection;
@@ -53,7 +55,10 @@ class OfferPageSelection extends React.Component {
                 }} />
             }
         }
+        // Extract pizzas from API, should be retrieved in componentDidMount
         const {pizza} = this.props;
+
+        // Get view and logic appropriate for particular offers
         if(pizza !== undefined) { 
             if(this.isOfferOne(offerSelected)) {
                 return this.twoForOneOffer(offerSelected, pizza);
@@ -66,9 +71,18 @@ class OfferPageSelection extends React.Component {
             }
         }
 
+        // This view should never appear, but just in case
         return <div>Something went wrong!</div>;
     }
 
+
+
+    /***************************
+     *  RENDER HELPER FUNCTIONS
+     ***************************/
+
+
+    // Two for one offer: at least and at most 2 pizzas can be selected
     twoForOneOffer(offer, pizzas) {
         const max = 2;
         return (
@@ -87,6 +101,7 @@ class OfferPageSelection extends React.Component {
         );
     }
 
+    // Two for one offer: at least and at most 2 pizzas can be selected
     twoPizzasAndCoke(offer, pizzas) {
         const max = 2;
         return (
@@ -105,6 +120,7 @@ class OfferPageSelection extends React.Component {
         );
     }
 
+    // Two for one offer: at least and at most 1 pizza can be selected
     onePizzaAndACoke(offer, pizzas) {
         const max = 1;
         return (
@@ -123,6 +139,8 @@ class OfferPageSelection extends React.Component {
         );
     }
 
+    // Contains logic for proceed button;
+    // is disabled when user hasn't selected enough pizzas for offer
     getProceed(max, offer) {
         if(this.canProceed(max)) {
             return(
@@ -151,44 +169,58 @@ class OfferPageSelection extends React.Component {
         }
     }
 
-    displayNotAllowedToProceed(max) {
-        alert('Please select at least ' + max + ' pizzas for offer')
-    }
 
-    proceedToCheckout(offer) {
-        this.setState({redirectTo: offer.validFor});
-    }
 
-    canProceed(max) {
-        return this.state.pizzaSelection.length === max;
-    }
+    /**********************************
+     *  RENDER LOGIC HELPER FUNCTIONS
+     **********************************/
 
-    isSelected (pizza) {
-        return this.state.pizzaSelection.includes(pizza);
-    }
+    // Identify offer by offer ID to realise which view to render
+    isOfferOne(offer)   { return offer.id === 1; }
+    isOfferTwo(offer)   { return offer.id === 2; }
+    isOfferThree(offer) { return offer.id === 3; }
 
+    // Explict feedback that user can't proceed if he tries
+    displayNotAllowedToProceed(max) { alert('Please select at least ' + max + ' pizzas for offer'); }
+
+    // Returns true if user has seleced all pizzas for offer
+    canProceed(max) { return this.state.pizzaSelection.length === max; }
+
+    // returns true if pizza has been selected
+    isSelected (pizza) { return this.state.pizzaSelection.includes(pizza); }
+
+    // Checks and unchecks pizzas, i.e. adds and removes from user selection array
     checkSelection(pizza, max) {
         for (let i = 0; i < this.state.pizzaSelection.length; i++) {
+
+            // Delete the only pizza in view; return empty array
             if(this.state.pizzaSelection[i] === pizza) {
                 if(this.state.pizzaSelection.length === 1) {
                     this.setState({pizzaSelection: []});
                     return;
                 }
+
+                // Otherwise splice out pizza from selection array
                 var newPizzaSelection = this.state.pizzaSelection.splice(i-1, 1);
                 this.setState({pizzaSelection: newPizzaSelection});
                 return;
             }
         }
+        // Too many pizzas selected means no action is taken
+        // But user get explicit feedback
         if(this.state.pizzaSelection.length === max) {
             alert('Only ' + max + ' pizzas can be selected with offer');
-        } else {
-            this.state.pizzaSelection.push(pizza);
-            var newPizzasSelected = this.state.pizzaSelection;
-            this.setState({pizzaSelection: newPizzasSelected});
+            return;
         }
+
+        // Pizza is not selected; add pizza to user cart
+        this.state.pizzaSelection.push(pizza);
+        var newPizzasSelected = this.state.pizzaSelection;
+        this.setState({pizzaSelection: newPizzasSelected});
     }
 };
 
+// Maps redux store state to component props
 const mapStateToProps = ({ pizza }) => {
     return { pizza };
 }
