@@ -7,6 +7,8 @@ import FontAwesome from 'react-fontawesome';
 import { Redirect } from 'react-router-dom';
 import { replaceCart } from '../../../actions/cartAction';
 
+// Renders order page selection, i.e. prompts user to select order-specific number of pizzas
+// To go with his or her selected offer
 class OfferPageSelection extends React.Component {
 
     constructor(props, ctx) {
