@@ -7,6 +7,7 @@ import { getCartContents, replaceCart } from '../../actions/cartAction';
 import { getOrder } from '../../actions/orderAction';
 import { Redirect } from 'react-router-dom';
 
+// Renders user's options for checkout (can checkout cart or previous order)
 class OrderPage extends React.Component {
 
     constructor(props, ctx) {
@@ -17,6 +18,7 @@ class OrderPage extends React.Component {
         }
     }
 
+    // Retrieve customer info and cart content immediately
     componentDidMount() {
         const { getCustomerInfo } = this.props;
         const { getCartContents } = this.props;
@@ -24,6 +26,7 @@ class OrderPage extends React.Component {
         getCartContents();
     }
 
+    // When customer loads, his or her previous order is retrieved
     componentDidUpdate(prevProps) {
         const { customer } = this.props;
         if(customer != prevProps.customer) {
@@ -34,40 +37,36 @@ class OrderPage extends React.Component {
         }
     }
 
-    customerNotLoaded(customer) {
-        return (customer != null) && (customer === undefined || customer.name === '');
-    }
-
-    cartNotLoaded(cart) {
-        return (cart === undefined || cart === null);
-    }
-
-    cartIsEmpty(cart) {
-        return (cart.length === 0);
-    }
-
-    noPreviousOrder(order, customer) {
-        return order === undefined || order === null || customer.name === '';
-    }
+    // Customer checkout options
+    placeSameOrderAsLast() { this.setState({checkoutPreviousOrder: true}); }
+    checkoutCart() { this.setState({checkoutCart: true}); }
 
     render() {
 
+        // Exract appropriate values, retrieved by redux actions
         const { customer } = this.props;
         const { cart } = this.props;
         const { order } = this.props;
 
+        // Redirect user to checkout when he or she wants to checkout cart
         if(this.state.checkoutCart === true) {
             return <Redirect to={{pathname: '/checkout'}} />;
         }
 
+        // If user wishes to use previous order, cart is replaced by it
+        // Then user is redirected to checkout
         if(this.state.checkoutPreviousOrder === true) {
             replaceCart(order.cart);
             return <Redirect to={{pathname: '/checkout'}} />;
         }
 
+        // Loading screen displayed while values are loading
         if(this.customerNotLoaded(customer) && this.cartNotLoaded(cart)) {
             return <LoadingScreen />;
 
+        // Render specific options for specific situations: 
+        // If no checkout is possible (i.e. no cart nor previous order) user is notified
+        // If either checkout is not possible, user is explicitly notified
         } else if(this.cartIsEmpty(cart) && this.noPreviousOrder(order, customer)) {
             return this.getUnableToOrderView();
 
@@ -82,16 +81,16 @@ class OrderPage extends React.Component {
         }
     }
 
-    /***************************
-     * ON CLICK OPTION FUNCTIONS
-     ***************************/
-    placeSameOrderAsLast() { this.setState({checkoutPreviousOrder: true}); }
-
-    checkoutCart() { this.setState({checkoutCart: true}); }
 
     /***************************
      *  RENDER HELPER FUNCTIONS
      ***************************/
+
+    // Conditional render boolean functions
+    customerNotLoaded(customer) { return (customer != null) && (customer === undefined || customer.name === ''); }
+    cartNotLoaded(cart) { return (cart === undefined || cart === null); }
+    cartIsEmpty(cart) { return (cart.length === 0); }
+    noPreviousOrder(order, customer) { return order === undefined || order === null || customer.name === ''; }
 
     // Explicitly notifies user that cart is empty (option unavailable)
     getEmptyChartOption() {
@@ -135,7 +134,7 @@ class OrderPage extends React.Component {
         );
     }
 
-    // Both options available
+    // Both options are available (checkout and previous order)
     getOptions() {
         return (
             <div className="pizzaBackground">
@@ -150,7 +149,7 @@ class OrderPage extends React.Component {
         
 }
 
-// Maps store state attributes to props
+// Maps redux store state attributes to component props
 const mapStateToProps = (storeState) => {
     return { 
         customer: storeState.customer,
