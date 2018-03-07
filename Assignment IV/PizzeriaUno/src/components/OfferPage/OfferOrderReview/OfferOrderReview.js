@@ -7,22 +7,21 @@ import { postOrder } from '../../../actions/orderAction';
 import CartItem from '../../Checkout/CartItem/CartItem';
 import NavigationBar from '../../NavigationBar/NavigationBar';
 
+// Reviews order specific to provided offer
 class OfferOrderReview extends React.Component {
 
     constructor (props, ctx) {
         super(props, ctx);
         this.state = {
             isLoading: true,
-            confirmed: false,
-            redirectToCart: false,
-            redirectToCustomerInfo: false
+            confirmed: false
         };
 
+        // Bind component functions to this context (called from subcomponents)
         this.confirmOrder = this.confirmOrder.bind(this);
-        this.redirectToCart = this.redirectToCart.bind(this);
-        this.redirectToCustomerInfo = this.redirectToCustomerInfo.bind(this);
     }
 
+    // Load cart and customer immediately via redux actions
     componentDidMount() {
         var getCart = this.props.getCartContents;
         var getCustomer = this.props.getCustomerInfo;
@@ -30,52 +29,41 @@ class OfferOrderReview extends React.Component {
         getCustomer();
     }
 
-    // Navigation
+    // Triggered when user clicks confirmed to confirm order
+    // Results in redirect to confirmation site
     confirmOrder() { this.setState({confirmed: !this.state.confirmed}); }
-    redirectToCart() { this.setState({redirectToCart: !this.state.redirectToCart}); }
-    redirectToCustomerInfo() { this.setState({redirectToCustomerInfo: !this.state.redirectToCustomerInfo}); }
-    
-    // Get total price of cart
-    getCartTotalForOffer(cart, offer) {
-        if(offer.id === 1) {
-            if(cart[0].price > cart[1].price) {
-                return cart[0].price;
-            } else {
-                return cart[1].price;
-            }
-        } else {
-            return offer.price;
-        }
-    }
 
     render() {
+
+        // Get necessary attributes from props for render
         var offer = this.props.location.offer.referrer;
         const { cart } = this.props;
         const { customer } = this.props;
 
+        // Get loading screen while cart is loading
         if(!cart) {
             return <div>Loading</div>;
         }
-        if(this.state.redirectToCart === true) {
-            return < Redirect to={{pathname: '/cart'}} />;
-        }
-        if(this.state.redirectToCustomerInfo === true) {
-            if(offer.delivery === 'delivery') {
-                return < Redirect to={{pathname: '/checkout/delivery'}} />;
-            } else {
-                return < Redirect to={{pathname: '/checkout/pickup'}} />;
-            }
-        }
+
+        // Redirect user to checkout on confirm
+        // Post order to API on confirm
+        // (excluding coca colas since the API doesn't recognize those)
         if(this.state.confirmed === true) {
+
+            // Create new order
             var orderModel = {
                 telephone: customer.telephone,
                 cart: cart
             }
+
+            // Post the order to server
             var confirmOrder = this.props.postOrder;
             confirmOrder(orderModel);
             var replaceCart = this.props.replaceCart;
             var emptyCart = []
             replaceCart(emptyCart);
+
+            // Redirect to confirmation site for explicit user feedback
             if(offer.delivery === 'delivery') {
                 return < Redirect to={{
                     pathname: '/checkout/delivery/confirmation/done',
@@ -87,6 +75,8 @@ class OfferOrderReview extends React.Component {
             }
         }
 
+        // If unconfirmed, display user info and cart contents
+        // So that user has a chance to review his or her order before confirming
         return (
             <div className="pizzaBackground">
                 <NavigationBar />
@@ -94,7 +84,7 @@ class OfferOrderReview extends React.Component {
                     <div className="row">
                         <h1>Please review your order </h1>
                         <div className="row">
-                            <div className="userInfoReview col-centered col-md-7">{this.getUserInfo(customer, offer.delivery)}</div>
+                            <div className="userInfoReview col-centered col-md-7">{this.getUserInfo(customer, offer.validFor)}</div>
                         </div>
                         <h2>Items to checkout: </h2>
                         <div className='pizzasInMenu'>
@@ -115,6 +105,27 @@ class OfferOrderReview extends React.Component {
         );
     }
 
+
+
+    /***************************
+     *  RENDER HELPER FUNCTIONS
+     ***************************/
+
+    // Get total price of cart, which is specific to the offer chosen
+    getCartTotalForOffer(cart, offer) {
+        if(offer.id === 1) {
+            if(cart[0].price > cart[1].price) {
+                return cart[0].price;
+            } else {
+                return cart[1].price;
+            }
+        } else {
+            return offer.price;
+        }
+    }
+
+    // If offer includes coke, add coke to cart contents list
+    // Is a pseudo item in cart; i.e. is not actually part of order
     getCoke(offer) {
         if(offer.id > 1) {
             return (
@@ -130,6 +141,7 @@ class OfferOrderReview extends React.Component {
         }
     }
 
+    // Text explaining obtained price, offer specific
     getExplainationText(offer) {
         if (offer.id === 1) {
             return '*Special offer price: two pizzas for the price of one (pay for more expensive pizza)';
@@ -140,7 +152,9 @@ class OfferOrderReview extends React.Component {
         }
     }
  
+    // Gets user info, specific to deilvery method
     getUserInfo(customer, delivery) {
+        console.log(delivery);
         if(delivery === 'delivery') {
             return (
                 <div>
@@ -159,6 +173,7 @@ class OfferOrderReview extends React.Component {
     }
 }
 
+// Maps redux store state to component props
 const mapStateToProps = (storeState) => {
     return { 
         cart: storeState.cart,
