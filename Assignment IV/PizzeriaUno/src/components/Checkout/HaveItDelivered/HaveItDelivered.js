@@ -2,13 +2,13 @@ import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
 import DeliveryForm from './FormForDelivery/FormForDelivery';
 
+// Almost dummy component: renders form for delivery
+// If any offer is selected, component extracts it and passes it on to forms
 class HaveItDelivered extends React.Component {
 
     constructor(props, ctx) {
         super(props,ctx);
-        this.state = {
-            offerSelected: null
-        }
+        this.state = { offerSelected: null }
     }
 
     render() {

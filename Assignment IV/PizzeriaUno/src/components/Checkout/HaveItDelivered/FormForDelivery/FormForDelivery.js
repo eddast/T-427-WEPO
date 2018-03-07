@@ -19,6 +19,7 @@ class DeliveryForm extends React.Component {
             offerSelected: null
         };
 
+        // Bind component functions to this context (called from subcomponents)
         this.handleChangeForName = this.handleChangeForName.bind(this);
         this.handleChangeForAddress = this.handleChangeForAddress.bind(this);
         this.handleChangeForCity = this.handleChangeForCity.bind(this);
@@ -28,41 +29,17 @@ class DeliveryForm extends React.Component {
 
     }
 
+    // Get customer info from local storage immediately
     componentDidMount() {
         var getCustomer = this.props.getCustomerInfo;
         getCustomer();
     }
 
+    // Once customer has loaded, input values are set appropriately to customer info
     componentDidUpdate(prevProps) {
         if(prevProps.customer !== this.props.customer) {
             this.setInputValues();
         }
-    }
-
-    // Handle change functions
-    handleChangeForName (event)         { this.setState({ name: event.target.value });      }
-    handleChangeForAddress (event)      { this.setState({ address: event.target.value });   }
-    handleChangeForCity (event)         { this.setState({ city: event.target.value });      }
-    handleChangeForTelephone (event)    { this.setState({ telephone: event.target.value });  }
-    handleChangeForPostalCode (event)   { this.setState({ postalCode: event.target.value }); }
-
-    // Handle submit
-    handleSubmit(event) {
-        if(this.canSubmit()) {
-            this.setState({ toConfirmation: true })
-            var customer = {
-                name: this.state.name,
-                address: this.state.address,
-                city: this.state.city,
-                telephone: this.state.telephone,
-                postalCode: this.state.postalCode,
-            }
-            this.setState({ customerInfo: customer});
-            var setCustomer = this.props.setCustomerInfo;
-            setCustomer(customer);
-        }
-
-        event.preventDefault();
     }
 
     setInputValues() {
@@ -80,18 +57,24 @@ class DeliveryForm extends React.Component {
     render() {
 
         const { offerSelected } = this.props;
-
+    
+        // Redirect to confirmation, provided an offer
         if(this.state.toConfirmation === true && offerSelected !== null) {
             return <Redirect to={{
                 pathname: '/offers/confirmation',
                 offer: { referrer: offerSelected }
             }} />;
+
+        // Redirect to confirmation, no offer provided
         } else if (this.state.toConfirmation === true ) {
             return <Redirect to={{
                 pathname: '/checkout/delivery/confirmation',
                 delivery: { referrer: true }
             }} />;
         }
+
+        // If no redirect is appropriate user hasn't provided info
+        // Display input fields
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="formAttributes col-centered">
@@ -138,6 +121,97 @@ class DeliveryForm extends React.Component {
         );
     }
 
+
+    /***************************
+     *  INPUT HELPER FUNCTIONS
+     ***************************/
+
+    // Handle change functions
+    handleChangeForName (event)         { this.setState({ name: event.target.value });      }
+    handleChangeForAddress (event)      { this.setState({ address: event.target.value });   }
+    handleChangeForCity (event)         { this.setState({ city: event.target.value });      }
+    handleChangeForTelephone (event)    { this.setState({ telephone: event.target.value });  }
+    handleChangeForPostalCode (event)   { this.setState({ postalCode: event.target.value }); }
+
+    // Handle submit
+    handleSubmit(event) {
+        if(this.canSubmit()) {
+            this.setState({ toConfirmation: true })
+            var customer = {
+                name: this.state.name,
+                address: this.state.address,
+                city: this.state.city,
+                telephone: this.state.telephone,
+                postalCode: this.state.postalCode,
+            }
+            this.setState({ customerInfo: customer});
+            var setCustomer = this.props.setCustomerInfo;
+            setCustomer(customer);
+        }
+
+        event.preventDefault();
+    }
+
+    // Validate name and city input
+    // Can only be letter not numbers or other characters
+    validateOnlyLetterInput(name) {
+        if(name==='') {
+            return 'This field is required';
+        } else if(!(/^[A-Za-z\u00C0-\u017F\s]+$/.test(name))) {
+            return 'Invalid input (only letters allowed)';
+        }
+        
+        return '';
+    }
+
+    // Validate telephone input
+    // Can only be numeric not letters or other characters
+    validateTelephone(tel) {
+        if(tel==='') {
+            return 'Telephone required';
+        } else if (!/^\d+$/.test(tel)) {
+            return 'Telephone number invalid'
+        }
+        
+        return '';
+    }
+
+    // Validate address input
+    // Can only be a combination of letters and numbers but not other characters
+    validateAddress(address) {
+        if(address==='') {
+            return 'Address required';
+        } else if (!(/^[A-Za-z\u00C0-\u017F\s\d]+$/.test(address))) {
+            return 'Address invalid (only letters and numbers allowed)'
+        }
+        
+        return '';
+    }
+
+    // Validate postal codes
+    // Can only be numbers not other characters
+    // Watch out for postal code length;
+    // Shortest postal code in the world is 2 digits
+    // Longest postal code in the world is 10 digits
+    validatePostalCode(postalCode) {
+        if(postalCode==='') {
+            return 'Postal code required';
+        } else if (!/^\d+$/.test(postalCode)) {
+            return 'Postal code invalid'
+        } else if (postalCode.length > 10 || postalCode.length < 2) {
+            return 'Postal code invalid (must be between 2-10 digits)'
+        }
+        
+        return '';
+    }
+
+
+
+    /***************************
+     *  RENDER HELPER FUNCTIONS
+     ***************************/
+
+    // Render submit button - render distinguishes between disabled buttons and clickable buttons visually 
     getSubmitButton() {
         if(this.canSubmit()) {
             return (
@@ -164,6 +238,7 @@ class DeliveryForm extends React.Component {
 
     }
 
+    // Returns true if user has provided all info and no info is ill-formed
     canSubmit() {
         return (
             this.validateOnlyLetterInput(this.state.name)==='' &&
@@ -173,50 +248,9 @@ class DeliveryForm extends React.Component {
             this.validateOnlyLetterInput(this.state.city)===''
         );
     }
-
-    validateOnlyLetterInput(name) {
-        if(name==='') {
-            return 'This field is required';
-        } else if(!(/^[A-Za-z\u00C0-\u017F\s]+$/.test(name))) {
-            return 'Invalid input (only letters allowed)';
-        }
-        
-        return '';
-    }
-
-    validateTelephone(tel) {
-        if(tel==='') {
-            return 'Telephone required';
-        } else if (!/^\d+$/.test(tel)) {
-            return 'Telephone number invalid'
-        }
-        
-        return '';
-    }
-
-    validateAddress(address) {
-        if(address==='') {
-            return 'Address required';
-        } else if (!(/^[A-Za-z\u00C0-\u017F\s\d]+$/.test(address))) {
-            return 'Address invalid (only letters and numbers allowed)'
-        }
-        
-        return '';
-    }
-
-    validatePostalCode(postalCode) {
-        if(postalCode==='') {
-            return 'Postal code required';
-        } else if (!/^\d+$/.test(postalCode)) {
-            return 'Postal code invalid'
-        } else if (postalCode.length > 10 || postalCode.length < 2) {
-            return 'Postal code invalid (must be between 2-10 digits)'
-        }
-        
-        return '';
-    }
 }
 
+// Map redux store state to component props
 const mapStateToProps = ({ customer }) => {
     return { customer };
 }

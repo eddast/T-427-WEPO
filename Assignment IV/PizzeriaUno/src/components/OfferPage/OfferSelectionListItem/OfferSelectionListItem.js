@@ -35,6 +35,7 @@ const OfferSelectionListItem = ({ isSelected, onClick, max, pizza }) => {
 };
 
 OfferSelectionListItem.propTypes = {
+    
     /** pizza obj needed to render list item in view
         Contains name, description, price and image
     */

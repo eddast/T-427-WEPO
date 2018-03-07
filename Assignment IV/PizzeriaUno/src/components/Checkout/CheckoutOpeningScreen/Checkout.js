@@ -2,6 +2,7 @@ import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
 import { Link } from 'react-router-dom';
 
+// Dummy component: renders links for pickup and delivery options
 const CheckoutPageView = () => {
     return (
         <div className="pizzaBackground">

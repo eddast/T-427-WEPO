@@ -47,7 +47,9 @@ class PizzaListCartItem extends React.Component {
 // Variables pizza cart item needs provided
 PizzaListCartItem.propTypes = {
 
-    // The list item pizza to display
+    /** Pizza obj needed to render list item in view
+        Contains name, description, pice and image
+    */
     pizza: propTypes.shape({
         name: propTypes.string,
         description: propTypes.string,

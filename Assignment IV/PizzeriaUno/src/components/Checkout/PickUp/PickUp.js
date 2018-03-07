@@ -2,17 +2,16 @@ import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
 import FormForPickUp from './FormForPickUp/FormPickUp'
 
+// Almost dummy component: renders form for pickup
+// If any offer is selected, component extracts it and passes it on to forms
 class PickUp extends React.Component {
 
     constructor(props, ctx) {
         super(props, ctx);
-        this.state = {
-            offerSelected: null
-        }
+        this.state = { offerSelected: null }
     }
 
     render() {
-
         if(this.props.location != undefined && this.props.location.offerSelected != undefined && this.props.location.offerSelected.referrer != undefined) {
             this.state.offerSelected = this.props.location.offerSelected.referrer;
         }
