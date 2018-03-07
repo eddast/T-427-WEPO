@@ -1,6 +1,6 @@
 import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
-import FormForPickUp from './FormForPickUp/FormPickUp'
+import FormForPickUp from '../FormAttributes/FormForPickUp/FormPickUp';
 
 // Almost dummy component: renders form for pickup
 // If any offer is selected, component extracts it and passes it on to forms

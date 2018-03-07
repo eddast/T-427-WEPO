@@ -1,6 +1,6 @@
 import React from 'react';
 import NavigationBar from '../../NavigationBar/NavigationBar';
-import DeliveryForm from './FormForDelivery/FormForDelivery';
+import DeliveryForm from '../FormAttributes/FormForDelivery/FormForDelivery';
 
 // Almost dummy component: renders form for delivery
 // If any offer is selected, component extracts it and passes it on to forms
