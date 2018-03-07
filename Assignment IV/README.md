@@ -2,7 +2,15 @@
 PizzeriaUno is a Home Page for an imaginary pizza-place developed for the course T-427-WEPO Web Programming by Darri Valgarðsson, Edda Steinunn Rúnarsdóttir and Sigurður Sturla Bjarnason.
 
 ## Installation and running PizzeriaUno
-Resources are retrieved by the webpage via a server which resides in the folder '.../Assignment4-darriv15_eddasr15_sigurdursb16/PizzeriaUnoServer'. Therefore, in order to obtain PizzeriaUno's functionality, this server must be running. To run this server, one must have either npm or node installed; both can be downloaded directly from https://nodejs.org/en/download/ or installed in the terminal on a linux based OS. The server is run either via npm using the command start via node from terminal/bash. To run it, make sure that one has navigated to the correct folder, then run the chatserver via npm or node. See example terminal command below:
+Resources are retrieved by the webpage via a server which resides in the folder '.../Assignment4-darriv15_eddasr15_sigurdursb16/PizzeriaUnoServer'. Therefore, in order to obtain PizzeriaUno's functionality, this server must be running. To install server's dependencies, one must have npm installed and run npm install. See example terminal command below:
+
+```bash
+username$ pwd
+~/.../Assignment3-darriv15_eddasr15_sigurdursb16/PizzeriaUnoServer
+username$ npm install
+```
+
+Once dependencies have been installed, server can be run. To run this server, one must have either npm or node installed; both can be downloaded directly from https://nodejs.org/en/download/ or installed in the terminal on a linux based OS. The server is run either via npm using the command start via node from terminal/bash. To run it, make sure that one has navigated to the correct folder, then run the chatserver via npm or node. See example terminal command below:
 
 ```bash
 username$ pwd
@@ -25,4 +33,19 @@ username$ npm start
 ```
 
 ## How does PizzeriaUno work?
-Pizzeria Uno provides five major views which are accessible from anywhere in the web site either via the navigation bar which is visible in all views, or in case of the inital page via links on page. 
+Pizzeria Uno provides five major views which are accessible from anywhere in the web site either via the navigation bar which is visible in all views, or in case of the inital page via links on page. These links are to the __Menu view__ which resides in the home page sub-URI _/pizzas_, the __Offers view__ which resides in the home page sub-URI _/offers_, the __Cart view__ which resides at the home page sub-URI _/cart_, the __About Us view__ which resides in the home page sub-URI _/about_ and finally the __Order view__ which resides at the home page sub-URI _/order_.
+
+### The Menu View
+// TODO EXPLAIN
+
+### The Order View
+// TODO EXPLAIN
+
+### The Cart View
+// TODO EXPLAIN
+
+### The Offers View
+// TODO EXPLAIN
+
+### About Us View
+// TODO EXPLAIN
