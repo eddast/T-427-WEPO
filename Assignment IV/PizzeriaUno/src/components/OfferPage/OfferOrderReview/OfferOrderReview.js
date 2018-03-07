@@ -154,7 +154,6 @@ class OfferOrderReview extends React.Component {
  
     // Gets user info, specific to deilvery method
     getUserInfo(customer, delivery) {
-        console.log(delivery);
         if(delivery === 'delivery') {
             return (
                 <div>
