@@ -62,15 +62,19 @@ class OfferPageSelection extends React.Component {
 
         // Get view and logic appropriate for particular offers
         if(pizza !== undefined) { 
-            if(this.isOfferOne(offerSelected)) {
-                return this.twoForOneOffer(offerSelected, pizza);
-
-            } else if (this.isOfferTwo(offerSelected)) {
-                return this.twoPizzasAndCoke(offerSelected, pizza);
-
-            } else if (this.isOfferThree(offerSelected)) {
-                return this.onePizzaAndACoke(offerSelected, pizza);
-            }
+            const max = this.getMaxForOffer(offerSelected.id);
+            return (
+                <div className="pizzaBackground">
+                    <NavigationBar />
+                    <div className="offerSelectionBody">
+                        {this.getOfferHeadings(offerSelected)}
+                        <div>
+                            {pizza.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
+                        </div>
+                        {this.getProceed(max, offerSelected)}
+                    </div>
+                </div>
+            );
         }
 
         // This view should never appear, but just in case
@@ -82,64 +86,6 @@ class OfferPageSelection extends React.Component {
     /***************************
      *  RENDER HELPER FUNCTIONS
      ***************************/
-
-
-    // Two for one offer: at least and at most 2 pizzas can be selected
-    twoForOneOffer(offer, pizzas) {
-        const max = 2;
-        return (
-            <div className="pizzaBackground">
-                <NavigationBar />
-                <div className="offerSelectionBody">
-                    <h1>Get two pizzas for one</h1>
-                    <h2>Select two pizzas from the menu for the price of one!</h2>
-                    <h3>Make your selection:</h3>
-                    <div>
-                        {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
-                    </div>
-                    {this.getProceed(max, offer)}
-                </div>
-            </div>
-        );
-    }
-
-    // Two for one offer: at least and at most 2 pizzas can be selected
-    twoPizzasAndCoke(offer, pizzas) {
-        const max = 2;
-        return (
-            <div className="pizzaBackground">
-                <NavigationBar />
-                <div className="offerSelectionBody">
-                    <h1>Get a free coke with Joey's special!</h1>
-                    <h2>Select two pizzas from the menu and get a free coke to go with it for only {offer.price} kr</h2>
-                    <h3>Make your selection:</h3>
-                    <div>
-                        {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
-                    </div>
-                    {this.getProceed(max, offer)}
-                </div>
-            </div>
-        );
-    }
-
-    // Two for one offer: at least and at most 1 pizza can be selected
-    onePizzaAndACoke(offer, pizzas) {
-        const max = 1;
-        return (
-            <div className="pizzaBackground">
-                <NavigationBar />
-                <div className="offerSelectionBody">
-                    <h1>Get a free coke with your pizza!</h1>
-                    <h2>Select a pizza from the menu and get a free coke to go with it for only {offer.price}:</h2>
-                    <h3>Make your selection:</h3>
-                    <div>
-                        {pizzas.map((pizza) => <SelectionItem onClick={this.checkSelection}key={pizza.id} pizza={pizza} isSelected={this.isSelected} max={max}/>)}
-                    </div>
-                    {this.getProceed(max, offer)}
-                </div>
-            </div>
-        );
-    }
 
     // Contains logic for proceed button;
     // is disabled when user hasn't selected enough pizzas for offer
@@ -177,10 +123,42 @@ class OfferPageSelection extends React.Component {
      *  RENDER LOGIC HELPER FUNCTIONS
      **********************************/
 
-    // Identify offer by offer ID to realise which view to render
-    isOfferOne(offer)   { return offer.id === 1; }
-    isOfferTwo(offer)   { return offer.id === 2; }
-    isOfferThree(offer) { return offer.id === 3; }
+    getOfferHeadings(offer) {
+        if(offer.id === 1) {
+            return (
+                <div>
+                    <h1>Get two pizzas for one</h1>
+                    <h2>Select two pizzas from the menu for the price of one!</h2>
+                    <h3>Make your selection:</h3>
+                </div>
+            );
+        } else if (offer.id === 2) {
+            return (
+                <div>
+                    <h1>Get a free coke with Joey's special!</h1>
+                    <h2>Select two pizzas from the menu and get a free coke to go with it for only {offer.price} kr</h2>
+                    <h3>Make your selection:</h3>
+                </div>
+            );
+        } else if (offer.id === 3) {
+            return(
+                <div>
+                    <h1>Get a free coke with your pizza!</h1>
+                    <h2>Select a pizza from the menu and get a free coke to go with it for only {offer.price}:</h2>
+                    <h3>Make your selection:</h3>
+                </div>
+            );
+        }
+    }
+
+    // Get how many pizzas one can select given offer
+    getMaxForOffer(offerID) {
+        if(offerID===3) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
 
     // Explict feedback that user can't proceed if he tries
     displayNotAllowedToProceed(max) { alert('Please select at least ' + max + ' pizzas for offer'); }
