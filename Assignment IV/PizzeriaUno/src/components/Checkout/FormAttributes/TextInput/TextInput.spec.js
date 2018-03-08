@@ -12,7 +12,7 @@ describe('ConfirmOrder dummy render tests', () => {
     const mockType = 'number';
     const mockLabel = 'Mock Label';
     const mockName = 'Mock name';
-    const mockValue = "1337";
+    const mockValue = '1337';
     const mockValidationMessage = 'Mock Validation Message';
     const mockOnChange = () => { }
     const mockValidate = () => { return mockValidationMessage; }

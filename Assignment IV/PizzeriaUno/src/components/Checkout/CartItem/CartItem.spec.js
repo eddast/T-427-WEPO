@@ -20,11 +20,11 @@ describe('Cart Item render appropriate values for pizza tests', () => {
 
     it('should render image of propType pizza with pizza name as alt', () => {
         expect(component.find('.pizzaImg').filterWhere((item) => {
-          return item.prop('src') === mockPizza.image;
+            return item.prop('src') === mockPizza.image;
         }).length==1).toBe(true);
   
         expect(component.find('.pizzaImg').filterWhere((item) => {
-          return item.prop('alt') === mockPizza.name;
+            return item.prop('alt') === mockPizza.name;
         }).length==1).toBe(true);
   
     });
