@@ -62,6 +62,8 @@ class OfferOrderReview extends React.Component {
         const { customer } = this.props;
         const { cart } = this.props;
 
+        console.log(offer);
+
         // Get loading screen while cart is loading
         if(cart == undefined || !cart) {
             return <div>Loading</div>;
@@ -122,14 +124,17 @@ class OfferOrderReview extends React.Component {
 
     // Get total price of cart, which is specific to the offer chosen
     getCartTotalForOffer(cart, offer) {
-        if(offer.id === 1) {
-            if(cart[0].price > cart[1].price) {
-                return cart[0].price;
+        console.log(cart);
+        if(cart.length !== 0) {
+            if(offer.id === 1) {
+                if(cart[0].price > cart[1].price) {
+                    return cart[0].price;
+                } else {
+                    return cart[1].price;
+                }
             } else {
-                return cart[1].price;
+                return offer.price;
             }
-        } else {
-            return offer.price;
         }
     }
 
