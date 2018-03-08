@@ -44,13 +44,13 @@ class OrderReview extends React.Component {
 
         // create order model
         var orderModel = {
-            telephone: this.props.customer.telephone,
-            cart: this.props.cart
+            cart: this.props.cart,
+            offer: null
         }
 
         // Post order to API
         var confirmOrder = this.props.postOrder;
-        confirmOrder(orderModel);
+        confirmOrder(this.props.customer.telephone, orderModel);
 
         // Empty cart
         var replaceCart = this.props.replaceCart;
@@ -63,15 +63,21 @@ class OrderReview extends React.Component {
     redirectToCustomerInfo() { this.setState({redirectToCustomerInfo: !this.state.redirectToCustomerInfo}); }
 
     render() {
-
         // Get necessary attributes from props for render
         var delivery = this.props.location.delivery && this.props.location.delivery.referrer;
-        const { cart } = this.props;
         const { customer } = this.props;
 
         // Get loading screen while cart is loading
-        if(!cart) {
+        if(this.props.cart === undefined || !this.props.cart) {
             return <div>Loading</div>;
+        }
+        
+        var cart = {}
+        
+        if(this.props.cart.cart) {
+            cart = this.props.cart.cart;
+        } else {
+            cart = this.props.cart;
         }
 
         // Redirect user to info input forms view

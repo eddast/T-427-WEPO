@@ -47,7 +47,9 @@ class OrderPage extends React.Component {
         const customer = this.props.customer;
         const cart = this.props.cart;
         const order = this.props.order;
+        console.log(order);
 
+        
         // Redirect user to checkout when he or she wants to checkout cart
         if(this.state.checkoutCart === true) {
             return <Redirect to={{pathname: '/checkout'}} />;
@@ -56,12 +58,27 @@ class OrderPage extends React.Component {
         // If user wishes to use previous order, cart is replaced by it
         // Then user is redirected to checkout
         if(this.state.checkoutPreviousOrder === true) {
+            console.log(order.cart);
             replaceCart(order.cart);
-            return <Redirect to={{pathname: '/checkout'}} />;
+            if(order.cart.offer != undefined || order.cart.offer != null) {
+                if(order.cart.offer.validFor === 'delivery') {
+                    return <Redirect to={{
+                        pathname: '/checkout/delivery',
+                        offerSelected: { referrer: order.cart.offer }
+                    }} />
+                } else {
+                    return <Redirect to={{
+                        pathname: '/checkout/pickup',
+                        offerSelected: { referrer: order.cart.offer }
+                    }} />
+                }
+            } else {
+                return <Redirect to={{pathname: '/checkout'}} />;
+            }
         }
 
         // Loading screen displayed while values are loading
-        if(this.customerNotLoaded(customer) && this.cartNotLoaded(cart)) {
+        if(this.customerNotLoaded(customer) || this.cartNotLoaded(cart)) {
             return <LoadingScreen />;
 
         // Render specific options for specific situations: 

@@ -34,18 +34,20 @@ class OfferOrderReview extends React.Component {
     // On confirm we post the order to the API and empty cart
     confirmOrder() {
 
+        var offer = this.props.location.offer.referrer;
+
         // Trigger redirect in next render
         this.setState({confirmed: true});
 
         // create order model
         var orderModel = {
-            telephone: this.props.customer.telephone,
-            cart: this.props.cart
+            cart: this.props.cart,
+            offer: offer
         }
 
         // Post order to API
         var confirmOrder = this.props.postOrder;
-        confirmOrder(orderModel);
+        confirmOrder(this.props.customer.telephone, orderModel);
 
         // Empty cart
         var replaceCart = this.props.replaceCart;
@@ -57,13 +59,21 @@ class OfferOrderReview extends React.Component {
 
         // Get necessary attributes from props for render
         var offer = this.props.location.offer.referrer;
-        const { cart } = this.props;
         const { customer } = this.props;
 
         // Get loading screen while cart is loading
-        if(!cart) {
+        if(this.props.cart == undefined || !this.props.cart) {
             return <div>Loading</div>;
         }
+
+        var cart = {}
+        
+        if(this.props.cart.cart) {
+            cart = this.props.cart.cart;
+        } else {
+            cart = this.props.cart;
+        }
+        console.log(offer);
 
         // Redirect user to checkout on confirm
         // Post order to API on confirm
@@ -81,6 +91,8 @@ class OfferOrderReview extends React.Component {
                 }} />;
             }
         }
+
+        console.log(cart);
 
         // If unconfirmed, display user info and cart contents
         // So that user has a chance to review his or her order before confirming
