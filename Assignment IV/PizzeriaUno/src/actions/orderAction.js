@@ -5,7 +5,7 @@ const getOrder = (telephone) => {
     return dispatch => fetch('http://localhost:3500/api/orders/' + telephone).then(function(response) {
         if(response.status >= 200 && response.status < 300) {
             response.json().then(data => dispatch(getOrderSuccess(data)));
-        }
+        } 
     });
 };
 

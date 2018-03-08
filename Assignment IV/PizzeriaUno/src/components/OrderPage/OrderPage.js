@@ -44,8 +44,6 @@ class OrderPage extends React.Component {
     render() {
 
         // Exract appropriate values, retrieved by redux actions
-        // console.log('this.props is: ');
-        // console.log(this.props);
         const customer = this.props.customer;
         const cart = this.props.cart;
         const order = this.props.order;
@@ -58,7 +56,7 @@ class OrderPage extends React.Component {
         // If user wishes to use previous order, cart is replaced by it
         // Then user is redirected to checkout
         if(this.state.checkoutPreviousOrder === true) {
-            replaceCart(cart);
+            replaceCart(order.cart);
             return <Redirect to={{pathname: '/checkout'}} />;
         }
 
