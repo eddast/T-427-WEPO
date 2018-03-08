@@ -1,6 +1,6 @@
 
-function Order() {
-    /* Define some properties for the order */
+function Order(cart) {
+    this.cart = cart;
 };
 
 module.exports = Order;
