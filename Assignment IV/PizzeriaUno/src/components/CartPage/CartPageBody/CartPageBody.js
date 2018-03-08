@@ -19,7 +19,17 @@ class CartPageBody extends React.Component {
             return <LoadingScreen />;
         
         // Display appropriate message for an empty cart
-        } else if(this.props.cart.length === 0) {
+        }
+
+        var cart = {}
+        
+        if(this.props.cart.cart) {
+            cart = this.props.cart.cart;
+        } else {
+            cart = this.props.cart;
+        }
+
+        if(cart.length === 0) {
             return (
                 <div className='cartBody'>
                     <div className="pageViewHeadings">
@@ -40,7 +50,7 @@ class CartPageBody extends React.Component {
                             <h2>Mamma mia! You're clearly in for a feast!</h2>
                         </div>
                         <div className='pizzasInMenu'>
-                            {this.props.cart.map((pizza, i) => <PizzaListCartItem key={i} pizza={pizza} removeFromLocalStorage={this.removeFromLocalStorage}/>)}
+                            {cart.map((pizza, i) => <PizzaListCartItem key={i} pizza={pizza} removeFromLocalStorage={this.removeFromLocalStorage}/>)}
                         </div>
                     </div>
                     <div className='row'>

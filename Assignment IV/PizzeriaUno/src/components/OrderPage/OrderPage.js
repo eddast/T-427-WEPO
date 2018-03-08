@@ -47,7 +47,6 @@ class OrderPage extends React.Component {
         const customer = this.props.customer;
         const cart = this.props.cart;
         const order = this.props.order;
-        console.log(order);
 
         
         // Redirect user to checkout when he or she wants to checkout cart
@@ -58,7 +57,6 @@ class OrderPage extends React.Component {
         // If user wishes to use previous order, cart is replaced by it
         // Then user is redirected to checkout
         if(this.state.checkoutPreviousOrder === true) {
-            console.log(order.cart);
             replaceCart(order.cart);
             if(order.cart.offer != undefined || order.cart.offer != null) {
                 if(order.cart.offer.validFor === 'delivery') {

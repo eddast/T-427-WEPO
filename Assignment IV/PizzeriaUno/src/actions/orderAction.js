@@ -2,19 +2,14 @@ import { GET_ORDER_BY_TELEPHONE, POST_ORDER_BY_TELEPHONE} from '../constants/ord
 import fetch from 'isomorphic-fetch';
 
 const getOrder = (telephone) => {
-    console.log('fetching order');
     return dispatch => fetch('http://localhost:3500/api/orders/' + telephone).then(function(response) {
         if(response.status >= 200 && response.status < 300) {
             response.json().then(data => dispatch(getOrderSuccess(data)));
         } 
-
-        console.log('fetch failed');
     });
 };
 
 const postOrder = (telephone, order) => {
-    console.log('posting:');
-    console.log(order);
     return dispatch => fetch('http://localhost:3500/api/orders/' + telephone, {
         method: 'POST',
         body: JSON.stringify(order),
@@ -23,10 +18,8 @@ const postOrder = (telephone, order) => {
         }
     }).then(function(response) {
         if(response.status >= 200 && response.status < 300) {
-            console.log('POSTED!!!:');
             () => dispatch(postOrderSuccess());
         } else {
-            console.log('FAILED!!!:');
             () => dispatch(postOrderFail());
         }
     });
@@ -38,8 +31,6 @@ export {
 }
 
 const getOrderSuccess = (order) => {
-    console.log('order fetched!');
-    console.log(order);
     return {
         type: GET_ORDER_BY_TELEPHONE,
         payload: order[order.length-1]

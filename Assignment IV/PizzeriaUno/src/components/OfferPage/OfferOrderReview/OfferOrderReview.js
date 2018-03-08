@@ -73,7 +73,6 @@ class OfferOrderReview extends React.Component {
         } else {
             cart = this.props.cart;
         }
-        console.log(offer);
 
         // Redirect user to checkout on confirm
         // Post order to API on confirm
@@ -91,8 +90,6 @@ class OfferOrderReview extends React.Component {
                 }} />;
             }
         }
-
-        console.log(cart);
 
         // If unconfirmed, display user info and cart contents
         // So that user has a chance to review his or her order before confirming
