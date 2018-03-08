@@ -61,8 +61,9 @@ class OfferPageSelection extends React.Component {
         const {pizza} = this.props;
 
         // Get view and logic appropriate for particular offers
-        if(pizza !== undefined) { 
+        if(pizza !== undefined && Array.isArray(pizza)) { 
             const max = this.getMaxForOffer(offerSelected.id);
+            console.log(pizza);
             return (
                 <div className="pizzaBackground">
                     <NavigationBar />
