@@ -23,7 +23,7 @@ describe('Cart Item renders appropriate values for pizza tests', () => {
 
     const component = shallow(<PizzaListCartItem pizza={mockPizza} store={mockStore}/> )
     // AFHVERJU FINNUR HANN EKKI EINU SINNI DIV??!?
-    console.log(component.find('div'));
+    // console.log(component.find('div'));
 
     it('DOES NOTHING I WANT IT TO DO!!', () => {
         expect(true).toBe(true);
