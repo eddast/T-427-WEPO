@@ -60,18 +60,11 @@ class OfferOrderReview extends React.Component {
         // Get necessary attributes from props for render
         var offer = this.props.location.offer.referrer;
         const { customer } = this.props;
+        const { cart } = this.props;
 
         // Get loading screen while cart is loading
-        if(this.props.cart == undefined || !this.props.cart) {
+        if(cart == undefined || !cart) {
             return <div>Loading</div>;
-        }
-
-        var cart = {}
-        
-        if(this.props.cart.cart) {
-            cart = this.props.cart.cart;
-        } else {
-            cart = this.props.cart;
         }
 
         // Redirect user to checkout on confirm

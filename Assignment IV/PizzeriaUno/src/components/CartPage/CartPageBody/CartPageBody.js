@@ -14,22 +14,15 @@ class CartPageBody extends React.Component {
     }  
 
     render() {
+
+        const { cart } = this.props;
+
         // Display loading message while still fetching cart
         if (this.props.cart === null) {
             return <LoadingScreen />;
         
         // Display appropriate message for an empty cart
-        }
-
-        var cart = {}
-        
-        if(this.props.cart.cart) {
-            cart = this.props.cart.cart;
-        } else {
-            cart = this.props.cart;
-        }
-
-        if(cart.length === 0) {
+        } else if(cart.length === 0) {
             return (
                 <div className='cartBody'>
                     <div className="pageViewHeadings">

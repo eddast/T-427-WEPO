@@ -24,6 +24,7 @@ const removeFromCart = (pizza) => {
 // Adds pizza to 'cart' in local storage
 const addToCart = (pizza) => {
     var pizzasInCart = JSON.parse(localStorage.getItem(pizzasInCartKey));
+    console.log(pizzasInCart);
     if(pizzasInCart == null) { pizzasInCart = []; }
     pizzasInCart.push(pizza);
     var newCartContents = JSON.stringify(pizzasInCart);

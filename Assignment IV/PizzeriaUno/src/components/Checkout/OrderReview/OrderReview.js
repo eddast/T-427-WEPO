@@ -66,18 +66,11 @@ class OrderReview extends React.Component {
         // Get necessary attributes from props for render
         var delivery = this.props.location.delivery && this.props.location.delivery.referrer;
         const { customer } = this.props;
+        const { cart } = this.props;
 
         // Get loading screen while cart is loading
         if(this.props.cart === undefined || !this.props.cart) {
             return <div>Loading</div>;
-        }
-        
-        var cart = {}
-        
-        if(this.props.cart.cart) {
-            cart = this.props.cart.cart;
-        } else {
-            cart = this.props.cart;
         }
 
         // Redirect user to info input forms view
