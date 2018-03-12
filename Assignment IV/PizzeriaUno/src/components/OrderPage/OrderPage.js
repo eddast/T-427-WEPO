@@ -30,7 +30,7 @@ class OrderPage extends React.Component {
     componentDidUpdate(prevProps) {
         const { customer } = this.props;
         if(customer != prevProps.customer) {
-            if(customer != null && customer.name != '') {
+            if(customer != undefined && customer != null && customer.name != '') {
                 const { getOrder } = this.props;
                 getOrder(customer.telephone);
             }

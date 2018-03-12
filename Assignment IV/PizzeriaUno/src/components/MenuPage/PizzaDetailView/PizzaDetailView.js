@@ -13,7 +13,8 @@ class PizzaDetailView extends React.Component {
 
     constructor (props, ctx) {
         super(props, ctx);
-        this.state = { toCheckout : false } // Determines wheter user should be redirected to checkout
+        this.state = { toCheckout : false } // Determines whether user should be redirected to checkout
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
 
     // Immediately retrieve pizza by id via redux action

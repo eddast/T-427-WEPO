@@ -1,0 +1,42 @@
+.btn-wrapper{
+    display: block;
+    width: 120px;
+    height: 40px;
+    border: 2px solid #34618d;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 5px;
+  }
+.btn-href{
+    display: block;
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bolder;
+    color:#fff;
+    line-height:40px;
+    transition:all .5s ease;
+    z-index:2;
+    position:relative;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.btn{
+    display: block;
+    width:120px;
+    height:40px;
+    border:70px solid #34618d;
+    position:absolute;
+    transition:all .2s ease;
+    z-index:1;
+    box-sizing:border-box;
+}
+.btn-wrapper:hover .btn{
+    border:0px solid #34618d;
+}
+.btn-wrapper:hover a{
+    color:#34618d;
+}
