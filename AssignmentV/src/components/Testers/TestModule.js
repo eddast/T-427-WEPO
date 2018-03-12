@@ -1,5 +1,5 @@
 import React from 'react';
-import Module from './Module';
+import Module from '../Module/Module';
 
 class TestModule extends React.Component {
 
