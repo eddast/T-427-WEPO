@@ -1,9 +1,10 @@
 .progressbar {
-    width: 500px;
+    width: 70%;
     height: 25px;
     background-color: #c7c2c2a9;
     border: 2px solid #c7c2c256;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .progress {
@@ -15,12 +16,19 @@
     height: 100%;
 }
 
-/* .progressbar-info    { border: 2px solid #25558a;    }
-.progressbar-success { border: 2px solid #17853c;    }
-.progressbar-warning { border: 2px solid #b39513;    }
-.progressbar-danger  { border: 2px solid #700808;    } */
+.progress-info       { background-color: #0a7ef3b4;  }
+.progress-success    { background-color: #15aa08cc; }
+.progress-warning    { background-color: #ffbb00c5; }
+.progress-danger     { background-color: #c00606c2; }
 
-.progress-info       { background-color: #0a7ef3e8;  }
-.progress-success    { background-color: #1db951;    }
-.progress-warning    { background-color: #ffd000;    }
-.progress-danger     { background-color: #a70404;    }
+.striped {
+    background-size: 60px;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+    transparent 75%, transparent);
+}
+.animated      { animation: animate-stripes 2s linear infinite;  }
+
+@keyframes animate-stripes {
+    0% {background-position: 0 0;} 100% {background-position: 60px 0px;}
+}

@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import styles from './progressbar.css';
 
 const ProgressBar = ({ progress, state, striped, animated }) => {
-    //${progress}
     return (
-        <div className={`${styles.progressbar} ${styles[`progressbar-${state}`]}`}>
-            <div style={{ width: `${progress}%` }} className={`${styles.progress} ${styles[`progress-${state}`]}`}>{progress}%</div>
+        <div className={`${styles.progressbar} ${styles[`progressbar-${state}`]} `}>
+            <div style={{ width: `${progress}%` }} className={`${styles.progress} ${styles[`progress-${state}`]} ${striped && styles.striped} ${animated && styles.animated}`}>{progress}%</div>
         </div>
     );
 };
