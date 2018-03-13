@@ -1,0 +1,26 @@
+.progressbar {
+    width: 500px;
+    height: 25px;
+    background-color: #c7c2c2a9;
+    border: 2px solid #c7c2c256;
+    overflow: hidden;
+}
+
+.progress {
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #4d08088a;
+    height: 100%;
+}
+
+/* .progressbar-info    { border: 2px solid #25558a;    }
+.progressbar-success { border: 2px solid #17853c;    }
+.progressbar-warning { border: 2px solid #b39513;    }
+.progressbar-danger  { border: 2px solid #700808;    } */
+
+.progress-info       { background-color: #0a7ef3e8;  }
+.progress-success    { background-color: #1db951;    }
+.progress-warning    { background-color: #ffd000;    }
+.progress-danger     { background-color: #a70404;    }

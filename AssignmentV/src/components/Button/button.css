@@ -1,7 +1,7 @@
 .btn-wrapper{
     display: block;
-    width: 100px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border: 2px solid #34618d;
     float: left;
     text-align: center;
@@ -9,7 +9,6 @@
     position: relative;
     box-sizing: border-box;
     overflow: hidden;
-    margin: 2px;
   }
 .btn-href{
     display: block;
@@ -17,18 +16,19 @@
     font-size: 14px;
     font-weight: bolder;
     color:#fff;
-    line-height: 35px;
+    line-height: 30px;
     transition:all .5s ease;
     z-index:2;
     position:relative;
     text-decoration: none;
     text-transform: uppercase;
+    padding-bottom: 2px;
 }
 .btn{
     display: block;
-    width:100px;
-    height:35px;
-    border:70px solid #34618d;
+    width: 30px;
+    height: 30px;
+    border: 70px solid #34618d;
     position:absolute;
     transition:all .2s ease;
     z-index:1;

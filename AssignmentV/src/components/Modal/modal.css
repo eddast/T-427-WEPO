@@ -51,6 +51,9 @@
     padding-bottom: 20px;
 }
 .btn {
+    position: absolute;
+    width: 45%;
+    right: 0;
     display: flex;
     justify-content: center;
     align-self: center;
