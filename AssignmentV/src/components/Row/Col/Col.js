@@ -8,9 +8,8 @@ const Col = ({size}) => {
         size = 1;
     }
     var setWidth = 1000/12 * size;
-    
 
-    return <span className={`${styles.column}`} style={{ width: setWidth }} />;
+    return <div className={`${styles.column}`} style={{ width: setWidth }} />;
 }
 
 Col.propTypes = {   

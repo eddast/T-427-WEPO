@@ -191,16 +191,6 @@ class App extends React.Component {
         </Row> */}
       </div>;
 	}
-
-	testRows2() {
-		return <Row>
-        <Col size={5} />
-        <Col size={5} />
-        <Col size={5} />
-        <Col size={5} />
-        <Col size={5} />
-      </Row>;
-	}
 }
 
 export default App;
