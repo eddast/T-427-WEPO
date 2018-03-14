@@ -15,8 +15,6 @@ class Carousel extends React.Component {
     }
 
     render() {
-        console.log("Props equals: " + JSON.stringify(this.props));
-        
         const { images } = this.props;
         const dots = images.map((i, idx) => <span className={styles.dot} key={idx + 1} onClick={(e) => this.changePicture(e, idx + 1)}></span>)
         

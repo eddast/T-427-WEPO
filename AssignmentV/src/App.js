@@ -4,6 +4,8 @@ import Modal from'./components/Modal/Modal';
 import ProgressBar from'./components/ProgressBar/ProgressBar';
 import NameCard from './components/NameCard/NameCard';
 import Carousel from './components/Carousel/Carousel';
+import Row from './components/Row/Row/Row';
+import Col from './components/Row/Col/Col';
 
 class App extends React.Component {
 
@@ -52,18 +54,15 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>4.Carousel Component Demo</h2>
-		  {this.testCarousel([
-				"https://www.w3schools.com/w3css/img_nature_wide.jpg",
-				"https://www.w3schools.com/w3css/img_mountains_wide.jpg",
-				"https://www.w3schools.com/w3css/img_fjords_wide.jpg",
-			], 
-			"large")}
+          {this.testCarousel(["https://www.w3schools.com/w3css/img_nature_wide.jpg", "https://www.w3schools.com/w3css/img_mountains_wide.jpg", "https://www.w3schools.com/w3css/img_fjords_wide.jpg"], "large")}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>
+          {this.testRows()}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>
+          {this.testRows3()}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>7. TimePicker Component Demo</h2>
@@ -137,6 +136,60 @@ class App extends React.Component {
 				size={size}
 			/>
 		);
+	}
+
+	testRows() {
+		return <Row>
+        <Col size={4} />
+        <Col size={4} />
+        <Col size={4} />
+        <Col size={4} />
+      </Row>;
+	}
+
+	testRows3() {
+		return <div>
+        <Row>
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+        </Row>
+        <Row>
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+        </Row>
+        <Row>
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+        </Row>
+        <Row>
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+        </Row>
+        <Row>
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+          <Col size={4} />
+        </Row>
+      </div>;
+	}
+
+	testRows2() {
+		return <Row>
+        <Col size={5} />
+        <Col size={5} />
+        <Col size={5} />
+        <Col size={5} />
+        <Col size={5} />
+      </Row>;
 	}
 }
 
