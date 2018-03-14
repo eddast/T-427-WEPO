@@ -5,8 +5,6 @@ import styles from "./col.css";
 const Col = ({size}) => {
     var setWidth = 1000/size;
     console.log("setWidth equals: " + setWidth);
-    // var setHeight = size*3;
-    // style={{width: setWidth}}
 
     return <span className={`${styles.column}`} style={{ width: setWidth }} />;
 }
