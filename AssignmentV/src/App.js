@@ -58,11 +58,10 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>
-          {this.testRows()}
+          {this.testRows3()}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>
-          {this.testRows3()}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>7. TimePicker Component Demo</h2>
@@ -143,42 +142,53 @@ class App extends React.Component {
         <Col size={4} />
         <Col size={4} />
         <Col size={4} />
-        <Col size={4} />
       </Row>;
 	}
 
 	testRows3() {
 		return <div>
         <Row>
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
+          <Col size={2} />
+          <Col size={2} />
+          <Col size={2} />
+          <Col size={2} />
+          <Col size={2} />
+          <Col size={2} />
         </Row>
         <Row>
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-        </Row>
-        <Row>
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-        </Row>
-        <Row>
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-        </Row>
-        <Row>
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-          <Col size={4} />
-        </Row>
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+          <Col size={1} />
+				</Row>
+        {/* <Row>
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+          <Col />
+        </Row> */}
+        {/* <Row>
+          <Col size={3} />
+          <Col size={3} />
+          <Col size={3} />
+          <Col size={3} />
+        </Row> */}
       </div>;
 	}
 
