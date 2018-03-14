@@ -3,6 +3,7 @@ import styles from './basicstyle.css';
 import Modal from'./components/Modal/Modal';
 import ProgressBar from'./components/ProgressBar/ProgressBar';
 import NameCard from './components/NameCard/NameCard';
+import Carousel from './components/Carousel/Carousel';
 
 class App extends React.Component {
 
@@ -14,61 +15,69 @@ class App extends React.Component {
 	}
 
 	render() {
-		return (
-			<div className={`${styles.container}`}>
-
-				<div className={`${styles['container-headings']}`}>
-					<h1>Welcome To the InfinityModules DEMO site</h1>
-					<p>InfinityModules is a library of React components from the studio of USA (Universal Style Association). Our goal is to please your sight. This page demonstrates the power of our delightfulness. Try our fancy library out, go nuts!</p>
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>1. Modal Component Demo</h2>
-					{this.testModal()}
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>2. ProgressBar Component Demo</h2>
-					<h3>2.1. Striped ProgressBar</h3>
-					{this.testProgressBar(50, "info", false, true)}
-					<h3>2.2. Animated ProgressBar</h3>
-					<p></p>	
-					{this.testProgressBar(50, "info", true, true)}
-					<h3>2.3. Different Progresses ProgressBar</h3>
-					{this.testProgressBar(10, "info", false, false)}
-					{this.testProgressBar(30, "info", false, false)}
-					{this.testProgressBar(50, "info", false, false)}
-					<h3>2.4. Different States ProgressBar</h3>
-					{this.testProgressBar(50, "info", false, false)}
-					{this.testProgressBar(50, "success", false, false)}
-					{this.testProgressBar(50, "warning", false, false)}
-					{this.testProgressBar(50, "danger", false, false)}
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>3. NameCard Component Demo</h2>
-					{this.testNameCard('Mojo Jojo', 'ilovebananas@thebads.com', '+666-777-888', 'https://yt3.ggpht.com/a-/AJLlDp0Fqzwoio4JgrqFLkb53ZumHHCfm5jYTuDTyw=s900-mo-c-c0xffffffff-rj-k-no')}
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>4.Carousel Component Demo</h2>
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>5-6.Rows and Cols Components Demo</h2>
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>5-6.Rows and Cols Components Demo</h2>
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>7. TimePicker Component Demo</h2>
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>8. DatePicker Component Demo</h2>
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>9. Tabs Component Demo</h2>
-				</div>
-				<div className={`${styles['container-item']}`}>
-					<h2>10. CartoonNetworkSpinner Component Demo</h2>
-				</div>
-			</div>
-        );
+		return <div className={`${styles.container}`}>
+        <div className={`${styles["container-headings"]}`}>
+          <h1>Welcome To the InfinityModules DEMO site</h1>
+          <p>
+            InfinityModules is a library of React components from the studio
+            of USA (Universal Style Association). Our goal is to please your
+            sight. This page demonstrates the power of our delightfulness.
+            Try our fancy library out, go nuts!
+          </p>
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>1. Modal Component Demo</h2>
+          {this.testModal()}
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>2. ProgressBar Component Demo</h2>
+          <h3>2.1. Striped ProgressBar</h3>
+          {this.testProgressBar(50, "info", false, true)}
+          <h3>2.2. Animated ProgressBar</h3>
+          <p />
+          {this.testProgressBar(50, "info", true, true)}
+          <h3>2.3. Different Progresses ProgressBar</h3>
+          {this.testProgressBar(10, "info", false, false)}
+          {this.testProgressBar(30, "info", false, false)}
+          {this.testProgressBar(50, "info", false, false)}
+          <h3>2.4. Different States ProgressBar</h3>
+          {this.testProgressBar(50, "info", false, false)}
+          {this.testProgressBar(50, "success", false, false)}
+          {this.testProgressBar(50, "warning", false, false)}
+          {this.testProgressBar(50, "danger", false, false)}
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>3. NameCard Component Demo</h2>
+          {this.testNameCard("Mojo Jojo", "ilovebananas@thebads.com", "+666-777-888", "https://yt3.ggpht.com/a-/AJLlDp0Fqzwoio4JgrqFLkb53ZumHHCfm5jYTuDTyw=s900-mo-c-c0xffffffff-rj-k-no")}
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>4.Carousel Component Demo</h2>
+		  {this.testCarousel([
+				"https://www.w3schools.com/w3css/img_nature_wide.jpg",
+				"https://www.w3schools.com/w3css/img_mountains_wide.jpg",
+				"https://www.w3schools.com/w3css/img_fjords_wide.jpg",
+			], 
+			"large")}
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>5-6.Rows and Cols Components Demo</h2>
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>5-6.Rows and Cols Components Demo</h2>
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>7. TimePicker Component Demo</h2>
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>8. DatePicker Component Demo</h2>
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>9. Tabs Component Demo</h2>
+        </div>
+        <div className={`${styles["container-item"]}`}>
+          <h2>10. CartoonNetworkSpinner Component Demo</h2>
+        </div>
+      </div>;
 	}
 
 	// TESTS MODAL COMPONENT
@@ -117,6 +126,15 @@ class App extends React.Component {
 				email={email}
 				telephone={telephone}
 				imageUrl={imageUrl}
+			/>
+		);
+	}
+
+	testCarousel(images, size) {
+		return (
+			<Carousel
+				images={images}
+				size={size}
 			/>
 		);
 	}
