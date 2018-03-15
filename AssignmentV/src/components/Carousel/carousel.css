@@ -7,19 +7,31 @@ body {font-family: Verdana, sans-serif; margin:50}
   display: block;
 }
 
-.small {
-  max-height: 100px;
+.carousel-small {
+  max-height: 120px;
   max-width: 200px;
 }
 
-.medium {
-  max-height: 200px;
+.carousel-medium {
+  max-height: 220px;
   max-width: 400px;
 }
 
-.large {
-  max-height: 300px;
+.carousel-large {
+  max-height: 320px;
   max-width: 600px;
+}
+
+.image-small {
+  max-height: 100px;
+}
+
+.image-medium {
+  max-height: 200px;
+}
+
+.image-large {
+  max-height: 300px;
 }
 
 .dot {
@@ -40,15 +52,13 @@ body {font-family: Verdana, sans-serif; margin:50}
 
 .dots{
   text-align: center;
-  /* margin-top: 20px; */
-  max-height: 30%;
-  padding: 20px;
+  margin-top: 20px;
+  /* max-height: 30%; */
+  /* padding: 20px; */
 }
 
 /* Fading animation */
 .fade {
-  max-height: inherit;
-  max-width: inherit;
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
   animation-name: fade;

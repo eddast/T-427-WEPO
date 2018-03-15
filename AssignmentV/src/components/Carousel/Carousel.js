@@ -31,8 +31,8 @@ class Carousel extends React.Component {
 
         const { currentImage } = this.state;
         return (
-            <div className={`${styles.carousel} ${styles[`${this.props.size}`]}`}>
-                <div className={`${ (styles.fade)}`} >
+            <div className={`${styles.carousel} ${styles[`carousel-${this.props.size}`]} `}>
+                <div className={`${ (styles.fade)} ${styles[`image-${this.props.size}`]}`} >
                     <img src={images[currentImage]} alt="Loading"/>
                 </div>
                 <div className={`${styles.dots}`}>{dots}</div>
