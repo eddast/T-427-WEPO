@@ -1,0 +1,27 @@
+.containerForEachTab, .currentTab{
+    height: 40px;
+    width: 100px;
+    border-right: 1px solid rgb(160, 159, 159);
+    border-bottom: 1px solid rgb(160, 159, 159);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 3px; /*Don´t understand why it won´t move from the edges :(*/
+    padding-left: 3px;
+}
+
+.currentTab {
+    background-color: rgba(216, 216, 216, 0.733);
+}
+
+.containerForEachTab {
+    cursor: pointer;
+}
+
+.headerText {
+    word-break: break-all;
+    color: rgb(97, 96, 96);
+    font-size: 11px;
+}

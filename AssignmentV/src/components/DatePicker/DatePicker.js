@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./datepicker.css";
+// import styles from "./datepicker.css";
 
 class DatePicker extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class DatePicker extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
 
     return <div>I want to make a date picker here</div>
   }

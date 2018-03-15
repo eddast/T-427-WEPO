@@ -8,6 +8,8 @@ import Row from './components/Row/Row/Row';
 import Col from './components/Row/Col/Col';
 import TimePicker from './components/TimePicker/TimePicker';
 import DatePicker from './components/DatePicker/DatePicker';
+import Tabs from './components/Tabs/Tabs/Tabs';
+import Tab from './components/Tabs/Tab/Tab';
 
 class App extends React.Component {
 
@@ -71,10 +73,21 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>8. DatePicker Component Demo</h2>
-          {this.datePickerTest(date => this.setState({date}), "en-En")}
+          {this.datePickerTest(date => this.setState({ date }), "en-En")}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>9. Tabs Component Demo</h2>
+          <Tabs
+            theme="dark"
+            layout="vertical"
+            onSelect={newTab => this.setState({ tab: newTab})}
+            currentSelectedTab = {this.state.tab}
+          >
+            <Tab selectionKey={1} title={"Hi Mommy"} />
+            <Tab selectionKey={2} title={"Hi Daddy"} />
+            <Tab selectionKey={3} title={"Hey bro"} />
+            <Tab selectionKey={4} title={"Hey sis"} />
+          </Tabs>
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>10. CartoonNetworkSpinner Component Demo</h2>
@@ -212,6 +225,17 @@ class App extends React.Component {
 				locale={locale}
 			/>
 		);
+  }
+
+  TabsTest(theme, layout, onSelect, currentSelectedTab) {
+    return (
+      <Tabs>
+        <Tab selectionKey={1} title={"Hi Mommy"}></Tab>
+        <Tab selectionKey={2} title={"Hi Daddy"}></Tab>
+        <Tab selectionKey={3} title={"Hey bro"}></Tab>
+        <Tab selectionKey={4} title={"Hey sis"}></Tab>
+      </Tabs>
+    )
   }
 }
 

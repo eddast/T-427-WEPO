@@ -11,7 +11,6 @@ class TimePicker extends React.Component {
     };
   }
 
-
   handleClick(){
       console.log("Woop woop, I just pressed some stuff");
       this.setState({ time: 'someTime' });
