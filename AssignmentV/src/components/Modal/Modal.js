@@ -7,7 +7,6 @@ import FontAwesome from 'react-fontawesome';
 
 const Modal = ({isOpen, onClose, children}) => {
 
-    console.log(children);
         if(!isOpen) return <div />;
 
         return (
