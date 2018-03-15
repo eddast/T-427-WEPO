@@ -78,7 +78,7 @@ class App extends React.Component {
         <div className={`${styles["container-item"]}`}>
           <h2>9. Tabs Component Demo</h2>
           <Tabs
-            theme="dark"
+            theme="light"
             layout="vertical"
             onSelect={newTab => this.setState({ tab: newTab})}
             currentSelectedTab = {this.state.tab}
