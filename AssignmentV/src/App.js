@@ -6,6 +6,8 @@ import NameCard from './components/NameCard/NameCard';
 import Carousel from './components/Carousel/Carousel';
 import Row from './components/Row/Row/Row';
 import Col from './components/Row/Col/Col';
+import TimePicker from './components/TimePicker/TimePicker';
+import DatePicker from './components/DatePicker/DatePicker';
 
 class App extends React.Component {
 
@@ -65,9 +67,11 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>7. TimePicker Component Demo</h2>
+          {this.timePickerTest(time => this.setState({ time }), 24)}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>8. DatePicker Component Demo</h2>
+          {this.datePickerTest(date => this.setState({date}), "en-En")}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>9. Tabs Component Demo</h2>
@@ -190,7 +194,25 @@ class App extends React.Component {
           <Col size={3} />
         </Row> */}
       </div>;
-	}
+  }
+  
+  timePickerTest(onTimePick, format){
+    return (
+			<TimePicker
+				onTimePick={onTimePick}
+				format={format}
+			/>
+		);
+  }
+
+  datePickerTest(onDatePick, locale){
+     return (
+			<DatePicker
+				onDatePick={onDatePick}
+				locale={locale}
+			/>
+		);
+  }
 }
 
 export default App;
