@@ -2,39 +2,38 @@
 body {font-family: Verdana, sans-serif; margin:50}
 
 .carousel {
-  /* margin: auto; */
   position: relative;
   display: block;
 }
 
 .carousel-small {
-  height: 120px;
-  width: 200px;
-}
-
-.carousel-medium {
   height: 220px;
   width: 400px;
 }
 
+.carousel-medium {
+  height: 420px;
+  width: 800px;
+}
+
 .carousel-large {
-  height: 320px;
-  width: 600px;
+  height: 620px;
+  width: 1200px;
 }
 
 .image-small {
-  height: 100px;
-  width: 200px;
-}
-
-.image-medium {
   height: 200px;
   width: 400px;
 }
 
+.image-medium {
+  height: 400px;
+  width: 800px;
+}
+
 .image-large {
-  height: 300px;
-  width: 600px;
+  height: 600px;
+  width: 1200px;
 }
 
 .arrow{
@@ -77,50 +76,6 @@ body {font-family: Verdana, sans-serif; margin:50}
 }
 .selectedDot {
   background-color: rgb(70, 70, 70);
-}
-
-
-.slide-select {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  z-index: 100;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  font-family: "Reem Kufi", sans-serif;
-  font-size: 1.5em;
-  font-weight: lighter;
-  color: white;
-}
-.slide-select li {
-  position: relative;
-  cursor: pointer;
-  margin: 0 5px;
-}
-.slide-select li.prev:hover {
-  -webkit-transform: translateX(-2px);
-          transform: translateX(-2px);
-}
-.slide-select li.next:hover {
-  -webkit-transform: translateX(2px);
-          transform: translateX(2px);
-}
-.slide-select .selector {
-  height: 14px;
-  width: 14px;
-  border: 2px solid black;
-  background-color: transparent;
-  -webkit-transition: background-color 0.5s ease-in-out;
-  transition: background-color 0.5s ease-in-out;
-}
-.slide-select .selector.current {
-  background-color: black;
 }
 
 .dot:hover {
