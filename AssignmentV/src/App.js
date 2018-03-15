@@ -58,7 +58,18 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>4.Carousel Component Demo</h2>
-          {this.testCarousel(["https://www.w3schools.com/w3css/img_nature_wide.jpg", "https://www.w3schools.com/w3css/img_mountains_wide.jpg", "https://www.w3schools.com/w3css/img_fjords_wide.jpg"], "large")}
+          <div>
+            <h3>Small</h3>
+            {this.testCarousel(["https://www.w3schools.com/w3css/img_nature_wide.jpg", "https://www.w3schools.com/w3css/img_mountains_wide.jpg", "https://www.w3schools.com/w3css/img_fjords_wide.jpg"], "small")}
+          </div>
+          <div>
+            <h3>Medium</h3>
+            {this.testCarousel(["https://www.w3schools.com/w3css/img_nature_wide.jpg", "https://www.w3schools.com/w3css/img_mountains_wide.jpg", "https://www.w3schools.com/w3css/img_fjords_wide.jpg"], "medium")}
+          </div>
+          <div>
+            <h3>Large</h3>
+            {this.testCarousel(["https://www.w3schools.com/w3css/img_nature_wide.jpg", "https://www.w3schools.com/w3css/img_mountains_wide.jpg", "https://www.w3schools.com/w3css/img_fjords_wide.jpg"], "large")}
+          </div>  
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>

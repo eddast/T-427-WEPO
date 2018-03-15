@@ -1,16 +1,25 @@
 * {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
+body {font-family: Verdana, sans-serif; margin:50}
 
-.container {
-    max-width: 700px;
+.carousel {
+  /* margin: auto; */
+  position: relative;
+  display: block;
 }
 
-.containersmall {
-    max-width: 500px;
+.small {
+  max-height: 100px;
+  max-width: 200px;
 }
 
-.containerlarge {
-    max-width: 900px;
+.medium {
+  max-height: 200px;
+  max-width: 400px;
+}
+
+.large {
+  max-height: 300px;
+  max-width: 600px;
 }
 
 .dot {
@@ -22,27 +31,32 @@ body {font-family: Verdana, sans-serif; margin:0}
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
+  position: relative;
 }
 
 .dot:hover {
   background-color: #717171;
 }
 
-.divarounddots{
-    text-align: center;
-    margin-top: 20px;
+.dots{
+  text-align: center;
+  /* margin-top: 20px; */
+  max-height: 30%;
+  padding: 20px;
 }
 
 /* Fading animation */
 .fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
-    /* background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;  */
-    overflow: hidden;
+  max-height: inherit;
+  max-width: inherit;
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+  /* background-size: cover; */
+  background-repeat: no-repeat;
+  background-position: center; 
+  overflow: hidden;
 }
 
 @-webkit-keyframes fade {
