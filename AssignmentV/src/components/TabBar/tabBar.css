@@ -1,7 +1,12 @@
+.tabbar {
+    margin: 30px;
+}
+
 .tabs {
-    margin-top: 10px;
-    padding: 10px;
-    padding-bottom: 20px;
+    padding: 20px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 12px;
 }
 
 .tabs-dark {
@@ -11,24 +16,27 @@
 
 }
 .tabcontent {
-    max-width: 70%;
+    max-width: 70vw;
+    min-height: 10vw;
     padding: 20px;
     font-family: Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 .tabcontent-dark {
     color: yellow;
     background-color: black;
 }
 .tabcontent-light {
-    color: white;
+    color: #3f3a3a;
     background-color: blue;
 }
 .selected-light{
     color: white;
     background-color: blue;
+    font-size: 14px;
 }
 .selected-dark{
     color: yellow;
     background-color: black;
+    font-size: 14px;
 }
