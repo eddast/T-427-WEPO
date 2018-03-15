@@ -169,7 +169,7 @@ class App extends React.Component {
           <Col size={1} />
           <Col size={1} />
 				</Row>
-        {/* <Row>
+        <Row>
           <Col />
           <Col />
           <Col />
@@ -182,7 +182,7 @@ class App extends React.Component {
           <Col />
           <Col />
           <Col />
-        </Row> */}
+        </Row>
         {/* <Row>
           <Col size={3} />
           <Col size={3} />

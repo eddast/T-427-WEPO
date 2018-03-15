@@ -1,19 +1,32 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import styles from "./col.css";
 
-const Col = ({size}) => {
-    //Don´t know how to cast size as default 1
-    if (size === null) {
-        size = 1;
+class Col extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            size: 0
+        };
+    };
+
+    render () {
+        var size;
+        if (this.props.size > 0) {  
+            size = this.props.size;
+        }
+        else{
+            size = 1;
+        }
+
+        var setWidth = 1000/12 * size;
+        return <div className={`${styles.column}`} style={{ width: setWidth }} />;
+
+        // const { myProps } = this.props;
+        // console.log("myProps equals: " + myProps);
+
+        // return <div></div>
     }
-    var setWidth = 1000/12 * size;
-
-    return <div className={`${styles.column}`} style={{ width: setWidth }} />;
-}
-
-Col.propTypes = {   
-    size: PropTypes.number.isRequired
 }
 
 export default Col;

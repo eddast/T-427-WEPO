@@ -6,7 +6,7 @@ class Carousel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentImage: 1,
+            currentImage: 1
         };
     };
 
@@ -16,8 +16,19 @@ class Carousel extends React.Component {
 
     render() {
         const { images } = this.props;
-        const dots = images.map((i, idx) => <span className={styles.dot} key={idx + 1} onClick={(e) => this.changePicture(e, idx + 1)}></span>)
         
+        var dots;
+        if (images.length > 1){
+            dots = images.map((i, idx) => (
+                <span
+                    className={styles.dot}
+                    key={idx + 1}
+                    onClick={e => this.changePicture(e, idx + 1)}
+                />
+            ));
+        }
+        
+
         const { currentImage } = this.state;
         //Three different return statements, one for every size of image
         if (this.props.size === "medium"){
