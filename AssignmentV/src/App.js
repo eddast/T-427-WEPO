@@ -183,9 +183,27 @@ class App extends React.Component {
         layout={layout}
         onSelect={newTab => this.setState({currentSelectedTab: newTab})}
         currentSelectedTab={currentSelectedTab} >
-        <Tab selectionKey={1} title={"Edda Steinunn"}>Ég er Edda</Tab>
-        <Tab selectionKey={2} title={"Darri Valgarðsson"}>Ég er Darri</Tab>
-        <Tab selectionKey={3} title={"Sigurður Sturla"}>Ég er Stulli</Tab>
+        <Tab selectionKey={1} title={"Edda"}>
+          <form action="/action_page.php">
+            First name:
+            <input type="text" name="firstname" value="Edda" />
+            Last name:
+            <input type="text" name="lastname" value="Steinunn" />
+          </form> 
+        </Tab>
+        <Tab selectionKey={2} title={"Darri"}>
+          <h3>Darri er</h3>
+          <ol>
+            <li>88% Coffee</li>
+            <li>11% Beard</li>
+            <li>1% Tattoos</li>
+          </ol> 
+        </Tab>
+        <Tab selectionKey={3} title={"Stulli"}>
+          <h1>Stulli</h1>
+          <h2>Stulli</h2>
+          <h3>Stulli</h3>
+        </Tab>
       </Tabs>
     )
   }

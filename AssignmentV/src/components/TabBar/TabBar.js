@@ -4,7 +4,7 @@ import styles from './tabBar.css';
 
 const TabBar = ({theme, layout, onSelect, currentSelectedTab, children}) => {
     return (
-        <div>
+        <div className={`${styles.tabbar}`}>
             {children.map((tab) => (
                 <span   className={`${styles.tabs} ${styles[`tabs-${theme}`]} ${currentSelectedTab===tab.props.selectionKey && styles[`selected-${theme}`]}`}
                         key={tab.props.selectionKey}
