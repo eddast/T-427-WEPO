@@ -1,6 +1,9 @@
 .tabs {
+    margin-top: 10px;
     padding: 10px;
+    padding-bottom: 20px;
 }
+
 .tabs-dark {
 
 }
@@ -8,19 +11,24 @@
 
 }
 .tabcontent {
-    max-width: 80%;
-    padding: 10px;
+    max-width: 70%;
+    padding: 20px;
     font-family: Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
+}
+.tabcontent-dark {
+    color: yellow;
+    background-color: black;
+}
+.tabcontent-light {
     color: white;
     background-color: blue;
 }
-.tabcontent-dark {
-
-}
-.tabcontent-light {
-
-}
-.selected {
+.selected-light{
+    color: white;
     background-color: blue;
+}
+.selected-dark{
+    color: yellow;
+    background-color: black;
 }

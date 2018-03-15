@@ -86,7 +86,12 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>9. Tabs Component Demo</h2>
+          <h3>9.1. Tabs Component Light Theme</h3>
           {this.TabsTest('light', 'horizontal', ( (newTab) => this.setState({currentSelectedTab: newTab}) ), this.state.currentSelectedTab)}
+          <h3>9.2 Tabs Component Dark Theme</h3>
+          {this.TabsTest('dark', 'horizontal', ( (newTab) => this.setState({currentSelectedTab: newTab}) ), this.state.currentSelectedTab)}
+          <h3>9.3. Tabs Component Vertical </h3>
+          {this.TabsTest('light', 'vertical', ( (newTab) => this.setState({currentSelectedTab: newTab}) ), this.state.currentSelectedTab)}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>10. CartoonNetworkSpinner Component Demo</h2>
@@ -174,8 +179,8 @@ class App extends React.Component {
   TabsTest(theme, layout, onSelect, currentSelectedTab) {
     return (
       <Tabs
-        theme="light"
-        layout="horizontal"
+        theme={theme}
+        layout={layout}
         onSelect={newTab => this.setState({currentSelectedTab: newTab})}
         currentSelectedTab={currentSelectedTab} >
         <Tab selectionKey={1} title={"Edda Steinunn"}>Ég er Edda</Tab>

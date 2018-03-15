@@ -6,7 +6,7 @@ const TabBar = ({theme, layout, onSelect, currentSelectedTab, children}) => {
     return (
         <div>
             {children.map((tab) => (
-                <span   className={`${styles.tabs} ${styles[`tabs-${theme}`]} ${currentSelectedTab===tab.props.selectionKey && styles.selected}`}
+                <span   className={`${styles.tabs} ${styles[`tabs-${theme}`]} ${currentSelectedTab===tab.props.selectionKey && styles[`selected-${theme}`]}`}
                         key={tab.props.selectionKey}
                         onClick={() => onSelect(tab.props.selectionKey)} >
                     {tab}
