@@ -1,17 +1,19 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import styles from './tabBar.css';
+import styles from './tabs.css';
 
 const TabBar = ({theme, layout, onSelect, currentSelectedTab, children}) => {
     return (
         <div className={`${styles.tabbar}`}>
-            {children.map((tab) => (
-                <span   className={`${styles.tabs} ${styles[`tabs-${theme}`]} ${currentSelectedTab===tab.props.selectionKey && styles[`selected-${theme}`]}`}
-                        key={tab.props.selectionKey}
-                        onClick={() => onSelect(tab.props.selectionKey)} >
-                    {tab}
-                </span>
-            ))}
+            <div className={`${layout==='vertical' && styles.vertical}`}>
+                {children.map((tab) => (
+                    <span   className={`${styles.tabs} ${styles[`tabs-${theme}`]} ${currentSelectedTab===tab.props.selectionKey && styles[`selected-${theme}`]} ${layout==='vertical' && styles[`vertical-item`]}`}
+                            key={tab.props.selectionKey}
+                            onClick={() => onSelect(tab.props.selectionKey)} >
+                        {tab}
+                    </span>
+                ))}
+            </div>
             <div className={`${styles.tabcontent} ${styles[`tabcontent-${theme}`]}`} >
                 {children[currentSelectedTab-1].props.children}
             </div>

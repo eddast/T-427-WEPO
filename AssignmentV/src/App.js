@@ -6,8 +6,8 @@ import NameCard from './components/NameCard/NameCard';
 import Carousel from './components/Carousel/Carousel';
 import TimePicker from './components/TimePicker/TimePicker';
 import DatePicker from './components/DatePicker/DatePicker';
-import Tabs from './components/TabBar/TabBar';
-import Tab from './components/TabBar/Tab/Tab';
+import Tabs from './components/Tabs/Tabs';
+import Tab from './components/Tabs/Tab';
 
 class App extends React.Component {
 
@@ -200,9 +200,9 @@ class App extends React.Component {
           </ol> 
         </Tab>
         <Tab selectionKey={3} title={"Stulli"}>
-          <h1>Stulli</h1>
           <h2>Stulli</h2>
           <h3>Stulli</h3>
+          <p>Stulli</p>
         </Tab>
       </Tabs>
     )
