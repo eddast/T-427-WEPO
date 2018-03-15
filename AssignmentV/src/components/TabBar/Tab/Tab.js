@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import styles from './tab.css';
 
 const Tab = ({ selectionKey, title, children}) => {
@@ -10,9 +10,9 @@ const Tab = ({ selectionKey, title, children}) => {
     );
 };
 
-Tab.PropTypes = {
-    title: PropTypes.string.isRequired,
-    selectionKey: PropTypes.number.isRequired
+Tab.propTypes = {
+    title: propTypes.string.isRequired,
+    selectionKey: propTypes.number.isRequired
 };
 
 export default Tab

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import styles from './tabBar.css';
 
 const TabBar = ({theme, layout, onSelect, currentSelectedTab, children}) => {
@@ -19,11 +19,11 @@ const TabBar = ({theme, layout, onSelect, currentSelectedTab, children}) => {
     );
 };
 
-TabBar.PropTypes = {
-    theme: PropTypes.oneOf(['dark', 'light']),
-    layout: PropTypes.oneOf(['horizontal', 'vertical']),
-    onSelect: PropTypes.func.isRequired,
-    currentSelectedTab: PropTypes.number.isRequired
+TabBar.propTypes = {
+    theme: propTypes.oneOf(['dark', 'light']),
+    layout: propTypes.oneOf(['horizontal', 'vertical']),
+    onSelect: propTypes.func.isRequired,
+    currentSelectedTab: propTypes.number.isRequired
 };
 
 TabBar.defaultProps = {
