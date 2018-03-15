@@ -4,20 +4,19 @@ import Modal from'./components/Modal/Modal';
 import ProgressBar from'./components/ProgressBar/ProgressBar';
 import NameCard from './components/NameCard/NameCard';
 import Carousel from './components/Carousel/Carousel';
-import Row from './components/Row/Row/Row';
-import Col from './components/Row/Col/Col';
 import TimePicker from './components/TimePicker/TimePicker';
 import DatePicker from './components/DatePicker/DatePicker';
-import Tabs from './components/Tabs/Tabs/Tabs';
-import Tab from './components/Tabs/Tab/Tab';
+import Tabs from './components/TabBar/TabBar';
+import Tab from './components/TabBar/Tab/Tab';
 
 class App extends React.Component {
 
 	constructor(props, ctx) {
 		super(props,ctx);
 		this.state = {
-			showModule: false
-		};
+      showModule: false,
+      currentSelectedTab: 1
+    };
 	}
 
 	render() {
@@ -73,7 +72,6 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>
-          {this.testRows3()}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>
@@ -88,17 +86,7 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>9. Tabs Component Demo</h2>
-          <Tabs
-            theme="light"
-            layout="vertical"
-            onSelect={newTab => this.setState({ tab: newTab})}
-            currentSelectedTab = {this.state.tab}
-          >
-            <Tab selectionKey={1} title={"Hi Mommy"} />
-            <Tab selectionKey={2} title={"Hi Daddy"} />
-            <Tab selectionKey={3} title={"Hey bro"} />
-            <Tab selectionKey={4} title={"Hey sis"} />
-          </Tabs>
+          {this.TabsTest('light', 'horizontal', ( (newTab) => this.setState({currentSelectedTab: newTab}) ), this.state.currentSelectedTab)}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>10. CartoonNetworkSpinner Component Demo</h2>
@@ -164,61 +152,6 @@ class App extends React.Component {
 			/>
 		);
 	}
-
-	testRows() {
-		return <Row>
-        <Col size={4} />
-        <Col size={4} />
-        <Col size={4} />
-      </Row>;
-	}
-
-	testRows3() {
-		return <div>
-        <Row>
-          <Col size={2} />
-          <Col size={2} />
-          <Col size={2} />
-          <Col size={2} />
-          <Col size={2} />
-          <Col size={2} />
-        </Row>
-        <Row>
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-          <Col size={1} />
-				</Row>
-        <Row>
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-          <Col />
-        </Row>
-        {/* <Row>
-          <Col size={3} />
-          <Col size={3} />
-          <Col size={3} />
-          <Col size={3} />
-        </Row> */}
-      </div>;
-  }
   
   timePickerTest(onTimePick, format){
     return (
@@ -240,11 +173,14 @@ class App extends React.Component {
 
   TabsTest(theme, layout, onSelect, currentSelectedTab) {
     return (
-      <Tabs>
-        <Tab selectionKey={1} title={"Hi Mommy"}></Tab>
-        <Tab selectionKey={2} title={"Hi Daddy"}></Tab>
-        <Tab selectionKey={3} title={"Hey bro"}></Tab>
-        <Tab selectionKey={4} title={"Hey sis"}></Tab>
+      <Tabs
+        theme="light"
+        layout="horizontal"
+        onSelect={newTab => this.setState({currentSelectedTab: newTab})}
+        currentSelectedTab={currentSelectedTab} >
+        <Tab selectionKey={1} title={"Edda Steinunn"}>Ég er Edda</Tab>
+        <Tab selectionKey={2} title={"Darri Valgarðsson"}>Ég er Darri</Tab>
+        <Tab selectionKey={3} title={"Sigurður Sturla"}>Ég er Stulli</Tab>
       </Tabs>
     )
   }

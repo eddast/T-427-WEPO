@@ -1,0 +1,21 @@
+.tabs {
+
+}
+.tabs-dark {
+
+}
+.tabs-light {
+
+}
+.tabcontent {
+
+}
+.tabcontent-dark {
+
+}
+.tabcontent-light {
+
+}
+.selected {
+    border: 3px solid green;
+}
