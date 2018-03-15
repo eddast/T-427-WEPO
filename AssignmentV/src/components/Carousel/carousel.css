@@ -8,30 +8,45 @@ body {font-family: Verdana, sans-serif; margin:50}
 }
 
 .carousel-small {
-  max-height: 120px;
-  max-width: 200px;
+  height: 120px;
+  width: 200px;
 }
 
 .carousel-medium {
-  max-height: 220px;
-  max-width: 400px;
+  height: 220px;
+  width: 400px;
 }
 
 .carousel-large {
-  max-height: 320px;
-  max-width: 600px;
+  height: 320px;
+  width: 600px;
 }
 
 .image-small {
-  max-height: 100px;
+  height: 100px;
+  width: 200px;
 }
 
 .image-medium {
-  max-height: 200px;
+  height: 200px;
+  width: 400px;
 }
 
 .image-large {
-  max-height: 300px;
+  height: 300px;
+  width: 600px;
+}
+
+.arrow{
+  color: rgba(255, 255, 255, 0.726);
+  position: absolute;
+  right: 0;
+  vertical-align: middle;
+  top:0;
+  bottom: 0;
+  margin: auto;
+  margin-right: 10px;
+  height: 30%;
 }
 
 .dot {
@@ -63,7 +78,7 @@ body {font-family: Verdana, sans-serif; margin:50}
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
-  /* background-size: cover; */
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center; 
   overflow: hidden;
@@ -79,6 +94,6 @@ body {font-family: Verdana, sans-serif; margin:50}
   to {opacity: 1}
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
