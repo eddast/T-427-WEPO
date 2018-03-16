@@ -186,9 +186,9 @@ class App extends React.Component {
         <Tab selectionKey={1} title={"Edda"}>
           <form action="/action_page.php">
             First name:
-            <input type="text" name="firstname" value="Edda" />
+            <input type="text" name="firstname" placeholder="Edda" />
             Last name:
-            <input type="text" name="lastname" value="Steinunn" />
+            <input type="text" name="lastname" placeholder="Steinunn" />
           </form> 
         </Tab>
         <Tab selectionKey={2} title={"Darri"}>

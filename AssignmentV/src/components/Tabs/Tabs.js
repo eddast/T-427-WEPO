@@ -2,12 +2,12 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './tabs.css';
 
-const TabBar = ({theme, layout, onSelect, currentSelectedTab, children}) => {
+const Tabs = ({theme, layout, onSelect, currentSelectedTab, children}) => {
     return (
         <div className={`${styles.tabbar}`}>
             <div className={`${layout==='vertical' && styles.vertical}`}>
                 {children.map((tab) => (
-                    <span   className={`${styles[`tabs-${theme}`]} ${currentSelectedTab===tab.props.selectionKey && styles[`selected-${theme}`]} ${styles[`item-${layout}`]}`}
+                    <span className={`${styles[`tabs-${theme}`]} ${currentSelectedTab===tab.props.selectionKey && styles[`selected-${theme}`]} ${styles[`item-${layout}`]}`}
                             key={tab.props.selectionKey}
                             onClick={() => onSelect(tab.props.selectionKey)} >
                         {tab}
@@ -21,16 +21,16 @@ const TabBar = ({theme, layout, onSelect, currentSelectedTab, children}) => {
     );
 };
 
-TabBar.propTypes = {
+Tabs.propTypes = {
     theme: propTypes.oneOf(['dark', 'light']),
     layout: propTypes.oneOf(['horizontal', 'vertical']),
     onSelect: propTypes.func.isRequired,
     currentSelectedTab: propTypes.number.isRequired
 };
 
-TabBar.defaultProps = {
+Tabs.defaultProps = {
     theme: 'light',
     layout: 'horizontal'
 };
 
-export default TabBar
+export default Tabs
