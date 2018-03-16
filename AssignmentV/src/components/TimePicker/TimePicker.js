@@ -1,45 +1,37 @@
-import React from "react";
-import styles from "./timepicker.css";
+import React from 'react';
+import propTypes from 'prop-types';
+import styles from './timepicker.css';
+import Clock from './Clock';
 
-class TimePicker extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.state = {
-        time: null,
-        format: 0 
-    };
-  }
-
-  handleClick(){
-      console.log("Woop woop, I just pressed some stuff");
-      this.setState({ time: 'someTime' });
-  }
-
-  render() {
-    // console.log(this.props);
-
-    if (this.props.format === 24){
-        return <div className={`${styles.container24}`} onClick={this.handleClick}>
-        
-        </div>;
+class TimePicker extends React.Component{
+    constructor(props, ctx) {
+        super(props,ctx);
+        this.state = {
+            hour: 0,
+            minutes: 0
+        }
     }
-    else if (this.props.format === 12){
-        return <div className={`${styles.container12}`} onClick={this.handleClick}>
-
-        </div>;
+    render() {
+        return (
+            <div className={`${styles.wrapper}`}>
+                <Clock hour={this.state.hour} minutes={this.state.minutes} />
+                <span className={`${styles.timepicker}`}>
+                    <span>{this.state.hour}</span>
+                    <span> : </span>
+                    <span>{this.state.minutes}</span>
+                </span>
+            </div>
+        );
     }
-    else{
-        return <div>Wrong time format put in, only 24 and 12 are allowed</div>
-    }
-    
-  }
-}
+};
 
-//In case we want to use this later on
-// TimePicker.propTypes = {
-//   images: PropTypes.array.isRequired,
-//   size: PropTypes.string.isRequired
-// };
+TimePicker.propTypes = {
+    onTimePick: propTypes.func.isRequired,
+    format: propTypes.oneOf([24, 12])
+};
 
-export default TimePicker;
+TimePicker.defaultProps = {
+    format: 24
+};
+
+export default TimePicker
