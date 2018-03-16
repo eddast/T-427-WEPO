@@ -2,23 +2,38 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './timepicker.css';
 import Clock from './Clock';
+import FontAwesome from "react-fontawesome";
 
 class TimePicker extends React.Component{
     constructor(props, ctx) {
         super(props,ctx);
         this.state = {
-            hour: 0,
-            minutes: 0
+            hour: 10,
+            minutes: 10
         }
     }
     render() {
         return (
             <div className={`${styles.wrapper}`}>
-                <Clock hour={this.state.hour} minutes={this.state.minutes} />
+                <span className={`${styles.clockwrapper}`}>
+                    <Clock hour={this.state.hour} minutes={this.state.minutes} />
+                </span>
                 <span className={`${styles.timepicker}`}>
-                    <span>{this.state.hour}</span>
+                    <div className={`${styles.controlpanel}`}>
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({hour: this.state.hour+1})} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({minutes: this.state.minutes+1})} />
+                    </div>
+                    <span>
+                        {this.state.hour}
+                    </span>
                     <span> : </span>
-                    <span>{this.state.minutes}</span>
+                    <span>
+                        {this.state.minutes}
+                    </span>
+                    <div className={`${styles.controlpanel} ${styles.decrement}`}>
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> this.setState({hour: this.state.hour-1})} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> this.setState({minutes: this.state.minutes-1})} />
+                    </div>
                 </span>
             </div>
         );

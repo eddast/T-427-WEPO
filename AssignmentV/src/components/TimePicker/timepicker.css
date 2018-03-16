@@ -1,6 +1,50 @@
 .timepicker {
+    position: absolute;
+    width: 68%;
+    height: 100%;
+    color: white;
+    font-size: 60px;
+    font-weight: bolder;
+    background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto auto;
+    text-align: center;
+}
+.controlpanel {
+    margin: 0px;
+    padding: 0px;
+    height: 30%;
+}
+
+.decrement {
+    margin-top: -6%;
+}
+.wrapper {
     width: 50%;
-    min-height: 15em;
-    background-color: tomato;
-    display: inline-block;
+    box-shadow: 10px 5px 40px 5px #0000002a;
+    position: relative;
+}
+
+.controls {
+    padding: 0px;
+    margin: 0px;
+    padding-top: 0%;
+    font-size: 55px;
+    margin-left: 10%;
+    margin-right: 8%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    transition: 0.5s;
+}
+
+.controls:hover {
+    color: #35313146;
+}
+
+.clockwrapper {
+    width: 30%;
+    background-color: white;
+    height: fit-content;
 }

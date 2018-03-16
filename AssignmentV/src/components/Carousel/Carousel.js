@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types";
 import styles from "./carousel.css";
-import FontAwesome from "react-fontawesome"
+import FontAwesome from "react-fontawesome";
 
 class Carousel extends React.Component {
     constructor(props) {
