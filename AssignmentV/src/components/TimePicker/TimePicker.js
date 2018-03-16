@@ -20,8 +20,8 @@ class TimePicker extends React.Component{
                 </span>
                 <span className={`${styles.timepicker}`}>
                     <div className={`${styles.controlpanel}`}>
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({hour: this.state.hour+1})} />
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({minutes: this.state.minutes+1})} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=>  this.setState({hour: (this.state.hour+1) % this.props.format})} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({minutes: (this.state.minutes+1) % 60})} />
                     </div>
                     <span>
                         {this.state.hour}
@@ -31,8 +31,8 @@ class TimePicker extends React.Component{
                         {this.state.minutes}
                     </span>
                     <div className={`${styles.controlpanel} ${styles.decrement}`}>
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> this.setState({hour: this.state.hour-1})} />
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> this.setState({minutes: this.state.minutes-1})} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.hour > 0) this.setState({hour: (this.state.hour-1)}); else this.setState({hour: this.props.format})}} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.minutes > 0) this.setState({minutes: (this.state.minutes-1)}); else this.setState({minutes: 60})}} />
                     </div>
                 </span>
             </div>
