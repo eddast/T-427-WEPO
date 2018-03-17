@@ -38,7 +38,6 @@ class CartoonNetworkSpinner extends React.Component {
     this.setState({shouldSpin: false});
     var size = this.state.images.length; 
     if (size - 1 !== this.state.currentImage){
-        console.log('changing current image');
         this.setState({ currentImage: this.state.currentImage + 1});
     } else { this.setState({ currentImage: 0}); }
     clearInterval(this.changeImageInterval);
@@ -48,7 +47,6 @@ class CartoonNetworkSpinner extends React.Component {
   }
 
   spin(){
-    console.log('should spin');
     this.setState({shouldSpin: true});
     clearInterval(this.changeImageInterval);
     clearInterval(this.spinImageInterval);
@@ -56,7 +54,6 @@ class CartoonNetworkSpinner extends React.Component {
   }
 
   render() {
-    console.log('rendering');
     return (
       <div className={`${styles.container}`}>
         <div

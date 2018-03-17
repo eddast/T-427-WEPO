@@ -12,13 +12,10 @@ class DatePicker extends React.Component {
   }
 
   handleClick() {
-    console.log("Woop woop, I just pressed some stuff");
     this.setState({ date: "someDate" });
   }
 
   render() {
-    // console.log(this.props);
-
     return <div>I want to make a date picker here</div>
   }
 }

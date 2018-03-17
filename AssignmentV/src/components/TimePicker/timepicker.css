@@ -1,50 +1,48 @@
-.timepicker {
-    position: absolute;
-    width: 68%;
-    height: 100%;
-    color: white;
-    font-size: 60px;
-    font-weight: bolder;
-    background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%);
-    top: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto auto;
-    text-align: center;
-}
-.controlpanel {
-    margin: 0px;
-    padding: 0px;
-    height: 30%;
-}
-
-.decrement {
-    margin-top: -6%;
-}
 .wrapper {
-    width: 50%;
-    box-shadow: 10px 5px 40px 5px #0000002a;
+    width: 25%;
+    height: 5vw;
+    /* background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%); */
+    border-radius: 25px;
     position: relative;
+    text-transform: uppercase;
+    margin: 30px;
+    padding: 1%;
+    z-index:0;
+    position: relative;
+    display: table;
 }
 
-.controls {
-    padding: 0px;
-    margin: 0px;
-    padding-top: 0%;
-    font-size: 55px;
-    margin-left: 10%;
-    margin-right: 8%;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    transition: 0.5s;
+.picker {
+    display: table-cell;
+    vertical-align: middle;
+    background-color:white;
+    color: #049e8498;
+    overflow:hidden;
+    border: 4px solid #01e1ff;
+    border-radius: 20px;
+    z-index:10;
+    padding: 3%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: bolder;
+    letter-spacing: 6px;
+    text-shadow: 1px 1px 5px #00ff887a;
+    transition: .5s;
+    border-color: #01ff95;
+    box-shadow: 1px 1px 20px #01ff95, 1px 1px 40px #01ffdd;
+    outline: 0 none;
 }
 
-.controls:hover {
-    color: #35313146;
+.picker:hover {
+    color: #02e2ff;
 }
 
-.clockwrapper {
-    width: 30%;
-    background-color: white;
-    height: fit-content;
+.icon {
+    float: right;
+    font-size: 30px;
+    font-weight: bolder;
+    color: #01ffdd;
+    text-shadow: none;
+
 }

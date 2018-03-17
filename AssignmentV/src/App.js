@@ -16,7 +16,8 @@ class App extends React.Component {
 		super(props,ctx);
 		this.state = {
       showModule: false,
-      currentSelectedTab: 1
+      currentSelectedTab: 1,
+      time: "none"
     };
 	}
 
@@ -79,7 +80,10 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>7. TimePicker Component Demo</h2>
-          {this.timePickerTest(time => this.setState({ time }), 24)}
+          <h3>7.1. 24-hour Formatted TimePicker</h3>
+          {this.timePickerTest(time => this.setState({ time: time }), 24)}
+          <h3>7.2. 12-hour Formatted TimePicker</h3>
+          {this.timePickerTest(time => this.setState({ time: time }), 12)}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>8. DatePicker Component Demo</h2>
@@ -162,10 +166,13 @@ class App extends React.Component {
   
   timePickerTest(onTimePick, format){
     return (
-			<TimePicker
-				onTimePick={onTimePick}
-				format={format}
-			/>
+      <div>
+        <TimePicker
+          onTimePick={onTimePick}
+          format={format}
+        />
+        <p>Time from timepicker: {this.state.time}</p>
+      </div>
 		);
   }
 

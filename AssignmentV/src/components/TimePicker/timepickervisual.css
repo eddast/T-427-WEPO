@@ -1,0 +1,62 @@
+.timepicker {
+    position: absolute;
+    width: 68%;
+    height: 100%;
+    color: white;
+    font-size: 60px;
+    font-weight: bolder;
+    background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto auto;
+    text-align: center;
+    letter-spacing: 15px;
+}
+.controlpanel {
+    margin: 0px;
+    padding: 0px;
+    height: 30%;
+}
+
+.decrement {
+    margin-top: -6%;
+}
+.wrapper {
+    width: 100%;
+    box-shadow: 10px 5px 40px 5px #0000002a;
+    position: relative;
+    margin: px;
+}
+
+.controls {
+    padding: 0px;
+    margin: 0px;
+    padding-top: 0%;
+    font-size: 55px;
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-top: 25px;
+    transition: 0.5s;
+}
+
+.ampm {
+    margin: 18%;
+    margin-right: 5%;
+    position: absolute;
+    font-size: 30px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.controls:hover {
+    color: #35313146;
+}
+
+.clock {
+    width: 30%;
+    background-color: white;
+    height: fit-content;
+    margin-right: 68%;
+}

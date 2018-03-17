@@ -1,47 +1,30 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styles from './timepicker.css';
-import Clock from './Clock';
 import FontAwesome from "react-fontawesome";
+import TimePickerVisual from "./TimePickerVisual";
 
 class TimePicker extends React.Component{
     constructor(props, ctx) {
         super(props,ctx);
-        this.state = {
-            hour: 10,
-            minutes: 10
-        }
+        this.state = { time: this.props.format + ':00', showPicker: false, am: true};
+        this.props.format===12?this.state.time = this.state.time+(this.state.am?' AM':' PM'):this.state.time = this.state.time;
     }
     render() {
         return (
             <div className={`${styles.wrapper}`}>
-                <span className={`${styles.clockwrapper}`}>
-                    <Clock hour={this.state.hour} minutes={this.state.minutes} />
-                </span>
-                <span className={`${styles.timepicker}`}>
-                    <div className={`${styles.controlpanel}`}>
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=>  this.setState({hour: (this.state.hour+1) % this.props.format})} />
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({minutes: (this.state.minutes+1) % 59})} />
-                    </div>
-                    <span>
-                        {this.extrazero(this.state.hour)}{this.state.hour}
-                    </span>
-                    <span> : </span>
-                    <span>
-                        {this.extrazero(this.state.minutes)}{this.state.minutes}
-                    </span>
-                    <div className={`${styles.controlpanel} ${styles.decrement}`}>
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.hour > 0) this.setState({hour: (this.state.hour-1)}); else this.setState({hour: this.props.format-1})}} />
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.minutes > 0) this.setState({minutes: (this.state.minutes-1)}); else this.setState({minutes: 59})}} />
-                    </div>
-                </span>
+                <div className={`${styles.picker}`} onClick={()=> this.setState({showPicker: true})}>
+                    <span>{this.state.time}</span>
+                    <FontAwesome className={`${styles.icon}`} aria-hidden='false' name='clock-o' />
+                </div>
+                <TimePickerVisual
+                    show={this.state.showPicker}
+                    closePicker={(time, am)=> {this.props.onTimePick(time); this.setState({showPicker: false, time: time, am: am}) }}
+
+                    format={this.props.format}
+                />
             </div>
         );
-    }
-
-    extrazero(unit) {
-        if (unit < 10) { return '0'; }
-        else return;
     }
 
 };
