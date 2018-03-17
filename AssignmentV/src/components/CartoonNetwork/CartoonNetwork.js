@@ -6,9 +6,7 @@ class CartoonNetworkSpinner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //In our state we initialise what image we wish to display first
       currentImage: 0,
-      //And store our list of images
       images: [
       "https://img00.deviantart.net/3873/i/2016/249/a/6/cartoon_network_vs_nick_3ds_cover_by_thegamerlover-dagrlqb.jpg",
       "https://pmctvline2.files.wordpress.com/2017/09/cartoon-network-best-shows-billy-and-mandy.jpg?w=620",
@@ -35,9 +33,6 @@ class CartoonNetworkSpinner extends React.Component {
   }
 
   render() {
-    // console.log("The interval is: " + this.props.interval);
-
-    //We call the increaseCurrentImage function after each interval seconds with setTimeout
     setTimeout(this.increaseCurrentImage.bind(this), this.props.interval * 1000);
     return (
       <div className={`${styles.container}`}>

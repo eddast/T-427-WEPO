@@ -21,7 +21,7 @@ class TimePicker extends React.Component{
                 <span className={`${styles.timepicker}`}>
                     <div className={`${styles.controlpanel}`}>
                         <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=>  this.setState({hour: (this.state.hour+1) % this.props.format})} />
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({minutes: (this.state.minutes+1) % 60})} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({minutes: (this.state.minutes+1) % 59})} />
                     </div>
                     <span>
                         {this.extrazero(this.state.hour)}{this.state.hour}
@@ -31,8 +31,8 @@ class TimePicker extends React.Component{
                         {this.extrazero(this.state.minutes)}{this.state.minutes}
                     </span>
                     <div className={`${styles.controlpanel} ${styles.decrement}`}>
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.hour > 0) this.setState({hour: (this.state.hour-1)}); else this.setState({hour: this.props.format})}} />
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.minutes > 0) this.setState({minutes: (this.state.minutes-1)}); else this.setState({minutes: 60})}} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.hour > 0) this.setState({hour: (this.state.hour-1)}); else this.setState({hour: this.props.format-1})}} />
+                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.minutes > 0) this.setState({minutes: (this.state.minutes-1)}); else this.setState({minutes: 59})}} />
                     </div>
                 </span>
             </div>
@@ -40,10 +40,8 @@ class TimePicker extends React.Component{
     }
 
     extrazero(unit) {
-        if(unit < 10) {
-            return '0';
-        }
-        return;
+        if (unit < 10) { return '0'; }
+        else return;
     }
 
 };
