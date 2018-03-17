@@ -21,11 +21,6 @@ class Col extends React.Component {
 
         var setWidth = 1000/12 * size;
         return <div className={`${styles.column}`} style={{ width: setWidth }} />;
-
-        // const { myProps } = this.props;
-        // console.log("myProps equals: " + myProps);
-
-        // return <div></div>
     }
 }
 

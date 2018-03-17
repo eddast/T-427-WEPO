@@ -8,6 +8,7 @@ import TimePicker from './components/TimePicker/TimePicker';
 import DatePicker from './components/DatePicker/DatePicker';
 import Tabs from './components/Tabs/Tabs';
 import Tab from './components/Tabs/Tab';
+import CartoonNetworkSpinner from './components/CartoonNetwork/CartoonNetwork';
 
 class App extends React.Component {
 
@@ -95,6 +96,7 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>10. CartoonNetworkSpinner Component Demo</h2>
+          {this.CartoonNetworkSpinnerTest(4)}
         </div>
       </div>;
 	}
@@ -205,6 +207,12 @@ class App extends React.Component {
           <p>Stulli</p>
         </Tab>
       </Tabs>
+    )
+  }
+
+  CartoonNetworkSpinnerTest(interval) {
+    return (
+      <CartoonNetworkSpinner interval={interval} />
     )
   }
 }
