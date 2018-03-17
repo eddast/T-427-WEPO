@@ -7,37 +7,55 @@ class CartoonNetworkSpinner extends React.Component {
     super(props);
     this.state = {
       currentImage: 0,
+      shouldSpin: false,
+      interval: this.props.interval,
       images: [
-      "https://img00.deviantart.net/3873/i/2016/249/a/6/cartoon_network_vs_nick_3ds_cover_by_thegamerlover-dagrlqb.jpg",
-      "https://pmctvline2.files.wordpress.com/2017/09/cartoon-network-best-shows-billy-and-mandy.jpg?w=620",
-      "https://i.enkirelations.com/ayccvHUtFYE6LTrKLmjYcr1IEhc=/800x0//images/2016/12/795d02dd29000acf51273a5c42e11f74.jpg",
-      "http://cdn.kidscreen.com/wp/wp-content/uploads/2017/10/powerpuffgirls-special.jpg?97ea13",
-      "https://metrouk2.files.wordpress.com/2017/05/snip20170626_182.png?w=748&h=411&crop=1",
-      "https://www.watchcartoononline.io/thumbs/Dexter--s-Laboratory-Season-2-Episode-25-Critical-Gas--Let-s-Save-the-World-You-Jerk--Average-Joe.jpg",
-      "https://www.blog.embmall.com/uploads/2017/04/10202-Fabulously-Single-Johnny-Bravo-Embroidery-Design.jpg",
-      "https://s1-ssl.dmcdn.net/YHqPL.gif",
-      "https://pmcdeadline2.files.wordpress.com/2015/08/scooby-doo.jpg?crop=193px%2C0px%2C707px%2C474px&resize=446%2C299",
-      "http://images2.fanpop.com/images/photos/4000000/flintstones-the-flintstones-4083036-480-320.jpg"
+      "http://moziru.com/images/cartoon-network-clipart-cartoon-character-8.jpg",
+      "https://static.comicvine.com/uploads/original/0/9116/1029708-johnny_bravo_tv_01.jpg",
+      "https://http2.mlstatic.com/adesivo-desenho-as-meninas-superpoderosas-frete-gratis-D_NQ_NP_223411-MLB20548594809_012016-F.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/41T5FNqAYHL._SY355_.jpg",
+      "https://i.pinimg.com/originals/58/68/e1/5868e1a03656470c1f15acde6c553693.jpg",
+      "http://images2.fanpop.com/image/photos/11400000/Robin-teen-titans-boys-11494057-431-500.gif",
+      "https://vignette.wikia.nocookie.net/teentitans/images/0/0a/Latest-2.png/revision/latest?cb=20150813183840",
+      "https://static.comicvine.com/uploads/scale_small/11/111746/4579604-characterart-scooby-sd.jpg",
+      "https://vignette.wikia.nocookie.net/vsbattles/images/8/82/Shaggy_Rogers.png/revision/latest?cb=20180227172028",
+      "https://vignette.wikia.nocookie.net/edwikia/images/0/0d/Plank.png/revision/latest?cb=20170726093347"
     ]
     };
   }
 
+  componentDidMount() {
+    this.changeImageInterval = setInterval(function() {this.increaseCurrentImage()}.bind(this), this.props.interval * 1000);
+    this.spinImageInterval = setInterval(function() {this.spin()}.bind(this), (this.props.interval * 1000)-500);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.changeImageInterval);
+    clearInterval(this.spinImageInterval);
+   };
+
   increaseCurrentImage(){
     var size = this.state.images.length; 
     if (size - 1 !== this.state.currentImage){
-        this.setState({ currentImage: this.state.currentImage + 1 });
-    }
-    else{
-        this.setState({ currentImage: 0});
-    }
+        console.log('changing current image');
+        this.setState({ currentImage: this.state.currentImage + 1, shouldSpin: false});
+    } else { this.setState({ currentImage: 0}); }
+
+    console.log('should not spin');
+    this.setState({});
+  }
+
+  spin(){
+    console.log('should spin');
+    this.setState({shouldSpin: true});
   }
 
   render() {
-    setTimeout(this.increaseCurrentImage.bind(this), this.props.interval * 1000);
+    console.log('rendering');
     return (
       <div className={`${styles.container}`}>
         <div
-          className={`${styles.images}`}
+          className={`${styles.images} ${this.state.shouldSpin && styles.spin}`}
           style={{ backgroundImage: `url(${this.state.images[this.state.currentImage]})` }}
         />
       </div>
