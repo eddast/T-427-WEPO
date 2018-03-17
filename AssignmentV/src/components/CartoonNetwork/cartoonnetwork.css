@@ -10,9 +10,9 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transition: 0.3s ease-in-out;
+    transition: 1s;
 }
 
 .spin {
-    transform: rotate(360deg);
+    transform: rotate(1080deg);
 }

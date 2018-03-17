@@ -35,19 +35,24 @@ class CartoonNetworkSpinner extends React.Component {
    };
 
   increaseCurrentImage(){
+    this.setState({shouldSpin: false});
     var size = this.state.images.length; 
     if (size - 1 !== this.state.currentImage){
         console.log('changing current image');
-        this.setState({ currentImage: this.state.currentImage + 1, shouldSpin: false});
+        this.setState({ currentImage: this.state.currentImage + 1});
     } else { this.setState({ currentImage: 0}); }
-
-    console.log('should not spin');
-    this.setState({});
+    clearInterval(this.changeImageInterval);
+    clearInterval(this.spinImageInterval);
+    this.changeImageInterval = setInterval(function() {this.increaseCurrentImage()}.bind(this), (this.props.interval * 1000));
+    this.spinImageInterval = setInterval(function() {this.spin()}.bind(this), (this.props.interval * 1000)-500);
   }
 
   spin(){
     console.log('should spin');
     this.setState({shouldSpin: true});
+    clearInterval(this.changeImageInterval);
+    clearInterval(this.spinImageInterval);
+    this.changeImageInterval = setInterval(function() {this.increaseCurrentImage()}.bind(this), 1000);
   }
 
   render() {
