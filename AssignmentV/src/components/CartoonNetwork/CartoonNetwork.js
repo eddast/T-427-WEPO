@@ -10,14 +10,14 @@ class CartoonNetworkSpinner extends React.Component {
       shouldSpin: false,
       interval: this.props.interval,
       images: [
-      "http://moziru.com/images/cartoon-network-clipart-cartoon-character-8.jpg",
-      "https://static.comicvine.com/uploads/original/0/9116/1029708-johnny_bravo_tv_01.jpg",
-      "https://http2.mlstatic.com/adesivo-desenho-as-meninas-superpoderosas-frete-gratis-D_NQ_NP_223411-MLB20548594809_012016-F.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/41T5FNqAYHL._SY355_.jpg",
+      "http://www.pngmart.com/files/4/Dexters-Laboratory-PNG-Transparent-Image.png",
+      "https://vignette.wikia.nocookie.net/johnnybravo/images/b/bb/Johnnyb001.gif/revision/latest?cb=20120620184904",
+      "https://vignette.wikia.nocookie.net/villains/images/b/b3/Mojo_Jojo_2016.png/revision/latest/scale-to-width-down/300?cb=20170613192420",
+      "https://vignette.wikia.nocookie.net/powerpuff/images/2/23/Blossom-pic.png/revision/latest?cb=20130517081824",
       "https://i.pinimg.com/originals/58/68/e1/5868e1a03656470c1f15acde6c553693.jpg",
       "http://images2.fanpop.com/image/photos/11400000/Robin-teen-titans-boys-11494057-431-500.gif",
       "https://vignette.wikia.nocookie.net/teentitans/images/0/0a/Latest-2.png/revision/latest?cb=20150813183840",
-      "https://static.comicvine.com/uploads/scale_small/11/111746/4579604-characterart-scooby-sd.jpg",
+      "https://www.wbkidsgo.com/Portals/4/Images/Content/Characters/Scooby/characterArt-scooby-SD.png",
       "https://vignette.wikia.nocookie.net/vsbattles/images/8/82/Shaggy_Rogers.png/revision/latest?cb=20180227172028",
       "https://vignette.wikia.nocookie.net/edwikia/images/0/0d/Plank.png/revision/latest?cb=20170726093347"
     ]
