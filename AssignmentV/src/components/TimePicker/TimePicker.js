@@ -24,11 +24,11 @@ class TimePicker extends React.Component{
                         <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> this.setState({minutes: (this.state.minutes+1) % 60})} />
                     </div>
                     <span>
-                        {this.state.hour}
+                        {this.extrazero(this.state.hour)}{this.state.hour}
                     </span>
                     <span> : </span>
                     <span>
-                        {this.state.minutes}
+                        {this.extrazero(this.state.minutes)}{this.state.minutes}
                     </span>
                     <div className={`${styles.controlpanel} ${styles.decrement}`}>
                         <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.hour > 0) this.setState({hour: (this.state.hour-1)}); else this.setState({hour: this.props.format})}} />
@@ -38,6 +38,14 @@ class TimePicker extends React.Component{
             </div>
         );
     }
+
+    extrazero(unit) {
+        if(unit < 10) {
+            return '0';
+        }
+        return;
+    }
+
 };
 
 TimePicker.propTypes = {
