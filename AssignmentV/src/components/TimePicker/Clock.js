@@ -16,6 +16,9 @@ const Clock = ({ hour, minutes }) => {
             <div className={`${styles[`minutes-container`]}`} style={{transform: `rotateZ(${minuteAngle}deg)`}}>
                 <div className={`${styles.minutes}`}></div>
             </div>
+            <div className={`${styles[`center-container`]}`}>
+                <div className={`${styles.center}`}></div>
+            </div>
         </article>
     );
 };

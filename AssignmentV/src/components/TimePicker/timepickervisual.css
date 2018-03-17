@@ -60,3 +60,20 @@
     height: fit-content;
     margin-right: 68%;
 }
+
+.center {
+    width: 100%;
+    margin:5%;
+    margin-left:45%;
+}
+
+.input {
+    width: 20%;
+    color: black;
+    padding: 5px;
+}
+
+.dropdown {
+    width: 100%;
+    color: black;
+}

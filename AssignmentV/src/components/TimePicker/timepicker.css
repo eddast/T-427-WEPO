@@ -36,6 +36,7 @@
 
 .picker:hover {
     color: #02e2ff;
+    box-shadow: 1px 1px 60px #01ff95, 1px 1px 40px #01ffdd;
 }
 
 .icon {

@@ -10,7 +10,7 @@ const Modal = ({isOpen, onClose, children}) => {
         if(!isOpen) return <div />;
 
         return (
-            <div>
+            <div className={`${styles.wrapcontent}`}>
                 <div className={`${styles.background}`}>
                     <div className={`${styles.wrapper}`}>
                         <div className={`${styles.module}`}>

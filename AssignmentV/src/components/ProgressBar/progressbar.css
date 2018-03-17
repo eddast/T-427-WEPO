@@ -1,10 +1,13 @@
 .progressbar {
     width: 70%;
-    height: 25px;
+    height: 4vh;
     background-color: #c7c2c2a9;
-    border: 2px solid #c7c2c256;
     overflow: hidden;
     border-radius: 10px;
+    border-color: #31383556;
+    box-shadow: 1px 1px 20px #31383556, 1px 1px 40px #31383556;
+    outline: 0 none;
+    margin: 10px;
 }
 
 .progress {
@@ -12,7 +15,7 @@
     font-family: Helvetica, sans-serif;
     font-size: 12px;
     font-weight: bold;
-    color: #4d08088a;
+    color: #4d08085d;
     height: 100%;
 }
 

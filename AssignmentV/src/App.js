@@ -17,7 +17,7 @@ class App extends React.Component {
 		this.state = {
       showModule: false,
       currentSelectedTab: 1,
-      time: "none"
+      time: "None selected yet!"
     };
 	}
 

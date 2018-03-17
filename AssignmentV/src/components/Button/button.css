@@ -1,6 +1,5 @@
 .btn-wrapper{
     display: block;
-    width: 30px;
     height: 30px;
     border: 2px solid #34618d;
     float: left;
@@ -16,27 +15,31 @@
     font-size: 14px;
     font-weight: bolder;
     color:#fff;
-    line-height: 30px;
     transition:all .5s ease;
     z-index:2;
     position:relative;
     text-decoration: none;
     text-transform: uppercase;
-    padding-bottom: 2px;
+    padding: 0px 5px;
 }
 .btn{
     display: block;
-    width: 30px;
+    padding: 3px;
     height: 30px;
     border: 70px solid #34618d;
     position:absolute;
     transition:all .2s ease;
     z-index:1;
     box-sizing:border-box;
+    padding: 10px;
+    padding-bottom: 20px;
 }
 .btn-wrapper:hover .btn{
     border:0px solid #34618d;
 }
 .btn-wrapper:hover a{
     color:#34618d;
+}
+.btn-wrapper a{
+    text-decoration: none;
 }
