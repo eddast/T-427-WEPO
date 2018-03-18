@@ -18,22 +18,20 @@ class DatePicker extends React.Component{
         return (
             <div>
                 <GlowBox
-                    onClick={()=> this.setState({showPicker: true})}
+                    onClick={()=> this.setState({showPicker: !this.showPicker})}
                     icon='calendar'
                 >
                         <span>{this.state.date}</span>
                 </GlowBox>
-                {
-                  this.state.showPicker===true?
-                  <DatePickerInterface 
-                    onDatePick={(date) =>
-                      { console.log(date)
-                        this.props.onDatePick(date);
+                <DatePickerInterface 
+                  onClose={() => this.setState({showPicker: false})}
+                  locale={this.props.locale}
+                  visible={this.state.showPicker}
+                  onDatePick={(date) =>
+                    { console.log(date)
+                      this.props.onDatePick(date);
                       this.setState({date: date})}}
-                    locale={this.props.locale}
-                  /> :
-                  ''
-                }
+                />
             </div>
         );
     }
