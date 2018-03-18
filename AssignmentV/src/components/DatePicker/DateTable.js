@@ -74,4 +74,5 @@ DateTable.propTypes = {
     onDayPick: propTypes.func.isRequired
 }
 
+
 export default DateTable;
