@@ -1,29 +1,51 @@
-import React from "react";
-// import styles from "./datepicker.css";
+import React from 'react';
+import propTypes from 'prop-types';
+import GlowBox from '../GlowBox/GlowBox';
+import DatePickerInterface from './DatePickerInterface';
+import FontAwesome from "react-fontawesome";
 
-class DatePicker extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.state = {
-      date: null,
-      locale: null
-    };
-  }
+class DatePicker extends React.Component{
 
-  handleClick() {
-    this.setState({ date: "someDate" });
-  }
+    constructor(props, ctx) {
+      super(props,ctx);
+      this.state = {
+        showPicker: false,
+        date: "Pick Date"
+      };
+    }
 
-  render() {
-    return <div>I want to make a date picker here</div>
-  }
-}
+    render() {
+        return (
+            <div>
+                <GlowBox
+                    onClick={()=> this.setState({showPicker: true})}
+                    icon='calendar'
+                >
+                        <span>{this.state.date}</span>
+                </GlowBox>
+                {
+                  this.state.showPicker===true?
+                  <DatePickerInterface 
+                    onDatePick={(date) =>
+                      { console.log(date)
+                        this.props.onDatePick(date);
+                      this.setState({date: date})}}
+                    locale={this.props.locale}
+                  /> :
+                  ''
+                }
+            </div>
+        );
+    }
+};
 
-//In case we want to use this later on
-// DatePicker.propTypes = {
-//   images: PropTypes.array.isRequired,
-//   size: PropTypes.string.isRequired
-// };
+DatePicker.propTypes = {
+    onDatePick: propTypes.func.isRequired,
+    locale: propTypes.string
+};
+
+DatePicker.defaultProps = {
+    locale: 'is-IS'
+};
 
 export default DatePicker;

@@ -1,0 +1,14 @@
+.monthday {
+    padding-left: 40px;
+    color: white;
+    font-weight: bolder;
+    border: green;
+}
+
+.monthdays {
+    background-color: tomato;
+    border-radius: 20px;
+    max-width: 30%;
+    overflow: hidden;
+    word-wrap: break-word
+}

@@ -20,4 +20,8 @@ GlowBox.propTypes = {
     icon: propTypes.string.isRequired
 };
 
+GlowBox.defaultProps = {
+    modal: ''
+};
+
 export default GlowBox
