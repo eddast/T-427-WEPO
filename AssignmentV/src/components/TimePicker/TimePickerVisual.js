@@ -24,39 +24,33 @@ class TimePickerVisual extends React.Component{
     render() {
         let Time = this.extrazero(this.state.hour) + this.state.hour + ':' + this.extrazero(this.state.minutes) + this.state.minutes;
         return (
-            <Modal
-                isOpen={this.props.show}
-                onClose={() => this.props.closePicker(this.state.time+(this.props.format===12?(this.state.am?' AM':' PM'):''), this.state.am)}
-            >
-            <Modal.Title>Pick a Time</Modal.Title>
-            <Modal.Body>
-            <div className={`${styles.wrapper}`}>
-                <span className={`${styles.clockwrapper}`}>
-                    <span className={`${styles.clock}`}>
-                        <Clock hour={this.state.hour} minutes={this.state.minutes} />
+            <div>
+                <div className={`${styles.wrapper}`}>
+                    <span className={`${styles.clockwrapper}`}>
+                        <span className={`${styles.clock}`}>
+                            <Clock hour={this.state.hour} minutes={this.state.minutes} />
+                        </span>
                     </span>
-                </span>
-                <span className={`${styles.timepicker}`}>
-                    <div className={`${styles.controlpanel}`}>
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={() => this.incrementHours()} />
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> {this.setState({minutes: (this.state.minutes+1) % 59})}} />
+                    <span className={`${styles.timepicker}`}>
+                        <div className={`${styles.controlpanel}`}>
+                            <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={() => this.incrementHours()} />
+                            <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-up' onClick={()=> {this.setState({minutes: (this.state.minutes+1) % 59})}} />
+                        </div>
+                            <span className={`${styles.hours}`} onClick={() => this.setState({isInputtingHours: true})}>{this.getHours()}</span>
+                            <span>:</span>
+                            <span className={`${styles.minutes}`} onClick={() => this.setState({isInputtingMinutes: true})}>{this.getMinutes()}</span>
+                            <span onClick={() => this.setState({isInputtingAM: true})} className={`${styles.ampm}`}>{this.getAMIdentifier()}</span>
+                        <div className={`${styles.controlpanel} ${styles.decrement}`}>
+                            <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> this.decrementHours()} />
+                            <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.minutes > 0) this.setState({minutes: (this.state.minutes-1)}); else this.setState({minutes: 59})}} />
+                        </div>
+                    </span>
+                    <div className={`${styles.center}`}>
+                        <Button onClick={() => this.props.closePicker(this.state.time+(this.props.format===12?(this.state.am?' AM':' PM'):''), this.state.am)}>CHOOSE THIS TIME</Button>
                     </div>
-                        <span onClick={() => this.setState({isInputtingHours: true})}>{this.getHours()}</span>
-                        <span>:</span>
-                        <span onClick={() => this.setState({isInputtingMinutes: true})}>{this.getMinutes()}</span>
-                        <span onClick={() => this.setState({isInputtingAM: true})} className={`${styles.ampm}`}>{this.getAMIdentifier()}</span>
-                    <div className={`${styles.controlpanel} ${styles.decrement}`}>
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> this.decrementHours()} />
-                        <FontAwesome className={`${styles.controls}`} aria-hidden='false' name='angle-down' onClick={()=> {if (this.state.minutes > 0) this.setState({minutes: (this.state.minutes-1)}); else this.setState({minutes: 59})}} />
-                    </div>
-                </span>
-                <div className={`${styles.center}`}>
-                    <Button onClick={() => this.props.closePicker(this.state.time+(this.props.format===12?(this.state.am?' AM':' PM'):''), this.state.am)}>Choose</Button>
                 </div>
+                {this.onChangeTime(Time)}
             </div>
-            {this.onChangeTime(Time)}
-            </Modal.Body>
-            </Modal>
         );
     }
 

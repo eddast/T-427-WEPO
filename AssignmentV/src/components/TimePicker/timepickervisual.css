@@ -12,6 +12,7 @@
     margin: auto auto;
     text-align: center;
     letter-spacing: 15px;
+    text-shadow: 2px 2px 60px #0266669f;
 }
 .controlpanel {
     margin: 0px;
@@ -23,10 +24,14 @@
     margin-top: -6%;
 }
 .wrapper {
-    width: 100%;
-    box-shadow: 10px 5px 40px 5px #0000002a;
+    width: 60%;
+    box-shadow: 10px 5px 60px 5px #000000c4;
     position: relative;
-    margin: px;
+    transition: all 0.3s ease-in-out;
+}
+
+.wrapper:after {
+	transition: all 0.3s cubic-bezier(.55, 0, .1, 1) ease-in-out;
 }
 
 .controls {
@@ -49,8 +54,17 @@
     bottom: 0;
     right: 0;
 }
+.ampm,
+.hours,
+.minutes {
+    cursor: pointer;
+    transition: 0.2s ease-in;
+}
 
-.controls:hover {
+.controls:hover 
+.hours:hover,
+.minutes:hover,
+.ampm:hover {
     color: #35313146;
 }
 
@@ -62,9 +76,13 @@
 }
 
 .center {
+    position: relative;
+    display: block;
     width: 100%;
-    margin:5%;
-    margin-left:45%;
+    min-width: 60%;
+    background-color: #08b1db;
+    letter-spacing: 8px;
+    font-size: 20px;
 }
 
 .input {

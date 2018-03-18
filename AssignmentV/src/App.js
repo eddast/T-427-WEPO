@@ -17,7 +17,8 @@ class App extends React.Component {
 		this.state = {
       showModule: false,
       currentSelectedTab: 1,
-      time: "None selected yet!"
+      time: "None selected yet!",
+      date: "No date selected yet!"
     };
 	}
 
@@ -87,12 +88,15 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>8. DatePicker Component Demo</h2>
-          <h3>8. DatePicker with is-IS locale</h3>
-          {this.datePickerTest(date => this.setState({ date }), "is-IS")}
-          <h3>8. DatePicker with en-EN locale</h3>
-          {this.datePickerTest(date => this.setState({ date }), "en-En")}
-          <h3>8. DatePicker with arablic locale</h3>
-          {this.datePickerTest(date => this.setState({ date }), "ar-EG")}
+          <h3>8.1. DatePicker with is-IS locale</h3>
+          {this.datePickerTest(date => this.setState({ date: date}), "is-IS")}
+          <p>Date from datepicker: {this.state.date} </p>
+          <h3>8.2. DatePicker with en-EN locale</h3>
+          {this.datePickerTest(date => this.setState({ date: date }), "en-En")}
+          <p>Date from datepicker: {this.state.date} </p>
+          <h3>8.3. DatePicker with arablic locale</h3>
+          {this.datePickerTest(date => this.setState({ date: date}), "ar-EG")}
+          <p>Date from datepicker: {this.state.date} </p>
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>9. Tabs Component Demo</h2>

@@ -12,20 +12,22 @@ class TimePicker extends React.Component{
     }
 
     render() {
-        const timePickerInterface = <TimePickerVisual
-                                        show={this.state.showPicker}
-                                        closePicker={(time, am)=> {this.props.onTimePick(time); this.setState({showPicker: false, time: time, am: am}) }}
-                                        format={this.props.format}
-                                    />;
         return (
             <div>
                 <GlowBox
-                    onClick={()=> this.setState({showPicker: true})}
+                    onClick={()=> this.setState({showPicker: !this.state.showPicker})}
                     icon='clock-o'
-                    modal= {timePickerInterface}
                 >
                         <span>{this.state.time}</span>
                 </GlowBox>
+                <div>
+                    {this.state.showPicker?
+                    <TimePickerVisual
+                        show={this.state.showPicker}
+                        closePicker={(time, am)=> {this.props.onTimePick(time); this.setState({showPicker: false, time: time, am: am}) }}
+                        format={this.props.format}
+                    />:''}
+                </div>
             </div>
         );
     }
