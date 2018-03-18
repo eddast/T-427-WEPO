@@ -1,8 +1,9 @@
 .monthday {
+    position: relative;
     padding-left: 40px;
     color: white;
     font-weight: bolder;
-    border: green;
+    border: 2px solid green;
 }
 
 .monthdays {
