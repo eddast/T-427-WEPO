@@ -2,7 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 import GlowBox from '../GlowBox/GlowBox';
 import DatePickerInterface from './DatePickerInterface';
-import FontAwesome from "react-fontawesome";
 
 class DatePicker extends React.Component{
 
@@ -18,7 +17,7 @@ class DatePicker extends React.Component{
         return (
             <div>
                 <GlowBox
-                    onClick={()=> this.setState({showPicker: !this.showPicker})}
+                    onClick={()=> this.setState({showPicker: !this.state.showPicker})}
                     icon='calendar'
                 >
                         <span>{this.state.date}</span>
@@ -28,8 +27,7 @@ class DatePicker extends React.Component{
                   locale={this.props.locale}
                   visible={this.state.showPicker}
                   onDatePick={(date) =>
-                    { console.log(date)
-                      this.props.onDatePick(date);
+                    { this.props.onDatePick(date);
                       this.setState({date: date})}}
                 />
             </div>
