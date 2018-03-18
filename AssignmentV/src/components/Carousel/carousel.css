@@ -1,6 +1,3 @@
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:50}
-
 .carousel {
   position: relative;
   display: block;
@@ -17,8 +14,8 @@ body {font-family: Verdana, sans-serif; margin:50}
 }
 
 .carousel-large {
-  height: 620px;
-  width: 1200px;
+  height: 520px;
+  width: 1000px;
 }
 
 .image-small {
@@ -32,12 +29,12 @@ body {font-family: Verdana, sans-serif; margin:50}
 }
 
 .image-large {
-  height: 600px;
-  width: 1200px;
+  height: 500px;
+  width: 1000px;
 }
 
 .arrow{
-  color: rgba(255, 255, 255, 0.726);
+  color: #a7f5ea;
   position: absolute;
   vertical-align: middle;
   top:0;
@@ -45,13 +42,14 @@ body {font-family: Verdana, sans-serif; margin:50}
   margin: auto;
   margin-right: 10px;
   height: 30%;
+  text-shadow: 1px 1px 20px #000;
+  transition: 0.5s;
 }
 
 .arrow:hover{
-  color: rgba(255, 255, 255, 0.322);
-
+  color: #82f7c6;
+  opacity: 0.5;
 }
-
 
 .arrow-left{
   left: 0;
@@ -65,21 +63,21 @@ body {font-family: Verdana, sans-serif; margin:50}
 
 .dot {
   cursor: pointer;
-  height: 15px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
   margin: 0 8px;
-  border: 2px solid rgb(70, 70, 70);
+  border: 3px solid #01ffdd;
   background-color: transparent;
   display: inline-block;
-  transition: background-color 0.6s ease;
+  transition: 0.6s ease;
   position: relative;
 }
 .selectedDot {
-  background-color: rgb(70, 70, 70);
+  background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%);
 }
 
 .dot:hover {
-  background-color: #717171;
+  background-color: #01ff95;
 }
 
 .dots{
@@ -89,10 +87,8 @@ body {font-family: Verdana, sans-serif; margin:50}
 
 /* Fading animation */
 .fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
+  transition: 0.6s ease;
+  box-shadow: 1px 1px 20px #382c2ccb;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; 

@@ -64,7 +64,7 @@ class TimePickerVisual extends React.Component{
         if(this.state.isInputtingHours) {
             return <input
                         type="number"
-                        autofocus
+                        autoFocus
                         className={`${styles.input}`}
                         onChange={(e) => this.setState({hoursInput: e.target.value})}
                         onKeyDown={(e) => e.which===13 ? this.changeHoursValue(e): () => {}}
@@ -77,7 +77,7 @@ class TimePickerVisual extends React.Component{
         if(this.state.isInputtingMinutes) {
             return <input
                         type="number"
-                        autofocus
+                        autoFocus
                         className={`${styles.input}`}
                         onChange={(e) => this.setState({minutesInput: e.target.value})}
                         onKeyDown={(e) => e.which===13 ? this.changeMinutesValue(e): () => {}}
