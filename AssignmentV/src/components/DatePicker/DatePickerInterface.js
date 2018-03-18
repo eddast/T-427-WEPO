@@ -4,9 +4,11 @@ import styles from './datepickerinterface.css';
 import FontAwesome from "react-fontawesome";
 import DateTable from './DateTable';
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];	
-const monthdays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
+/**
+ * Provides a graphic interface prompting user to pick date
+ * Renders feedback table (i.e. which month and year user currently sees)
+ * and the table showing days in whatever month is displayed
+ */
 class DatePickerInterface extends React.Component{
 
     constructor(props, ctx) {
@@ -17,10 +19,10 @@ class DatePickerInterface extends React.Component{
       };
     }
 
-    componentDidMount() {
-        this.updateDateStrings();
-    }
+    // Sets datepicker initially to today's date
+    componentDidMount() { this.updateDateStrings(); }
 
+    // Updates current month string and current year string
     updateDateStrings() {
         this.setState({
             currMonth: String((this.state.date).getMonth()+1),
@@ -28,6 +30,7 @@ class DatePickerInterface extends React.Component{
         });
     }
 
+    // Whenever the date object is changed, user has picked a date
     componentDidUpdate(prevProps, prevState) {
         if(prevState.date !== this.state.date) {
             this.updateDateStrings();
@@ -78,11 +81,11 @@ class DatePickerInterface extends React.Component{
         } else return <div />;
     }
 
+    // Increments month and date updates accordingly
     incrementMonth() {
         if(parseInt(this.state.currMonth, 10) < 12) {
-            this.setState({
-                currMonth: String(parseInt(this.state.currMonth, 10)+1)
-            });
+            this.setState({ currMonth: String(parseInt(this.state.currMonth, 10)+1) });
+        // Special case: increment to next year
         } else {
             this.setState({
                 currMonth: String(1), 
@@ -90,11 +93,12 @@ class DatePickerInterface extends React.Component{
             });
         }
     }
+
+    // Decrements month and date updates accordingly
     decrementMonth() {
         if(parseInt(this.state.currMonth, 10) > 1) {
-            this.setState({
-                currMonth: String(parseInt(this.state.currMonth, 10)-1)
-            });
+            this.setState({ currMonth: String(parseInt(this.state.currMonth, 10)-1) });
+        // Special case: decrement to previous year
         } else {
             this.setState({
                 currMonth: String(12), 
@@ -105,13 +109,24 @@ class DatePickerInterface extends React.Component{
 
 };
 
+// Months and number of days in each month,
+// Both indices in array correspond to month number in a year
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];	
+const monthdays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+// propTypes the interface needs to function
 DatePickerInterface.propTypes = {
+    /* Action to take when user picks a date, provides date string as parameter*/
     onDatePick: propTypes.func.isRequired,
+    /* Action to take when datepicker interface is closed */
     onClose: propTypes.func.isRequired,
+    /* Specifies whether the component should show */
     visible: propTypes.bool.isRequired,
+    /* Locale for date fromat, defaults to is-IS */
     locale: propTypes.string
 };
 
+// Datepickerinterface default propes if none are provied
 DatePickerInterface.defaultProps = {
     locale: 'is-IS'
 };

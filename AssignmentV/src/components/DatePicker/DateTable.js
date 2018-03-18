@@ -7,8 +7,9 @@ import styles from './datetable.css';
  * And on which weekday the first day in month is
  */
 const DateTable = ({daysInMonth, firstWeekdayOfMonth, onDayPick}) => {
+    
+    // Construct table before rendering
     let rows = []
-
     rows = populateWeekdaysTableIdx(rows);
     rows = populateDaysInMonthEntries(rows, daysInMonth, firstWeekdayOfMonth, onDayPick);
 
