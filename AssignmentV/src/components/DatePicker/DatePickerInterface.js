@@ -23,7 +23,6 @@ class DatePickerInterface extends React.Component{
 
     updateDateStrings() {
         this.setState({
-            dateString: String((this.state.date).getDate()) + '.' + String((this.state.date).getMonth()+1) + '.' + String(this.state.date.getFullYear()),
             currMonth: String((this.state.date).getMonth()+1),
             currYear: String(this.state.date.getFullYear())
         });
@@ -33,13 +32,12 @@ class DatePickerInterface extends React.Component{
         if(prevState.date !== this.state.date) {
             this.updateDateStrings();
             this.props.onClose();
-        }
-        if(prevState.dateString !== this.state.dateString) {
-            this.props.onDatePick(this.state.dateString);
+            this.props.onDatePick(this.state.date.toLocaleDateString(this.props.locale));
         }
     }
 
     render() {
+
         const {currYear} = this.state;
         const {currMonth} = this.state;
 

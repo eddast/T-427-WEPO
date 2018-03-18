@@ -87,7 +87,12 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>8. DatePicker Component Demo</h2>
+          <h3>8. DatePicker with is-IS locale</h3>
+          {this.datePickerTest(date => this.setState({ date }), "is-IS")}
+          <h3>8. DatePicker with en-EN locale</h3>
           {this.datePickerTest(date => this.setState({ date }), "en-En")}
+          <h3>8. DatePicker with arablic locale</h3>
+          {this.datePickerTest(date => this.setState({ date }), "ar-EG")}
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>9. Tabs Component Demo</h2>
