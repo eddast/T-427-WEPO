@@ -1,8 +1,11 @@
 .wrapper {
+    position: relative;
+    display: block;
     margin: 0px 30px;
     width: 27%;
     box-shadow: 10px 5px 60px 5px #000000c4;
-	transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    clear: both;
 }
 
 .wrapper:after {
@@ -10,6 +13,58 @@
 	transition: all 0.3s cubic-bezier(.55, 0, .1, 1) ease-in-out;
 }
 
+.monthWrapper {
+    position: relative;
+    min-width: 100%;
+    text-align: center;
+}
+
+.month {
+    position: absolute;
+    min-width: 60%;
+    min-height: 100%;
+    padding-top: 5%;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    margin: 0% 10%;
+}
+
+.increment {
+    float: right;
+}
+
+.decrement {
+    float: left;
+}
+
+.decrement,
+.increment{
+    font-size: 40px;
+    min-height: 20%;
+    cursor: pointer;
+	transition: 0.3s ease-in-out;
+    z-index: 10;
+}
+
+.decrement:hover,
+.increment:hover {
+    background-color: #0000004f;
+    box-shadow: 1px 1px 40px #0000004f;
+    filter: blur(2px);
+    border: 5px solid #00000000;
+}
+
 .feedback {
-    background-color: blue;
+    /* background-color: #673AB7; */
+    background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%);
+    width: 100%;
+    height: 5vw;
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    box-shadow: 1px 1px 20px #683ab7ad;
+    text-shadow: 1px 1px 20px #683ab7c2;
 }

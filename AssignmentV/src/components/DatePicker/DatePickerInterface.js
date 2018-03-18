@@ -48,10 +48,27 @@ class DatePickerInterface extends React.Component{
             return (
                 <div className={`${styles.wrapper}`}>
                     <div className={`${styles.feedback}`}>
-                        <FontAwesome onClick={() => this.decrementMonth()} className={`${styles.icon}`} aria-hidden='false' name='angle-left' />
-                        {months[parseInt(this.state.currMonth,10)-1]}
-                        <FontAwesome onClick={() => this.incrementMonth()}className={`${styles.icon}`} aria-hidden='false' name='angle-right' />
-                        <div>{this.state.currYear}</div>
+                        <div className={`${styles.monthWrapper}`}>
+                            <span className={`${styles.decrement}`}>
+                                <FontAwesome
+                                    onClick={() => this.decrementMonth()}
+                                    aria-hidden='false'
+                                    name='angle-left'
+                                />
+                            </span>
+                            <span className={`${styles.month}`}>
+                                {months[parseInt(this.state.currMonth,10)-1]} 
+                                    &nbsp;
+                                {this.state.currYear}
+                            </span>
+                            <span className={`${styles.increment}`}>
+                                <FontAwesome
+                                    onClick={() => this.incrementMonth()}
+                                    aria-hidden='false'
+                                    name='angle-right'
+                                />
+                            </span>
+                        </div>
                     </div>
                     <DateTable
                         daysInMonth={monthdays[this.state.currMonth-1]}

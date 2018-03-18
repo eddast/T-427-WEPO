@@ -51,7 +51,7 @@ const populateDaysInMonthEntries = (rows, daysInMonth, firstWeekdayOfMonth, onDa
         }
         // Push an empty entry before month 'starts' and after it has 'passed'
         if( i < firstWeekdayOfMonth || daysInMonth < daysIdx ) {
-            monthDays.push(<td className={`${styles.entry}`} key={monthDays.length*rows.length} id={monthDays.length*rows.length}>&nbsp;</td>);
+            monthDays.push(<td key={monthDays.length*rows.length} id={monthDays.length*rows.length}>&nbsp;</td>);
             
         // Otherwise push an actual day entry
         } else {

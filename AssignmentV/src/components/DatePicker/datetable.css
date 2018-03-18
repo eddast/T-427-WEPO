@@ -1,14 +1,30 @@
 .entry {
-    width: 14%;
-    border: 2px solid blue;
+    width: 10%;
+    border-radius: 100px;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s ease-in;
+}
+
+.entry:hover {
+    box-shadow: 1px 1px 80px #01ff95;
+    background-color: #683ab7c7;
+    color: white;
 }
 
 .index {
-    width: 14%;
+    width: 10%;
+    text-align: center;
+    border-bottom: 1px solid #683ab727;
+    background-color: #2e253227;
+    opacity: 0.5;
 }
 
 .table {
     width: 100%;
     height: 20vw;
+    color: #4b4040d0;
+    font-weight: 900;
 }
 
