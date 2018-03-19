@@ -34,7 +34,7 @@
 }
 
 .arrow{
-  color: #a7f5ea;
+  color: white;
   position: absolute;
   vertical-align: middle;
   top:0;
@@ -61,7 +61,7 @@
   margin-right: 10px;
 }
 
-.dot {
+.square {
   cursor: pointer;
   height: 25px;
   width: 25px;
@@ -72,39 +72,26 @@
   transition: 0.6s ease;
   position: relative;
 }
-.selectedDot {
+.selectedSquare {
   background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%);
 }
 
-.dot:hover {
+.square:hover {
   background-color: #01ff95;
+  opacity: 0.6;
 }
 
-.dots{
+.squares{
   text-align: center;
   margin-top: 20px;
 }
 
 /* Fading animation */
-.fade {
-  transition: 0.6s ease;
+.imageContainer {
+  transition: 0.3s ease-in-out;
   box-shadow: 1px 1px 20px #382c2ccb;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; 
   overflow: hidden;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@media only screen and (width: 300px) {
-  .prev, .next,.text {font-size: 11px}
 }
