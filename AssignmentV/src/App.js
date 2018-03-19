@@ -23,6 +23,7 @@ class App extends React.Component {
 	}
 
 	render() {
+    console.log(new Date().toLocaleString('is-IS'));
 		return <div className={`${styles.container}`}>
         <div className={`${styles["container-headings"]}`}>
           <h1>Welcome To the InfinityModules DEMO site</h1>

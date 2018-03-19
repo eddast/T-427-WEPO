@@ -1,12 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import styles from './timepickervisual.css';
+import styles from './timepickerinterface.css';
 import Clock from './Clock';
 import FontAwesome from "react-fontawesome";
-import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 
-class TimePickerVisual extends React.Component{
+class TimePickerInterface extends React.Component{
     constructor(props, ctx) {
         super(props,ctx);
         this.state = {
@@ -22,6 +21,9 @@ class TimePickerVisual extends React.Component{
         }
     }
     render() {
+        
+        if(!this.props.show) { return <div />;}
+
         let Time = this.extrazero(this.state.hour) + this.state.hour + ':' + this.extrazero(this.state.minutes) + this.state.minutes;
         return (
             <div>
@@ -159,14 +161,14 @@ class TimePickerVisual extends React.Component{
     }
 };
 
-TimePickerVisual.propTypes = {
+TimePickerInterface.propTypes = {
     closePicker: propTypes.func.isRequired,
     show: propTypes.bool.isRequired,
     format: propTypes.oneOf([24, 12])
 };
 
-TimePickerVisual.defaultProps = {
+TimePickerInterface.defaultProps = {
     format: 24
 };
 
-export default TimePickerVisual;
+export default TimePickerInterface;

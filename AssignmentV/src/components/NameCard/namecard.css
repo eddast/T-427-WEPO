@@ -15,7 +15,8 @@
 }
 .container:hover {
 	transition: 2s;
-	width: 42%;
+    width: 42%;
+    box-shadow: 1px 1px 60px #01ff95, 1px 1px 40px #01ffdd;
 }
 
 .wrapper {

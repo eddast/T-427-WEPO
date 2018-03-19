@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import TimePickerVisual from "./TimePickerVisual";
+import TimePickerVisual from "./TimePickerInterface";
 import GlowBox from '../GlowBox/GlowBox';
 
 class TimePicker extends React.Component{
@@ -21,12 +21,11 @@ class TimePicker extends React.Component{
                         <span>{this.state.time}</span>
                 </GlowBox>
                 <div>
-                    {this.state.showPicker?
                     <TimePickerVisual
                         show={this.state.showPicker}
                         closePicker={(time, am)=> {this.props.onTimePick(time); this.setState({showPicker: false, time: time, am: am}) }}
                         format={this.props.format}
-                    />:''}
+                    />
                 </div>
             </div>
         );
