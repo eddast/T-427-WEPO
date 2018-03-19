@@ -4,7 +4,12 @@ import styles from './modal.css';
 import Button from '../Button/Button';
 import FontAwesome from 'react-fontawesome';
 
-
+/**
+ * Renders an overlaying 'alert box' or modal
+ * User provides modal body and title as children
+ * and an optional footer
+ * Modal can be closed by top right exit button 
+ */
 const Modal = ({isOpen, onClose, children}) => {
 
         if(!isOpen) return <div />;
@@ -29,15 +34,20 @@ const Modal = ({isOpen, onClose, children}) => {
         );
 };
 
+// Subcomponents of modal
 Modal.Title =  ({ children }) => { return <h1 className={`${styles.title}`}>{children}</h1>;   };
 Modal.Body =    ({ children }) => { return <div className={`${styles.body}`}>{children}</div>;  };
 Modal.Footer =  ({ children }) => { return <div className={`${styles.footer}`}>{children}</div>;    };
 
+// Props modal needs to function
 Modal.propTypes = {
+    /* states whether modal is open - defaults to false*/
     isOpen: PropTypes.bool,
+    /* specifies action when modal is closed */
     onClose: PropTypes.func.isRequired
 };
 
+// Modal default props if not provided
 Modal.defaultProps = {
     isOpen: false
 };

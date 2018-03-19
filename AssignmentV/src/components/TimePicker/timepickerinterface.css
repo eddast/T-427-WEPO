@@ -61,7 +61,7 @@
     transition: 0.2s ease-in;
 }
 
-.controls:hover 
+.controls:hover,
 .hours:hover,
 .minutes:hover,
 .ampm:hover {

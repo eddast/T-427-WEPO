@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './progressbar.css';
 
+/**
+ * Progress bar indicating progess by progress in %
+ * Color specified by state (info, success, danger, warning)
+ * Can be striped and animated (but not animated without being striped)
+ */
 const ProgressBar = ({ progress, state, striped, animated }) => {
     return (
         <div className={`${styles.progressbar} ${styles[`progressbar-${state}`]} `}>
@@ -10,13 +15,19 @@ const ProgressBar = ({ progress, state, striped, animated }) => {
     );
 };
 
+// Props progressbar needs to function
 ProgressBar.propTypes = {
+    /* number 0-100 denoting progress in % */
     progress: PropTypes.number.isRequired,
+    /* state specifying color of progress bar */
     state: PropTypes.oneOf(['info', 'success', 'warning', 'danger']).isRequired,
+    /* specifies whether progress bar is striped - defaults to false */
     striped: PropTypes.bool,
+    /* specifies whether progress bar is animated - defaults to false */
     animated: PropTypes.bool
 };
 
+// Default props if not provided
 ProgressBar.defaultProps = {
     striped: false,
     animated: false

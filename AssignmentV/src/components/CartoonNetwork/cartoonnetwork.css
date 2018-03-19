@@ -15,5 +15,5 @@
 
 .spin {
     transform-origin: center;
-    transform: rotate(1080deg);
+    transform: rotateZ(1080deg);
 }

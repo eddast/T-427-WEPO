@@ -23,7 +23,7 @@ class App extends React.Component {
 	}
 
 	render() {
-    console.log(new Date().toLocaleString('is-IS'));
+
 		return <div className={`${styles.container}`}>
         <div className={`${styles["container-headings"]}`}>
           <h1>Welcome To the InfinityModules DEMO site</h1>
@@ -64,15 +64,15 @@ class App extends React.Component {
           <p> Jared Padalecki is very hot yes </p>
           <div>
             <h3>4.1. Small</h3>
-            {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg","http://7wallpapers.net/wp-content/uploads/1_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "small")}
+            {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg","https://media1.popsugar-assets.com/files/thumbor/SvTqx-9t-SqT1V2Ndezi7UxMzGQ/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2015/08/13/925/n/1922398/0a63aaf8015ce614_jared_padalecki-friday_the_13th-14/i/OhMyGod-Shirtless-Shot.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "small")}
           </div>
           <div>
             <h3>4.2. Medium</h3>
-            {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/1_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "medium")}
+            {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg", "https://media1.popsugar-assets.com/files/thumbor/SvTqx-9t-SqT1V2Ndezi7UxMzGQ/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2015/08/13/925/n/1922398/0a63aaf8015ce614_jared_padalecki-friday_the_13th-14/i/OhMyGod-Shirtless-Shot.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "medium")}
           </div>
           <div>
             <h3>4.3. Large</h3>
-            {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/1_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "large")}
+            {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg", "https://media1.popsugar-assets.com/files/thumbor/SvTqx-9t-SqT1V2Ndezi7UxMzGQ/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2015/08/13/925/n/1922398/0a63aaf8015ce614_jared_padalecki-friday_the_13th-14/i/OhMyGod-Shirtless-Shot.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "large")}
           </div>  
         </div>
         <div className={`${styles["container-item"]}`}>
