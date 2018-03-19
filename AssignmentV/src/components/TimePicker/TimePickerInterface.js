@@ -31,7 +31,7 @@ class TimePickerInterface extends React.Component{
         
         if(!this.props.show) { return <div />;}
 
-        let Time = this.extrazero(this.state.hour) + this.state.hour + ':' + this.extrazero(this.state.minutes) + this.state.minutes;
+        const time = this.extrazero(this.state.hour) + this.state.hour + ':' + this.extrazero(this.state.minutes) + this.state.minutes;
         return (
             <div>
                 <div className={`${styles.wrapper}`}>
@@ -55,10 +55,9 @@ class TimePickerInterface extends React.Component{
                         </div>
                     </span>
                     <div className={`${styles.center}`}>
-                        <Button onClick={() => this.props.closePicker(this.state.time+(this.props.format===12?(this.state.am?' AM':' PM'):''), this.state.am)}>CHOOSE THIS TIME</Button>
+                        <Button onClick={() => this.props.closePicker(time+(this.props.format===12?(this.state.am?' AM':' PM'):''), this.state.am)}>CHOOSE THIS TIME</Button>
                     </div>
                 </div>
-                {this.onChangeTime(Time)}
             </div>
         );
     }
@@ -182,11 +181,6 @@ class TimePickerInterface extends React.Component{
     extrazero(unit) {
         if (unit < 10) { return '0'; }
         else return '';
-    }
-
-    // Changes time
-    onChangeTime(time) {
-        this.state.time = time;
     }
 };
 
