@@ -10,7 +10,7 @@ const Tabs = ({theme, layout, onSelect, currentSelectedTab, children}) => {
     return (
         <div className={`${styles.tabbar}`}>
             <div className={`${layout==='vertical' && styles.vertical}`}>
-                {children.map((tab) => (
+                {React.Children.map(children, (tab) => (
                     <span
                         className={`${styles[`tabs-${theme}`]} ${currentSelectedTab===tab.props.selectionKey && styles[`selected-${theme}`]} ${styles[`item-${layout}`]}`}
                         key={tab.props.selectionKey}

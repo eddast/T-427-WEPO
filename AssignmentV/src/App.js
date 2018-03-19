@@ -9,6 +9,8 @@ import DatePicker from './components/DatePicker/DatePicker';
 import Tabs from './components/Tabs/Tabs';
 import Tab from './components/Tabs/Tab';
 import CartoonNetworkSpinner from './components/CartoonNetwork/CartoonNetwork';
+import Row from './components/GridSystem/Row/Row';
+import Col from './components/GridSystem/Col/Col';
 
 class App extends React.Component {
 
@@ -77,6 +79,26 @@ class App extends React.Component {
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>
+          <Row>
+            <Col size={10}>IM SIZE TEN</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+          </Row>
+          <Row>
+              <Col size={3}>IM SIZE THREE</Col>
+              <Col size={3}>IM SIZE THREE</Col>
+              <Col size={3}>IM SIZE THREE</Col>
+              <Col size={3}>IM SIZE THREE</Col>
+          </Row>
+          <Row>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col> 
+          </Row>
+          {/* OVERFLOW!! 2 cols should go to next row*/}
+          <Row>
+              <Col size={3}  style={{ backgroundColor: 'blue' }}>IM SIZE THREE</Col>
+              <Col size={5}>IM SIZE FIVE</Col>
+              <Col size={6}>IM SIZE SIX, I SHOULD OVERFLOW</Col>
+          </Row>
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>

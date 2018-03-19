@@ -13,7 +13,7 @@ class TimePicker extends React.Component{
     constructor(props, ctx) {
         super(props,ctx);
         this.state = {
-            time: this.props.format==24?'00:00':'12:00',
+            time: this.props.format===24?'00:00':'12:00',
             showPicker: false,
             am: true
         };

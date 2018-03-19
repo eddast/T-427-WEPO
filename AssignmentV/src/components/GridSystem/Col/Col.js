@@ -1,27 +1,17 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import styles from "./col.css";
 
-class Col extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            size: 0
-        };
-    };
-
-    render () {
-        var size;
-        if (this.props.size > 0) {  
-            size = this.props.size;
-        }
-        else{
-            size = 1;
-        }
-
-        var setWidth = 1000/12 * size;
-        return <div className={`${styles.column}`} style={{ width: setWidth }} />;
-    }
+const Col = ({ size, children }) => {
+    const colWidth = 100/12 * size + '%';
+    return <span className={`${styles.column}`} style={{ width: colWidth }}>{children}</span>;
 }
+
+Col.propTypes = {
+    size: (props, propName) => {
+        const prop = props[propName];
+        if (prop >= 1 && prop <= 12) { return; }
+        return new Error('Column size should be between 1 and 12');
+    }
+};
 
 export default Col;
