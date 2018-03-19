@@ -46,4 +46,5 @@ Tabs.defaultProps = {
     layout: 'horizontal'
 };
 
+
 export default Tabs;
