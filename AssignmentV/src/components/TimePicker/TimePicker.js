@@ -1,8 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import TimePickerVisual from "./TimePickerInterface";
 import GlowBox from '../GlowBox/GlowBox';
+import TimePickerInterface from './TimePickerInterface';
 
+/**
+ * Contains a pseudo-input box (GlowBox component) to show user-inputted time
+ * Once glowbox is clicked, the time picker interface component appears, prompting
+ * user to choose his or her time. Can either take 12H form or military time form via prop 'format'
+ */
 class TimePicker extends React.Component{
 
     constructor(props, ctx) {
@@ -21,7 +26,7 @@ class TimePicker extends React.Component{
                         <span>{this.state.time}</span>
                 </GlowBox>
                 <div>
-                    <TimePickerVisual
+                    <TimePickerInterface
                         show={this.state.showPicker}
                         closePicker={(time, am)=> {this.props.onTimePick(time); this.setState({showPicker: false, time: time, am: am}) }}
                         format={this.props.format}
@@ -33,13 +38,18 @@ class TimePicker extends React.Component{
 
 };
 
+// props timepicker needs to function
 TimePicker.propTypes = {
+    /* Action taken when user inputs time, takes time as parameter */
     onTimePick: propTypes.func.isRequired,
+    /* format of timepicker; either military time or 12H format */
     format: propTypes.oneOf([24, 12])
 };
 
+// Default props if none are provided
 TimePicker.defaultProps = {
     format: 24
 };
 
-export default TimePicker
+
+export default TimePicker;
