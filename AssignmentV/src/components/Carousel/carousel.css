@@ -89,7 +89,7 @@
 /* Fading animation */
 .imageContainer {
   transition: 0.3s ease-in-out;
-  box-shadow: 1px 1px 20px #382c2ccb;
+  box-shadow: 1px 1px 40px #1b1818ea;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; 

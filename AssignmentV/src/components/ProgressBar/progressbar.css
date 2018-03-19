@@ -1,15 +1,15 @@
 .progressbar {
     width: 30%;
-    height: 5vh;
-    background-color: #817a7a57;
+    height: 5.5vh;
+    background-color: #b1a6a621;
     overflow: hidden;
     line-height: 5vh;
     border-radius: 10px;
     border-color: #31383556;
-    box-shadow: 1px 1px 40px #2b2323a8;
+    /* box-shadow: 1px 1px 30px #00000017; */
     outline: 0 none;
     margin: 10px;
-    border: 2px solid #808080b7;
+    border: 2px solid #746d6d44;
 }
 
 .progress {
@@ -22,10 +22,11 @@
     text-shadow: 10px 5px 60px #000000;
     border-radius: 10px;
     letter-spacing: 2px;
-    padding-right: 2%;
+    padding-right: 1%;
+    border: 2px dashed #ffffff4d;
 }
 
-.progress-info       { background-color: #2a6eb3;  }
+.progress-info       { background-color: #0383d8;  }
 .progress-success    { background-color: #4CAF50; }
 .progress-warning    { background-color: #FFC107; }
 .progress-danger     { background-color: #F44336; }
