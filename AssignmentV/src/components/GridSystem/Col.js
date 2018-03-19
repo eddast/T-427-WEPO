@@ -1,9 +1,8 @@
 import React from "react";
-import styles from "./col.css";
 
 const Col = ({ size, children }) => {
     const colWidth = 100/12 * size + '%';
-    return <span className={`${styles.column}`} style={{ width: colWidth }}>{children}</span>;
+    return <span style={{ width: colWidth, minHeight: '100%' }}>{children}</span>;
 }
 
 Col.propTypes = {
