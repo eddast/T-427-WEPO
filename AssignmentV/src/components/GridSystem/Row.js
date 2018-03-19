@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./row.css";
-
+import PropTypes from 'prop-types';
 /**
  *  Row component with bootstrap-like row behaviour
  *  Has Col components as children 
@@ -47,6 +47,11 @@ const formatOverflow = ( children ) => {
 
   return rows;
 }
+
+// Should contain children!
+Row.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
   
 export default Row;

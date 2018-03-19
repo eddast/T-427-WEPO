@@ -18,7 +18,11 @@ const ProgressBar = ({ progress, state, striped, animated }) => {
 // Props progressbar needs to function
 ProgressBar.propTypes = {
     /* number 0-100 denoting progress in % */
-    progress: PropTypes.number.isRequired,
+    progress: (props, propName) => {
+        const prop = props[propName];
+        if (prop >= 0 && prop <= 100) { return; }
+        return new Error('Progress should be between 0 and 100');
+    },
     /* state specifying color of progress bar */
     state: PropTypes.oneOf(['info', 'success', 'warning', 'danger']).isRequired,
     /* specifies whether progress bar is striped - defaults to false */

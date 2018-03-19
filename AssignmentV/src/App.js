@@ -45,7 +45,6 @@ class App extends React.Component {
           <h3>2.1. Striped ProgressBar</h3>
           {this.testProgressBar(50, "info", false, true)}
           <h3>2.2. Animated ProgressBar</h3>
-          <p />
           {this.testProgressBar(50, "info", true, true)}
           <h3>2.3. Different Progresses ProgressBar</h3>
           {this.testProgressBar(10, "info", false, false)}
@@ -80,34 +79,54 @@ class App extends React.Component {
         <div className={`${styles["container-item"]}`}>
           <h2>5-6.Rows and Cols Components Demo</h2>
           <Row>
-            <Col size={10}>IM SIZE TEN</Col>
             <Col size={2}>IM SIZE TWO</Col>
-          {/* </Row> */}
-          {/* <Row> */}
-              <Col size={3}>IM SIZE THREE</Col>
-              <Col size={3}>IM SIZE THREE</Col>
-              <Col size={3}>IM SIZE THREE</Col>
-              <Col size={3}>IM SIZE THREE</Col>
-          {/* </Row> */}
-          {/* OVERFLOW!! 2 cols should go to next row*/}
-          {/* <Row> */}
-              <Col size={3}>IM SIZE THREE</Col>
-              <Col size={5}>IM SIZE FIVE</Col>
-              <Col size={6}>IM SIZE SIX, I SHOULD OVERFLOW</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={4}>IM SIZE FOUR</Col>
+            <Col size={3}>IM SIZE THREE</Col>
+            <Col size={1}>IM SIZE ONE</Col>
           </Row>
           <Row>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
+              <Col size={3}>
+                <span> I AM SIZE THREE </span>
+                <ul>
+                  <li> I AM COL THAT'S A LOT HIGHER THAN THE OTHERS </li>
+                  <li> HELLO THERE </li>
+                  <li> LULS </li>
+                </ul>
+              </Col>
+              <Col size={3}>IM SIZE THREE</Col>
+              <Col size={3}>IM SIZE THREE</Col>
+              <Col size={3}>IM A COL OF SIZE THREE THATS ONE VERY FUCKING LONG LINE I REALLY HOPE THE OVERFLOW WILL APPEAR IN THE NEXT LINE AS IT SHOULD HEHE.. YAY I DO</Col>
           </Row>
-          <Row />
+          {/* OVERFLOW!! 2 cols should go to next row*/}
+          <Row>
+              <Col size={3}>IM SIZE THREE</Col>
+              <Col size={5}>IM SIZE FIVE</Col>
+              <Col size={6}>IM SIZE SIX, I SHOULD OVERFLOW! YAY I FUCKIN OVERFLOWED!!</Col>
+          </Row>
+          <Row>
+            <Col size={2}><h3>IM SIZE TWO</h3></Col>
+            <Col size={2}><p>IM SIZE TWO</p></Col>
+            <Col size={2}><p>IM SIZE TWO</p></Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}><h3>IM SIZE TWO, SHOULD OVERFLOW NOW</h3></Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO, SHOULD OVERFLOW NOW</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO</Col>
+            <Col size={2}>IM SIZE TWO, SHOULD OVERFLOW NOW</Col>
+          </Row>
         </div>
         <div className={`${styles["container-item"]}`}>
-          <h2>5-6.Rows and Cols Components Demo</h2>
         </div>
         <div className={`${styles["container-item"]}`}>
           <h2>7. TimePicker Component Demo</h2>
