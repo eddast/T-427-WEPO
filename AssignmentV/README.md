@@ -253,6 +253,45 @@ __Result:__
 
 ![alt text](https://image.ibb.co/nn120H/Time_Picker_Ex.png "TimePicker Example")
 
+### DatePicker
+The DatePicker component poses as an input box which when clicked expands into a date picker interface, i.e. calendar, prompting user to choose a date. Once user clicks a day in calendar, the input box shows user's selected date.
+ 
+* __onDatePick__(Required!): Function. Specifies what should happen when a date has been picked. Takes in date as string parameter.
+* __locale__: String. Specifies in which locale the time should be in, e.g. 'is-IS', 'en-EN'. Defaults to 'is-IS' (Icelandic Locale) if none is provided.
+
+### DatePicker locale differences
+
+The following demonstrates the effect locale has on return type of DatePicker component string:
+
+__Locale en-EN:__
+
+
+![alt text](https://image.ibb.co/m7cT7x/Localeen_En.png "DatePicker English Locale")
+
+__Locale ar-EG:-
+
+![alt text](https://image.ibb.co/h9yCZc/Localear_Ar_copy.png "DatePicker Arabic Locale")
+
+### DatePicker example usage
+
+__JSX:__
+
+```html
+import { DatePicker } from 'super-infinity-modules';
+
+<DatePicker
+        onDatePick={date => this.setState({date: date})}
+        locale='en-EN'
+/>
+<p>Date from datepicker: {this.state.date} </p>
+```
+
+__Result:__
+
+
+![alt text](https://image.ibb.co/m7cT7x/Localeen_En.png "DatePicker English Locale")
+
+
 ### Tabs and Tab Components
 The Tabs component is a way to display a selection menu in a very easy manner. It can be used to seperate different content into seperate panes, making only one tab visible at a time. The Tabs component takes in the following props:
 
