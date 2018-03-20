@@ -253,10 +253,74 @@ __Result:__
 
 ![alt text](https://image.ibb.co/nn120H/Time_Picker_Ex.png "TimePicker Example")
 
+### Tabs and Tab Components
+The Tabs component is a way to display a selection menu in a very easy manner. It can be used to seperate different content into seperate panes, making only one tab visible at a time. The Tabs component takes in the following props:
+
+* __theme__: String, either 'light' or 'dark'. Denotes which theme the tab bar should conform to. Defaults to 'light' if none is provided.
+* __layout__: String, either 'horizontal' or 'vertical'. Denotes which way the tabs should render.
+* __onSelect__(Required!): Function. Specifies what should happen when tabs are clicked on.
+* __currentSelectedTab__(Required!): Number. Specifies what tab is selected when the component renders.
+
+The Tab component is a child of the Tabs component . A Tabs component can include any number of Tab components. The Tab component takes in the following props:
+
+* __selectionKey__(Required!): Number. A unique key that differentiates one tab from another. Must be unique between tabs!
+* __title__(Required!): String. The title of the tab. Is displayed in the tab header.
+
+### Tabs Theme and Tab Orientation
+
+The following demonstrates the differences of 'light' and 'dark' themes of Tabs component:
+
+![alt text](https://image.ibb.co/c0PGSx/tabslighttheme.png "Tabs Light")
+![alt text](https://image.ibb.co/c7aefH/tabsdarktheme.png "Tabs Dark")
+
+The following demonstrates a 'vertical' Tabs component:
+
+![alt text](https://image.ibb.co/dxjQnx/tabsvertical.png "Tabs Vertical")
+
+
+### Tabs example usage
+
+__JSX:__
+
+```html
+import { Tabs, Tab } from 'super-infinity-modules';
+
+<Tabs
+        theme={'light'}
+        layout={'horizontal'}
+        onSelect={newTab => this.setState({currentSelectedTab: newTab})}
+        currentSelectedTab={1} >
+        <Tab selectionKey={1} title={"Edda"}>
+          <form action="/action_page.php">
+            First name:
+            <input type="text" name="firstname" placeholder="Edda" />
+            Last name:
+            <input type="text" name="lastname" placeholder="Steinunn" />
+          </form> 
+        </Tab>
+        <Tab selectionKey={2} title={"Darri"}>
+          <h3>Darri er</h3>
+          <ol>
+            <li>88% Coffee</li>
+            <li>11% Beard</li>
+            <li>1% Tattoos</li>
+          </ol> 
+        </Tab>
+        <Tab selectionKey={3} title={"Stulli"}>
+          <h2>Stulli</h2>
+          <h3>Stulli</h3>
+          <p>Stulli</p>
+        </Tab>
+      </Tabs> 
+```
+
+__Result:__
+
+![alt text](https://image.ibb.co/c0PGSx/tabslighttheme.png "Tabs Example")
 
 ### CartoonNetworkSpinner
 
-The CartoonNetworkSpinner component includes a spinner including your favorite characters from Cartoon Network. The CartoonNetworkSpinner takes in the following props:
+The CartoonNetworkSpinner component includes a spinner including your favorite characters from Cartoon Network. The component displays one character at a time, then spins in a washing machine effect before changing to the next character. The CartoonNetworkSpinner takes in the following props:
 
 * __interval__: Number. Denotes number of seconds that the spinner should wait before changing displayed character. The value defaults to 3 if not provided.
 
