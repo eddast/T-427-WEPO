@@ -41,7 +41,7 @@ const populateDaysInMonthEntries = (rows, daysInMonth, firstWeekdayOfMonth, onDa
 
     // Get size of table, day index and populate array
     const maxMonthSize = 31; const numberOfWeekdays = 7;
-    const size = maxMonthSize + numberOfWeekdays;
+    const size = maxMonthSize + numberOfWeekdays + 7;
     let monthDays = []; let daysIdx = 1;
 
     for (let i = 0; i < size; i++) {

@@ -72,7 +72,7 @@ class DatePickerInterface extends React.Component{
                         </div>
                     </div>
                     <DateTable
-                        daysInMonth={monthdays[this.state.currMonth-1]}
+                        daysInMonth={this.getMonthDays(this.state.currMonth, this.state.currYear)}
                         firstWeekdayOfMonth={firstDayInMonthWeekday}
                         onDayPick={(e) => this.setState({date: new Date(parseInt(currYear, 10), parseInt(currMonth,10)-1, parseInt(e.target.innerHTML, 10))})}
                     />
@@ -91,6 +91,30 @@ class DatePickerInterface extends React.Component{
                 currMonth: String(1), 
                 currYear: String(parseInt(this.state.currYear, 10)+1)
             });
+        }
+    }
+
+    // Gets days in each month
+    getMonthDays(m, year) {
+        const month = parseInt(m, 10);
+        if(month === 2 && this.isLeapYear(year)) {
+            return 29;
+        } else {
+            return monthdays[this.state.currMonth-1];
+        }
+    }
+
+    // Checks whether year is leap year
+    isLeapYear(y) {
+        const year = parseInt(y, 10);
+        if (year%4 === 0) {
+            if (year%100 === 0) {
+                return year%400 === 0;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
         }
     }
 
