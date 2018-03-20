@@ -135,3 +135,36 @@ __Result:__
 
 ![alt text](https://image.ibb.co/gYUuEc/Screen_Shot_2018_03_20_at_19_15_30.png "NameCard")
 
+
+### Carousel
+
+The Carousel component displays specified images in a slideshow that can be navigated. It's size can be manipulated. It takes in as props:
+
+* __images__(Required!): Array of Strings. URL to images to be displayed in carousel.
+* __size__: String, either 'small', 'medium' or 'large'. Determines the size of carousel. Defaults to medium if none is provided.
+
+#### Carousel Navigation
+The Carousel can be navigated either by the arrows the carousel provides or by the squares appearing at the bottom. These squares essentially correspond to image array indices. The following demonstrates both ways of navigating the carousel:
+
+![alt text](https://image.ibb.co/facQLH/arrownavigation.png "Carousel Navigation via Arrows")
+
+![alt text](https://image.ibb.co/dtmKfH/squarenavigation.png "Carousel Navigation via Squares")
+
+#### Carousel Example Usage: 
+__JSX:__
+
+
+```html
+import { Carousel } from 'super-infinity-modules';
+
+<Carousel 
+	images={["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg","https://media1.popsugar assets.com/files/thumbor/SvTqx-9t-SqT1V2Ndezi7UxMzGQ/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2015/08/13/925/n/1922398/0a63aaf8015ce614_jared_padalecki-friday_the_13th-14/i/OhMyGod-Shirtless-Shot.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"]}
+	size="small"
+/>
+
+```
+
+__Result:__
+
+![alt text](https://image.ibb.co/mxQUfH/examplecarousel.png "Example Carousel")
+
