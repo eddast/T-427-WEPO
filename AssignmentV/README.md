@@ -168,3 +168,24 @@ __Result:__
 
 ![alt text](https://image.ibb.co/mxQUfH/examplecarousel.png "Example Carousel")
 
+### Row and Col
+
+The rows and col components correspond to a gridsystem very similar to the bootstrap grid system. The row component takes in col components and children and the col component takes in the following prop
+
+* __size__(Required!) Number in the range of 0-12. An error is raised if number is invalid and not in the range. Corresponds to column size. 12 is a full row, 6 is a half-row, etc.
+
+## Row with Multiple Col component
+
+Rows can contain multiple columns. The following demonstrates a row with multiple columns of various sizes:
+
+![alt text](https://image.ibb.co/cq4KEc/SimleEx.png "Simple Example Grid System")
+
+## Rows' height adjusts with Col component height
+
+Rows' height are automatically adjusted by the Col height and corresponds to the Row's highest Col. The following demonstrates a row with multiple columns which vary in height:
+
+![alt text](https://image.ibb.co/fQMzEc/HeightEx.png "Height Example Grid System")
+
+## Overflowing Col Components in a Row
+When the sum of Col component's size prop in a single Row exceed 12, the Col that exceeded 12 is moved to the next row below. The following demonstrates such overflow with component of size 3,5 and 6. Since 3+5+6 = 14, the last Col, Col of size 6 overflows to a new row below:
+![alt text](https://image.ibb.co/bQOqLH/Overflow_Ex.png "Overflow Example Grid System")
