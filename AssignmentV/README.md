@@ -88,10 +88,12 @@ As stated, the state prop changes progress bar colors. The following demonstrate
 
 ![alt text](https://image.ibb.co/dbTUEc/different_states.png "Progress Bar different states")
 
-#### Progress Bar Example Usage: 
+#### ProgressBar Example Usage: 
 __JSX:__
 
 ```html
+import { ProgressBar } from 'super-infinity-modules';
+
 <ProgressBar 
 	progress={50}
 	animated={true}
@@ -104,3 +106,32 @@ __JSX:__
 __Result:__
 
 ![alt text](https://image.ibb.co/grv9Ec/striped.png "Striped Progress Bar")
+
+### NameCard
+
+The NameCard component displays a name card for user given name, email, telephone and imageURL. It takes in as props (all of which are required):
+
+* __name__(Required!): String. name of cardholder.
+* __email__(Required!): String. email of cardholder.
+* __telephone__(Required!): String. telephone of cardholder.
+* __imageUrl__(Required!): String. URL for cardholder profile image to be displayed on card.
+
+#### NameCard Example Usage: 
+__JSX:__
+
+```html
+import { NameCard } from 'super-infinity-modules';
+
+<NameCard
+	name="Mojo Jojo"
+	email="ilovebananas@thebads.com"
+	telephone="+666-777-888"
+	imageUrl="https://yt3.ggpht.com/a-/AJLlDp0Fqzwoio4JgrqFLkb53ZumHHCfm5jYTuDTyw=s900-mo-c-c0xffffffff-rj-k-no"
+/>
+
+```
+
+__Result:__
+
+![alt text](https://image.ibb.co/gYUuEc/Screen_Shot_2018_03_20_at_19_15_30.png "NameCard")
+
