@@ -189,3 +189,66 @@ Rows' height are automatically adjusted by the Col height and corresponds to the
 ## Overflowing Col Components in a Row
 When the sum of Col component's size prop in a single Row exceed 12, the Col that exceeded 12 is moved to the next row below. The following demonstrates such overflow with component of size 3,5 and 6. Since 3+5+6 = 14, the last Col, Col of size 6 overflows to a new row below:
 ![alt text](https://image.ibb.co/bQOqLH/Overflow_Ex.png "Overflow Example Grid System")
+
+#### Row and Col Example Usage: 
+
+__JSX:__
+
+```html
+import { Row, Col } from 'super-infinity-modules';
+
+<Row>
+	<Col size={2}>IM SIZE TWO</Col>
+	<Col size={2}>IM SIZE TWO</Col>
+	<Col size={4}>IM SIZE FOUR</Col>
+	<Col size={3}>IM SIZE THREE</Col>
+	<Col size={1}>IM SIZE ONE</Col>
+</Row>
+
+```
+
+__Result:__
+
+![alt text](https://image.ibb.co/cq4KEc/SimleEx.png "Simple Example Grid System")
+
+### TimePicker
+The TimePicker component poses as an input box which when clicked expands into an time picker interface with a interactive clock showing user which time he has picked. Hours and minutes can be altered both by clicking them (in which case an input box appears, prompting user to input an hour or minute) or by using the arrows above the hours or minutes to increment and decrement them. The TimePicker can either take the form of a military time picker (24HRS) or 12H time picker (which then provides AM/PM identifier). The TimePicker component takes in as props:
+
+* __format__: Number, either 12 or 24. Determines whether time picker shows military time or 12H with AM/PM identifier. Defaults to 24 (military time).
+* __onTimePick__ (Required!): Actions taken when user picks a time. Takes in time string as parameter.
+
+
+### Using the TimePicker
+
+The following shows a 24HRS format TimePicker to demonstrate how user can pick a time, both by using the arrow to increment his time and by clicking the time and using an input box to change it:
+
+__Military Time TimePicker:__
+
+![alt text](https://image.ibb.co/c1N9fH/Time1.png "TimePicker Expand From Input Box")
+
+![alt text](https://image.ibb.co/drk6Sx/Time2.png "TimePicker Increment With Arrows")
+
+![alt text](https://image.ibb.co/jpnaLH/Time3.png "TimePicker Change With Input Box")
+
+__12H AM/PM TimePicker:__
+
+![alt text](https://image.ibb.co/fOXmSx/Time2_copy_2.png "TimePicker Change AM/PM")
+
+#### TimePicker Usage: 
+
+__JSX:__
+
+```html
+import { TimePicker } from 'super-infinity-modules';
+
+<TimePicker
+	onTimePick={time => this.setState({ time: time }}
+	format={24}
+/>
+<p>Time from timepicker: {this.state.time}</p>
+
+```
+
+__Result:__
+
+![alt text](https://image.ibb.co/nn120H/Time_Picker_Ex.png "TimePicker Example")
