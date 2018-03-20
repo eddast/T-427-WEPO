@@ -252,3 +252,24 @@ import { TimePicker } from 'super-infinity-modules';
 __Result:__
 
 ![alt text](https://image.ibb.co/nn120H/Time_Picker_Ex.png "TimePicker Example")
+
+
+### CartoonNetworkSpinner
+
+The CartoonNetworkSpinner component includes a spinner including your favorite characters from Cartoon Network. The CartoonNetworkSpinner takes in the following props:
+
+* __interval__: Number. Denotes number of seconds that the spinner should wait before changing displayed character. The value defaults to 3 if not provided.
+
+### CartoonNetworkSpinner example usage
+
+__JSX:__
+
+```html
+import { CartoonNetworkSpinner } from 'super-infinity-modules';
+
+<CartoonNetworkSpinner interval={2} />
+```
+
+__Result:__
+
+![alt text](https://image.ibb.co/gteSZc/spinner.png "CartoonNetworkSpinner Example")
