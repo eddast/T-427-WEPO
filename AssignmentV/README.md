@@ -53,6 +53,7 @@ import { Modal } from 'super-infinity-modules';
 </Modal>
 ```
 __Result:__
+
 ![alt text](https://image.ibb.co/fdBDqH/Modal.png "Modal Example")
 
 ### ProgressBar
@@ -66,15 +67,17 @@ The progress bar visually shows user the progress of an event. It takes in as pr
 The following demonstrates how setting the striped prop to true for a progress bar changes it's appearance:
 
 __Striped prop true__
+
 ![alt text](https://image.ibb.co/grv9Ec/striped.png "Striped Progress Bar")
 
 __Striped prop false__
+
 ![alt text](https://image.ibb.co/jBmufH/not_striped.png "Stripeless Progress Bar")
 
 If animated, the stripes move forward infinitely and linearily. __NOTE HOWEVER__ that the animated props has no effect if the striped prop is set to false. The animation depends solely on the progress bar being striped.
 
 #### the Progress Bar Progress Prop
-The following demonstrates various percentages of progress for a progres bar:
+The following demonstrates various percentages of progress for a progress bar:
 
 ![alt text](https://image.ibb.co/bBqbuc/different_progress.png "Progress Bar different progresses")
 
@@ -97,5 +100,7 @@ __JSX:__
 />
 
 ```
+
 __Result:__
+
 ![alt text](https://image.ibb.co/grv9Ec/striped.png "Striped Progress Bar")
