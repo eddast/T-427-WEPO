@@ -36,6 +36,8 @@ The following shows a button that shows the Modal component. The modal component
 __JSX:__
 
 ```html
+import { Modal } from 'super-infinity-modules';
+
 <button onClick={() => this.setState({showModule: true})}>Show Modal</button>
 <Modal
   isOpen={this.state.showModule}
@@ -46,9 +48,54 @@ __JSX:__
         <p>Well hello, I am the modal body</p>
         <p>I don't need to be text, can also be html elements, look:</p>
         <input type="text" placeholder="pretty cool, huh!"/>
-		</Modal.Body>
-		<Modal.Footer>This is the footer of the Modal</Modal.Footer>
+    </Modal.Body>
+    <Modal.Footer>This is the footer of the Modal</Modal.Footer>
 </Modal>
 ```
 __Result:__
 ![alt text](https://image.ibb.co/fdBDqH/Modal.png "Modal Example")
+
+### ProgressBar
+The progress bar visually shows user the progress of an event. It takes in as props the following values:
+* __progress__(Required!) Number in the range of 0-100. An error is raised if this prop is invalid, i.e. not a number or not within the given range. This value specifies in percentage the progress the progress bar shows.
+* __state__ (Required!): A string that's either 'info', 'success', 'warning' or 'danger'. Determines the progress bar color.
+* __striped__: Boolean. Determines whether bar is striped. This value defaults to false if this prop is not provided.
+* __animated__: Boolean. Determines whether bar is animate. This value defaults to false if this prop is not provided. __NOTE HOWEVER__ that this prop has no effect if the striped prop is false. Animation is based solely on progress bar stripes.
+
+#### the Progress Bar Striped and Animated Props
+The following demonstrates how setting the striped prop to true for a progress bar changes it's appearance:
+
+__Striped prop true__
+![alt text](https://image.ibb.co/grv9Ec/striped.png "Striped Progress Bar")
+
+__Striped prop false__
+![alt text](https://image.ibb.co/jBmufH/not_striped.png "Stripeless Progress Bar")
+
+If animated, the stripes move forward infinitely and linearily. __NOTE HOWEVER__ that the animated props has no effect if the striped prop is set to false. The animation depends solely on the progress bar being striped.
+
+#### the Progress Bar Progress Prop
+The following demonstrates various percentages of progress for a progres bar:
+
+![alt text](https://image.ibb.co/bBqbuc/different_progress.png "Progress Bar different progresses")
+
+The progress is the % of the progress bar width as whole.
+
+#### the Progress Bar State Prop
+As stated, the state prop changes progress bar colors. The following demonstrates how the state prop varies by which prop user gives it. In order of appearence: 'info', 'success', 'warning' and last 'danger.
+
+![alt text](https://image.ibb.co/dbTUEc/different_states.png "Progress Bar different states")
+
+#### Progress Bar Example Usage: 
+__JSX:__
+
+```html
+<ProgressBar 
+	progress={50}
+	animated={true}
+	striped={true}
+	state='info'
+/>
+
+```
+__Result:__
+![alt text](https://image.ibb.co/grv9Ec/striped.png "Striped Progress Bar")
