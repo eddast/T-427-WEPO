@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './basicstyle.css';
-import Modal from'./components/Modal/Modal';
-import ProgressBar from'./components/ProgressBar/ProgressBar';
-import NameCard from './components/NameCard/NameCard';
-import Carousel from './components/Carousel/Carousel';
-import TimePicker from './components/TimePicker/TimePicker';
-import DatePicker from './components/DatePicker/DatePicker';
-import Tabs from './components/Tabs/Tabs';
-import Tab from './components/Tabs/Tab';
-import CartoonNetworkSpinner from './components/CartoonNetwork/CartoonNetwork';
-import Row from './components/GridSystem/Row';
-import Col from './components/GridSystem/Col';
+import Modal from'./components/Modal/index';
+import ProgressBar from'./components/ProgressBar/index';
+import NameCard from './components/NameCard/index';
+import Carousel from './components/Carousel/index';
+import TimePicker from './components/TimePicker/index';
+import DatePicker from './components/DatePicker/index';
+import Tabs from './components/Tabs/index';
+import Tab from './components/Tab/index';
+import CartoonNetworkSpinner from './components/CartoonNetwork/index';
+import Row from './components/Row/index';
+import Col from './components/Col/index';
+
 
 class App extends React.Component {
 
@@ -64,15 +65,15 @@ class App extends React.Component {
           <h2>4.Carousel Component Demo</h2>
           <p> Jared Padalecki is very hot yes </p>
           <div>
-            <h3>4.1. Small</h3>
+            <h3>Small</h3>
             {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg","https://media1.popsugar-assets.com/files/thumbor/SvTqx-9t-SqT1V2Ndezi7UxMzGQ/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2015/08/13/925/n/1922398/0a63aaf8015ce614_jared_padalecki-friday_the_13th-14/i/OhMyGod-Shirtless-Shot.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "small")}
           </div>
           <div>
-            <h3>4.2. Medium</h3>
+            <h3>Medium</h3>
             {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg", "https://media1.popsugar-assets.com/files/thumbor/SvTqx-9t-SqT1V2Ndezi7UxMzGQ/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2015/08/13/925/n/1922398/0a63aaf8015ce614_jared_padalecki-friday_the_13th-14/i/OhMyGod-Shirtless-Shot.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "medium")}
           </div>
           <div>
-            <h3>4.3. Large</h3>
+            <h3>Large</h3>
             {this.testCarousel(["http://7wallpapers.net/wp-content/uploads/16_Jared-Padalecki.jpg", "https://media1.popsugar-assets.com/files/thumbor/SvTqx-9t-SqT1V2Ndezi7UxMzGQ/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2015/08/13/925/n/1922398/0a63aaf8015ce614_jared_padalecki-friday_the_13th-14/i/OhMyGod-Shirtless-Shot.jpg", "http://7wallpapers.net/wp-content/uploads/2_Jared-Padalecki.jpg", "http://7wallpapers.net/wp-content/uploads/5_Jared-Padalecki.jpg"], "large")}
           </div>  
         </div>
@@ -96,34 +97,13 @@ class App extends React.Component {
               </Col>
               <Col size={3}>IM SIZE THREE</Col>
               <Col size={3}>IM SIZE THREE</Col>
-              <Col size={3}>IM A COL OF SIZE THREE THATS ONE VERY FUCKING LONG LINE I REALLY HOPE THE OVERFLOW WILL APPEAR IN THE NEXT LINE AS IT SHOULD HEHE.. YAY I DO</Col>
+              <Col size={3}>IM A COL OF SIZE THREE THATS ONE VERY LONG LINE YET I WILL SPAN A SINGLE ROW ACCORDING TO THE GRIDSYSTEM</Col>
           </Row>
           {/* OVERFLOW!! 2 cols should go to next row*/}
           <Row>
               <Col size={3}>IM SIZE THREE</Col>
               <Col size={5}>IM SIZE FIVE</Col>
-              <Col size={6}>IM SIZE SIX, I SHOULD OVERFLOW! YAY I FUCKIN OVERFLOWED!!</Col>
-          </Row>
-          <Row>
-            <Col size={2}><h3>IM SIZE TWO</h3></Col>
-            <Col size={2}><p>IM SIZE TWO</p></Col>
-            <Col size={2}><p>IM SIZE TWO</p></Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}><h3>IM SIZE TWO, SHOULD OVERFLOW NOW</h3></Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO, SHOULD OVERFLOW NOW</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO</Col>
-            <Col size={2}>IM SIZE TWO, SHOULD OVERFLOW NOW</Col>
+              <Col size={6}>IM SIZE SIX, I SHOULD OVERFLOW!</Col>
           </Row>
         </div>
         <div className={`${styles["container-item"]}`}>
@@ -188,13 +168,13 @@ class App extends React.Component {
 		return (
 			<div>
 				<div>
-					The following demonstrates a {state} progressBar with {progress}% progress (animated: {String(animated)}, striped: {String(striped)}):
+					{/* The following demonstrates a {state} progressBar with {progress}% progress (animated: {String(animated)}, striped: {String(striped)}): */}
 				</div>
 				<div>
 					<ProgressBar 
 						progress={progress}
 						animated={animated}
-						striped={striped}
+						striped={false}
 						state={state}
 					/>
 				</div>

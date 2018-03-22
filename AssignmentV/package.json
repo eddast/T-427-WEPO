@@ -1,13 +1,12 @@
 {
-  "name": "infinity-modules",
-  "version": "0.1.0",
-  "private": true,
+  "name": "super-infinity-modules",
+  "version": "0.7.0",
+  "main": "dist/index.js",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
-    "babel-loader": "7.1.2",
     "babel-preset-react-app": "^3.1.1",
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
@@ -49,7 +48,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "package": "webpack --config ./config/webpack.config.build.js"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -92,5 +92,8 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.2"
   }
 }
