@@ -59,6 +59,17 @@
 /**********************************
  *          SECTION TWO
  **********************************/
+ .section-2 {
+    flex-direction: column-reverse;
+ }
+ .section-2 :nth-child(1) {
+    align-self: flex-start;
+    flex-grow: 1;
+ }
+ .section-2 :nth-last-child(1) {
+    align-self: flex-end;
+    flex-grow: 1;
+ }
 
 /**********************************
  *          SECTION THREE
@@ -67,7 +78,15 @@
 /**********************************
  *          SECTION FOUR
  **********************************/
+.section-4 .flex-item {
+    height: 60px;
+    width: 100px;
+}
 
+.section-4 {
+    justify-content: space-between;
+    align-items: center;
+}
 /**********************************
  *          SECTION FIVE
  **********************************/
