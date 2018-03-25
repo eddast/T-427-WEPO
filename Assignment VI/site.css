@@ -41,24 +41,33 @@
  * all items should stretch from top to bottom and the
  * text should be centered both vertically and horizontally.
  * Every odd element should be twice as big as the even items.*/
+
  .section-1 {
     height: 200px;
  }
+
  .section-1 .flex-item {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .section-1 .flex-item:nth-child(even) {
     flex-grow: 0.5;
 }
+
 .section-1 .flex-item:nth-child(odd) {
     flex-grow: 1;
 }
 
+
 /**********************************
  *          SECTION TWO
  **********************************/
+ /* Implement a column structure, where the first column should be aligned to the left and the
+  * last column be aligned to the right. The column should start on the opposite number from 5 to 1.
+  * The last and first child should take as much space as they can.*/
+
  .section-2 {
     flex-direction: column-reverse;
  }
@@ -78,9 +87,13 @@
     align-self: flex-end;
  }
 
+
 /**********************************
  *          SECTION THREE
  **********************************/
+ /* Implement a column structure, where the first column should take all the space and the last column
+  * should take all the space, other column should be wrapped nicely within the middle */
+
  .section-3 {
     flex-direction: column;
     align-content: stretch;
@@ -95,6 +108,7 @@
  .section-3 :nth-last-child(1) {
     flex-basis: 100%;
  }
+
 
 /**********************************
  *          SECTION FOUR
@@ -112,24 +126,21 @@
     justify-content: space-between;
     align-items: center;
 }
+
+
 /**********************************
  *          SECTION FIVE
  **********************************/
  /* Order the space invaders so one green space invader is on the left side oppose the rest of the space invaders.
   * The remaining space invaders should be ordered so that all purple come first,
   * then the remaining green expect the one on the opposing side. See image below. */
-.section-5 {
-    flex-direction: column;
-    align-content: stretch;
-    flex-wrap: wrap;
+
+ .section-5 :nth-child(1) { order: 1; }
+ .section-5 {
+    flex-direction: column-reverse;
+    flex-wrap: wrap-reverse;
     align-items: center;
     justify-content: center;
-}
-
-.section-5 :nth-child(1) {
-    flex-basis: 100%;
-    background-color: red;
-    flex-grow: 0;
 }
 
 /**********************************
@@ -165,6 +176,24 @@
     align-self: flex-start;
     flex-basis: 100%;
  }
+
 /**********************************
  *          SECTION EIGHT
  **********************************/
+ /* Implement a layout like the image below.
+  * The one should be first and fill out the entire height of the element,
+  * while the others should fill the rest of the element together */
+  
+ .section-8 {
+     flex-direction: column-reverse;
+     flex-wrap: wrap;
+     flex-basis: 100%;
+ }
+
+.section-8 :nth-child(1) {
+    flex-basis: 100%;
+}
+
+.section-8 .flex-item {
+    flex-grow: 1;
+}
