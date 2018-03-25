@@ -65,19 +65,39 @@
  .section-2 :nth-child(1) {
     align-self: flex-start;
     flex-grow: 1;
+    flex-basis: 100%;
  }
  .section-2 :nth-last-child(1) {
     align-self: flex-end;
     flex-grow: 1;
+    flex-basis: 100%;
  }
 
 /**********************************
  *          SECTION THREE
  **********************************/
+ .section-3 {
+    flex-direction: column;
+    align-content: stretch;
+    flex-wrap: wrap;
+ }
+
+ .section-3 .flex-item {
+     flex-basis: 50%;
+ }
+
+ .section-3 :nth-child(1),
+ .section-3 :nth-last-child(1) {
+    flex-basis: 100%;
+ }
 
 /**********************************
  *          SECTION FOUR
  **********************************/
+ /* Implement a column structure which should be separated,
+  * each column should have a height of 60px and width of 100px.
+  * They should be separated as shown below.*/
+
 .section-4 .flex-item {
     height: 60px;
     width: 100px;
