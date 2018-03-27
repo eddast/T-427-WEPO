@@ -9,23 +9,24 @@
                Darri Valgarðsson,
                Edda Steinunn,
                Sigurður Sturla Bjarnasson
+               
  ========================================================*/
-
+ 
 /* GLÓSUR - FLEX CONTAINER ATTRIBUTES:
  * hafa main axis og cross axis sem eru hornrétt (fer eftir hvort er hvað eftir hvort direction er row eða col)
- * flex-direction: row | row-reverse | column | column-reverse
+ * flex-direction: row | row-reverse | column | column-reverse
  * flex-wrap: nowrap | wrap | wrap-reverse
  * flex-flow: (flex-direction) (flex-wrap)
- * justify-content: (hvernig hlutir raðast á main axis) flex-start | center | space-around | space-between | flex-end;
- * align-items: (hvernig hlutir raðast á cross axis) flex-start | center | baseline | stretch(def) | flex-end;
- * align-content: (höndlar hvernig hlutir raðast ef það er overflow í containernum væntanlega virkar bara með wrap) flex-start | center | space-around | space-between | stretch | flex-end;
+ * justify-content: (hvernig hlutir raðast á main axis) flex-start | center | space-around | space-between | flex-end;
+ * align-items: (hvernig hlutir raðast á cross axis) flex-start | center | baseline | stretch(def) | flex-end;
+ * align-content: (höndlar hvernig hlutir raðast ef það er overflow í containernum væntanlega virkar bara með wrap) flex-start | center | space-around | space-between | stretch | flex-end;
  * 
  * GLÓSUR - FLEX ITEM ATTRIBUTES:
- * flew-grow: (má ég stækka? hversu mikið má ég stækka í hlutfalli við hina?) 0 (ekki stækka) | 0.xx (hlutfall - má eiga allt afgangs plássið)
+ * flew-grow: (má ég stækka? hversu mikið má ég stækka í hlutfalli við hina?) 0 (ekki stækka) | 0.xx (hlutfall - má eiga allt afgangs plássið)
  * flex-shrink: öfugt við flex-grow
- * flex-basis: (size of context box, impacted by box sizing, accept same values as width) auto | content | % | px | 0;
+ * flex-basis: (size of context box, impacted by box sizing, accept same values as width) auto | content | % | px | 0;
  * flex: (flex-grow) (flex-shrink) (flex-basis)
- * aligh-self: (yfirskrifar align-items container valueið) flex-start | flex-end | center | baseline | stretch;
+ * aligh-self: (yfirskrifar align-items container valueið) flex-start | flex-end | center | baseline | stretch;
  * order: (eins og row-reverse hjálpar að displaya ekki hluti í sama röð og þeir koma fram í htmli nema meira flexible) tekur við int default 0 (segjum að við séum með tvo hluti með order values a og b þá er a fremur en b ef a < b annars er b fremri 
  *
  */
@@ -39,7 +40,6 @@
  * all items should stretch from top to bottom and the
  * text should be centered both vertically and horizontally.
  * Every odd element should be twice as big as the even items.*/
-
  .section-1 {
     height: 200px;
  }
@@ -62,7 +62,6 @@
  /* Implement a column structure, where the first column should be aligned to the left and the
   * last column be aligned to the right. The column should start on the opposite number from 5 to 1.
   * The last and first child should take as much space as they can.*/
-
  .section-2 {
     flex-direction: column-reverse;
  }
@@ -85,7 +84,6 @@
  **********************************/
  /* Implement a column structure, where the first column should take all the space and the last column
   * should take all the space, other column should be wrapped nicely within the middle */
-
  .section-3 {
     flex-direction: column;
     align-content: stretch;
@@ -106,7 +104,6 @@
  /* Implement a column structure which should be separated,
   * each column should have a height of 60px and width of 100px.
   * They should be separated as shown below. */
-
 .section-4 .flex-item {
     height: 60px;
     width: 100px;
@@ -148,6 +145,12 @@
 /**********************************
  *          SECTION SEVEN
  **********************************/
+ /* Arrange the Carebears as seen below.
+  * All carebears expect the pink one should be slightly bigger
+  * (height or width cannot be used to implement this).
+  * And the Carebears must be in the same order as seen in the image.
+  * The pink one at the left center while the others are in the following order:
+  * red, green, blue and yellow */
  .section-7 {
     flex-direction: column;
     flex-wrap: wrap-reverse;
@@ -179,7 +182,6 @@
  /* Implement a layout like the image below.
   * The one should be first and fill out the entire height of the element,
   * while the others should fill the rest of the element together */
-
  .section-8 {
      flex-direction: column-reverse;
      flex-wrap: wrap;
