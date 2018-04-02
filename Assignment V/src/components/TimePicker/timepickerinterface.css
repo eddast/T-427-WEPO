@@ -1,0 +1,97 @@
+.timepicker {
+    position: absolute;
+    width: 68%;
+    height: 100%;
+    color: white;
+    font-size: 60px;
+    font-weight: bolder;
+    background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto auto;
+    text-align: center;
+    letter-spacing: 15px;
+    text-shadow: 2px 2px 60px #0266669f;
+}
+.controlpanel {
+    margin: 0px;
+    padding: 0px;
+    height: 30%;
+}
+
+.decrement {
+    margin-top: -6%;
+}
+.wrapper {
+    width: 60%;
+    box-shadow: 10px 5px 60px 5px #000000c4;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.wrapper:after {
+	transition: all 0.3s cubic-bezier(.55, 0, .1, 1) ease-in-out;
+}
+
+.controls {
+    padding: 0px;
+    margin: 0px;
+    padding-top: 0%;
+    font-size: 55px;
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-top: 25px;
+    transition: 0.5s;
+}
+
+.ampm {
+    margin: 18%;
+    margin-right: 5%;
+    position: absolute;
+    font-size: 30px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+.ampm,
+.hours,
+.minutes {
+    cursor: pointer;
+    transition: 0.2s ease-in;
+}
+
+.controls:hover,
+.hours:hover,
+.minutes:hover,
+.ampm:hover {
+    color: #35313146;
+}
+
+.clock {
+    width: 30%;
+    background-color: white;
+    height: fit-content;
+    margin-right: 68%;
+}
+
+.center {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 60%;
+    background-color: #08b1db;
+    letter-spacing: 8px;
+    font-size: 20px;
+}
+
+.input {
+    width: 20%;
+    color: black;
+    padding: 5px;
+}
+
+.dropdown {
+    width: 100%;
+    color: black;
+}

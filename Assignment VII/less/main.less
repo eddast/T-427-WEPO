@@ -1,0 +1,149 @@
+@import "variables.less";
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: @persianPink;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto 250px;
+    grid-template-areas:
+        "main pilot";
+
+    main {
+        grid-area: main;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "banner"
+            "navigation"
+            "cities"
+            "city-preview";
+    }
+
+    #primary-nav {
+        grid-area: banner;
+        display: grid;
+        background-color: @persianPink;
+        border-bottom:  8px solid @thulianPink;
+        justify-content: center;
+        align-content: center;
+        #logo {
+            width: 200px 
+        }
+    }
+
+    #secondary-nav {
+        grid-area: navigation;
+        display: grid;
+        background-color: @spanishPink;
+        justify-content: center;
+        align-content: center;
+        padding: 10px;
+        li {
+            display: inline;
+            font-family: "Josefin Sans", "Nanum Gothic";
+            font-size: 1.5em;
+            padding: @commonPadding;
+            a {
+                color: @white;
+            }
+        }
+    }
+
+    .cities {
+        grid-area: cities;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        background-color: @white;
+
+        li {
+            display: grid;
+            grid-template-columns: min-content;
+            justify-items: center;
+            justify-content: center;
+            align-content: center;
+            align-items:  center;
+            border: 3px solid @thulianPink;
+            padding: 10px;
+
+            .city-img {
+                align-self: center;
+                width: 250px;
+                height: 150px;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+
+            .text-wrapper {
+                width: 40vh;
+                h2 {
+                    font-weight: normal;
+                    font-family: "Josefin Sans", "Nanum Gothic";
+                    font-size: 2em;
+                    padding-top: 20px;
+                }
+                p { margin-top: 0; }
+            }
+        }
+    }
+
+    .banner-area {
+        grid-area: city-preview;
+        display: grid;
+        justify-content: center;
+        background-color: @spanishPink;
+        padding: @commonPadding;
+        border-bottom: 8px solid @thulianPink;
+        h1 {
+            font-weight: normal;
+            font-size: 1.5em;
+            color: white;
+            text-align: center;
+            padding-bottom: @commonPadding;
+        }
+
+        .city-previews {
+            display: grid;
+            padding: 0 @commonPadding;
+            grid-column-gap: 100px;
+            grid-template-columns: repeat(4, auto);
+            li {
+                height: 150px;
+                width: 150px;
+                border-radius: 100%;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+    }
+
+    .pilot {
+        grid-area: pilot;
+        display: grid;
+        grid-template-rows: min-content;
+        grid-template-columns: auto-fit;//minmax(0%, 60%);
+        background-color: @laurelGreen;
+        height: 100%;
+        border-left:  8px solid @desaturatedCyan;
+        color: white;
+        justify-content: center;
+        justify-items: center;
+        img {
+            width: 150px;
+            margin: @commonPadding;
+        }
+        p {
+            font-size: 1.2em;
+            text-align: center;
+            padding: 0 @commonPadding;
+        }
+    }
+
+    #right-aside-inside { display: none; }
+}

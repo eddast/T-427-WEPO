@@ -1,0 +1,97 @@
+.carousel {
+  position: relative;
+  display: block;
+}
+
+.carousel-small {
+  height: 220px;
+  width: 400px;
+}
+
+.carousel-medium {
+  height: 420px;
+  width: 800px;
+}
+
+.carousel-large {
+  height: 520px;
+  width: 1000px;
+}
+
+.image-small {
+  height: 200px;
+  width: 400px;
+}
+
+.image-medium {
+  height: 400px;
+  width: 800px;
+}
+
+.image-large {
+  height: 500px;
+  width: 1000px;
+}
+
+.arrow{
+  color: white;
+  position: absolute;
+  vertical-align: middle;
+  top:0;
+  bottom: 0;
+  margin: auto;
+  margin-right: 10px;
+  height: 30%;
+  text-shadow: 1px 1px 20px #000;
+  transition: 0.5s;
+}
+
+.arrow:hover{
+  color: #82f7c6;
+  opacity: 0.5;
+}
+
+.arrow-left{
+  left: 0;
+  margin-left: 10px;
+}
+
+.arrow-right{
+  right: 0;
+  margin-right: 10px;
+}
+
+.square {
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  margin: 0 8px;
+  border: 3px solid #01ffdd;
+  background-color: transparent;
+  display: inline-block;
+  transition: 0.6s ease;
+  position: relative;
+}
+.selectedSquare {
+  background: linear-gradient(135deg,#01ffdd 0%,#01ff95 100%);
+}
+
+.square:hover {
+  background-color: #01ff95;
+  opacity: 0.6;
+}
+
+.squares{
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Fading animation */
+.imageContainer {
+  transition: 0.3s ease-in-out;
+  box-shadow: 1px 1px 40px #1b1818ea;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; 
+  overflow: hidden;
+}

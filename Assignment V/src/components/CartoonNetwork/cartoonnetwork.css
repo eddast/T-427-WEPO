@@ -1,0 +1,19 @@
+.container {
+    width: 20%;
+    height: 15vw;
+    margin-left: 75px;
+}
+
+.images{
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 1s;
+}
+
+.spin {
+    transform-origin: center;
+    transform: rotateZ(1080deg);
+}
