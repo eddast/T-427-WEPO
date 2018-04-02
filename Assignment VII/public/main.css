@@ -22,6 +22,7 @@
   font-weight: 700;
   src: local('NanumGothic Bold'), local('NanumGothic-Bold'), url(https://fonts.gstatic.com/s/nanumgothic/v7/PN_oRfi-oW3hYwmKDpxS7F_LQv3LyVsj.ttf) format('truetype');
 }
+/* DESKTOP-AIMED AND MAIN CSS */
 html,
 body {
   height: 100%;
@@ -110,7 +111,6 @@ body .banner-area {
   display: grid;
   justify-content: center;
   background-color: #EDBFB7;
-  padding: 40px;
   border-bottom: 8px solid #E06C9F;
 }
 body .banner-area h1 {
@@ -120,9 +120,11 @@ body .banner-area h1 {
   text-align: center;
   padding-bottom: 40px;
 }
+body .banner-area #banner {
+  padding: 40px;
+}
 body .banner-area .city-previews {
   display: grid;
-  padding: 0 40px;
   grid-column-gap: 100px;
   grid-template-columns: repeat(4, auto);
 }
@@ -137,7 +139,6 @@ body .pilot {
   grid-area: pilot;
   display: grid;
   grid-template-rows: min-content;
-  grid-template-columns: auto-fit;
   background-color: #B5BFA1;
   height: 100%;
   border-left: 8px solid #6E9887;
@@ -157,3 +158,87 @@ body .pilot p {
 body #right-aside-inside {
   display: none;
 }
+/* TABLET-AIMED CSS */
+@media screen and (max-width: 1024px) {
+  body {
+    grid-template-columns: auto;
+  }
+  body main {
+    grid-template-areas: "banner" "navigation" "cities" "city-pilot";
+  }
+  body #right-aside-inside {
+    display: grid;
+  }
+  body #right-aside {
+    display: none;
+  }
+  body .cities {
+    grid-area: cities;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    background-color: #FFFFFF;
+    padding: 0;
+  }
+  body .cities li {
+    grid-auto-flow: column;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+  }
+  body .cities li .city-img {
+    align-self: flex-start;
+    margin: 20px;
+  }
+  body .cities li .text-wrapper {
+    width: 100%;
+  }
+  body .cities li:last-child {
+    grid-column: 1 / span 2;
+    grid-template-columns: max-content;
+    align-content: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    padding: 40px;
+  }
+  body .cities li:last-child .city-img {
+    width: 400px;
+    height: 200px;
+  }
+  body .cities li:last-child .text-wrapper {
+    grid-column: 1 / span 2;
+    width: 100%;
+  }
+  body .banner-area {
+    grid-area: city-pilot;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-areas: "city-preview pilot";
+  }
+  body .banner-area .city-previews {
+    grid-area: city-preview;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-column-gap: 50px;
+    grid-row-gap: 50px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+  }
+  body .banner-area .city-previews li {
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  body .banner-area .pilot {
+    grid-area: pilot;
+    border-left: none;
+    padding: 0 40px;
+  }
+  body .banner-area .pilot img {
+    width: 50%;
+  }
+}
+/* MOBILE-AIMED CSS */
