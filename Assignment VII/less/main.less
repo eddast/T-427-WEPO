@@ -151,7 +151,8 @@ body {
 }
 
 /* TABLET-AIMED CSS */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) and (min-width: 451px) {
+
     body {
         grid-template-columns: auto;
 
@@ -172,6 +173,8 @@ body {
             grid-template-columns: repeat(2, 50%);
             background-color: @white;
             padding: 0;
+            h2 { font-size: 1.5em !important;}
+            p { font-size: 0.7em; }
             li {
                 grid-auto-flow: column;
                 justify-content: start;
@@ -181,6 +184,8 @@ body {
                 .city-img {
                     align-self: flex-start;
                     margin: 20px;
+                    width: 20vw;
+                    height: 15vw;
                 }
 
                 .text-wrapper {
@@ -196,8 +201,8 @@ body {
                     grid-template-columns: repeat(2, auto);
                     padding: @commonPadding;
                     .city-img {
-                        width: 400px;
-                        height: 200px;
+                        width: 35vw;
+                        height: 20vw;
                     }
                     .text-wrapper {
                         grid-column: 1 / span 2;
@@ -223,14 +228,6 @@ body {
                 align-content: center;
                 justify-content: center;
                 justify-items: center;
-    
-                li {
-                    height: 150px;
-                    width: 150px;
-                    border-radius: 100%;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
             }
             .pilot {
                 grid-area: pilot;
@@ -240,8 +237,96 @@ body {
             }
         }
     }
-
 }
+
 /* MOBILE-AIMED CSS */
-// @media screen and (max-width: 450px) {
-// }
+
+@media screen and (max-width: 450px) {
+
+    body {
+        grid-template-columns: auto;
+
+        main {
+            grid-template-areas:
+                "banner"
+                "navigation"
+                "cities"
+                "city-view";
+        }
+
+        #secondary-nav {
+            li {
+                font-size: 1.2em;
+                padding: 15px;
+            }
+        }
+    
+        #right-aside-inside { display: none; }
+        #right-aside        { display: none; }
+
+        .cities {
+            background-color: @white;
+            padding: 0;
+            grid-template-columns: auto;
+
+            li {
+                grid-template-columns: max-content;
+                h2 { font-size: 1.3em !important;}
+                p { font-size: 0.3em; }
+
+                .city-img {
+                    width: 35vw;
+                    height: 15vh;
+                    margin: 10%;
+                }   
+
+                .text-wrapper {
+                    width: 100%;
+                    padding: 10%;
+                }
+
+                &:nth-child(even) {
+                    grid-template-columns: max-content;
+                    align-content: center;
+                    align-items: center;
+                    display: grid;
+                    grid-template-columns: repeat(2, auto);
+                    grid-auto-flow: column;
+                    .text-wrapper { grid-column: 1 / span 2; }
+                }
+                &:nth-child(odd) {
+                    grid-template-columns: max-content;
+                    align-content: center;
+                    align-items: center;
+                    display: grid;
+                    grid-template-columns: repeat(2, auto);
+                    grid-auto-flow: column;
+                    .city-img { grid-column: 1 / span 2; }
+                }
+             }
+        }
+    
+        .banner-area {
+            grid-area: city-view;
+            grid-template-columns: auto;
+
+            #banner { padding: @commonPadding 0px; }
+
+            .city-previews {
+                display: grid;
+                grid-template-columns: repeat(4, auto);
+                grid-column-gap: 2.5vh;
+                align-items: center;
+                align-content: center;
+                justify-content: center;
+                justify-items: center;
+
+                li {
+                    height: 10vh;
+                    width: 10vh;
+                    border-radius: 100%;
+                }
+            }
+        }
+    }
+}
