@@ -1,8 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import styles from './input.css'
 
 // Dummy component: renders a text input box with given labels, value, type etc plus onclick and validation functionality
-const TextInput = ({ label, onChange, name, value, validate }) => {
+const TextInput = ({ label, onChange, name, value, validate, background }) => {
+    const valid = validate(value)==='OK'?'valid':'invalid';
     return (
         <div>
             <label>
@@ -16,7 +18,7 @@ const TextInput = ({ label, onChange, name, value, validate }) => {
                     onChange={onChange}
                 />
             </div>
-            <div>
+            <div className={`${styles[`${valid}`]} ${background && styles.background}`}>
                 <span>{validate(value)}</span>
             </div>
         </div>
@@ -43,6 +45,10 @@ TextInput.propTypes = {
 
     /* Validate function, returns string */
     validate: propTypes.func
+}
+
+TextInput.defaultProps = {
+    background: false
 }
 
 export default TextInput;

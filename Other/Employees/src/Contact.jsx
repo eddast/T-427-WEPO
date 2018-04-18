@@ -25,14 +25,14 @@ class Contact extends React.Component {
             return 'Invalid input (only letters allowed)';
         }
         
-        return '';
+        return 'OK';
     }
 
     canSubmit() {
         return (
-            this.validateOnlyLetterInput(this.state.name)==='' &&
-            this.validateOnlyLetterInput(this.state.email)==='' &&
-            this.validateOnlyLetterInput(this.state.subject)===''
+            this.validateOnlyLetterInput(this.state.name)==='OK' &&
+            this.validateOnlyLetterInput(this.state.email)==='OK' &&
+            this.validateOnlyLetterInput(this.state.subject)==='OK'
         );
     }
 
@@ -72,6 +72,7 @@ class Contact extends React.Component {
                             label="Subject:"
                             name={this.state.subject}
                             value={this.state.subject}
+                            background={true}
                             onChange={(e) => this.setState({ subject: e.target.value })}
                             validate={(val) => this.validateOnlyLetterInput(val)}
                         />
