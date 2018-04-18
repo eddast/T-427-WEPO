@@ -6,6 +6,10 @@
     color: green;
 }
 
+.valid :hover {
+    opacity: 0.1;
+}
+
 .background {
     background-color: aqua;
 }
