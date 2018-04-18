@@ -1,0 +1,69 @@
+<!-- ========================================================
+ 
+           T-427-WEPO Web Programming II
+           Reykjavik University
+           Extra Assignment I: JS Object-Orientation
+           Part: HTML (modified from template)
+           Assignment Due: 01.05.2018
+           Author: Edda Steinunn 
+ 
+============================================================= */ -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Give Me An Answer!™</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/site.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-xs-10 col-xs-push-1">
+                <h2 class="text-center">Give Me An Answer!™</h2>
+                <div class="game-board">
+                    <div class="center">
+                        <div class="entry-screen">
+                            <div class="form-group">
+                                <input type="number" name="numQuestions" class="form-control input-small" value="" placeholder="How many questions?">
+                            </div>
+                            <button class="btn btn-default btn-primary btn-large" type="button" id="startGameBtn" name="submitFormBtn">Start playing!</button>
+                        </div>
+                        <form class="hidden" id="questionType">
+                            <input type="radio" name="questionTypes" value="any" checked>Any Type Questions<br>
+                            <input type="radio" name="questionTypes" value="multiple">Multiple Choices<br>
+                            <input type="radio" name="questionTypes" value="short">Short Answers<br>
+                            <input type="radio" name="questionTypes" value="tf">True or False<br>
+                            <button class="btn btn-default btn-primary btn-large" type="button" id="letsGo" name="submitFormBtn">Let's GO!</button>
+                        </form>
+                        <div class="hidden question-area">
+                            <h2 id="question"></h2>
+                            <form class="question-choices"></form>
+                            <div class="answerBtn">
+                                <button class="btn btn-default btn-primary btn-large" type="button" id="answerBtn">Answer</button>
+                                <p id="timeLeft"></p>
+                            </div>
+                        </div>
+                        <div class="hidden feedback-area">
+                                <h3 id="feedback"></h3>
+                                <p id="correct-feedback"></p>
+                                <div class="feedback-next">
+                                    <button class="btn btn-default btn-default btn-large" type="button" id="nextQuestion">Next Question</button>
+                                    <p id="questionsRemaining"></p>
+                                </div>
+                                <div class="hidden feedback-done">
+                                    <h2>You have completed all questions, well done :)</h2>
+                                    <h3 id="user-score">Your score was </h3>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" charset="utf-8"></script>
+        <script src="resources.js" charset="utf-8"></script>
+        <script src="questions.js" charset="utf-8"></script>
+        <script src="game.js" charset="utf-8"></script>
+        <script src="main.js" charset="utf-8"></script>
+    </body>
+</html>
