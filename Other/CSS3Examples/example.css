@@ -1,0 +1,111 @@
+p {
+    width: 100px;
+    height: 50px;
+    font-size: 11px;
+}
+/*** Media Queries ****/
+
+@media only screen and (min-width: 1000px) and (max-width: 1500px) {
+    #media {
+        color: green;
+    }
+}
+
+/**********************/
+/***** Animations *****/
+
+@keyframes example {
+    0% {background-color: red;}
+    /*Note that height doesn't change until 25% since it is set to stay the same until 25% */
+    25% {background-color: yellow; width:150px; height: 50px}
+    50% {background-color: teal; height: 25px}
+    75% {background-color: green; border: 1px solid black;}
+    100% {background-color: white; border: 0px solid black;}
+}
+
+
+#animation {
+    background-color: red;
+}
+
+#animation:hover {
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+/**********************/
+/****** Gradients *****/
+#gradient {
+    background: linear-gradient(red, yellow);
+}
+
+/**********************/
+/******* Shadows ******/
+
+#text_shadow {
+    text-shadow: 2px 2px 5px red;
+}
+
+#box_shadow {
+    box-shadow: 10px 10px 5px grey;
+}
+/**********************/
+/**** Transitions *****/
+
+#transition {
+    background: red;
+    -webkit-transition: width 2s; /* Safari */
+    transition: width 2s;
+}
+
+#transition:hover {
+    width: 300px;
+}
+
+/*********************/
+/**** Perspective ****/
+#perspective {
+    background-color: grey;
+    -webkit-perspective: 100px; /* Safari 4-8 */
+    perspective: 100px;
+    -webkit-transform-style: preserve-3d; /* Safari 3-8  */    
+    -webkit-transform: rotateX(45deg); /* Safari 3-8  */
+    transform-style: preserve-3d;
+    transform: rotateX(45deg);
+    border: 2px solid black;
+}
+
+
+/*********************/
+/***** Transform *****/
+
+#transform {
+    background-color: green;
+    transform: rotate(20deg);
+}
+
+
+/*********************/
+/** Rounded corners **/
+
+#rounded {
+    background-color: red;
+    text-align: center;
+    border-radius: 25px;
+}
+
+/*********************/
+#box {
+    background-color: green;
+    box-sizing: content-box;
+    
+}
+
+#background {
+    height: 600px;
+    width: 600px;
+    background: url(https://amedia.britannica.com/700x450/72/143172-049-0FB95AC0.jpg);
+    background-repeat: auto;
+    background-size: auto;
+}
