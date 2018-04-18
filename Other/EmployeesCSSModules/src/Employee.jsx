@@ -17,11 +17,7 @@ const style = {
   quoteStyle: {
     color: 'gray',
     fontSize: '14px',
-    fontWeight: 'bold',
-    ':hover': {
-      color: 'purple',
-      transition: 'ease-out .5s'
-    }
+    fontWeight: 'bold'
   },
   dangerous: {
     color: 'red'
