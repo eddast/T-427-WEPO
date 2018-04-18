@@ -18,12 +18,16 @@ class Employees extends React.Component {
 
     render() {
         const { employee } = this.props;
-        return (
-            <div>
-                <p>Employees: </p>
-                {employee.map(e => <EmployeeListItem key={e.id} employee={e} onClick={() => this.props.history.push("/employees/" + e.name)}/>)}
-            </div>
-        );
+        if(employee.length!== undefined && employee.length !== 0){
+            return (
+                <div>
+                    <p>Employees: </p>
+                    {employee.map(e => <EmployeeListItem key={e.id} employee={e} onClick={() => this.props.history.push("/employees/" + e.name)}/>)}
+                </div>
+            );
+        } else {
+            return <div/>;
+        }
     }
 }
 

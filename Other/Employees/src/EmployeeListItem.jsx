@@ -16,7 +16,7 @@ const EmployeeListItem = ({ employee, onClick }) => {
 EmployeeListItem.propTypes = {
 
     /* Label for input box, displayed to the right of input box*/
-    employee: propTypes.isRequired,
+    employee: propTypes.any.isRequired,
 }
 
 export default EmployeeListItem;
