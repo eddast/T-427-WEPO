@@ -46,39 +46,43 @@ class Contact extends React.Component {
 
     render() {
         const { employee } = this.props;
-        return (
-            <div>
-                <p>Contact page</p>
-                <form onSubmit={(e) => e.preventDefault()} >
-                    <select name="employees">
-                        {employee.map(p => <option value={p.id} key={p.id}>{p.name}</option>)}
-                    </select>
-                    <TextInput 
-                        label="Name:"
-                        name={this.state.name}
-                        value={this.state.name}
-                        onChange={(e) => this.setState({ name: e.target.value })}
-                        validate={(val) => this.validateOnlyLetterInput(val)}
-                    />
-                    <TextInput 
-                        label="Email:"
-                        name={this.state.email}
-                        value={this.state.email}
-                        onChange={(e) => this.setState({ email: e.target.value })}
-                        validate={(val) => this.validateOnlyLetterInput(val)}
-                    />
-                    <TextInput 
-                        label="Subject:"
-                        name={this.state.subject}
-                        value={this.state.subject}
-                        onChange={(e) => this.setState({ subject: e.target.value })}
-                        validate={(val) => this.validateOnlyLetterInput(val)}
-                    />
-                    <textarea />
-                    {this.getSubmitButton()}
-                </form>
-            </div>
-        );
+        if(employee.length!== undefined && employee.length !== 0) {
+            return (
+                <div>
+                    <p>Contact page</p>
+                    <form onSubmit={(e) => e.preventDefault()} >
+                        <select name="employees">
+                            {employee.map(p => <option value={p.id} key={p.id}>{p.name}</option>)}
+                        </select>
+                        <TextInput 
+                            label="Name:"
+                            name={this.state.name}
+                            value={this.state.name}
+                            onChange={(e) => this.setState({ name: e.target.value })}
+                            validate={(val) => this.validateOnlyLetterInput(val)}
+                        />
+                        <TextInput 
+                            label="Email:"
+                            name={this.state.email}
+                            value={this.state.email}
+                            onChange={(e) => this.setState({ email: e.target.value })}
+                            validate={(val) => this.validateOnlyLetterInput(val)}
+                        />
+                        <TextInput 
+                            label="Subject:"
+                            name={this.state.subject}
+                            value={this.state.subject}
+                            onChange={(e) => this.setState({ subject: e.target.value })}
+                            validate={(val) => this.validateOnlyLetterInput(val)}
+                        />
+                        <textarea />
+                        {this.getSubmitButton()}
+                    </form>
+                </div>
+            );
+        } else {
+            return <div />;
+        }
     }
 }
 
