@@ -20,7 +20,7 @@ EmployeeListItem.propTypes = {
     employee: propTypes.any.isRequired,
 }
 
-const uglyAnimation = keyframes`
+const uglyAsHellAnimation = keyframes`
     0% { background-color: rgba(155, 155, 155, .5); }
     25% { background-color: yellow; }
     50% { background-color: green; }
@@ -42,7 +42,7 @@ const StyledEmployeeListItem = styled(EmployeeListItem)`
     :hover {
         opacity: .5;
         cursor: pointer;
-        animation: ${uglyAnimation} 2s linear 0s infinite;
+        animation: ${uglyAsHellAnimation} 2s ease-out 0s infinite;
     }
     @media (max-width: 400px) {
         background-color: blue;
