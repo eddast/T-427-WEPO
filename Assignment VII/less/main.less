@@ -12,6 +12,68 @@
 
     ======================================================== */
 
+/*********************
+* GRID LAYOUT GLÓSUR
+**********************
+
+* Grid track: dálkur eða röð between two adjacent grid lines fer eftir hvort grid sé horizontal eða vertical
+* Grid cell: afmarkað af fjórum gridlínum, minnsta unit grids
+* Grid area: ferhyrningslaga svæði afmarkað af fjórum gridlínum úr einni eða fleiri grid cell
+
+* ATTRIBUTES
+* display: grid | inline-grid
+* grid-template-columns (raðar eftir horizontal grid track): px | % | auto | minmax(min, max) | fr | min content | max content | repeat(n, size)
+* grid-template-rows (raðar eftir vertical grid track): px | % | auto | minmax(min, max) | fr | min-content | max-content | repeat(n, size)
+* grid-auto-flow: row (stackast frá vinstri til hægri) | column (toppur til botns)
+* grid-row-grap: px | %
+* grid-column-gap: px | %
+* grid-gap: (grid-row-gap) (grid-column-gap)
+
+* ALIGNMENT:
+* (GRID CONTAINER)
+* justify-content: the entire grid in the inline (horizontal) direction
+* align-content: the entire grid in the block (vertical direction)
+* justify-items: all grid items in the inline direction (horizontal)
+* align-items: all grid items in block in vertical direction
+* (GRID ITEMS)
+* justify-self: A grid item in the inline (horizontal) direction
+* align-self: a grid item in the block (vertical) direction)
+
+* grid-template-areas :	// 3x3 grid
+*  “cell1 cell2 cell3”	// first row
+*  “cell4 cell5 cell6”	// second row
+*  “cell7 cell7 …”;	// third row
+*
+* (Cols separated by space, rows by string, … er unassigned)
+
+
+* DÆMI UM CSS GRID NOTKUN
+* Hægt að nefna línur nöfnum:
+
+* grid-template-columns:
+* 	[first-col-start] 	1fr	[first-col-end
+* 	second-col-start]	1fr	[second-col-end
+* 	third-col-start]	1fr	[third-col-end]
+* grid-template-rows:
+* 	[first-row-start] 	1fr	[first-row-end
+* 	second-row-start]	1fr	[second-row-end]
+
+* getum þá gert:
+*  background-color: blue;
+*  grid-row-start: first-row(-start);
+*  grid-row-end: second-row(-end);
+* og þá litast fyrstu cellurnar í hvorri röð
+* EÐA (eins):
+* background-color: blue;
+* grid-row-start: 1;
+* grid-row-end:  span 2;
+* EÐA:
+* background-color: blue;
+* grid-row:  1 / span 2;
+
+* grid-template-columns: repeat (1, 0.5fr 1f  1fr) // repeat pattern einu sinni hver röð
+*/
+
 @import "variables.less";
 
 /****************************************
